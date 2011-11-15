@@ -1,0 +1,6 @@
+<% if @company.followers.include?(current_user) %>
+  <%= button_to_remote 'Unfollow This Company', :url => unfollow_user_company_path(current_user, @company) %>
+<% else %>
+  <%= button_to_remote 'Follow This Company', :url =>follow_user_company_path(current_user, @company) %>
+<% end %>
+

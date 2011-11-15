@@ -1,0 +1,13 @@
+<p>
+  <b>Title:</b>
+  <%=h @certification.title %>
+</p>
+
+<p>
+  <b>Award date:</b>
+  <%=h @certification.award_date %>
+</p>
+
+
+<%= link_to 'Edit', edit_certification_path(@certification) %> |
+<%= link_to 'Back', certifications_path %>

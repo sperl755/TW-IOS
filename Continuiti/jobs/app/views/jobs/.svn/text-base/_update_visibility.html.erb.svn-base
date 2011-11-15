@@ -1,0 +1,1 @@
+<%=link_to_remote 'Make '+@new_visible_status.titleize,:url=>{:controller=>:jobs, :action=>:update_visibility, :id=>@id},:update => 'visibility_status_div',:confirm=>'Are you sure to change visibility?'%>

@@ -1,0 +1,32 @@
+<div class="skill">
+  <% new_or_existing = skill.new_record? ? 'new' : 'existing' %>
+  <% prefix = "user[#{new_or_existing}_skill_attributes][]" %>
+  <% fields_for prefix, skill do |skill_form| -%>
+    <p>
+    <div style="float:left;width:150px;"><b><%= skill_form.label :title %>:</b></div>
+    <div style="float: right; width:350px;"><%= skill_form.text_field :title %></div>
+    <div style="clear:both;"></div>
+  </p>
+  <p>
+  <div style="float:left;width:150px;"><b><%= skill_form.label :description %>:</b></div>
+  <div style="float: right; width:350px;"><%= skill_form.text_area :description, :rows => 4 %></div>
+  <div style="clear:both;"></div>
+  </p>
+  <p>
+  <div style="float:left;width:160px;"><b><%= skill_form.label :from_date, "From" %>:</b></div>
+  <div style="float: right; width:350px;"><%= skill_form.date_select :from_date %></div>
+  <div style="clear:both;"></div>
+  </p>
+  <p>
+  <div style="float:left;width:150px;"><b><%= skill_form.label :until_date, "Until" %>:</b></div>
+  <div style="float: right; width:350px;"><%= skill_form.date_select :until_date %></div>
+  <div style="clear:both;"></div>
+  </p>
+  <p>
+  <div style="float:left;width:150px;vertical-align:top;" ></div>
+  <div style="float: right; width:350px;"><%= link_to_function "remove" , "$(this).up('.skill').remove()" %></div>
+  <div style="clear:both;"></div>
+  </p>
+<% end -%>
+</div>
+

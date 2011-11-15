@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/371/jobs/trunk/app/views/general_availabilities
+END
+_new_custom_general_availability.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/!svn/ver/312/jobs/trunk/app/views/general_availabilities/_new_custom_general_availability.html.erb
+END
+_edit_general_availability.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/!svn/ver/312/jobs/trunk/app/views/general_availabilities/_edit_general_availability.html.erb
+END
+_checkbox_general_availability.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/!svn/ver/371/jobs/trunk/app/views/general_availabilities/_checkbox_general_availability.html.erb
+END
+_new_general_availability.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/!svn/ver/371/jobs/trunk/app/views/general_availabilities/_new_general_availability.html.erb
+END
+_general_availability_list.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/!svn/ver/335/jobs/trunk/app/views/general_availabilities/_general_availability_list.html.erb
+END

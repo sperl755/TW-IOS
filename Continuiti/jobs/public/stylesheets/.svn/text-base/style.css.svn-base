@@ -1,0 +1,72 @@
+input.value-undefined[type="text"], textarea.value-undefined {
+    color: #B9ABA2;
+}
+
+a.remove_link {
+    background: url("/images/remove-close.gif") 0px 3px no-repeat;
+    display: block;
+    height: 22px;
+	padding-left: 19px;
+    position: relative;
+    right: 0;
+    top: 3px;
+}
+
+.loc {
+	padding-bottom:30px;
+}
+
+#location {
+	border: 1px solid #cccccc;
+}
+
+div.specify_address{
+	padding-left: 25px;
+    width: 160px
+}
+
+a.profile_link {
+	font-size: 11px;
+	font-variant:normal;
+}
+
+.heading {
+    font-weight:bold;
+    font-size:17px; 
+    color:cadetblue;
+}
+
+.job_title {
+   font-weight:bold;
+    font-size:25px;  
+}
+
+.specify_text {
+    font-weight:bold;
+    color:#600;
+}
+
+/********* css star rating *********/
+.classification {
+          position: relative;
+          width: 91px;
+          height: 17px;
+}
+.classification .cover {
+  position: absolute;
+  background: transparent url(/images/stars.png) top left no-repeat;
+  top: 0px;
+  left: 0px;
+  width: 91px;
+  height: 17px;
+  z-index: 101;
+}
+.classification .progress {
+  position: absolute;
+  background: transparent url(/images/stars_full.png) top left no-repeat;
+  top: 0px;
+  left: 0px;
+  height: 17px;
+  z-index: 102;
+}
+/********* css star rating *********/

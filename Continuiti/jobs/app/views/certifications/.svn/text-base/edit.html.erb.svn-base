@@ -1,0 +1,28 @@
+<h3 style="font-size:16px;border-bottom:1px solid #CCCCCC">Editing certification</h3>
+
+<style>
+  .fieldWithErrors{
+    display: inline;
+  }
+</style>
+
+<div style="width:520px;padding: 40px 0 0 130px;">
+  <% form_for(@certification) do |f| %>
+    <%= f.error_messages %>
+    <p>
+    <div style="float:left;width:150px;"><b><%= f.label :title %>:</b></div>
+    <div style="float: right; width:350px;"><%= f.text_field :title %></div>
+    <div style="clear:both;"></div>
+  </p>
+  <p>
+  <div style="float:left;width:160px;"><b><%= f.label :award_date %>:</b></div>
+  <div style="float: right; width:350px;"><%= f.date_select :award_date %></div>
+  <div style="clear:both;"></div>
+  </p>
+  <p>
+  <div style="float:left;width:150px;vertical-align:top;" ></div>
+  <div style="float:right;width:350px;"><%= submit_tag "Update" %> or <%= link_to 'Cancel', user_path(current_user) %></div>
+  <div style="clear:both;"></div>
+  </p>
+<% end %>
+</div>

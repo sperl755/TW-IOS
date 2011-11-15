@@ -1,0 +1,27 @@
+
+<h1>Listing referrals</h1>
+
+<table border="1">
+  <tr>
+    <th>Invited by you</th>
+    <th>Referral Bonus</th>
+    <th>Maximum Possible Bonus</th>
+  </tr>
+
+  <% @referred_users.each do |referred| %>
+    <tr>
+      <th><%=h referred.login %></th>
+      <td><%=h referred.paid_to_referrers.sum(:amount) %></td>
+      <td><%=h @referral_bonus.maximum_per_user %></td>
+    </tr>
+  <% end %>
+  <tr>
+    <td> Total Referral Bonus</td>
+    <td><%=h @user.received_from_referrals.sum(:amount) %></td>
+    <td><%=h @referral_bonus.maximum %></td>
+  </tr>
+</table>
+
+<br />
+
+<%=link_to "Invite more of your friends to join us and get more bonus.", invite_user_path(current_user) %>

@@ -1,0 +1,78 @@
+<% 
+if @job && !@job.cost_method_id.blank? && @job.cost_method_id > 0
+  @cost_method = CostMethod.find_by_id(@job.cost_method_id).title
+end
+
+%>
+
+<p>
+<div style="width:470px;">
+
+  <% if @cost_method.include?('Hourly') || @cost_method.include?('Custom')
+    # @cost_method.to_s == Job::TIME_UNIT_COST.to_s || @cost_method.to_s == Job::CUSTOME_QUOTE_REQUIRED.to_s
+    # @cost_method.to_s == Job::TIME_UNIT_COST.to_s || @cost_method.to_s == Job::CUSTOME_QUOTE_REQUIRED.to_s
+    aet = @job.nil? ? nil : @job.average_expected_time
+  %>
+    <div style="width:230px;float:left;">
+      I expect this task to take:
+      <%= text_field_tag "job[average_expected_time]",aet,{:onchange=>"calculate_expected_cost()"}  %>
+    </div>
+  <% end %>
+
+
+  <%
+  if @cost_method.include?('Hourly')
+    tu  = @job.nil? ? nil : @job.time_unit_id %>
+    <div style="width:240px;float:right;text-align:left;">
+      TU
+  <%#= select_tag "job[time_unit_id]", '<option value="">Please select</option>'+options_for_select(Job::TIME_UNIT) %>
+      <%= select_tag "job[time_unit_id]", '<option value="">Please select</option>'+options_from_collection_for_select(TimeUnit.find_all_by_active(1),:id,:name, tu)%>
+    </div>
+    <div style="clear:both;"></div>
+  <% end %>
+</div>
+</p>
+<%
+#if @cost_method.to_s == Job::TIME_UNIT_COST.to_s 
+if @cost_method.include?('Hourly')
+  cptu = @job.nil? ? nil : @job.cost_per_time_unit%>
+  <p>
+    Cost per time unit:<br />
+    <%= text_field_tag "job[cost_per_time_unit]", cptu, {:onchange=>"calculate_expected_cost()"}  %>
+  </p>
+
+<% end
+if @cost_method.include?('Fixed') 
+  # @cost_method.to_s == Job::FIXED_COST.to_s
+  fca = @job.nil? ? nil : @job.fixed_cost_amount
+%>
+  <p>
+    Your fixed price offer is
+    $<%= text_field_tag "job[fixed_cost_amount]",fca, {:onchange=>"calculate_expected_cost()"} %>.00 USD
+  </p>
+<% end %>
+
+<p>
+  <% er = @job.nil? ? nil : @job.expense_required%>
+  Will any expenses be required while on the job?
+	$<%= text_field_tag "job[expense_required]", er, {:onchange=>"calculate_expected_cost()"}  %>.00 USD
+</p>
+
+<% #if @cost_method.include?('Hourly') || @cost_method.include?('Custom')
+  # @cost_method.to_s == Job::TIME_UNIT_COST.to_s || @cost_method.to_s == Job::CUSTOME_QUOTE_REQUIRED.to_s
+  aec = @job.nil? ? nil : @job.average_expected_cost
+%>
+  <p>
+    What do you expect to pay for this?<br />
+    $<%= text_field_tag "job[average_expected_cost]", aec%>.00 USD
+  </p>
+<% #end %>
+
+<% if @cost_method.include?('Custom') 
+  # @cost_method.to_s == Job::CUSTOME_QUOTE_REQUIRED.to_s
+  cqf = @job.nil? ? nil : @job.custom_quote_factors%>
+  <p>Requirements for pricing:<br />
+    <%= text_area_tag "job[custom_quote_factors]", cqf, :rows=>6,:cols=>35 %>
+  </p>
+
+<% end %>

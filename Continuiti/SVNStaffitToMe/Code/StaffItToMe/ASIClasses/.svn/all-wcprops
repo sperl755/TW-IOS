@@ -1,0 +1,137 @@
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/svn/!svn/ver/220/ios/StaffItToMe/ASIClasses
+END
+ASIHTTPRequest.m
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/220/ios/StaffItToMe/ASIClasses/ASIHTTPRequest.m
+END
+ASICacheDelegate.h
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/220/ios/StaffItToMe/ASIClasses/ASICacheDelegate.h
+END
+ASINetworkQueue.h
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/!svn/ver/220/ios/StaffItToMe/ASIClasses/ASINetworkQueue.h
+END
+ASIDataDecompressor.h
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/!svn/ver/220/ios/StaffItToMe/ASIClasses/ASIDataDecompressor.h
+END
+ASIAuthenticationDialog.h
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/!svn/ver/220/ios/StaffItToMe/ASIClasses/ASIAuthenticationDialog.h
+END
+ASIProgressDelegate.h
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/!svn/ver/220/ios/StaffItToMe/ASIClasses/ASIProgressDelegate.h
+END
+ASIDownloadCache.m
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/220/ios/StaffItToMe/ASIClasses/ASIDownloadCache.m
+END
+ASINetworkQueue.m
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/!svn/ver/220/ios/StaffItToMe/ASIClasses/ASINetworkQueue.m
+END
+Reachability.h
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/220/ios/StaffItToMe/ASIClasses/Reachability.h
+END
+ASIDataDecompressor.m
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/!svn/ver/220/ios/StaffItToMe/ASIClasses/ASIDataDecompressor.m
+END
+ASIAuthenticationDialog.m
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/!svn/ver/220/ios/StaffItToMe/ASIClasses/ASIAuthenticationDialog.m
+END
+ASIFormDataRequest.h
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/220/ios/StaffItToMe/ASIClasses/ASIFormDataRequest.h
+END
+Reachability.m
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/220/ios/StaffItToMe/ASIClasses/Reachability.m
+END
+ASIFormDataRequest.m
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/220/ios/StaffItToMe/ASIClasses/ASIFormDataRequest.m
+END
+ASIInputStream.h
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/220/ios/StaffItToMe/ASIClasses/ASIInputStream.h
+END
+ASIHTTPRequestConfig.h
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/!svn/ver/220/ios/StaffItToMe/ASIClasses/ASIHTTPRequestConfig.h
+END
+ASIInputStream.m
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/220/ios/StaffItToMe/ASIClasses/ASIInputStream.m
+END
+ASIHTTPRequestDelegate.h
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/220/ios/StaffItToMe/ASIClasses/ASIHTTPRequestDelegate.h
+END
+ASIDataCompressor.h
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/220/ios/StaffItToMe/ASIClasses/ASIDataCompressor.h
+END
+ASIHTTPRequest.h
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/220/ios/StaffItToMe/ASIClasses/ASIHTTPRequest.h
+END
+ASIDownloadCache.h
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/220/ios/StaffItToMe/ASIClasses/ASIDownloadCache.h
+END
+ASIDataCompressor.m
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/220/ios/StaffItToMe/ASIClasses/ASIDataCompressor.m
+END

@@ -1,0 +1,18 @@
+connect:
+  twitter:
+    key: j7zkvsIFaV1oc8dMB9JRZQ
+    token: 198025824-ksDR5M2UlTZOyQHWZ48t2TJWt6tS9dI0PCTkTrTk
+    secret: xzqhT02cHNBIpaygEB7ZNsOtXj6PFZraItRQFpeY95E
+    label: "Twitter"
+  facebook:
+    key: "my_key"
+    secret: "my_secret"
+    label: "Facebook"
+  google:
+    key: "my_key"
+    secret: "my_secret"
+    label: "Google"
+  yahoo:
+    key: "my_key"
+    secret: "my_secret"
+    label: "Yahoo"

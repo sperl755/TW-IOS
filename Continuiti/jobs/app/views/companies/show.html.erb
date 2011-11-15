@@ -1,0 +1,105 @@
+<%= GMap.header %>
+
+<%= stylesheet_link_tag 'company' %>
+<div id="company_page">
+  <div id="company_page_top">
+    <div id="edit_company">
+      <%= link_to 'Edit', edit_user_company_path(current_user,@company) %> |
+      <%= link_to 'My Companies', user_companies_path(current_user) %>
+    </div>
+    <% unless @company.company_followers.include?(current_user) %>
+    <div id ="follow_company">
+      <%= render :partial => 'follow_company'  %>
+    </div>
+    <% end %>
+    <div class="clear"></div>
+  </div>
+
+  <div id="company_page_details">
+    <div id ="company_details">
+
+      <div id ="company_image_office">
+        <div id="company_avatar">
+          <%= image_tag @company.company_photo_url(:medium) %>
+        </div>
+        <div id="company_office_addresses" class="alt">
+          <h3>Company Office</h3>
+          <% @company.offices.each do |office| %>
+
+            <div id="company_office_map" style="border: none;">
+              <%= @map[:office => office.office_name].to_html unless @map[:office => office.office_name].blank? %>
+              <%= @map[:office => office.office_name].div(:width => 276, :height => 150) %>
+            </div>
+            <div id="company_office_address">
+              <p>
+                <% unless office.address1.blank? %>
+                  <%=h office.address1 %><br />
+                <% end %>
+                <% unless office.city.blank? %>
+                  <%=h office.city + "," %>
+                <% end %>
+                <% unless office.state.blank? %>
+                  <%=h office.state + "," %><br/>
+                <% end %>
+                <% unless office.country.blank? %>
+                  <%=h office.country%><br/>
+                <%end%>
+                <% unless office.zip.blank? %>
+                  <%=h office.zip%><br/>
+                <%end%>
+              </p>
+            </div>
+          <%  end %>
+        </div>
+      </div>
+
+      <div id ="company_identity">
+        <div id="company_name_url" class="alt">
+          <h3><p><%=h @company.name %><br/>
+            <%=h @company.company_url%></p></h3>
+        </div>
+        <%#*<div id="company_industries" class="alt">%>
+          <%#*<h3>Company Industry(ies)</h3>%>
+          <%#*<p>Our industries are: </p>%>
+        <%#*</div>%>
+        <div id="compnay_description" class="alt">
+          <h3>Company Description</h3>
+          <p><%= @company.description%></p>
+        </div>
+        <div id="current_company_job" class="alt">
+          <h3>Company Jobs-Current</h3>
+          <p>Our current job is: </p>
+        </div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="mission_and_history">
+        <div id="company_core_value" class="alt">
+          <h3>Core Value</h3>
+          <p><%=h @company.core_values %></p>
+        </div>
+        <div id="company_mission" class="alt">
+          <h3>Our Mission</h3>
+          <%=h @company.mission_philosophy %>
+        </div>
+        <div id="what_we_look_for" class="alt">
+          <h3>What we look for</h3>
+          <%=h @company.what_we_look_for %>
+        </div>
+        <div id="company_jobs_future" class="alt">
+          <h3>Company Jobs Future</h3>
+          <p>Our current job is: </p>
+        </div>
+        <div id="company_jobs_past" class="alt">
+          <h3>Company Jobs Expired/Past</h3>
+          <p>Our current job is: </p>
+        </div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="company_followers_list">
+        <%= render :partial => 'company_followers' %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 38
+/svn/!svn/ver/234/jobs/trunk/solr/conf
+END
+schema.xml
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/!svn/ver/234/jobs/trunk/solr/conf/schema.xml
+END
+stopwords.txt
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/234/jobs/trunk/solr/conf/stopwords.txt
+END
+elevate.xml
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/234/jobs/trunk/solr/conf/elevate.xml
+END
+solrconfig.xml
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/234/jobs/trunk/solr/conf/solrconfig.xml
+END
+synonyms.txt
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/234/jobs/trunk/solr/conf/synonyms.txt
+END
+spellings.txt
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/234/jobs/trunk/solr/conf/spellings.txt
+END

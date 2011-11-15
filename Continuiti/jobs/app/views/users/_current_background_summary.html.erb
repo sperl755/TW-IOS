@@ -1,0 +1,24 @@
+<%- unless @my_recent_experience.blank? %>
+  <%= "<b>Most Recent Employer :</b> #{@my_recent_experience.first.title} at #{@my_recent_experience.first.company_name}, #{@my_recent_experience.first.from_year} - #{@my_recent_experience.first.end_year}" %>
+  <br />
+<%- end %>
+<%- unless @my_recent_education.blank? %>
+  <%= "<b>Most Recent Degree :</b> #{@my_recent_education.first.degree} in #{@my_recent_education.first.organization}, #{@my_recent_education.first.from_year} - #{@my_recent_education.first.end_year}" %>
+  <br />
+<%- end %>
+<%- unless @my_recent_certification.blank? %>
+  <%= "<b>Recent Certifications :</b> #{@my_recent_certification.map(&:title).to_sentence(:connector => "")}" %>
+  <br />
+<%- end %>
+<%- unless @my_current_skill.blank? %>
+  <%= "<b>Current Skills :</b> #{@my_current_skill.map(&:title).to_sentence(:connector => "")}" %>
+<%- end %>
+
+<%- if @my_recent_experience.blank? and @my_recent_education.blank? and @my_recent_certification.blank? and @my_current_skill.blank? %>
+  <%- unless current_user %>
+    No current background and expertise
+  <%- end %>
+<%- end %>
+
+
+

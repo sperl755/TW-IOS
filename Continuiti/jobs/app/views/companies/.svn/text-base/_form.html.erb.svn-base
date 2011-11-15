@@ -1,0 +1,68 @@
+<div id ="company_details">
+  <%= f.error_messages %>
+  <div id ="company_image_office">
+    <div id="company_avatar">
+      <%= image_tag AppConfig.photo['missing_medium']  %>
+      <p>
+        <% f.fields_for :company_photo do |p| %>
+          <label for="uploaded_data">Upload a photo:</label>
+          <%= p.file_field :uploaded_data, :size => 20 %>
+        <%end%>
+      </p>
+    </div>
+
+    <div id="company_office_addresses" class="alt">
+
+      <h3>Company Office</h3>
+      <div id="company_office_address">
+        <%= render :partial => 'office', :collection => @company.offices %>
+      </div>
+
+      <p>
+        <%= link_to_function  "Add a new office" do |page|
+          page.insert_html :bottom, :company_office_address, :partial => 'office', :object => Office.new
+        end%>
+      </p>
+
+    </div>
+  </div>
+  <div id ="company_form">
+    <p>
+    <div id="leftlabel">
+      Company Page Name:
+    </div>
+    <%= f.text_field :company_page_name %>
+    </p>
+    <p>
+    <div id="leftlabel">Name of the Company:</div>
+    <%= f.text_field :name %>
+    </p>
+    <p>
+    <div id="leftlabel">Company Website:</div>
+    <%= f.text_field :company_url %>
+    </p>
+    <p>
+      <%= f.label :description %><br />
+      <%= f.text_area :description, :style => 'width: 100%', :class => "rich_text_editor" %>
+    </p>
+    <p>
+      <%= f.label :mission_philosophy %><br />
+      <%= f.text_area :mission_philosophy, :style => 'width: 100%', :class => "rich_text_editor" %>
+    </p>
+    <p>
+      <%= f.label :core_values %><br />
+      <%= f.text_area :core_values, :style => 'width: 100%', :class => "rich_text_editor" %>
+    </p>
+    <p>
+      <%= f.label :what_we_look_for %><br />
+      <%= f.text_area :what_we_look_for, :style => 'width: 100%', :class => "rich_text_editor" %>
+    </p>
+
+  </div>
+</div>
+<script type="text/javascript" >
+  function mark_for_destroy(element){
+  $(element).previous('.should_destroy').value = 1;
+  $(element).up('#new_office_form').hide();
+  }
+</script>

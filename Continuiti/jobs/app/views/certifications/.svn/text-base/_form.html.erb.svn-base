@@ -1,0 +1,50 @@
+<script type="text/javascript">
+  window.certificationFormIndex = 0;
+</script>
+<style>
+  .fieldWithErrors{
+    display: inline;
+  }
+</style>
+
+<div style="width:520px;padding: 40px 0 0 130px;">
+  <% form_remote_tag(:url => certifications_path,
+    :loading => "$('add_new_certification_form_process_ajax_loader').show()",
+    :success => "$('add_new_certification_form_process_ajax_loader').hide()") do %>
+    <div id="certification_fields">
+      <div class="certification_field">
+        <p>
+        <div style="float:left;width:150px;"><b>Title:</b></div>
+        <span id="certification_title_cant_be_blank_0" style="display: none"><div style="float: right; width:350px; color: red">Title can't be blank</div></span>
+        <span id="certification_title_must_unique_0" style="display: none"><div style="float: right; width:350px; color: red">Title must be uniqueness</div></span>
+        <div style="float: right; width:350px;"><%= text_field_tag "certification[0][title]", nil,
+            :onchange => "validateFieldCantBeBlank('certification_0_title', 'certification_title_cant_be_blank_0')" %></div>
+        <div style="clear:both;"></div>
+        </p>
+        <p>
+        <div style="float:left;width:160px;"><b>Award date:</b></div>
+        <span id="certification_month_cant_be_blank_0" style="display: none"><div style="float:right;width:350px;color: red">Please select a month.</div></span>
+        <span id="certification_year_must_enter_after_1900_0" style="display: none"><div style="float:right;width:350px;color: red">Please enter a year after 1900.</div></span>
+        <div style="float: right; width:350px;">
+          <%= date_select "certification[0]", "award_date", {:order => [:month], :prompt => {:month => "Month"}}, {:onchange => "validateFieldCantBeBlank('certification_0_award_date_2i', 'certification_month_cant_be_blank_0')"} %>
+          <%= text_field_tag "certification[0][award_year]", nil,
+            :size => 4, :maxlength => 4,
+            :onchange => "validateSingleYear('certification_0_award_year', 'certification_year_must_enter_after_1900_0', 'certification_month_cant_be_blank_0', 'after filled field')" %>
+        </div>
+        <div style="clear:both;"></div>
+        </p>
+        <p>
+          <%= link_to_function "remove" , "$(this).up('.certification_field').remove();$$('.certification_field').length == 0 ? $('cancel_add_certification').click() : false;" %>
+        </p>
+      </div>
+    </div>
+    <p>
+      <%= link_to_function "+ Add another certification", "addNewCertificationMultipleForm()" %>
+    </p>
+    <p>
+    <div style="float:left;width:150px;vertical-align:top;"></div>
+    <div style="float:right;width:350px;" ><%= submit_tag "Create", :onclick => "return validateAllCertificationFields()" %> or <%= link_to_function 'Cancel', "$(\"add_certification_form\").innerHTML = \"\"", :id => "cancel_add_certification" %> <span id="add_new_certification_form_process_ajax_loader" style="display: none"><%= image_tag "LoaderIcon.gif", :style => "width:15px" %></span></div>
+    <div style="clear:both;"></div>
+  </p>
+<% end %>
+</div>

@@ -1,0 +1,75 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  jobtype_id: 1
+  job_title: MyString
+  job_detail_description: MyString
+  job_detail_private: MyString
+  task_start_time_date: MyString
+  task_completed_by_time_date: MyString
+  your_time_estimate: MyString
+  your_cost_estimate_per_hour: 1.5
+  your_estimated_expense_to_do_task: 1.5
+  total_cost_calculated: MyString
+  vehicle_required: MyString
+  action_chosen: MyString
+  make_template: false
+
+two:
+  jobtype_id: 1
+  job_title: MyString
+  job_detail_description: MyString
+  job_detail_private: MyString
+  task_start_time_date: MyString
+  task_completed_by_time_date: MyString
+  your_time_estimate: MyString
+  your_cost_estimate_per_hour: 1.5
+  your_estimated_expense_to_do_task: 1.5
+  total_cost_calculated: MyString
+  vehicle_required: MyString
+  action_chosen: MyString
+  make_template: false
+
+
+
+
+
+
+# == Schema Information
+#
+# Table name: jobs
+#
+#  id                                :integer(4)      not null, primary key
+#  jobtype_id                        :integer(4)
+#  title                             :string(255)
+#  description                       :string(255)
+#  private_description               :string(255)
+#  task_start_time_date              :string(255)
+#  task_completed_by_time_date       :string(255)
+#  your_time_estimate                :string(255)
+#  your_cost_estimate_per_hour       :float
+#  your_estimated_expense_to_do_task :float
+#  total_cost_calculated             :string(255)
+#  vehicle_id                        :integer(4)
+#  action_chosen                     :string(255)
+#  make_template                     :boolean(1)
+#  created_at                        :datetime
+#  updated_at                        :datetime
+#  cost_method_id                    :integer(4)      default(0)
+#  time_unit_id                      :integer(4)
+#  cost_per_time_unit                :string(255)
+#  fixed_cost_amount                 :string(255)
+#  average_expected_cost             :string(255)
+#  average_expected_time             :string(255)
+#  custom_quote_factors              :string(255)
+#  skills                            :string(255)
+#  user_id                           :integer(4)
+#  category_id                       :integer(4)
+#  industry_id                       :integer(4)
+#  company                           :string(255)
+#  expense_required                  :integer(4)
+#  task_location_type_id             :integer(4)
+#  status                            :integer(1)      default(1)
+#  visible_status                    :integer(1)      default(0)
+#
+

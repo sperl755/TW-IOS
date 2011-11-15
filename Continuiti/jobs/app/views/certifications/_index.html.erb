@@ -1,0 +1,26 @@
+<%- certifications = @certifications || certifications %>
+<%- i = 1 %>
+<%- certifications.each_with_index do |certification, cert_index| %>
+
+  <b><%= certification.title %></b>
+  <% if current_user and current_user.id.eql?(certification.user_id) %>
+    <%= link_to_remote 'Edit', :url => edit_certification_path(certification), :loading => "$('edit_and_remove_certification_ajax_loader_#{cert_index}').show()", :success => "$('edit_and_remove_certification_ajax_loader_#{cert_index}').hide()", :method => :get %>
+    <%= link_to_remote 'Remove', :url => certification_path(certification), :loading => "$('edit_and_remove_certification_ajax_loader_#{cert_index}').show()", :success => "$('edit_and_remove_certification_ajax_loader_#{cert_index}').hide()", :confirm => 'Are you sure?', :method => :delete %>
+    <span id="edit_and_remove_certification_ajax_loader_<%= cert_index %>" style="display: none"><%= image_tag "LoaderIcon.gif", :style => "width:15px" %></span>
+  <% end %>
+  <br />
+  <%=h certification.award_date.strftime("%B %Y") %><br />
+
+  <%- if certifications.size != i %>
+    <div style="padding-top: 5px;"></div>
+    <hr style="border: 1px dotted #cccccc; ">
+    <div style="padding-top: 10px;"></div>
+  <%- elsif current_user && current_user.certifications.size != i %>
+    <div style="padding-top: 5px;"></div>
+    <hr style="border: 1px dotted #cccccc; ">
+    <div style="padding-top: 10px;"></div>
+  <%- end %>
+  <%- i = i + 1 %>
+<%- end %>
+
+<br />

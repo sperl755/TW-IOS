@@ -1,0 +1,7 @@
+<div style="float: left;width: 300px">
+  <%= check_box_tag "general_availability[#{general_availability.id}]", general_availability.id, true %> <%= general_availability.name %>
+</div>
+
+<%- if (my_availabilities_count % 2).zero? %>
+  <div class="clear"></div>
+<%- end %>

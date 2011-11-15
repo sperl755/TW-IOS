@@ -1,0 +1,16 @@
+
+<table width="100%" cellpadding="3px" cellspacing="3px" style="margin:25px 0 20px 0;">
+  <tr style="height:40px;background-color:#CCCCCC;">
+    <td><%= link_to 'Edit job', edit_job_path(@job.title.parameterize.wrapped_string,@job.id) %></td>
+    <td>
+      <% visibility_status = @job.visible_status == 0 ? APP_CONFIG['job_visible_status'][1] : APP_CONFIG['job_visible_status'][0] %>
+      <div id="visibility_status_div">
+        <%=link_to_remote 'Make '+visibility_status.titleize,:url=>{:controller=>:jobs, :action=>:update_visibility, :id=>@job.id},
+		:update => 'visibility_status_div',:confirm=>'Are you sure to change visibility?'%>
+      <%#= link_to 'Make Private', update_job_visibility_path(@job.title.parameterize.downcase.wrapped_string,@job.id) %>
+      </div></td>
+    <td><%=link_to "Repost Job", "#;"%> </td>
+    <td><%=link_to "Close Job", "#;"%> </td>
+    <td><%=link_to "View Job Applications", "#;"%> </td>
+  </tr>
+</table>

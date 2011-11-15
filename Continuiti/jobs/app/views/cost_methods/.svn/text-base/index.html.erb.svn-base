@@ -1,0 +1,22 @@
+<h1>Listing cost_methods</h1>
+
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Active</th>
+  </tr>
+
+<% @cost_methods.each do |cost_method| %>
+  <tr>
+    <td><%=h cost_method.title %></td>
+    <td><%=h cost_method.active %></td>
+    <td><%= link_to 'Show', cost_method %></td>
+    <td><%= link_to 'Edit', edit_cost_method_path(cost_method) %></td>
+    <td><%= link_to 'Destroy', cost_method, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New cost_method', new_cost_method_path %>

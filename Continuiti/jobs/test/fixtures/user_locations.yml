@@ -1,0 +1,39 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  address_name: MyString
+  address1: MyString
+  address2: MyString
+  city: MyString
+  state: MyString
+  zipcode: 1
+  country: MyString
+  user_id: 1
+
+two:
+  address_name: MyString
+  address1: MyString
+  address2: MyString
+  city: MyString
+  state: MyString
+  zipcode: 1
+  country: MyString
+  user_id: 1
+
+# == Schema Information
+#
+# Table name: user_locations
+#
+#  id           :integer(4)      not null, primary key
+#  address_name :string(255)
+#  address1     :string(255)
+#  address2     :string(255)
+#  city         :string(255)
+#  state        :string(255)
+#  zipcode      :integer(4)
+#  country      :string(255)
+#  user_id      :integer(4)
+#  created_at   :datetime
+#  updated_at   :datetime
+#
+

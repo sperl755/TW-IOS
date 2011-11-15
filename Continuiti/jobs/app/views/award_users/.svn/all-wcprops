@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/!svn/ver/62/jobs/trunk/app/views/award_users
+END
+edit.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/34/jobs/trunk/app/views/award_users/edit.html.erb
+END
+index.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/62/jobs/trunk/app/views/award_users/index.html.erb
+END
+new.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/!svn/ver/34/jobs/trunk/app/views/award_users/new.html.erb
+END
+show.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/34/jobs/trunk/app/views/award_users/show.html.erb
+END

@@ -1,0 +1,22 @@
+<h1>Listing award_users</h1>
+
+<table>
+  <tr>
+    <th>User</th>
+    <th>Award</th>
+  </tr>
+
+<% @award_users.each do |award_user| %>
+  <tr>
+    <td><%=h award_user.user.login %></td>
+    <td><%=h award_user.award.name %></td>
+    <td><%= link_to 'Show', award_user %></td>
+    <td><%= link_to 'Edit', edit_award_user_path(award_user) %></td>
+    <td><%= link_to 'Destroy', award_user, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New award_user', new_award_user_path %>

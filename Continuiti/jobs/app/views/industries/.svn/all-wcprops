@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/!svn/ver/63/jobs/trunk/app/views/industries
+END
+edit.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/!svn/ver/63/jobs/trunk/app/views/industries/edit.html.erb
+END
+index.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/63/jobs/trunk/app/views/industries/index.html.erb
+END
+new.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/63/jobs/trunk/app/views/industries/new.html.erb
+END
+show.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/!svn/ver/63/jobs/trunk/app/views/industries/show.html.erb
+END

@@ -1,0 +1,6 @@
+<%= javascript_include_tag "jquery/jquery-1.5.1" %>
+<%= javascript_include_tag "jquery/jquery.popupWindow" %>
+
+<span class="heading">Job Postings</span>
+<%=render :partial =>"job_posting_header"%>
+<%=render :partial =>"job_posting_list"%>   

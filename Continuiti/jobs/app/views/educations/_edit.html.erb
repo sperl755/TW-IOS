@@ -1,0 +1,73 @@
+<style>
+  .fieldWithErrors{
+    display: inline;
+  }
+</style>
+
+<div style="width:520px;padding: 40px 0 0 100px;">
+  <% form_remote_for(@education, :url => education_path(@education),
+    :loading => "$('add_new_education_form_process_ajax_loader').show()",
+    :success => "$('add_new_education_form_process_ajax_loader').hide()") do |f| %>
+    <p>
+    <div style="float:left;width:150px;"><b><%= f.label :organization, "School/University" %>:</b></div>
+    <span id="education_university_cant_be_blank_0" style="display: none"><div style="float: right; width:350px; color: red">School/University can't blank</div></span>
+    <div style="float: right; width:350px;"><%= f.text_field :organization, :id => "education_0_organization",
+        :onchange => "validateFieldCantBeBlank('education_0_organization', 'education_university_cant_be_blank_0')" %></div>
+    <div style="clear:both;"></div>
+  </p>
+  <p>
+  <div style="float:left;width:150px;"><b><%= f.label :url, "School/University URL" %>:</b></div>
+  <span id="education_university_url_not_valid_0" style="display: none"><div style="float: right; width:350px; color: red">School/University URL is not valid</div></span>
+  <div style="float: right; width:350px;"><%= f.text_field :url, :id => "education_0_url", :onchange => "validateURLAddress('education_0_url', 'education_university_url_not_valid_0')" %></div>
+  <div style="clear:both;"></div>
+  </p>
+  <p>
+  <div style="float:left;width:160px;"><b><%= f.label :degree %>:</b></div>
+  <span id="education_degree_cant_be_blank_0" style="display: none"><div style="float: right; width:350px; color: red">Degree can't blank</div></span>
+  <div style="float: right; width:350px;">
+    <%= f.text_field :degree, :size => 4, :id => "education_0_degree",
+      :onchange => "validateFieldCantBeBlank('education_0_degree', 'education_degree_cant_be_blank_0')" %>
+  </div>
+  <div style="clear:both;"></div>
+  </p>
+  <p>
+  <div style="float:left;width:150px;"><b>Field(s) of study:</b></div>
+  <span id="education_major_cant_be_blank_0" style="display: none"><div style="float: right; width:350px; color: red">Field(s) of study can't blank</div></span>
+  <div style="float: right; width:350px;"><%= f.text_field :major, :id => "education_0_major",
+      :onchange => "validateFieldCantBeBlank('education_0_major', 'education_major_cant_be_blank_0')" %></div>
+  <div style="clear:both;"></div>
+  </p>
+  <p>
+  <div style="float:left;width:150px;display:inline;"><b>Dates Attended:</b></div>
+  <span id="education_year_must_enter_after_1900_0" style="display: none"><div style="float:right;width:350px;color: red">Please enter a year after 1900.</div></span>
+  <span id="education_end_year_must_enter_after_1900_0" style="display: none"><div style="float:right;width:350px;color: red">Please enter an end year after 1900.</div></span>
+  <span id="education_end_year_must_greater_than_start_year_0" style="display: none"><div style="float:right;width:350px;color: red">End year must equal or greater than start year.</div></span>
+  <div style="float: right; width:350px;">
+    <%= f.text_field :from_year, :size => 4, :maxlength => 4, :id => "education_0_from_year",
+      :onchange => "validateDateAttended('start year', 0)" %>
+    to
+    <%= f.text_field :end_year, :size => 4, :maxlength => 4, :id => "education_0_end_year",
+      :onchange => "validateDateAttended('end year', 0)" %>
+  </div>
+  <div style="clear:both;"></div>
+  </p>
+  <p>
+  <div style="float:left;width:160px;vertical-align:top;" ><b>Activities and Societies:</b></div>
+  <div style="float: right; width:350px;"><%= f.text_area :activities, :rows => 7, :cols => 55 %></div>
+  <div style="clear:both;"></div>
+  </p>
+  <p>
+  <div style="float:left;width:150px;vertical-align:top;" ><b>Additional Notes:</b></div>
+  <div style="float: right; width:350px;"><%= f.text_area :description, :rows => 7, :cols => 55 %></div>
+  <div style="clear:both;"></div>
+  </p>
+  <p>
+  <div style="float:left;width:150px;vertical-align:top;" ></div>
+  <div style="float:right;width:350px;"><%= submit_tag "Update", :onclick => "window.formIndex = 0;return validateAllEducationFields();" %> or <%= link_to_function 'Cancel', "$(\"add_education_form\").innerHTML = \"\"" %>
+    <span id="add_new_education_form_process_ajax_loader" style="display: none"><%= image_tag "LoaderIcon.gif", :style => "width:15px" %></span>
+  </div>
+  <div style="clear:both;"></div>
+  </p>
+<% end %>
+</div>
+

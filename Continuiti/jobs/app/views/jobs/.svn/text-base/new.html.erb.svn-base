@@ -1,0 +1,7 @@
+<%=calendar_date_select_includes%>
+<br />
+<h1>New job</h1>
+<br />
+<%=render :partial=>'form'%>
+
+<%#= link_to 'Back', jobs_path %>

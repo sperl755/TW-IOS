@@ -1,0 +1,125 @@
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/220/ios/pokeb-asi-http-request-2980421/Classes
+END
+ASIHTTPRequest.m
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/!svn/ver/220/ios/pokeb-asi-http-request-2980421/Classes/ASIHTTPRequest.m
+END
+ASICacheDelegate.h
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/!svn/ver/220/ios/pokeb-asi-http-request-2980421/Classes/ASICacheDelegate.h
+END
+ASINetworkQueue.h
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/!svn/ver/220/ios/pokeb-asi-http-request-2980421/Classes/ASINetworkQueue.h
+END
+ASIDataDecompressor.h
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/!svn/ver/220/ios/pokeb-asi-http-request-2980421/Classes/ASIDataDecompressor.h
+END
+ASIAuthenticationDialog.h
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/!svn/ver/220/ios/pokeb-asi-http-request-2980421/Classes/ASIAuthenticationDialog.h
+END
+ASIProgressDelegate.h
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/!svn/ver/220/ios/pokeb-asi-http-request-2980421/Classes/ASIProgressDelegate.h
+END
+ASIDownloadCache.m
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/!svn/ver/220/ios/pokeb-asi-http-request-2980421/Classes/ASIDownloadCache.m
+END
+ASINetworkQueue.m
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/!svn/ver/220/ios/pokeb-asi-http-request-2980421/Classes/ASINetworkQueue.m
+END
+ASIDataDecompressor.m
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/!svn/ver/220/ios/pokeb-asi-http-request-2980421/Classes/ASIDataDecompressor.m
+END
+ASIAuthenticationDialog.m
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/!svn/ver/220/ios/pokeb-asi-http-request-2980421/Classes/ASIAuthenticationDialog.m
+END
+ASIFormDataRequest.h
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/!svn/ver/220/ios/pokeb-asi-http-request-2980421/Classes/ASIFormDataRequest.h
+END
+ASIInputStream.h
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/!svn/ver/220/ios/pokeb-asi-http-request-2980421/Classes/ASIInputStream.h
+END
+ASIFormDataRequest.m
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/!svn/ver/220/ios/pokeb-asi-http-request-2980421/Classes/ASIFormDataRequest.m
+END
+ASIHTTPRequestConfig.h
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/!svn/ver/220/ios/pokeb-asi-http-request-2980421/Classes/ASIHTTPRequestConfig.h
+END
+ASIInputStream.m
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/!svn/ver/220/ios/pokeb-asi-http-request-2980421/Classes/ASIInputStream.m
+END
+ASIHTTPRequestDelegate.h
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/!svn/ver/220/ios/pokeb-asi-http-request-2980421/Classes/ASIHTTPRequestDelegate.h
+END
+ASIDataCompressor.h
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/!svn/ver/220/ios/pokeb-asi-http-request-2980421/Classes/ASIDataCompressor.h
+END
+ASIHTTPRequest.h
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/!svn/ver/220/ios/pokeb-asi-http-request-2980421/Classes/ASIHTTPRequest.h
+END
+ASIDownloadCache.h
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/!svn/ver/220/ios/pokeb-asi-http-request-2980421/Classes/ASIDownloadCache.h
+END
+ASIDataCompressor.m
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/!svn/ver/220/ios/pokeb-asi-http-request-2980421/Classes/ASIDataCompressor.m
+END

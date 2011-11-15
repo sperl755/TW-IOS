@@ -1,0 +1,65 @@
+K 25
+svn:wc:ra_dav:version-url
+V 35
+/svn/!svn/ver/373/jobs/trunk/config
+END
+authlogic.yml
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/!svn/ver/195/jobs/trunk/config/authlogic.yml
+END
+facebooker.yml
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/139/jobs/trunk/config/facebooker.yml
+END
+application.yml
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/170/jobs/trunk/config/application.yml
+END
+routes.rb
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/svn/!svn/ver/373/jobs/trunk/config/routes.rb
+END
+database.yml
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/!svn/ver/266/jobs/trunk/config/database.yml
+END
+boot.rb
+K 25
+svn:wc:ra_dav:version-url
+V 42
+/svn/!svn/ver/19/jobs/trunk/config/boot.rb
+END
+environment.rb
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/236/jobs/trunk/config/environment.rb
+END
+gmaps_api_key.yml
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/71/jobs/trunk/config/gmaps_api_key.yml
+END
+sunspot.yml
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/svn/!svn/ver/233/jobs/trunk/config/sunspot.yml
+END
+app_constants.yml
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/249/jobs/trunk/config/app_constants.yml
+END

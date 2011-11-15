@@ -1,0 +1,64 @@
+<script type="text/javascript">
+  window.membershipFormIndex = 0;
+</script>
+<style>
+  .fieldWithErrors{
+    display: inline;
+  }
+</style>
+
+<div style="width:520px;padding: 40px 0 0 130px;">
+  <% form_remote_tag(:url => memberships_path, :method => :post,
+    :loading => "$('add_new_membership_form_process_ajax_loader').show()",
+    :success => "$('add_new_membership_form_process_ajax_loader').hide()") do %>
+    <div id="membership_fields">
+      <div class="membership_field">
+        <p>
+        <div style="float:left;width:150px;"><b>Name:</b></div>
+        <span id="membership_name_cant_be_blank_0" style="display: none"><div style="float: right; width:350px; color: red">Name can't be blank</div></span>
+        <span id="membership_name_must_unique_0" style="display: none"><div style="float: right; width:350px; color: red">Name must be uniqueness</div></span>
+        <div style="float: right; width:350px;"><%= text_field_tag "membership[0][name]", nil,
+            :onchange => "validateFieldCantBeBlank('membership_0_name', 'membership_name_cant_be_blank_0')" %></div>
+        <div style="clear:both;"></div>
+        </p>
+        <p>
+        <div style="float:left;width:150px;"><b>Time Period:</b></div>
+        <span id="membership_start_month_cant_be_blank_0" style="display: none"><div style="float:right;width:350px;color: red">Please select a start month.</div></span>
+        <span id="membership_end_month_cant_be_blank_0" style="display: none"><div style="float:right;width:350px;color: red">Please select an end month.</div></span>
+        <span id="membership_year_must_enter_after_1900_0" style="display: none"><div style="float:right;width:350px;color: red">Please enter a start year after 1900.</div></span>
+        <span id="membership_end_year_must_enter_after_1900_0" style="display: none"><div style="float:right;width:350px;color: red">Please enter an end year after 1900.</div></span>
+        <span id="membership_end_year_must_greater_than_start_year_0" style="display: none"><div style="float:right;width:350px;color: red">End year must equal or greater than start year.</div></span>
+        <div style="float: right; width:350px;">
+          <%= check_box_tag "membership[0][to_present]", 1, false,
+            :onclick => "dateToPresent(this.checked, 0)" %> I currently active
+        </div>
+        <div style="clear:both;"></div>
+        <div style="float: right; width:350px;">
+          <%= date_select "membership[0]", "from_date", {:order => [:month], :prompt => {:month => "Month"}}, {:onchange => "validateFieldCantBeBlank('membership_0_from_date_2i', 'membership_start_month_cant_be_blank_0')"} %>
+          <%= text_field_tag "membership[0][from_year]", nil, :size => 4, :maxlength => 4,
+            :onchange => "validateBetweenFromAndEndYear('membership_0_from_year', 'membership_0_until_year', $('membership_0_to_present').checked, 'start year', 'membership_year_must_enter_after_1900_0', 'membership_end_year_must_greater_than_start_year_0', 'membership_end_year_must_enter_after_1900_0', 'membership_start_month_cant_be_blank_0', 'membership_end_month_cant_be_blank_0', 'membership_0_from_date_2i', 'membership_0_until_date_2i')" %>
+          to
+          <span id="until-date-form-0">
+            <%= date_select "membership[0]", "until_date", {:order => [:month], :prompt => {:month => "Month"}}, {:onchange => "validateFieldCantBeBlank('membership_0_until_date_2i', 'membership_end_month_cant_be_blank_0')"} %>
+            <%= text_field_tag "membership[0][until_year]", nil, :size => 4, :maxlength => 4,
+              :onchange => "validateBetweenFromAndEndYear('membership_0_from_year', 'membership_0_until_year', $('membership_0_to_present').checked, 'end year', 'membership_year_must_enter_after_1900_0', 'membership_end_year_must_greater_than_start_year_0', 'membership_end_year_must_enter_after_1900_0', 'membership_start_month_cant_be_blank_0', 'membership_end_month_cant_be_blank_0', 'membership_0_from_date_2i', 'membership_0_until_date_2i')" %>
+          </span>
+          <span id="present-date-0" style="display: none">Present</span>
+        </div>
+        <div style="clear:both;"></div>
+        </p>
+        <p>
+          <%= link_to_function "remove" , "$(this).up('.membership_field').remove();$$('.membership_field').length == 0 ? $('cancel_add_membership').click() : false;" %>
+        </p>
+      </div>
+    </div>
+    <p>
+      <%= link_to_function "+ Add another membership", "addNewMembershipMultipleForm()" %>
+    </p>
+    <p>
+    <div style="float:left;width:150px;vertical-align:top;"></div>
+    <div style="float:left;width:350px;" ><%= submit_tag "Create", :onclick => "return validateAllMembershipFields()" %> or <%= link_to_function 'Cancel', "$(\"add_membership_form\").innerHTML = \"\"", :id => "cancel_add_membership" %> <span id="add_new_membership_form_process_ajax_loader" style="display: none"><%= image_tag "LoaderIcon.gif", :style => "width:15px" %></span></div>
+    <div style="clear:both;"></div>
+  </p>
+<% end %>
+</div>

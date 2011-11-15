@@ -1,0 +1,42 @@
+<%# @page_header_title = "Job Postings"%>
+<% content_for :page_header_title do %>staffittome::<%=@job.title %><% end %>
+<% content_for :page_header_description do %><%=@job.description[0..200] %><% end %>
+
+<% if !@job.jobtype.title.include?('Staff') %>
+   <%=render :partial=>'show_job_header' %>
+<% end %>
+
+<% if current_user.id == @job.user_id || admin? %>
+  <%=render :partial =>"job_action_header"%>
+<% end %>
+
+<% if !@job.jobtype.title.include?('Staff') %>
+<p>
+  <%= render :partial => "job_description" %>
+</p>
+<p>
+  <%= render :partial => "show" %>
+</p>
+<% end %>
+
+<% if @job.jobtype.title.include?('Staff') %>
+   <%=render :partial=>'show_staffing_job' %>
+<% end %>
+
+<% if @application.nil? && current_user.id != @job.user_id && !admin? %>
+  <%=link_to "Apply to this job", new_application_url(@job.title.parameterize.downcase.wrapped_string, @job.id) %>
+<% end %>
+
+<% unless @application.nil? %>
+  You have already applied to this job
+  <br/><br/>
+  <%= link_to "View Job Application", {:controller=>"applications",:action=>"show",:id=>@application.id} %>
+<% end %>
+<% if @job.user_id == current_user.id %>
+  <b>You Paid:</b>
+  <%=h number_to_currency @job.total_paid_amount %>
+  <% if @job.total_paid_amount < @job.required_job_investment %>
+  You need to pay more. Please
+  <%= link_to "Click Here", invest_funds_job_path(@job) %>
+  <% end %>
+<% end %>

@@ -1,0 +1,13 @@
+<p>
+  <b>Name:</b>
+  <%=h @time_unit.name %>
+</p>
+
+<p>
+  <b>Active:</b>
+  <%=h @time_unit.active %>
+</p>
+
+
+<%= link_to 'Edit', edit_time_unit_path(@time_unit) %> |
+<%= link_to 'Back', time_units_path %>

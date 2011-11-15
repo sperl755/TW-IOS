@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/!svn/ver/17/jobs/trunk/public/plugin_assets/community_engine/javascripts/tiny_mce/plugins/table/js
+END
+row.js
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/!svn/ver/17/jobs/trunk/public/plugin_assets/community_engine/javascripts/tiny_mce/plugins/table/js/row.js
+END
+table.js
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/svn/!svn/ver/17/jobs/trunk/public/plugin_assets/community_engine/javascripts/tiny_mce/plugins/table/js/table.js
+END
+cell.js
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/svn/!svn/ver/17/jobs/trunk/public/plugin_assets/community_engine/javascripts/tiny_mce/plugins/table/js/cell.js
+END
+merge_cells.js
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/svn/!svn/ver/17/jobs/trunk/public/plugin_assets/community_engine/javascripts/tiny_mce/plugins/table/js/merge_cells.js
+END

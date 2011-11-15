@@ -1,0 +1,14 @@
+<% form_for @message, :url => send_application_message_path do |f| %>
+  <%= f.error_messages %>
+
+      <%=f.hidden_field  :messageable_type %>
+       <%=f.hidden_field  :messageable_id %>
+
+    <p>
+    <%= f.label :body, "Reply" %>:<br />
+    <%= f.text_area :body, :rows=>10, :cols=> 60 %>
+  </p>
+  <p>
+    <%= f.submit 'Send' %>
+  </p>
+<% end %>

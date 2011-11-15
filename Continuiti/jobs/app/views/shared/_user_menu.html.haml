@@ -1,0 +1,40 @@
+%h2
+  =:logged_in.l
+  = link_to 'Account', dashboard_user_path(current_user), :id => 'user-menu'
+#user-menu-tip
+  %ul
+    -if current_user.admin?
+      %li=link_to :admin_dashboard.l, admin_dashboard_path
+    %li= link_to :edit_profile.l, edit_user_path(current_user) 
+    %li= link_to :edit_account.l, edit_account_user_path(current_user)          
+    %li= link_to :manage_posts.l, manage_user_posts_path(current_user)
+    %li= link_to :inbox.l, user_messages_path(current_user)          
+    %li= link_to "Add A Company", new_user_company_path(current_user)
+  %hr
+  %ul
+    %li= link_to :my_profile.l, user_path(current_user)                    
+    %li=link_to :my_blog.l, user_posts_path(current_user)
+    %li=link_to :photo_manager.l, user_photo_manager_index_path(current_user)
+    %li=link_to :my_clippings.l, user_clippings_path(current_user)
+    %li=link_to :my_friends.l, accepted_user_friendships_path(current_user)
+    %li=link_to "My Companies", user_companies_path(current_user)
+    %li=link_to "New Job", new_job_url
+    %li=link_to "New full time job", {:controller=>:jobs,:action=>:new,:jobtype_id=>3}
+    %li=link_to "New task", {:controller=>:jobs,:action=>:new,:jobtype_id=>2}
+    %li=link_to "Create my service", {:controller=>:jobs,:action=>:new,:jobtype_id=>1}
+    %li=link_to "Create Staffing Position", {:controller=>:jobs,:action=>:new,:jobtype_id=>4}
+    %li=link_to "Job Postings", user_jobs_list_by_status_url(current_user.id,"open")
+    %li=link_to "Job Applications", applications_url
+    %li=link_to "Contracts", contracts_url
+  %hr
+  =link_to :log_out.l, logout_path
+
+%script{:type => "text/javascript"}
+  :plain
+    new Tip('user-menu', $('user-menu-tip'), {
+      hook:{target: 'bottomRight', tip: 'topRight'},
+      hideOn: false, 
+      hideAfter: 1.5,  
+      className: 'silver',
+      offset: {y:2, x:12}
+      });

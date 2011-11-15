@@ -1,0 +1,23 @@
+development:
+  app_id: 11955002674
+  api_key: 00230cf77ec2a69e41d9725c6f82be71
+  secret_key: 8710be5127dfc701db761063876b2f9d
+  canvas_page_name: staffittome
+  callback_url: http://ce.com:3000/
+  pretty_errors: true
+  set_asset_host_to_callback_url: false
+ 
+test:
+  api_key: your_api_key
+  secret_key: your_secret_key
+  canvas_page_name: your_canvas_name
+  callback_url: your_callback_url
+  pretty_errors: true
+  set_asset_host_to_callback_url: false
+production:
+  api_key: your_api_key
+  secret_key: your_secret_key
+  canvas_page_name: your_canvas_name
+  callback_url: your_callback_url
+  pretty_errors: true
+  set_asset_host_to_callback_url: false

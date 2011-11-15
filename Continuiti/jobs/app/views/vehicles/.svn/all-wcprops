@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svn/!svn/ver/68/jobs/trunk/app/views/vehicles
+END
+edit.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/68/jobs/trunk/app/views/vehicles/edit.html.erb
+END
+index.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/68/jobs/trunk/app/views/vehicles/index.html.erb
+END
+new.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/68/jobs/trunk/app/views/vehicles/new.html.erb
+END
+show.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/68/jobs/trunk/app/views/vehicles/show.html.erb
+END

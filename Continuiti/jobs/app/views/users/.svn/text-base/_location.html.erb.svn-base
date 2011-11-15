@@ -1,0 +1,64 @@
+<div id="new_location_form" style="display: block;">
+
+  <% fields_for "user[location_attributes][]",location do |o| %>
+    <div style="margin:0;padding:0;display:inline">
+      <% unless location.new_record? %>
+        <%= o.hidden_field :id, :index => nil %>
+        <%= o.hidden_field :should_destroy, :index => nil, :class => 'should_destroy' %>
+      <% end %>
+      <p>
+      <div id="leftlabel">
+        <%= o.label :location_name %>:
+      </div>
+
+      <%= o.text_field :location_name, :index => nil, :size => 20 %>
+      </p>
+      <p><div id="leftlabel">
+        <%= o.label :telephone %>:
+      </div>
+
+      <%= o.text_field :telephone, :index => nil, :size => 20 %>
+      </p>
+
+      <p><div id="leftlabel">
+        <%= o.label :address1 %>:
+      </div>
+
+      <%= o.text_field :address1, :index => nil, :size => 20 %>
+      </p>
+      <p><div id="leftlabel">
+        <%= o.label :address2 %>:
+      </div>
+
+      <%= o.text_field :address2 , :index => nil, :size => 20%>
+      </p>
+      <p><div id="leftlabel">
+        <%= o.label :city %>:
+      </div>
+
+      <%= o.text_field :city , :index => nil, :size => 20%>
+      </p>
+      <p><div id="leftlabel">
+        <%= o.label :state %>:
+      </div>
+
+      <%= o.text_field :state , :index => nil, :size => 20%>
+      </p>
+      <p>
+      <div id="leftlabel">
+        <%= o.label "ZIP/Postal code" %>:
+      </div>
+
+      <%= o.text_field :zip, :index => nil , :size => 20%>
+      </p>
+    <% end %>
+
+    <% if location.new_record? %>
+      <%= button_to_function(" Remove This Address ", "this.up('#new_location_form').remove(); return false")   %>
+    <% else %>
+      <%= button_to_function(" Remove This Address ", "mark_for_destroy(this); return false")   %>
+    <% end %>
+
+
+  </div>
+</div>

@@ -1,0 +1,65 @@
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/svn/!svn/ver/335/jobs/trunk/app/views/awards
+END
+_my_last_five_badges.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/!svn/ver/335/jobs/trunk/app/views/awards/_my_last_five_badges.html.erb
+END
+edit.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/283/jobs/trunk/app/views/awards/edit.html.erb
+END
+index.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/34/jobs/trunk/app/views/awards/index.html.erb
+END
+new_badge_for_friend.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/!svn/ver/284/jobs/trunk/app/views/awards/new_badge_for_friend.html.erb
+END
+new.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/283/jobs/trunk/app/views/awards/new.html.erb
+END
+show_all_available_badges_for_friend.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/!svn/ver/284/jobs/trunk/app/views/awards/show_all_available_badges_for_friend.html.erb
+END
+show_all_badges.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/!svn/ver/284/jobs/trunk/app/views/awards/show_all_badges.html.erb
+END
+show.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/34/jobs/trunk/app/views/awards/show.html.erb
+END
+get_a_badge.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/!svn/ver/284/jobs/trunk/app/views/awards/get_a_badge.html.erb
+END
+_form.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/34/jobs/trunk/app/views/awards/_form.html.erb
+END

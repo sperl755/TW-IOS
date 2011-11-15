@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/275/jobs/trunk/app/views/endorsement_mailer
+END
+share_the_badge_to_friend.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/!svn/ver/275/jobs/trunk/app/views/endorsement_mailer/share_the_badge_to_friend.html.erb
+END
+invite_user_to_endorse_me.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/!svn/ver/268/jobs/trunk/app/views/endorsement_mailer/invite_user_to_endorse_me.html.erb
+END

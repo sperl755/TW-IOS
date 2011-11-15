@@ -1,0 +1,80 @@
+<p>
+  <b>Job:</b>
+  <%=h @contract.job.title %>
+</p>
+
+Contract: <%=@contract.title%>   <br /> <br />
+Contractor: <%=user_display_name(@contract.contractor) %>   <br />    <br />
+
+Employer: <%=user_display_name(@contract.user)%>   <br />   <br />
+Start Date: <%=display_date_with_ago_words(@contract.start_datetime)%>  <br />    <br />
+
+
+
+
+<% if @contract.status == APP_CONFIG['contract_status']['active'] && @contract.user_id== current_user.id%>
+Click <%= link_to "here", employer_end_contract_path(@contract.id) %> to end this contract.
+<% elsif @contract.status == APP_CONFIG['contract_status']['active'] && @contract.contractor_id== current_user.id%>
+Click <%= link_to "here", contractor_end_path(@contract.id,0) %> to end this contract.
+<% elsif @contract.status == APP_CONFIG['contract_status']['end'] %>
+Contract has been ended on <%=display_date_with_ago_words(@contract.end_datetime)%>.   <br /> <br />
+<% end %>
+
+<% unless @contract.ended_by.nil? && @contract.ended_by == 0 %>
+
+    <table width="100%">
+      <tr>
+        <td width="50%" valign="top">
+
+          <% unless @contract.end_employer_comment.blank? %>
+            <b>Feedback to contractor(<%=user_display_name(@contract.contractor)%>):</b>
+              <br /> <br><br>
+              <%=@contract.end_employer_comment%>
+              <br /><br />
+            <%average_rating = average_rating(@contract.user.id,@contract.id,"Contract")
+            rating_percentage = (average_rating.to_f/5)*100
+            %>
+        <div class="classification"><div class="cover"></div><div class="progress" style="width: <%=rating_percentage%>%;"></div> </div>
+              <%=average_rating.to_f.round(2)%>
+                  <br /><br />
+        Skills: <%= ratings_for @contract, @contract.user, :show_user_rating => true, :force_static=>true, :small=>true, :dimension => :skills %>
+        Quality: <%= ratings_for @contract, @contract.user, :show_user_rating => true, :force_static=>true, :small=>true, :dimension => :quality %>
+        Availability: <%= ratings_for @contract, @contract.user, :show_user_rating => true, :force_static=>true, :small=>true, :dimension => :availability %>
+        Deadlines: <%= ratings_for @contract, @contract.user, :show_user_rating => true, :force_static=>true, :small=>true, :dimension => :deadlines %>
+        Communication: <%= ratings_for @contract, @contract.user, :show_user_rating => true, :force_static=>true, :small=>true, :dimension => :communication %>
+        Co-operation: <%= ratings_for @contract, @contract.user, :show_user_rating => true, :force_static=>true, :small=>true, :dimension => :cooperation %>
+    <% else %>
+          <% if !current_user.nil? && current_user.id == @contract.user_id %>
+          Click <%= link_to "here", employer_end_contract_path(@contract.id) %> to send feedback.
+          <% end %>
+    <% end %>
+          
+        </td>
+        <td width="50%" valign="top">
+
+          <% unless @contract.end_contractor_comment.blank? %>
+            <b>Feedback to employer(<%=user_display_name(@contract.user)%>):</b>
+              <br><br><br>
+              <%=@contract.end_contractor_comment%>
+              <br /><br />
+            <%average_rating = average_rating(@contract.contractor.id,@contract.id,"Contract")
+            rating_percentage = (average_rating.to_f/5)*100
+            %>
+        <div class="classification"><div class="cover"></div><div class="progress" style="width: <%=rating_percentage%>%;"></div></div><%=average_rating.to_f.round(2)%>
+                  <br /><br />
+        Job description matched actual work: <%= ratings_for @contract, @contract.contractor, :show_user_rating => true, :force_static=>true, :small=>true, :dimension => :actual_work_matched %>
+        Professionalism: <%= ratings_for @contract, @contract.contractor, :show_user_rating => true, :force_static=>true, :small=>true, :dimension => :professionalism %>
+        Deadlines: <%= ratings_for @contract, @contract.contractor, :show_user_rating => true, :force_static=>true, :small=>true, :dimension => :deadlines %>
+
+        Communication: <%= ratings_for @contract, @contract.contractor, :show_user_rating => true, :force_static=>true, :small=>true, :dimension => :communication %>
+        Co-operation: <%= ratings_for @contract, @contract.contractor, :show_user_rating => true, :force_static=>true, :small=>true, :dimension => :cooperation %>
+    <% else %>
+          <% if !current_user.nil? && current_user.id == @contract.contractor_id %>
+          Click <%= link_to "here", contractor_end_path(@contract.id,1) %> to send feedback.
+          <% end %>
+    <% end %>
+
+        </td>
+      </tr>
+    </table>
+<% end #unless @contract.ended_by.nil? && @contract.ended_by == 0%>

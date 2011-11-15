@@ -1,0 +1,24 @@
+<h1>Listing jobs</h1>
+<div id ="cart_items">
+  <%= render :partial=> 'cart_items' %>
+</div>
+<table>
+  <tr>
+    <th>Jobtype</th>
+    <th>Job title</th>
+    <th>Job detail description</th>
+    <th>Total cost calculated</th>
+  </tr>
+
+  <% @jobs.each do |job| %>
+    <tr>
+      <td><%= job.jobtype_id %> </td>
+      <td><%= job.title %></td>
+      <td><%= job.description %></td>
+      <td><%= number_to_currency(job.total_cost_calculated.to_f) %></td>
+      <td><%= link_to_remote 'Add to Cart', :url=>cart_items_path(:job_id => job), :method => :post %></td>
+      <td><%= link_to 'Remove From Cart' %></td>
+    </tr>
+  <% end %>
+</table>
+

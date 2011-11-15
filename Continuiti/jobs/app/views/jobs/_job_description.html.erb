@@ -1,0 +1,26 @@
+
+
+<p>
+  <b>Description:</b> <br>
+  <%=h @job.description %>
+</p>
+
+<p>
+  <b>Work Location:</b>
+  <% if @job.task_location_type_id == 1 %>
+   You can work remotely.
+  <% else %>
+   You need to work at folowing location:
+      <% @loc = @job.locations
+         @loc.each { |loc|
+             %>
+           <%=loc.contact_name+", "+loc.address1+", "+loc.city+", "+loc.state+", "+loc.country.name+", "+loc.zip.to_s+"<br>"%>
+               <%
+                  }
+    end %>
+</p>
+
+<p>
+  <b>Skills Required:</b>
+  <%=@job.skills%>
+</p>

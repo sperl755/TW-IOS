@@ -1,0 +1,23 @@
+<p>
+  <b>Description:</b>
+  <%=h @endorsement.description %>
+</p>
+
+<p>
+  <b>Rating:</b>
+  <%=h @endorsement.rating %>
+</p>
+
+<p>
+  <b>Endorser:</b>
+  <%=h @endorsement.endorser_id %>
+</p>
+
+<p>
+  <b>User:</b>
+  <%=h @endorsement.user_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_endorsement_path(@endorsement) %> |
+<%= link_to 'Back', endorsements_path %>

@@ -1,0 +1,263 @@
+K 25
+svn:wc:ra_dav:version-url
+V 42
+/svn/!svn/ver/369/jobs/trunk/test/fixtures
+END
+interests.yml
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/!svn/ver/257/jobs/trunk/test/fixtures/interests.yml
+END
+bids.yml
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/162/jobs/trunk/test/fixtures/bids.yml
+END
+award_types.yml
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/275/jobs/trunk/test/fixtures/award_types.yml
+END
+user_locations.yml
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/124/jobs/trunk/test/fixtures/user_locations.yml
+END
+locations.yml
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/!svn/ver/132/jobs/trunk/test/fixtures/locations.yml
+END
+user_opportunity_preferences.yml
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/!svn/ver/296/jobs/trunk/test/fixtures/user_opportunity_preferences.yml
+END
+opportunity_preferences.yml
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/!svn/ver/296/jobs/trunk/test/fixtures/opportunity_preferences.yml
+END
+jobs.yml
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/158/jobs/trunk/test/fixtures/jobs.yml
+END
+orders.yml
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/176/jobs/trunk/test/fixtures/orders.yml
+END
+educations.yml
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/156/jobs/trunk/test/fixtures/educations.yml
+END
+user_transportation_accesses.yml
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/!svn/ver/124/jobs/trunk/test/fixtures/user_transportation_accesses.yml
+END
+jobtypes.yml
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/87/jobs/trunk/test/fixtures/jobtypes.yml
+END
+payments.yml
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/!svn/ver/176/jobs/trunk/test/fixtures/payments.yml
+END
+experience_levels.yml
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/90/jobs/trunk/test/fixtures/experience_levels.yml
+END
+users_awards.yml
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/34/jobs/trunk/test/fixtures/users_awards.yml
+END
+order_transactions.yml
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/176/jobs/trunk/test/fixtures/order_transactions.yml
+END
+certifications.yml
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/257/jobs/trunk/test/fixtures/certifications.yml
+END
+endorsements.yml
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/268/jobs/trunk/test/fixtures/endorsements.yml
+END
+experiences.yml
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/157/jobs/trunk/test/fixtures/experiences.yml
+END
+carts.yml
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/176/jobs/trunk/test/fixtures/carts.yml
+END
+task_locations.yml
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/120/jobs/trunk/test/fixtures/task_locations.yml
+END
+user_general_availabilities.yml
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/!svn/ver/306/jobs/trunk/test/fixtures/user_general_availabilities.yml
+END
+memberships.yml
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/257/jobs/trunk/test/fixtures/memberships.yml
+END
+general_availabilities.yml
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/306/jobs/trunk/test/fixtures/general_availabilities.yml
+END
+award_users.yml
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/87/jobs/trunk/test/fixtures/award_users.yml
+END
+awards.yml
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/87/jobs/trunk/test/fixtures/awards.yml
+END
+experience_functional_areas.yml
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/!svn/ver/90/jobs/trunk/test/fixtures/experience_functional_areas.yml
+END
+referrals.yml
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/!svn/ver/353/jobs/trunk/test/fixtures/referrals.yml
+END
+applications.yml
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/160/jobs/trunk/test/fixtures/applications.yml
+END
+cart_items.yml
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/176/jobs/trunk/test/fixtures/cart_items.yml
+END
+staffing_position_categories.yml
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/!svn/ver/186/jobs/trunk/test/fixtures/staffing_position_categories.yml
+END
+lists.yml
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/87/jobs/trunk/test/fixtures/lists.yml
+END
+user_skills.yml
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/257/jobs/trunk/test/fixtures/user_skills.yml
+END
+skills.yml
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/369/jobs/trunk/test/fixtures/skills.yml
+END
+user_descriptions.yml
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/309/jobs/trunk/test/fixtures/user_descriptions.yml
+END
+user_work_types.yml
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/!svn/ver/124/jobs/trunk/test/fixtures/user_work_types.yml
+END
+invitations.yml
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/270/jobs/trunk/test/fixtures/invitations.yml
+END
+referral_bonus.yml
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/353/jobs/trunk/test/fixtures/referral_bonus.yml
+END
+staffing_position_types.yml
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/!svn/ver/186/jobs/trunk/test/fixtures/staffing_position_types.yml
+END
+countries.yml
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/!svn/ver/87/jobs/trunk/test/fixtures/countries.yml
+END
+list_items.yml
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/!svn/ver/87/jobs/trunk/test/fixtures/list_items.yml
+END
+useraddresses.yml
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/124/jobs/trunk/test/fixtures/useraddresses.yml
+END
+degrees.yml
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/142/jobs/trunk/test/fixtures/degrees.yml
+END

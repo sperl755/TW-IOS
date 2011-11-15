@@ -1,0 +1,20 @@
+digraph G
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="MGTwitterMessagesLibXMLParser",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled" fontcolor="black"];
+  Node2 -> Node1 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+  Node2 [label="MGTwitterLibXMLParser",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$interface_m_g_twitter_lib_x_m_l_parser.html"];
+  Node3 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+  Node3 [label="NSObject",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_n_s_object.html"];
+  Node3 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+  Node3 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+  Node4 -> Node2 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" identifier" ];
+  Node4 [label="NSString",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_n_s_string.html"];
+  Node5 -> Node2 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" xml" ];
+  Node5 [label="NSData",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_n_s_data.html"];
+  Node6 -> Node2 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" delegate" ];
+  Node6 [label="NSObject\< MGTwitterParserDelegate \>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_n_s_object.html"];
+  Node2 -> Node1 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+  Node2 -> Node1 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+}

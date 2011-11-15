@@ -1,0 +1,45 @@
+<%
+if @educations.blank? %>
+  <%- if current_user %>
+    Please add school.
+  <%- else %>
+    No education
+  <%- end %>
+<% else 
+  i = 1
+  @educations.each_with_index do |education, edu_index|
+  %>
+
+    <b><%= link_to education.organization, education.url, {:target=>"_blank"} %></b>
+    <% if current_user && current_user.id.eql?(education.user_id) %>
+      <%= link_to_remote 'Edit', :url => edit_education_path(education), :loading => "$('edit_and_remove_education_ajax_loader_#{edu_index}').show()", :success => "$('edit_and_remove_education_ajax_loader_#{edu_index}').hide()", :method => :get %>
+      <%= link_to_remote 'Remove', :url => education_path(education), :loading => "$('edit_and_remove_education_ajax_loader_#{edu_index}').show()", :success => "$('edit_and_remove_education_ajax_loader_#{edu_index}').hide()", :confirm => 'Are you sure?', :method => :delete %>
+      <span id="edit_and_remove_education_ajax_loader_<%= edu_index %>" style="display: none"><%= image_tag "LoaderIcon.gif", :style => "width:15px" %></span>
+    <% end %>
+    <br />
+    <%=h education.degree %>,  <%=h education.major %><br />
+    <%=h education.from_year %> to <%=h education.end_year %><br />
+
+    <% if !education.activities.blank?%>
+      Activities and Societies: <%=h education.activities %><br />
+    <% end %>
+
+    <% if !education.description.blank?%>
+      Additional Notes: <%=h education.description %><br />
+    <% end %>
+
+    <% if @educations.size != i %>
+      <div style="padding-top: 5px;"></div>
+      <hr style="border: 1px dotted #cccccc; ">
+      <div style="padding-top: 10px;"></div>
+    <%- elsif current_user && current_user.educations.size != i %>
+      <div style="padding-top: 5px;"></div>
+      <hr style="border: 1px dotted #cccccc; ">
+      <div style="padding-top: 10px;"></div>
+    <% end
+    i = i + 1
+  end
+end%>
+
+
+<br />

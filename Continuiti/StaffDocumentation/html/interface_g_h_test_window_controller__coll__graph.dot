@@ -1,0 +1,25 @@
+digraph G
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="GHTestWindowController",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled" fontcolor="black"];
+  Node2 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" viewController_" ,fontname="Helvetica"];
+  Node2 [label="GHTestViewController",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$interface_g_h_test_view_controller.html"];
+  Node3 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="\<GHTestOutlineViewModelDelegate\>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$protocol_g_h_test_outline_view_model_delegate-p.html"];
+  Node3 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 -> Node2 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" dataSource_" ,fontname="Helvetica"];
+  Node4 [label="GHTestOutlineViewModel",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$interface_g_h_test_outline_view_model.html"];
+  Node5 -> Node2 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" exceptionFilename_\nstatus_\nrunLabel_" ,fontname="Helvetica"];
+  Node5 [label="NSString",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_n_s_string.html"];
+  Node6 -> Node2 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" _splitView" ,fontname="Helvetica"];
+  Node6 [label="BWSplitView",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$interface_b_w_split_view.html"];
+}

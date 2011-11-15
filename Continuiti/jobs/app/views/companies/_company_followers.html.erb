@@ -1,0 +1,9 @@
+<div id="company_followers" class="alt">
+  <h3>Followers </h3>
+  <% @company.followers.each do |follower| %>
+    <div id="follower_avatar" style="border: none;">
+      <%= image_tag follower.avatar_photo_url(:tiny_thumb) %>
+      <%=h follower.login%>
+    </div>
+  <%  end %>
+</div>

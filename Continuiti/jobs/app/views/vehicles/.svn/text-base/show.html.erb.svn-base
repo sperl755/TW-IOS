@@ -1,0 +1,13 @@
+<p>
+  <b>Title:</b>
+  <%=h @vehicle.title %>
+</p>
+
+<p>
+  <b>Active:</b>
+  <%=h @vehicle.active %>
+</p>
+
+
+<%= link_to 'Edit', edit_vehicle_path(@vehicle) %> |
+<%= link_to 'Back', vehicles_path %>

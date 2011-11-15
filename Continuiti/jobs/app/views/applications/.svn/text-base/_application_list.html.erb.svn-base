@@ -1,0 +1,29 @@
+<br><br>
+<table width="100%" cellpadding="0px" cellspacing="0px">
+  <tr>
+    <td width="20px" style="border-bottom: 1px solid #CCCCCC"></td>
+    <td width="400px" style="padding:0px">
+<table width="100%" cellpadding="0px" cellspacing="0px">
+  <tr style="background-color:#CCCCCC; border-left:1px solid #CCCCCC; border-top:1px solid #CCCCCC; border-right:1px solid #CCCCCC; ">
+    <td align="center" style="background-color:<%="#FFFFFF" if params[:application_status]=="applied"%>"> <%=link_to (pluralize(application_count(@job.id,APP_CONFIG['job_application_status']["applied"]),'Applicant')),job_applications_url(@job.id,"applied")%> </td>
+    <td align="center" style="background-color:<%="#FFFFFF" if params[:application_status]=="active"%>"> <%=link_to (pluralize(application_count(@job.id,APP_CONFIG['job_application_status']["active"]),'Active Candidate', nil)),job_applications_url(@job.id,"active")%> </td>
+  </tr>
+</table>
+    </td>
+  <td style="border-bottom:1px solid #CCCCCC"></td></tr>
+</table>
+
+
+<br><br>
+<table width="100%" cellpadding="3" cellspacing="3">
+<% i = 0
+   @applications.each { |application|
+    i += 1
+     bgcol = i%2==0 ? "cornsilk" : "#FFFFFF"%>
+<tr style="background-color:<%=bgcol%>;">
+  <td><%= link_to (user_display_name(application.user)), {:controller=>:applications, :action=>:show,:id=>application.id} %> </td>
+</tr>
+
+
+<% } %>
+    </table>

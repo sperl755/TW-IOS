@@ -1,0 +1,23 @@
+source "http://rubygems.org"
+gem "haml"
+gem "desert"
+gem "hpricot"
+gem "rmagick"
+gem "google-geo"
+gem "rdoc"
+gem "sass"
+gem "will_paginate", "~> 2.3.5"
+gem "searchlogic", "2.4.28"
+gem "ajaxful_rating"
+gem "facebooker"
+gem "json"
+gem 'faraday'
+gem "rack", "1.1.2"
+gem 'rack-openid'
+gem "oauth"
+gem "authlogic", "2.1.6"
+gem "authlogic-connect", "0.0.6"
+gem "authlogic-oauth", "1.0.8"
+gem 'sunspot'
+gem 'sunspot_rails'
+gem 'mysql'

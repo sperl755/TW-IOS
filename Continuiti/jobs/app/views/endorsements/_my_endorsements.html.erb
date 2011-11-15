@@ -1,0 +1,32 @@
+<%- if @endorsements.blank? %>
+  <%- if current_user %>
+    You not have any endorsement yet.
+  <%- else %>
+    No endorsement
+  <%- end %>
+<% else %>
+  <%- i = 1 %>
+  <%- @endorsements.each_with_index do |endorsement, endorsement_index| %>
+
+    <% if current_user and current_user.id.eql?(endorsement.user_id) %>
+      <%= link_to_remote 'Remove', :url => endorsement_path(endorsement), :loading => "$('remove_endorsement_ajax_loader_#{endorsement_index}').show()", :success => "$('remove_endorsement_ajax_loader_#{endorsement_index}').hide()", :confirm => 'Are you sure?', :method => :delete %>
+      <span id="remove_endorsement_ajax_loader_<%= endorsement_index %>" style="display: none"><%= image_tag "LoaderIcon.gif", :style => "width:15px" %></span>
+    <% end %>
+    <br />
+    <%- endorser = User.find(endorsement.endorser_id) %>
+    <%= link_to endorser.name, user_path(endorser) %>, <i><%= endorsement.job_title %>, <%= endorsement.company_name %></i><br />
+
+    <%- unless endorsement.description.blank? %>
+      <%= image_tag "icon-quote.gif", :style => "width:21px" %> <%=h endorsement.description %><br />
+    <%- end %>
+
+    <%- if @endorsements.size != i %>
+      <div style="padding-top: 5px;"></div>
+      <hr style="border: 1px dotted #cccccc; ">
+      <div style="padding-top: 10px;"></div>
+    <%- end %>
+    <%- i = i + 1 %>
+  <%- end %>
+<%- end %>
+
+<br />

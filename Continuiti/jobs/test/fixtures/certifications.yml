@@ -1,0 +1,9 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  title: MyString
+  award_date: 2011-07-04
+
+two:
+  title: MyString
+  award_date: 2011-07-04

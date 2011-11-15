@@ -1,0 +1,149 @@
+K 25
+svn:wc:ra_dav:version-url
+V 43
+/svn/!svn/ver/356/jobs/trunk/app/views/jobs
+END
+index.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/353/jobs/trunk/app/views/jobs/index.html.erb
+END
+_job_posting_list.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/!svn/ver/241/jobs/trunk/app/views/jobs/_job_posting_list.html.erb
+END
+list.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/165/jobs/trunk/app/views/jobs/list.html.erb
+END
+_job_description.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/356/jobs/trunk/app/views/jobs/_job_description.html.erb
+END
+pay_to_users.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/176/jobs/trunk/app/views/jobs/pay_to_users.html.erb
+END
+invest_funds.html.erb.erb
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/188/jobs/trunk/app/views/jobs/invest_funds.html.erb.erb
+END
+_location.html.erb.erb
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/!svn/ver/332/jobs/trunk/app/views/jobs/_location.html.erb.erb
+END
+_job_action_header.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/!svn/ver/160/jobs/trunk/app/views/jobs/_job_action_header.html.erb
+END
+_show.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/189/jobs/trunk/app/views/jobs/_show.html.erb
+END
+job_applications.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/203/jobs/trunk/app/views/jobs/job_applications.html.erb
+END
+search.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/!svn/ver/240/jobs/trunk/app/views/jobs/search.rhtml
+END
+show.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/209/jobs/trunk/app/views/jobs/show.html.erb
+END
+_show_job_header.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/189/jobs/trunk/app/views/jobs/_show_job_header.html.erb
+END
+_job_posting_header.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/!svn/ver/158/jobs/trunk/app/views/jobs/_job_posting_header.html.erb
+END
+edit.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/!svn/ver/92/jobs/trunk/app/views/jobs/edit.html.erb
+END
+_update_visibility.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/!svn/ver/160/jobs/trunk/app/views/jobs/_update_visibility.html.erb
+END
+_cart_items.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/176/jobs/trunk/app/views/jobs/_cart_items.html.erb
+END
+new.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/!svn/ver/160/jobs/trunk/app/views/jobs/new.html.erb
+END
+_show_staffing_job.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/!svn/ver/189/jobs/trunk/app/views/jobs/_show_staffing_job.html.erb
+END
+share_job.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/!svn/ver/177/jobs/trunk/app/views/jobs/share_job.html.erb
+END
+temporary_jobs.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/!svn/ver/176/jobs/trunk/app/views/jobs/temporary_jobs.html.erb
+END
+_task_location.html.erb.erb
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/!svn/ver/120/jobs/trunk/app/views/jobs/_task_location.html.erb.erb
+END
+_form.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/317/jobs/trunk/app/views/jobs/_form.html.erb
+END
+_update_form.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/188/jobs/trunk/app/views/jobs/_update_form.html.erb
+END

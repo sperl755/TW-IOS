@@ -1,0 +1,13 @@
+<p>
+  <b>Title:</b>
+  <%=h @staffing_position_category.title %>
+</p>
+
+<p>
+  <b>Active:</b>
+  <%=h @staffing_position_category.active %>
+</p>
+
+
+<%= link_to 'Edit', edit_staffing_position_category_path(@staffing_position_category) %> |
+<%= link_to 'Back', staffing_position_categories_path %>

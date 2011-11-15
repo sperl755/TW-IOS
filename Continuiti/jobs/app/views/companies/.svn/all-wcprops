@@ -1,0 +1,59 @@
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/!svn/ver/260/jobs/trunk/app/views/companies
+END
+edit.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/64/jobs/trunk/app/views/companies/edit.html.erb
+END
+_follow_company.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/!svn/ver/64/jobs/trunk/app/views/companies/_follow_company.html.erb
+END
+index.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/260/jobs/trunk/app/views/companies/index.html.erb
+END
+new.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/64/jobs/trunk/app/views/companies/new.html.erb
+END
+_office.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/64/jobs/trunk/app/views/companies/_office.html.erb
+END
+follow.js.rjs
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/64/jobs/trunk/app/views/companies/follow.js.rjs
+END
+show.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/64/jobs/trunk/app/views/companies/show.html.erb
+END
+_company_followers.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/!svn/ver/64/jobs/trunk/app/views/companies/_company_followers.html.erb
+END
+_form.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/!svn/ver/64/jobs/trunk/app/views/companies/_form.html.erb
+END

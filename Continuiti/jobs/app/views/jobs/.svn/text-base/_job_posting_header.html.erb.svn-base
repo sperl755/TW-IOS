@@ -1,0 +1,15 @@
+<br><br>
+<table width="100%" cellpadding="0px" cellspacing="0px">
+  <tr>
+    <td width="20px" style="border-bottom: 1px solid #CCCCCC"></td>
+    <td width="200px" style="padding:0px">
+<table width="100%" cellpadding="0px" cellspacing="0px">
+  <tr style="background-color:#CCCCCC; border-left:1px solid #CCCCCC; border-top:1px solid #CCCCCC; border-right:1px solid #CCCCCC; ">
+    <td align="center" style="background-color:<%="#FFFFFF" if params[:status]=="open"%>"><%=link_to 'Open',user_jobs_list_by_status_url(params[:user_id],"open")%></td>
+    <td align="center" style="background-color:<%="#FFFFFF" if params[:status]=="filled"%>"><%=link_to 'Filled',user_jobs_list_by_status_url(params[:user_id],"filled")%></td>
+    <td align="center" style="background-color:<%="#FFFFFF" if params[:status]=="closed"%>"><%=link_to 'Closed',user_jobs_list_by_status_url(params[:user_id],"closed")%></td>
+  </tr>
+</table>
+    </td>
+  <td style="border-bottom:1px solid #CCCCCC"></td></tr>
+</table>

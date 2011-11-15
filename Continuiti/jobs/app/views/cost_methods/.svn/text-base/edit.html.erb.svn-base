@@ -1,0 +1,20 @@
+<h1>Editing cost_method</h1>
+
+<% form_for(@cost_method) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :title %><br />
+    <%= f.text_field :title %>
+  </p>
+  <p>
+    <%= f.label :active %><br />
+    <%= f.check_box :active %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @cost_method %> |
+<%= link_to 'Back', cost_methods_path %>

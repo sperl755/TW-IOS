@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/svn/!svn/ver/207/jobs/trunk/app/views/messages
+END
+_sidebar_nav.html.haml
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/!svn/ver/205/jobs/trunk/app/views/messages/_sidebar_nav.html.haml
+END
+_inbox.html.haml
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/205/jobs/trunk/app/views/messages/_inbox.html.haml
+END
+show.html.haml
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/!svn/ver/205/jobs/trunk/app/views/messages/show.html.haml
+END
+_form.html.haml
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/205/jobs/trunk/app/views/messages/_form.html.haml
+END
+index.html.haml
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/205/jobs/trunk/app/views/messages/index.html.haml
+END
+_sent.html.haml
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/205/jobs/trunk/app/views/messages/_sent.html.haml
+END
+new.html.haml
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/205/jobs/trunk/app/views/messages/new.html.haml
+END
+_message.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/207/jobs/trunk/app/views/messages/_message.html.erb
+END

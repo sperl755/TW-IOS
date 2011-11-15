@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svn/!svn/ver/353/jobs/trunk/app/views/layouts
+END
+referrals.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/353/jobs/trunk/app/views/layouts/referrals.html.erb
+END
+earnings.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/353/jobs/trunk/app/views/layouts/earnings.html.erb
+END
+minimal.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/166/jobs/trunk/app/views/layouts/minimal.html.erb
+END
+orders.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/!svn/ver/176/jobs/trunk/app/views/layouts/orders.html.erb
+END

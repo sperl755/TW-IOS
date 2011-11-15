@@ -1,0 +1,8 @@
+<h1>Editing media file</h1>
+
+<% form_for(@media, :url => user_media_path(current_user), :html => { :multipart => true }) do |f| %>
+  <%= render :partial => 'form', :locals => {:f => f} %>
+<% end %>
+
+<%= link_to 'Show', user_media_path(params[:user_id], @media) %> |
+<%= link_to 'Back', user_medias_path(params[:user_id]) %>

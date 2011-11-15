@@ -1,0 +1,28 @@
+<% unless @cart.blank? %>
+  <table id="line_items">
+    <tr>
+      <th>Jobs</th>
+      <th>Qty</th>
+      <th class="price">Unit Price</th>
+      <th class="price">Full Price</th>
+    </tr>
+    <% for cart_item in @cart.cart_items %>
+      <tr class="<%= cycle :odd, :even %>">
+        <td><%=h cart_item.job.title %></td>
+        <td class="qty"><%= cart_item.quantity %></td>
+        <td class="price"><%= number_to_currency(cart_item.unit_price) %></td>
+        <td class="price"><%= number_to_currency(cart_item.full_price) %></td>
+      </tr>
+    <% end %>
+    <tr>
+      <td class="total price" colspan="4">
+        Total: <%= number_to_currency @cart.total_price %>
+      </td>
+    </tr>
+  </table>
+  <%= link_to 'Reset and Back', cart_path, :method => :delete%>|
+  <%= link_to 'Pay by card', new_order_path%>
+  <p>
+    <%= link_to image_tag("https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif"), express_new_order_path %>
+  </p>
+<% end %>

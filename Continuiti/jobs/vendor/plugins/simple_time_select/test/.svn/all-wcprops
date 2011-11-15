@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/!svn/ver/185/jobs/trunk/vendor/plugins/simple_time_select/test
+END
+test_helper.rb
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/!svn/ver/185/jobs/trunk/vendor/plugins/simple_time_select/test/test_helper.rb
+END
+simple_time_select_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/!svn/ver/185/jobs/trunk/vendor/plugins/simple_time_select/test/simple_time_select_test.rb
+END

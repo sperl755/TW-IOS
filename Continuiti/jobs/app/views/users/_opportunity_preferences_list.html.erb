@@ -1,0 +1,25 @@
+<b>What types of opportunities are you interested in?</b>
+<br />
+<br />
+<%- @my_opportunity_preferences.each do |user_opportunity_preference| %>
+  <p>
+    &#9745; <%= user_opportunity_preference.opportunity_preference.name %>
+  </p>
+<%- end %>
+<%- if params[:controller].eql?("users") and params[:action].eql?("show") and current_user and current_user.id.eql?(@user.id) %>
+  <%= link_to_remote('Edit', :url => edit_user_opportunity_preferences_path(current_user.id), :method => :get, :html => {:class=>"profile_link", :onclick => "$('add_or_edit_opportunity_preferences_ajax_loader').show()"}) unless current_user.user_opportunity_preferences.size.zero? %>
+  <%= link_to_remote('Delete', :url => user_opportunity_preferences_path(current_user.id), :method => :delete, :html => {:class=>"profile_link"}, :confirm => "Are you sure ?", :loading => "$('add_or_edit_opportunity_preferences_ajax_loader').show()", :success => "$('add_or_edit_opportunity_preferences_ajax_loader').hide()") unless current_user.user_opportunity_preferences.size.zero? %>
+  <%= link_to_remote('New', :url => new_user_opportunity_preferences_path(current_user.id), :method => :get, :html => {:class=>"profile_link"}, :loading => "$('add_or_edit_opportunity_preferences_ajax_loader').show()", :success => "$('add_or_edit_opportunity_preferences_ajax_loader').hide()") if current_user.user_opportunity_preferences.size.zero? %>
+<%- elsif !params[:controller].eql?("users") or !params[:action].eql?("show") %>
+  <%= link_to_remote('Edit', :url => edit_user_opportunity_preferences_path(current_user.id), :method => :get, :html => {:class=>"profile_link", :onclick => "$('add_or_edit_opportunity_preferences_ajax_loader').show()"}) unless current_user.user_opportunity_preferences.size.zero? %>
+  <%= link_to_remote('Delete', :url => user_opportunity_preferences_path(current_user.id), :method => :delete, :html => {:class=>"profile_link"}, :confirm => "Are you sure ?", :loading => "$('add_or_edit_opportunity_preferences_ajax_loader').show()", :success => "$('add_or_edit_opportunity_preferences_ajax_loader').hide()") unless current_user.user_opportunity_preferences.size.zero? %>
+  <%= link_to_remote('New', :url => new_user_opportunity_preferences_path(current_user.id), :method => :get, :html => {:class=>"profile_link"}, :loading => "$('add_or_edit_opportunity_preferences_ajax_loader').show()", :success => "$('add_or_edit_opportunity_preferences_ajax_loader').hide()") if current_user.user_opportunity_preferences.size.zero? %>
+<%- end %>
+<span id="add_or_edit_opportunity_preferences_ajax_loader" style="display:none;">
+  <%= image_tag "LoaderIcon.gif", :style => "width:15px" %>
+</span>
+<%- if @my_opportunity_preferences.count.eql?(0) %>
+  <%- unless current_user %>
+    <p>No opportunity preferences</p>
+  <%- end %>
+<%- end %>

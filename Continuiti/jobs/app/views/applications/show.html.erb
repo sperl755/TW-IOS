@@ -1,0 +1,54 @@
+<p>
+  <%=h @application.job.title %>
+    <% if @application.status == APP_CONFIG['job_application_status']["hired"] %>
+      &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+        <% if current_user.id == @application.job.user_id %>
+            <% if @application.contract.status == 0%>
+                <b>Contract request has been sent</b>
+            <% elsif @application.contract.status == 1 %>
+                <b>Already hired, see <%=link_to "Contract", "#"%></b>,
+                <%=link_to "End contract", "#"%>
+            <% else %>
+                Contract Ended
+              <!-- feed back can be displayed here -->
+            <% end %>
+        <% elsif current_user.id == @application.user_id %>
+            <% if @application.contract.status == 0%>
+                <%= link_to "Activate contract", activate_contract_path(@application.contract.id) %>
+            <% elsif @application.contract.status == 1%>
+              <b>Already hired, see <%=link_to "Contract", "#"%></b>,
+                <%=link_to "End contract", "#"%>
+            <% else %>
+                Contract Ended
+                <!-- feed back can be displayed here -->
+            <% end %>
+        <% end %>
+    <% elsif @application.status == APP_CONFIG['job_application_status']["closed"] %>
+        <b>Application is closed</b>
+    <% else %>
+        <%=link_to "Hire", change_application_status_path(@application.id,"hired")%>
+    <% end %>
+
+</p>
+<p>
+  <b>File file name:</b>
+  <%=h @application.file_file_name %>
+</p>
+
+<p>
+  <b>Cover letter:</b>
+  <%=h @application.cover_letter %>
+</p>
+
+<% @application.messages.each { |message| %>
+    <br>
+     <%= user_display_name(message.sender) %> to <%= user_display_name(message.recipient) %> <br>
+    <%=message.body%>
+    <br><br>
+         <hr>
+<% } %>
+
+
+<div id="message">
+  <%=render :partial=> 'messages/message'%>
+</div>

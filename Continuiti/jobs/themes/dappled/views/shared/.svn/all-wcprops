@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/!svn/ver/199/jobs/trunk/themes/dappled/views/shared
+END
+_header.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/!svn/ver/199/jobs/trunk/themes/dappled/views/shared/_header.html.erb
+END
+_user_locations.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/!svn/ver/123/jobs/trunk/themes/dappled/views/shared/_user_locations.html.erb
+END
+_address.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/!svn/ver/123/jobs/trunk/themes/dappled/views/shared/_address.html.erb
+END

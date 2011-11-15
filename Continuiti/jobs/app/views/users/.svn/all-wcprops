@@ -1,0 +1,95 @@
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/svn/!svn/ver/376/jobs/trunk/app/views/users
+END
+_location.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/134/jobs/trunk/app/views/users/_location.html.erb
+END
+_opportunity_preference.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/!svn/ver/296/jobs/trunk/app/views/users/_opportunity_preference.html.erb
+END
+_user_addresses_show.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/!svn/ver/134/jobs/trunk/app/views/users/_user_addresses_show.html.erb
+END
+_user_addresses.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/132/jobs/trunk/app/views/users/_user_addresses.html.erb
+END
+_edit_opportunity_preference.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/!svn/ver/305/jobs/trunk/app/views/users/_edit_opportunity_preference.html.erb
+END
+_new_opportunity_preference.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/!svn/ver/371/jobs/trunk/app/views/users/_new_opportunity_preference.html.erb
+END
+_rating.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/336/jobs/trunk/app/views/users/_rating.html.erb
+END
+_opportunity_preferences_list.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/!svn/ver/371/jobs/trunk/app/views/users/_opportunity_preferences_list.html.erb
+END
+_search_options.html.haml
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/!svn/ver/258/jobs/trunk/app/views/users/_search_options.html.haml
+END
+show.html.haml
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/376/jobs/trunk/app/views/users/show.html.haml
+END
+_current_background_summary.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/!svn/ver/335/jobs/trunk/app/views/users/_current_background_summary.html.erb
+END
+welcome_about.html.haml
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/!svn/ver/131/jobs/trunk/app/views/users/welcome_about.html.haml
+END
+_dashboard_nav.html_old.haml
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/!svn/ver/287/jobs/trunk/app/views/users/_dashboard_nav.html_old.haml
+END
+new.html.haml
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/296/jobs/trunk/app/views/users/new.html.haml
+END
+_dashboard_nav.html.haml
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/353/jobs/trunk/app/views/users/_dashboard_nav.html.haml
+END

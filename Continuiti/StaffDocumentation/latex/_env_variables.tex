@@ -1,0 +1,65 @@
+\hypertarget{_env_variables_GHUnitEnvVariables}{}\section{\-G\-H\-Unit Environment Variables}\label{_env_variables_GHUnitEnvVariables}
+\-Go into the \char`\"{}\-Get Info\char`\"{} contextual menu of your (\-Tests) executable (inside the \char`\"{}\-Executables\char`\"{} group in the left panel of \-X\-Code). \-Then go in the \char`\"{}\-Arguments\char`\"{} tab. \-You can add the following environment variables\-:
+
+\begin{DoxyVerb}
+ GHUNIT_CLI - Default NO; Runs tests on the command line (see Debugger Console, Cmd-Shift-R)
+ GHUNIT_RERAISE - Default NO; If an exception is encountered it re-raises it allowing you to crash into the debugger
+ GHUNIT_AUTORUN - Default NO; If YES, tests will start automatically
+ GHUNIT_AUTOEXIT - Default NO; If YES, will exit upon test completion (no matter what); For command line MacOSX testing
+ \end{DoxyVerb}
+\hypertarget{_env_variables_EnvVariablesTest}{}\section{\-Test Environment Variables (\-Recommended)}\label{_env_variables_EnvVariablesTest}
+\-Go into the \char`\"{}\-Get Info\char`\"{} contextual menu of your (\-Tests) executable (inside the \char`\"{}\-Executables\char`\"{} group in the left panel of \-X\-Code). \-Then go in the \char`\"{}\-Arguments\char`\"{} tab. \-You can add the following environment variables\-:
+
+\begin{DoxyVerb}
+ Environment Variable:                 Default:  Set to:
+ NSDebugEnabled                           NO       YES
+ NSZombieEnabled                          NO       YES
+ NSDeallocateZombies                      NO       NO (or YES)
+ NSHangOnUncaughtException                NO       YES
+ NSAutoreleaseFreedObjectCheckEnabled     NO       YES
+ \end{DoxyVerb}
+
+
+\-If \-Using \-N\-S\-Deallocate\-Zombies=\-N\-O, then all objects will leak so be sure to turn it off when debugging memory leaks.
+
+\-For more info on these varaiables see \-N\-S\-Debug.\-h (\href{http://theshadow.uw.hu/iPhoneSDKdoc/Foundation.framework/NSDebug.h.html}{\tt http\-://theshadow.\-uw.\-hu/i\-Phone\-S\-D\-Kdoc/\-Foundation.\-framework/\-N\-S\-Debug.\-h.\-html})
+
+\-For malloc debugging\-:
+
+\begin{DoxyVerb}
+ MallocStackLogging
+ MallocStackLoggingNoCompact
+ MallocScribble
+ MallocPreScribble
+ MallocGuardEdges
+ MallocDoNotProtectPrelude
+ MallocDoNotProtectPostlude
+ MallocCheckHeapStart
+ MallocCheckHeapEach
+ \end{DoxyVerb}
+
+
+\-If you see a message like\-:
+
+\begin{DoxyVerb}
+ 2009-10-15 13:02:24.746 Tests[38615:40b] *** -[Foo class]: message sent to deallocated instance 0x1c8e680
+ \end{DoxyVerb}
+
+
+\-Re-\/run (in gdb) with {\ttfamily \-Malloc\-Stack\-Logging=\-Y\-E\-S} (or {\ttfamily \-Malloc\-Stack\-Logging\-No\-Compact=\-Y\-E\-S}), then if you run under gdb\-:
+
+\begin{DoxyVerb}
+ (gdb) shell malloc_history 38615 0x1c8e680
+ 
+ ALLOC 0x1a9ad10-0x1a9ad6f [size=96]: thread_a024a500 |start | main | UIApplicationMain | GSEventRun | GSEventRunModal | CFRunLoopRunInMode | CFRunLoopRunSpecific | __NSThreadPerformPerform | -[GHTestGroup _run:] | -[GHTest run] | +[GHTesting runTest:selector:withObject:exception:interval:] | -[Foo foo] | +[NSObject alloc] | +[NSObject allocWithZone:] | _internal_class_createInstance | _internal_class_createInstanceFromZone | calloc | malloc_zone_calloc 
+ 
+ \end{DoxyVerb}
+
+
+\-Somewhere between run\-Test and \hyperlink{class_n_s_object}{\-N\-S\-Object} alloc there may be an object that wasn't retained.
+
+\-Also using {\ttfamily \-Malloc\-Scribble=\-Y\-E\-S} causes the malloc library to overwrite freed memory with a well-\/known value (0x55), and occasionally checks freed malloc blocks to make sure the memory has not been over-\/written overwritten written since it was cleared.
+
+\-For more info on these variables see \-Malloc\-Debug (\href{http://developer.apple.com/mac/library/documentation/Performance/Conceptual/ManagingMemory/Articles/MallocDebug.html}{\tt http\-://developer.\-apple.\-com/mac/library/documentation/\-Performance/\-Conceptual/\-Managing\-Memory/\-Articles/\-Malloc\-Debug.\-html})
+
+\-For more info on malloc\-\_\-history see malloc\-\_\-history (\href{http://developer.apple.com/mac/library/documentation/Darwin/Reference/ManPages/man1/malloc_history.1.html}{\tt http\-://developer.\-apple.\-com/mac/library/documentation/\-Darwin/\-Reference/\-Man\-Pages/man1/malloc\-\_\-history.\-1.\-html}) 

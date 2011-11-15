@@ -1,0 +1,26 @@
+<h1>Listing endorsements</h1>
+
+<table>
+  <tr>
+    <th>Description</th>
+    <th>Rating</th>
+    <th>Endorser</th>
+    <th>User</th>
+  </tr>
+
+  <% @endorsements.each do |endorsement| %>
+    <tr>
+      <td><%=h endorsement.description %></td>
+      <td><%=h endorsement.rating %></td>
+      <td><%=h endorsement.endorser_id %></td>
+      <td><%=h endorsement.user_id %></td>
+      <td><%= link_to 'Show', endorsement %></td>
+      <td><%= link_to 'Edit', edit_endorsement_path(endorsement) %></td>
+      <td><%= link_to 'Destroy', endorsement, :confirm => 'Are you sure?', :method => :delete %></td>
+    </tr>
+  <% end %>
+</table>
+
+<br />
+
+<%= link_to 'New endorsement', new_endorsement_path %>

@@ -1,0 +1,24 @@
+<p>
+  <b>Name:</b>
+  <%=h @award.name %>
+</p>
+
+<p>
+  <b>Level:</b>
+  <%=h @award.level %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%=h @award.description %>
+</p>
+
+<% if @award.photo.exists? then %>
+<p>Small:<%= image_tag @award.photo.url(:small) %></p>
+<p>Medium:<%= image_tag @award.photo.url(:medium) %></p>
+<% else %>
+<p> There are no photo's attached, upload one. </p>
+<% end %>
+
+<%= link_to 'Edit', edit_award_path(@award) %> |
+<%= link_to 'Back', awards_path %>

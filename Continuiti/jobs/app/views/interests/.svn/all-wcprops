@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/!svn/ver/364/jobs/trunk/app/views/interests
+END
+edit.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/!svn/ver/256/jobs/trunk/app/views/interests/edit.html.erb
+END
+_index.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/364/jobs/trunk/app/views/interests/_index.html.erb
+END
+index.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/256/jobs/trunk/app/views/interests/index.html.erb
+END
+new.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/256/jobs/trunk/app/views/interests/new.html.erb
+END
+_interest.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/!svn/ver/256/jobs/trunk/app/views/interests/_interest.html.erb
+END
+show.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/!svn/ver/256/jobs/trunk/app/views/interests/show.html.erb
+END
+_form.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/347/jobs/trunk/app/views/interests/_form.html.erb
+END
+_edit.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/347/jobs/trunk/app/views/interests/_edit.html.erb
+END

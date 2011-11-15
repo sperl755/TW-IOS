@@ -1,0 +1,24 @@
+<%
+average_rating = average_rating(@user.id)
+rating_percentage = (average_rating.to_f/5)*100
+%>
+<div style="width:130px;">
+  <div style="float:left;width:100px;">
+<div class="classification" id="rating_tooltip"><div class="cover"></div><div class="progress" style="width: <%=rating_percentage%>%;"></div></div>
+   </div>
+  <div style="float:right;"><%=link_to average_rating.to_f.round(2), user_ratings_url(@user.id) if average_rating.to_f>0%></div>
+
+<% if average_rating.to_f > 0 %>
+<div id="avg_rating_tooltip" style="display:none;">
+<%
+   avg_ratings = average_type_rating(@user.id)
+   for rating in avg_ratings                                          
+   rating_percentage = (rating.avg_rating.to_f/5)*100
+%>
+
+ <%=rating.dimension%> <div class="classification"><div class="cover"></div><div class="progress" style="width: <%=rating_percentage%>%;"></div></div>
+  <% end  %></div>
+</div>
+<%end%>
+<div style="clear:both;"></div>
+ </div>

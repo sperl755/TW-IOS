@@ -1,0 +1,80 @@
+.clear {
+  clear: both; }
+
+form #leftlabel {
+  width: 30%;
+  float: left;
+  font-weight: bold; }
+form #input_text_field {
+  width: 60%; }
+
+#company_page strong {
+  font-weight: bold; }
+#company_page em {
+  font-style: italic; }
+#company_page table tr .photo {
+  width: 10%; }
+#company_page table tr .name_url {
+  width: 10%; }
+#company_page table tr .description {
+  width: 15%; }
+#company_page table tr .company_page_name {
+  width: 10%; }
+#company_page #company_page_top {
+  width: 100%;
+  border-bottom: 1px solid #FFD735; }
+  #company_page #company_page_top #edit_company {
+    float: left;
+    margin-top: 10px; }
+  #company_page #company_page_top #follow_company {
+    float: right;
+    margin: 5px 0px; }
+#company_page #company_page_details input#submit {
+  background: none repeat scroll 0 0 #008000;
+  border: 4px solid #004500;
+  color: #FFFFFF;
+  cursor: pointer;
+  margin: 1em;
+  padding-left: 1em;
+  padding-right: 1em;
+  width: auto; }
+#company_page #company_page_details #company_details #company_image_office {
+  float: left;
+  width: 32%;
+  margin-right: 10px; }
+  #company_page #company_page_details #company_details #company_image_office #company_avatar {
+    margin: 10px 0px 5px 0px;
+    border: 1px solid #A2A19B;
+    padding: 5px; }
+  #company_page #company_page_details #company_details #company_image_office #company_office_addresses {
+    margin: 5px 0px 0px 0px; }
+  #company_page #company_page_details #company_details #company_image_office #new_office_form {
+    pasotion: absolute;
+    margin: 0;
+    padding: 10px;
+    background: #FBFBF0;
+    border: solid #CCCCCC 2px;
+    z-index: 1000;
+    font-family: arial; }
+#company_page #company_page_details #company_details #company_form {
+  float: left;
+  width: 65%; }
+  #company_page #company_page_details #company_details #company_form label {
+    font-weight: bold; }
+#company_page #company_page_details #company_details #company_identity {
+  float: left;
+  width: 25%;
+  margin-right: 10px; }
+  #company_page #company_page_details #company_details #company_identity #company_name_url, #company_page #company_page_details #company_details #company_identity #company_industries, #company_page #company_page_details #company_details #company_identity #compnay_description {
+    margin: 10px 0px 5px 0px; }
+#company_page #company_page_details #company_details #mission_and_history {
+  float: left;
+  width: 25%;
+  margin-right: 10px; }
+  #company_page #company_page_details #company_details #mission_and_history #company_core_value, #company_page #company_page_details #company_details #mission_and_history #company_mission, #company_page #company_page_details #company_details #mission_and_history #what_we_look_for, #company_page #company_page_details #company_details #mission_and_history #company_jobs_future, #company_page #company_page_details #company_details #mission_and_history #company_jobs_past {
+    margin: 10px 0px 5px 0px; }
+#company_page #company_page_details #company_details #company_followers_list {
+  float: left;
+  width: 14.4%; }
+  #company_page #company_page_details #company_details #company_followers_list #company_followers {
+    margin: 10px 0px 5px 0px; }

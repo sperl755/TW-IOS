@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 38
+/svn/!svn/ver/269/jobs/trunk/lib/tasks
+END
+add_admin_user.rake
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/269/jobs/trunk/lib/tasks/add_admin_user.rake
+END
+job_test_data.rake
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/177/jobs/trunk/lib/tasks/job_test_data.rake
+END

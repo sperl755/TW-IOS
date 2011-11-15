@@ -1,0 +1,77 @@
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/!svn/ver/17/jobs/trunk/public/plugin_assets/community_engine/charts/themes/default
+END
+test.yml
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/!svn/ver/17/jobs/trunk/public/plugin_assets/community_engine/charts/themes/default/test.yml
+END
+stacked_bar_chart.yml
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/!svn/ver/17/jobs/trunk/public/plugin_assets/community_engine/charts/themes/default/stacked_bar_chart.yml
+END
+bar_chart.yml
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/!svn/ver/17/jobs/trunk/public/plugin_assets/community_engine/charts/themes/default/bar_chart.yml
+END
+parallel_threed_column_chart.yml
+K 25
+svn:wc:ra_dav:version-url
+V 120
+/svn/!svn/ver/17/jobs/trunk/public/plugin_assets/community_engine/charts/themes/default/parallel_threed_column_chart.yml
+END
+stacked_threed_column_chart.yml
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/svn/!svn/ver/17/jobs/trunk/public/plugin_assets/community_engine/charts/themes/default/stacked_threed_column_chart.yml
+END
+column_threed_chart.yml
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/svn/!svn/ver/17/jobs/trunk/public/plugin_assets/community_engine/charts/themes/default/column_threed_chart.yml
+END
+pie_threed_chart.yml
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/!svn/ver/17/jobs/trunk/public/plugin_assets/community_engine/charts/themes/default/pie_threed_chart.yml
+END
+base_chart.yml
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/!svn/ver/17/jobs/trunk/public/plugin_assets/community_engine/charts/themes/default/base_chart.yml
+END
+stacked_column_chart.yml
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/svn/!svn/ver/17/jobs/trunk/public/plugin_assets/community_engine/charts/themes/default/stacked_column_chart.yml
+END
+column_chart.yml
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/!svn/ver/17/jobs/trunk/public/plugin_assets/community_engine/charts/themes/default/column_chart.yml
+END
+pie_chart.yml
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/!svn/ver/17/jobs/trunk/public/plugin_assets/community_engine/charts/themes/default/pie_chart.yml
+END
+polar_chart.yml
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/!svn/ver/17/jobs/trunk/public/plugin_assets/community_engine/charts/themes/default/polar_chart.yml
+END

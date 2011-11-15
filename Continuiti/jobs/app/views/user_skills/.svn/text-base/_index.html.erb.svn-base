@@ -1,0 +1,30 @@
+<%- skills = @skills || skills %>
+<%- i = 1 %>
+<%- skills.each_with_index do |skill, skill_index| %>
+
+  <b><%= skill.skill.name rescue nil %></b>
+  <% if current_user and current_user.id.eql?(skill.user_id) %>
+    <%= link_to_remote 'Edit', :url => edit_user_skill_path(skill), :loading => "$('edit_and_remove_skill_ajax_loader_#{skill_index}').show()", :success => "$('edit_and_remove_skill_ajax_loader_#{skill_index}').hide()", :method => :get %>
+    <%= link_to_remote 'Remove', :url => user_skill_path(skill), :loading => "$('edit_and_remove_skill_ajax_loader_#{skill_index}').show()", :success => "$('edit_and_remove_skill_ajax_loader_#{skill_index}').hide()", :confirm => 'Are you sure?', :method => :delete %>
+    <span id="edit_and_remove_skill_ajax_loader_<%= skill_index %>" style="display: none"><%= image_tag "LoaderIcon.gif", :style => "width:15px" %></span>
+  <% end %>
+  <br />
+  <%=h skill.year_period %> years <%=h "#{skill.month_period} months" unless skill.month_period.blank? %><br />
+
+  <%- unless skill.description.blank? %>
+    <%=h skill.description %><br />
+  <%- end %>
+
+  <%- if skills.size != i %>
+    <div style="padding-top: 5px;"></div>
+    <hr style="border: 1px dotted #cccccc; ">
+    <div style="padding-top: 10px;"></div>
+  <%- elsif current_user && current_user.user_skills.size != i %>
+    <div style="padding-top: 5px;"></div>
+    <hr style="border: 1px dotted #cccccc; ">
+    <div style="padding-top: 10px;"></div>
+  <%- end %>
+  <%- i = i + 1 %>
+<%- end %>
+
+<br />

@@ -1,0 +1,124 @@
+<% content_for :header_includes do %>
+  <%= javascript_include_tag 'page/base_landing.js' %>
+  <%= stylesheet_link_tag 'page/base_landing.css' %>
+<% end %>
+<div id="landing_center">
+  <h1>Welcome to StaffItToMe!</h1>
+  This is a very temporary landing page until I have chance to speak to Sam. 
+  In the meantime, please login:
+  <br />
+<div id="login_connectors">
+  Or connect with..
+  <%= authlogic_facebook_login_button :controller=>:sessions%>
+</div>
+
+<br /><br /><br /><!-- hacky way of adding spacing, deleteme -->
+<div id="search_jobs">
+  <% form_tag '/jobs/search',:method=>:post  do %>
+    Search: <input type="text" name="searchterm" /><input type="submit" value="Search" />
+  <% end %>
+</div>
+
+</div>
+<div id="LandingFooter">
+  <div id="FooterContainerLeft"></div>
+  <div id="FooterContainer">
+    <ul id="FooterNavigation">
+      <li><a class="ourStory" href="/Public/AboutInspirato">Our Story</a></li>
+      <li><a class="theBenefits" href="/Public/InspiratoMembership">The Benefits</a></li>
+      <li><a class="destinations" href="/Destination/Summary">Destinations</a></li>
+      <li><a class="press" href="/Public/Press">Press</a></li>
+    </ul>
+    <div id="FooterCompanyInfo">
+      <div id="FooterPrivacyPolicy">
+        <a href="javascript:OpenPrivacyPolicyDialog();">Privacy Policy</a>
+      </div>
+      Staff It To Me - Santa Barbara, (555)-555-5555
+    </div>
+  </div>
+  <div id="FooterContainerRight"></div>
+</div>
+<div class="popup">
+  <div id="signup"></div>
+  <div class="signup" id="popupSignup">
+    <div id="wrapper">
+      <form id="register" method="post">
+        <section class="form form_1">
+        <div class="form_container">
+          <div class="step">
+            <img alt="Step 1 of 2" src="images/popup/signup/one.png"/>			
+          </div>
+          <fieldset>
+            <h2>Are you 
+              <select id="select_location">
+                <option value="offering">Looking for work</option>
+                <option value="searching">Offering work</option>
+                <option value="both">Both</option>
+              </select>
+              :</h2>
+          </fieldset>
+          <div class="button">
+            <a class="button_1" href="#" id="step_one" onclick="; return false;">Continue</a>
+          </div>
+        </div>	
+        </section>
+        <section class="form form_2 formhide">
+        <div class="form_container">
+          <div class="step">
+            <img alt="Step 2 of 2" src="images/popup/signup/two.png"/>
+          </div>
+          <fieldset>
+            <h2>Enter your email :</h2>
+            <div class="email_field">
+              <label class="hide" for="subscription_email_address">&nbsp;</label>
+              <input value="" id="subscription_email_address" name="subscription[email_address]" size="30" title="Please enter a valid email address." type="text">
+            </div>
+            <p>Don't worry, your email is safe with us.</p>
+            <h2>Enter your password :</h2>
+            <div class="email_field">
+              <input value="" id="subscription_email_address" name="subscription[email_address]" size="30" title="Please enter a valid email address." type="text">
+            </div>
+            <h2>Zipcode :</h2>
+            <div class="email_field">
+              <input value="" id="subscription_email_address" name="subscription[email_address]" size="30" title="Please enter a valid email address." type="text">
+            </div>
+          </fieldset>
+          <div class="button">
+            <input class="button_2" id="subscription_submit" value="See what's happening" type="submit">
+          </div>
+        </div>
+        </section>
+      </form>
+    </div>
+  </div>
+  <div id="backgroundSignup"></div>
+  <div id="login_popup"></div>
+  <div class="form" id="popupContact">
+    <a id="popupContactClose">x</a>
+    <h1>Login</h1>
+    <div id="login_normal">
+      <% form_tag sessions_path, :class => 'MainForm' do %>
+        <label for="login"><h2>Email:</h2></label><br />
+        <%= text_field_tag 'login', nil, :size => 25 %>
+        <br />
+        <label for="password"><h2>Password:</h2></label><br />
+        <%= password_field_tag 'password', nil, :size => 25 %>
+        <fieldset>
+          <label for="remember_me">Remember Me?</label> &nbsp; <%= check_box_tag 'remember_me' %>
+        </fieldset>
+        <div class="login">
+          <%= submit_tag :log_in.l %>
+        </div>
+      <% end %>
+    </div>
+    <div class="fb">
+      <div id="login_connectors">
+        <%= authlogic_facebook_login_button :controller=>:sessions%>
+      </div>
+    </div>
+    <div class="twitter">
+      <%=link_to image_tag('sign-in-with-twitter-d.png'), twitter_authenticate_url%>
+    </div>
+  </div>
+  <div id="backgroundPopup"></div>
+</div>

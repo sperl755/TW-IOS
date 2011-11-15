@@ -1,0 +1,36 @@
+<h3 style="font-size:16px;border-bottom:1px solid #CCCCCC">Choose a badge to award to a friend!</h3>
+
+<style>
+  .fieldWithErrors{
+    display: inline;
+  }
+</style>
+
+<div style="width:520px;padding: 40px 0 0 130px;">
+  <%- row_count = (@shareable_badges_for_friends.size / 5.to_f).ceil %>
+  <table>
+    <%- total_badges = @shareable_badges_for_friends.size %>
+    <%- badges_counter = 1 %>
+    <%- 1..row_count.times do %>
+      <%- first_column_count_per_row = 1 %>
+      <tr>
+        <%- total_badges.times do %>
+          <%- if @shareable_badges_for_friends[badges_counter - 1] %>
+            <td align="center" valign="top">
+              <table>
+                <tr><td align="center"><%= link_to image_tag(@shareable_badges_for_friends[badges_counter - 1].photo.url, :style => "width:70px"), new_badge_for_friend_awards_path(:badge_id => @shareable_badges_for_friends[badges_counter - 1].id) %></td></tr>
+                <tr><td align="center"><%= link_to @shareable_badges_for_friends[badges_counter - 1].name, new_badge_for_friend_awards_path(:badge_id => @shareable_badges_for_friends[badges_counter - 1].id) %></td></tr>
+                <tr><td align="center"><%= link_to "Give this badge", new_badge_for_friend_awards_path(:badge_id => @shareable_badges_for_friends[badges_counter - 1].id) %></td></tr>
+              </table>
+            </td>
+            <%- badges_counter += 1 %>
+          <%- end %>
+          <%- first_column_count_per_row += 1 %>
+          <%- if first_column_count_per_row.eql?(6) %>
+            <%- break %>
+          <%- end %>
+        <%- end %>
+      </tr>
+    <%- end %>
+  </table>
+</div>

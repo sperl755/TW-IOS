@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svn/!svn/ver/142/jobs/trunk/app/views/degrees
+END
+edit.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/142/jobs/trunk/app/views/degrees/edit.html.erb
+END
+index.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/142/jobs/trunk/app/views/degrees/index.html.erb
+END
+new.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/142/jobs/trunk/app/views/degrees/new.html.erb
+END
+show.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/142/jobs/trunk/app/views/degrees/show.html.erb
+END

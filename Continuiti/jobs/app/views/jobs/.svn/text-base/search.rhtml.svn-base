@@ -1,0 +1,11 @@
+<%
+  # You will need to:
+# - paginate search results
+# - link search results to the relevant show page
+%>
+<h1>Search results for '<%= params[:searchterm] %>' (<%= @search.results.size %> results) </h1>
+<ul>
+  <% @search.each_hit_with_result do |hit, job| %>
+    <li>Title: <%= job.title -%>, ID: <%= job.id -%>, SearchScore: <%= hit.score %></li>
+  <% end %>
+</ul>

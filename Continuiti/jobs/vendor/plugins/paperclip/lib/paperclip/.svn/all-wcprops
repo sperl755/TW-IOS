@@ -1,0 +1,89 @@
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/!svn/ver/182/jobs/trunk/vendor/plugins/paperclip/lib/paperclip
+END
+callback_compatability.rb
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/!svn/ver/182/jobs/trunk/vendor/plugins/paperclip/lib/paperclip/callback_compatability.rb
+END
+processor.rb
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/!svn/ver/182/jobs/trunk/vendor/plugins/paperclip/lib/paperclip/processor.rb
+END
+style.rb
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/!svn/ver/182/jobs/trunk/vendor/plugins/paperclip/lib/paperclip/style.rb
+END
+iostream.rb
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/!svn/ver/182/jobs/trunk/vendor/plugins/paperclip/lib/paperclip/iostream.rb
+END
+thumbnail.rb
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/!svn/ver/182/jobs/trunk/vendor/plugins/paperclip/lib/paperclip/thumbnail.rb
+END
+upfile.rb
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/!svn/ver/182/jobs/trunk/vendor/plugins/paperclip/lib/paperclip/upfile.rb
+END
+storage.rb
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/!svn/ver/182/jobs/trunk/vendor/plugins/paperclip/lib/paperclip/storage.rb
+END
+command_line.rb
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/!svn/ver/182/jobs/trunk/vendor/plugins/paperclip/lib/paperclip/command_line.rb
+END
+version.rb
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/!svn/ver/182/jobs/trunk/vendor/plugins/paperclip/lib/paperclip/version.rb
+END
+matchers.rb
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/!svn/ver/182/jobs/trunk/vendor/plugins/paperclip/lib/paperclip/matchers.rb
+END
+attachment.rb
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/!svn/ver/182/jobs/trunk/vendor/plugins/paperclip/lib/paperclip/attachment.rb
+END
+railtie.rb
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/!svn/ver/182/jobs/trunk/vendor/plugins/paperclip/lib/paperclip/railtie.rb
+END
+interpolations.rb
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/!svn/ver/182/jobs/trunk/vendor/plugins/paperclip/lib/paperclip/interpolations.rb
+END
+geometry.rb
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/!svn/ver/182/jobs/trunk/vendor/plugins/paperclip/lib/paperclip/geometry.rb
+END

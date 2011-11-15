@@ -1,0 +1,36 @@
+<table>
+  <tr>
+    <td>
+      <%- if current_user and current_user.id.eql?(@user.id) %>
+        <table>
+          <tr>
+            <td>
+              <%= link_to "All Badges (#{@my_badges.size})", show_all_badges_awards_path %>
+            </td>
+            <td>
+              <%= link_to "Send badges to friend", show_all_available_badges_for_friend_awards_path %>
+            </td>
+            <td colspan="3">
+              <%= link_to "Get a badges", get_a_badge_awards_path %>
+            </td>
+          </tr>
+        </table>
+      <%- else %>
+        No badges
+      <%- end %>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <table>
+        <tr>
+          <%- @my_badges.each do |my_badge| %>
+            <td>
+              <%= link_to_function image_tag(my_badge.award.photo.url, :style => "width:50px"), "alert('#{my_badge.award.name}')" %>
+            </td>
+          <%- end %>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>

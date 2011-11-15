@@ -1,0 +1,14 @@
+    <div id="company_office_addresses" class="alt">
+
+      <h3>Location</h3>
+      <div id="company_office_address">
+        <%= render :partial => 'location', :collection => @user.locations %>
+      </div>
+
+      <p>
+        <%= link_to_function  "Add a new office" do |page|
+          page.insert_html :bottom, :company_office_address, :partial => 'location', :object => Location.new
+        end%>
+      </p>
+
+    </div>

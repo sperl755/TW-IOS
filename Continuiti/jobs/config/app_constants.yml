@@ -1,0 +1,53 @@
+defaults: &defaults
+
+  
+  job_title_default_text: What do you need? The task title goes here.
+  job_detail_description_default_text: Enter as much detail as you think necessary to determine the time and skills required to complete effectively.  Being descriptive helps Heroes understand how they can help. 
+  job_detail_private_default_text: Enter private notes here shown only to your Hero.
+  company_description_default_text: Please provide company details.
+  requirement_list_default_text: Please provide your requirements.
+  job_vehicle_default_text: Enter details here about anything specific they will need to bring or purchase in advance to effectively complete the task.
+  
+  job_category_personal: 1
+  job_category_small_business: 2
+  job_category_corporate: 3
+  
+  job_categories:
+    "Personal": 1
+    "Business": 2
+
+
+  job_status:
+    "inactive": 0
+    "open": 1
+    "assigned": 2
+    "filled": 3
+    "in progress": 4
+    "completed": 5
+    "cancelled": 6
+
+  job_visible_status:
+    0: "private"
+    1: "public" 
+
+  job_application_status:
+    "applied": 1
+    "invited": 2
+    "active": 3
+    "hired": 4
+    "closed": 5
+
+  contract_status:
+    "inactive": 0
+    "active": 1
+    "end": 2
+  ##job_category: [["Personal",job_category_personal], ["Small business",job_category_small_business], ["Corporate",job_category_corporate]]
+  
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults

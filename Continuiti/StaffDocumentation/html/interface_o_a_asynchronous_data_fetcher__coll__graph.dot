@@ -1,0 +1,24 @@
+digraph G
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="OAAsynchronousDataFetcher",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled" fontcolor="black"];
+  Node2 -> Node1 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="NSObject",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_n_s_object.html"];
+  Node2 -> Node1 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 -> Node1 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" request" ,fontname="Helvetica"];
+  Node3 [label="OAMutableURLRequest",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$interface_o_a_mutable_u_r_l_request.html"];
+  Node4 -> Node3 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" token" ,fontname="Helvetica"];
+  Node4 [label="OAToken",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$interface_o_a_token.html"];
+  Node2 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 -> Node3 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" consumer" ,fontname="Helvetica"];
+  Node5 [label="OAConsumer",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$interface_o_a_consumer.html"];
+  Node2 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 -> Node3 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" realm\ntimestamp" ,fontname="Helvetica"];
+  Node6 [label="NSString",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_n_s_string.html"];
+}

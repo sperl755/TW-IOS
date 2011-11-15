@@ -1,0 +1,36 @@
+<h3 style="font-size:16px;border-bottom:1px solid #CCCCCC">Choose a badge to award yourself!</h3>
+
+<style>
+  .fieldWithErrors{
+    display: inline;
+  }
+</style>
+
+<div style="width:520px;padding: 40px 0 0 130px;">
+  <%- row_count = (@my_available_badges.size / 5.to_f).ceil %>
+  <table>
+    <%- total_badges = @my_available_badges.size %>
+    <%- badges_counter = 1 %>
+    <%- 1..row_count.times do %>
+      <%- first_column_count_per_row = 1 %>
+      <tr>
+        <%- total_badges.times do %>
+          <%- if @my_available_badges[badges_counter - 1] %>
+            <td align="center" valign="top">
+              <table>
+                <tr><td align="center"><%= link_to image_tag(@my_available_badges[badges_counter - 1].photo.url, :style => "width:70px"), save_this_badge_awards_path(:badge_id => @my_available_badges[badges_counter - 1].id) %></td></tr>
+                <tr><td align="center"><%= link_to @my_available_badges[badges_counter - 1].name, save_this_badge_awards_path(:badge_id => @my_available_badges[badges_counter - 1].id) %></td></tr>
+                <tr><td align="center"><%= link_to "Get this badge", save_this_badge_awards_path(:badge_id => @my_available_badges[badges_counter - 1].id) %></td></tr>
+              </table>
+            </td>
+            <%- badges_counter += 1 %>
+          <%- end %>
+          <%- first_column_count_per_row += 1 %>
+          <%- if first_column_count_per_row.eql?(6) %>
+            <%- break %>
+          <%- end %>
+        <%- end %>
+      </tr>
+    <%- end %>
+  </table>
+</div>

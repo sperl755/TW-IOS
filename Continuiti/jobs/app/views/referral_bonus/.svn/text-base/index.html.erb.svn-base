@@ -1,0 +1,19 @@
+<h1>Current ReferralBonuses</h1>
+
+
+<ul>
+  <li style="float:left; width: 100px; font-weight: bold; border-bottom: 1px solid;"> Bonus Percent </li>
+  <li style="float:left; width: 200px; font-weight: bold; border-bottom: 1px solid;"> Maximum Bonus Per User </li>
+  <li style="float:left; width: 200px; font-weight: bold; border-bottom: 1px solid;"> Total Maximum Bonus </li>
+  <li style="float:left; width: 200px; font-weight: bold; border-bottom: 1px solid;"> Manage </li>
+</ul>
+<% @referral_bonuses.each do |referral_bonus| %>
+  <div class="clear"></div>
+  <div id=<%="referral_bonus_form_#{referral_bonus.id}"%>>
+    <%= render :partial => 'show_a_referral_bonus', :locals =>{:referral_bonus => referral_bonus} %>
+  </div>
+<% end %>
+
+<%#=  link_to "Set Bonus For 100", {:controller => 'referral_bonus', :action => 'temp'} %>
+
+

@@ -1,0 +1,89 @@
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/!svn/ver/222/ios/MyCode/StaffItToMe/ASIClasses/CloudFiles
+END
+ASICloudFilesCDNRequest.m
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/!svn/ver/222/ios/MyCode/StaffItToMe/ASIClasses/CloudFiles/ASICloudFilesCDNRequest.m
+END
+ASICloudFilesContainer.h
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/!svn/ver/222/ios/MyCode/StaffItToMe/ASIClasses/CloudFiles/ASICloudFilesContainer.h
+END
+ASICloudFilesObjectRequest.m
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/!svn/ver/222/ios/MyCode/StaffItToMe/ASIClasses/CloudFiles/ASICloudFilesObjectRequest.m
+END
+ASICloudFilesObject.h
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/!svn/ver/222/ios/MyCode/StaffItToMe/ASIClasses/CloudFiles/ASICloudFilesObject.h
+END
+ASICloudFilesContainer.m
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/!svn/ver/222/ios/MyCode/StaffItToMe/ASIClasses/CloudFiles/ASICloudFilesContainer.m
+END
+ASICloudFilesRequest.h
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/!svn/ver/222/ios/MyCode/StaffItToMe/ASIClasses/CloudFiles/ASICloudFilesRequest.h
+END
+ASICloudFilesContainerRequest.h
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/!svn/ver/222/ios/MyCode/StaffItToMe/ASIClasses/CloudFiles/ASICloudFilesContainerRequest.h
+END
+ASICloudFilesContainerXMLParserDelegate.h
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/!svn/ver/222/ios/MyCode/StaffItToMe/ASIClasses/CloudFiles/ASICloudFilesContainerXMLParserDelegate.h
+END
+ASICloudFilesObject.m
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/!svn/ver/222/ios/MyCode/StaffItToMe/ASIClasses/CloudFiles/ASICloudFilesObject.m
+END
+ASICloudFilesCDNRequest.h
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/!svn/ver/222/ios/MyCode/StaffItToMe/ASIClasses/CloudFiles/ASICloudFilesCDNRequest.h
+END
+ASICloudFilesRequest.m
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/!svn/ver/222/ios/MyCode/StaffItToMe/ASIClasses/CloudFiles/ASICloudFilesRequest.m
+END
+ASICloudFilesObjectRequest.h
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/!svn/ver/222/ios/MyCode/StaffItToMe/ASIClasses/CloudFiles/ASICloudFilesObjectRequest.h
+END
+ASICloudFilesContainerRequest.m
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/!svn/ver/222/ios/MyCode/StaffItToMe/ASIClasses/CloudFiles/ASICloudFilesContainerRequest.m
+END
+ASICloudFilesContainerXMLParserDelegate.m
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/!svn/ver/222/ios/MyCode/StaffItToMe/ASIClasses/CloudFiles/ASICloudFilesContainerXMLParserDelegate.m
+END

@@ -1,0 +1,61 @@
+\hypertarget{_customizing_CustomTests}{}\section{\-Custom Test Case Classes}\label{_customizing_CustomTests}
+\-You can register additional classes at runtime; if you have your own. \-For example\-:
+
+
+\begin{DoxyCode}
+ [[GHTesting sharedInstance] registerClassName:@"MySpecialTestCase"];
+\end{DoxyCode}
+\hypertarget{_customizing_AlternateIOSAppDelegate}{}\section{\-Using an Alternate i\-Phone Application Delegate}\label{_customizing_AlternateIOSAppDelegate}
+\-If you want to use a custom application delegate in your test environment, you should subclass \hyperlink{interface_g_h_unit_i_phone_app_delegate}{\-G\-H\-Unit\-I\-Phone\-App\-Delegate}\-:
+
+
+\begin{DoxyCode}
+ @interface MyTestApplicationDelegate : GHUnitIPhoneAppDelegate { }
+ @end
+\end{DoxyCode}
+
+
+\-Then in \-G\-H\-Unit\-I\-Phone\-Test\-Main.\-m\-:
+
+
+\begin{DoxyCode}
+ retVal = UIApplicationMain(argc, argv, nil, @"MyTestApplicationDelegate");
+\end{DoxyCode}
+
+
+\-I am looking into removing this dependency but this will work in the meantime.\hypertarget{_customizing_UsingSenTesting}{}\section{\-Using Sen\-Testing\-Kit}\label{_customizing_UsingSenTesting}
+\-You can also use \-G\-H\-Unit with \-Sen\-Test\-Case, for example\-:
+
+
+\begin{DoxyCode}
+ #import <SenTestingKit/SenTestingKit.h>
+ 
+ @interface MyTest : SenTestCase { }
+ @end
+ 
+ @implementation MyTest
+ 
+ - (void)setUp {
+   // Run before each test method
+ }
+ 
+ - (void)tearDown {
+   // Run after each test method
+ }
+ 
+ - (void)testFoo {
+   // Assert a is not NULL, with no custom error description
+   STAssertNotNULL(a, nil);
+ 
+   // Assert equal objects, add custom error description
+   STAssertEqualObjects(a, b, @"Foo should be equal to: %@. Something bad
+       happened", bar);
+ }
+ 
+ - (void)testBar {
+   // Another test
+ }
+ 
+ @end
+\end{DoxyCode}
+ 

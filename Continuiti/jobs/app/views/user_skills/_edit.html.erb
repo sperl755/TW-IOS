@@ -1,0 +1,75 @@
+<script type="text/javascript">
+  new Autocomplete('user_skill_0_title', { serviceUrl:'/user_skills/suggestion/search_skill' });
+  Ajax.Responders.register({
+    onCreate: function() {
+      if (Ajax.activeRequestCount === 1 && window.currentTitleFocused != -1) {
+        $('add_new_skill_ajax_loader_'+window.currentTitleFocused).show();
+      }
+    },
+    onComplete: function() {
+      if (Ajax.activeRequestCount === 0 && window.currentTitleFocused != -1) {
+        $('add_new_skill_ajax_loader_'+window.currentTitleFocused).hide();
+      }
+    }
+  });
+</script>
+<style>
+  .fieldWithErrors{
+    display: inline;
+  }
+  .autocomplete-w1 { background:url(/images/shadow.png) no-repeat bottom right; position:absolute; top:4px; left:3px; /* IE6 fix: */ _background:none; _top:1px; }
+  .autocomplete { width:300px; border:1px solid #999; background:#FFF; cursor:default; text-align:left; max-height:350px; overflow:auto; margin:-6px 6px 6px -6px; /* IE specific: */ _height:350px;  _margin:0px 6px 6px 0; overflow-x:hidden; }
+  .autocomplete .selected { background:#F0F0F0; }
+  .autocomplete div { padding:2px 5px; white-space:nowrap; }
+  .autocomplete strong { font-weight:normal; color:#3399FF; }
+</style>
+
+<div style="width:520px;padding: 40px 0 0 130px;">
+  <% form_remote_for(@user_skill, :url => user_skill_path(@user_skill),
+    :loading => "$('add_new_skill_form_process_ajax_loader').show()",
+    :success => "$('add_new_skill_form_process_ajax_loader').hide()") do |f| %>
+    <%= f.hidden_field :skill_id %>
+    <p>
+    <div style="float:left;width:150px;"><b>Title:</b></div>
+    <span id="user_skill_title_cant_be_blank_0" style="display: none"><div style="float: right; width:350px; color: red">Title can't be blank</div></span>
+    <span id="user_skill_title_been_taken_0" style="display: none"><div style="float: right; width:350px; color: red">Title has been taken</div></span>
+    <div style="float: right; width:350px;">
+      <%= text_field_tag "user_skill_0_title", (@user_skill.skill.name rescue nil),
+        :onchange => "validateFieldCantBeBlank('user_skill_0_title', 'user_skill_title_cant_be_blank_0')",
+        :onfocus => "window.currentTitleFocused = 0", :onblur => "window.currentTitleFocused = -1" %>
+      <span id="add_new_skill_ajax_loader_0" style="display: none">
+        <img style="width:15px" src="/images/LoaderIcon.gif?1309949898" alt="Loadericon">
+      </span>
+    </div>
+    <div style="clear:both;"></div>
+  </p>
+  <p>
+  <div style="float:left;width:150px;"><b><%= f.label :description %>:</b></div>
+  <span id="user_skill_description_cant_be_blank_0" style="display: none"><div style="float: right; width:350px; color: red">Description can't be blank</div></span>
+  <div style="float: right; width:350px;"><%= f.text_area :description, :id => "user_skill_0_description",
+      :rows => 4, :onchange => "validateFieldCantBeBlank('user_skill_0_description', 'user_skill_description_cant_be_blank_0')" %></div>
+  <div style="clear:both;"></div>
+  </p>
+  <p>
+  <div style="float:left;width:150px;"><b>Time Period:</b></div>
+  <span id="user_skill_year_or_month_cant_be_blank_0" style="display: none"><div style="float: right; width:350px; color: red">Year or month can't be blank</div></span>
+  <span id="user_skill_year_must_integer_0" style="display: none"><div style="float: right; width:350px; color: red">Year must be integer</div></span>
+  <span id="user_skill_year_must_greater_than_zero_0" style="display: none"><div style="float: right; width:350px; color: red">Year must greater than 0</div></span>
+  <span id="user_skill_month_must_integer_0" style="display: none"><div style="float: right; width:350px; color: red">Month must be integer</div></span>
+  <span id="user_skill_month_must_greater_than_zero_0" style="display: none"><div style="float: right; width:350px; color: red">Month must greater than 0</div></span>
+  <div style="float: right; width:350px;">
+    <%= f.text_field :year_period, :id => "user_skill_0_year_period",
+      :size => 4, :maxlength => 4, :onchange => "valueMustInteger('user_skill_0_year_period', 'user_skill_year_must_integer_0', 'user_skill_year_must_greater_than_zero_0')" %> years
+    <%= f.text_field :month_period, :id => "user_skill_0_month_period",
+      :size => 1, :maxlength => 1, :onchange => "valueMustInteger('user_skill_0_month_period', 'user_skill_month_must_integer_0', 'user_skill_month_must_greater_than_zero_0')" %> months
+  </div>
+  <div style="clear:both;"></div>
+  </p>
+  <p>
+  <div style="float:left;width:150px;vertical-align:top;" ></div>
+  <div style="float:right;width:350px;"><%= submit_tag "Update", :onclick => "return validateAllSkillFields()" %> or <%= link_to_function 'Cancel', "$(\"add_skill_form\").innerHTML = \"\"" %><span id="add_new_skill_form_process_ajax_loader" style="display: none"><%= image_tag "LoaderIcon.gif", :style => "width:15px" %></span></div>
+  <div style="clear:both;"></div>
+  </p>
+<% end %>
+</div>
+

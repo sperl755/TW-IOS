@@ -1,0 +1,108 @@
+\hypertarget{interface_s_b_json_stream_parser_adapter}{
+\section{\-S\-B\-Json\-Stream\-Parser\-Adapter \-Class \-Reference}
+\label{interface_s_b_json_stream_parser_adapter}\index{\-S\-B\-Json\-Stream\-Parser\-Adapter@{\-S\-B\-Json\-Stream\-Parser\-Adapter}}
+}
+
+
+\hyperlink{protocol_s_b_json_stream_parser_delegate-p}{\-S\-B\-Json\-Stream\-Parser\-Delegate} protocol adapter.  
+
+
+
+
+{\ttfamily \#import $<$\-S\-B\-Json\-Stream\-Parser\-Adapter.\-h$>$}
+
+
+
+\-Inheritance diagram for \-S\-B\-Json\-Stream\-Parser\-Adapter\-:
+
+
+\-Collaboration diagram for \-S\-B\-Json\-Stream\-Parser\-Adapter\-:
+\subsection*{\-Properties}
+\begin{DoxyCompactItemize}
+\item 
+\-N\-S\-U\-Integer \hyperlink{interface_s_b_json_stream_parser_adapter_a1b7451c67d9149b14632c228909659bb}{levels\-To\-Skip}
+\begin{DoxyCompactList}\small\item\em \-How many levels to skip. \end{DoxyCompactList}\item 
+\hypertarget{interface_s_b_json_stream_parser_adapter_ae64dd83cfbaa69e35a5c8b0ec1da070b}{
+id\*
+$<$ \hyperlink{protocol_s_b_json_stream_parser_adapter_delegate-p}{\-S\-B\-Json\-Stream\-Parser\-Adapter\-Delegate} $>$ \hyperlink{interface_s_b_json_stream_parser_adapter_ae64dd83cfbaa69e35a5c8b0ec1da070b}{delegate}}
+\label{interface_s_b_json_stream_parser_adapter_ae64dd83cfbaa69e35a5c8b0ec1da070b}
+
+\begin{DoxyCompactList}\small\item\em \-Your delegate object \-Set this to the object you want to receive the \hyperlink{protocol_s_b_json_stream_parser_adapter_delegate-p}{\-S\-B\-Json\-Stream\-Parser\-Adapter\-Delegate} messages. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\hyperlink{protocol_s_b_json_stream_parser_delegate-p}{\-S\-B\-Json\-Stream\-Parser\-Delegate} protocol adapter. 
+
+\-Rather than implementing the \hyperlink{protocol_s_b_json_stream_parser_delegate-p}{\-S\-B\-Json\-Stream\-Parser\-Delegate} protocol yourself you will most likely find it much more convenient to use an instance of this class and implement the \hyperlink{protocol_s_b_json_stream_parser_adapter_delegate-p}{\-S\-B\-Json\-Stream\-Parser\-Adapter\-Delegate} protocol instead.
+
+\-Normally you would only get one call from either the -\/parser\-:found\-Array\-: or -\/parser\-:found\-Object\-: method. \-However, if your inputs contains multiple \-J\-S\-O\-N documents and you set the parser's -\/support\-Multiple\-Documents property to \-Y\-E\-S you will get one call for each full method.
+
+
+\begin{DoxyCode}
+ SBJsonStreamParserAdapter *adapter = [[[SBJsonStreamParserAdapter alloc] init]
+       autorelease];
+ adapter.delegate = self;
+ 
+ SBJsonStreamParser *parser = [[[SBJsonStreamParser alloc] init] autorelease];
+ parser.delegate = adapter;
+ parser.supportMultipleDocuments = YES;
+
+ // Note that this input contains multiple top-level JSON documents
+ NSData *json = [@"[]{}[]{}" dataWithEncoding:NSUTF8StringEncoding]; 
+ [parser parse:data];
+\end{DoxyCode}
+
+
+\-In the above example {\ttfamily self} will have the following sequence of methods called on it\-:
+
+\begin{DoxyItemize}
+\item -\/parser\-:found\-Array\-: \item -\/parser\-:found\-Object\-: \item -\/parser\-:found\-Array\-: \item -\/parser\-:found\-Object\-:\end{DoxyItemize}
+\-Often you won't have control over the input you're parsing, so can't make use of this feature. \-But, all is not lost\-: this class will let you get the same effect by allowing you to skip one or more of the outer enclosing objects. \-Thus, the next example results in the same sequence of -\/parser\-:found\-Array\-: / -\/parser\-:found\-Object\-: being called on your delegate.
+
+
+\begin{DoxyCode}
+ SBJsonStreamParserAdapter *adapter = [[[SBJsonStreamParserAdapter alloc] init]
+       autorelease];
+ adapter.delegate = self;
+ adapter.levelsToSkip = 1;
+ 
+ SBJsonStreamParser *parser = [[[SBJsonStreamParser alloc] init] autorelease];
+ parser.delegate = adapter;
+ 
+ // Note that this input contains A SINGLE top-level document
+ NSData *json = [@"[[],{},[],{}]" dataWithEncoding:NSUTF8StringEncoding]; 
+ [parser parse:data];
+\end{DoxyCode}
+ 
+
+\subsection{\-Property \-Documentation}
+\hypertarget{interface_s_b_json_stream_parser_adapter_a1b7451c67d9149b14632c228909659bb}{
+\index{\-S\-B\-Json\-Stream\-Parser\-Adapter@{\-S\-B\-Json\-Stream\-Parser\-Adapter}!levels\-To\-Skip@{levels\-To\-Skip}}
+\index{levels\-To\-Skip@{levels\-To\-Skip}!SBJsonStreamParserAdapter@{\-S\-B\-Json\-Stream\-Parser\-Adapter}}
+\subsubsection[{levels\-To\-Skip}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (\-N\-S\-U\-Integer) levels\-To\-Skip\hspace{0.3cm}{\ttfamily  \mbox{[}read, write, assign\mbox{]}}}}
+\label{interface_s_b_json_stream_parser_adapter_a1b7451c67d9149b14632c228909659bb}
+
+
+\-How many levels to skip. 
+
+\-This is useful for parsing huge \-J\-S\-O\-N documents, or documents coming in over a very slow link.
+
+\-If you set this to \-N it will skip the outer \-N levels and call the -\/parser\-:found\-Array\-: or -\/parser\-:found\-Object\-: methods for each of the inner objects, as appropriate.
+
+\begin{DoxySeeAlso}{\-See also}
+\-The \-Stream\-Parser\-Integration\-Test.\-m file for examples 
+\end{DoxySeeAlso}
+
+
+\-The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+\-Staff\-It\-To\-Me/\-J\-S\-O\-N\-Classes/\-S\-B\-Json\-Stream\-Parser\-Adapter.\-h\item 
+stig-\/json-\/framework-\/9c7016a/\-Classes/\-S\-B\-Json\-Stream\-Parser\-Adapter.\-h\item 
+\-S\-V\-N\-Staffit\-To\-Me/\-Checkout/\-Staff\-It\-To\-Me/\-J\-S\-O\-N\-Classes/\-S\-B\-Json\-Stream\-Parser\-Adapter.\-h\item 
+\-S\-V\-N\-Staffit\-To\-Me/\-Checkout/stig-\/json-\/framework-\/9c7016a/\-Classes/\-S\-B\-Json\-Stream\-Parser\-Adapter.\-h\item 
+\-S\-V\-N\-Staffit\-To\-Me/\-Code/\-My\-Code/\-Staff\-It\-To\-Me/\-J\-S\-O\-N\-Classes/\-S\-B\-Json\-Stream\-Parser\-Adapter.\-h\item 
+\-S\-V\-N\-Staffit\-To\-Me/\-Code/\-Staff\-It\-To\-Me/\-J\-S\-O\-N\-Classes/\-S\-B\-Json\-Stream\-Parser\-Adapter.\-h\item 
+\-S\-V\-N\-Staffit\-To\-Me/\-Code/stig-\/json-\/framework-\/9c7016a/\-Classes/\-S\-B\-Json\-Stream\-Parser\-Adapter.\-h\item 
+\-S\-V\-N\-Staffit\-To\-Me/ios/\-My\-Code/\-Staff\-It\-To\-Me/\-J\-S\-O\-N\-Classes/\-S\-B\-Json\-Stream\-Parser\-Adapter.\-h\item 
+\-S\-V\-N\-Staffit\-To\-Me/ios/\-Staff\-It\-To\-Me/\-J\-S\-O\-N\-Classes/\-S\-B\-Json\-Stream\-Parser\-Adapter.\-h\item 
+\-S\-V\-N\-Staffit\-To\-Me/ios/stig-\/json-\/framework-\/9c7016a/\-Classes/\-S\-B\-Json\-Stream\-Parser\-Adapter.\-h\end{DoxyCompactItemize}

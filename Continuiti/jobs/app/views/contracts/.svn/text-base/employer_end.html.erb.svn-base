@@ -1,0 +1,33 @@
+End contract
+
+<br />
+<br />
+<br />
+
+skills: <%= ratings_for @contract,@contract.user,:show_user_rating=>true, :dimension => :skills%>
+quality: <%= ratings_for @contract, @contract.user,:show_user_rating=>true, :dimension => :quality%>
+availability: <%= ratings_for @contract, @contract.user,:show_user_rating=>true, :dimension => :availability%>
+deadlines: <%= ratings_for @contract, @contract.user,:show_user_rating=>true, :dimension => :deadlines%>
+communication: <%= ratings_for @contract, @contract.user,:show_user_rating=>true, :dimension => :communication%>
+cooperation: <%= ratings_for @contract, @contract.user,:show_user_rating=>true, :dimension => :cooperation%>
+<!-- Score: -->      <%#= ratings_for @contract, :show_user_rating => true%>           <br />
+Contract: <%=@contract.title%>   <br />    <br />
+Contractor: <%=user_display_name(@contract.contractor) %>   <br />    <br />
+Start Date: <%=display_date_with_ago_words(@contract.start_datetime) %>   <br />    <br />
+End Date:   <%= @contract.end_datetime.nil? ? Date.today.strftime('%d %b, %Y') : display_date_with_ago_words(@contract.end_datetime)%>   <br /> <br />
+<% form_for(@contract) do |f| %>
+  <%= f.error_messages %>
+  <% @contract.feedback_type = 'employer' %>
+  <%=f.hidden_field :feedback_type%>
+  <p>
+    <%= f.label :end_employer_comment, "Comment" %>: <br />
+    <%= f.text_area :end_employer_comment, :rows=>6, :cols=>60 %>
+  </p>
+   <p>
+    <%= f.label :work_again_with_contractor , "I would work again with this contractor" %>:
+    Yes: <%= f.radio_button :work_again_with_contractor, true%> &nbsp; &nbsp; &nbsp; No: <%= f.radio_button :work_again_with_contractor, false%>
+  </p>
+  <p>
+    <%= f.submit 'Submit' %>
+  </p>
+<% end %>

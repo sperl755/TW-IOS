@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/182/jobs/trunk/vendor/plugins/paperclip
+END
+Appraisals
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/182/jobs/trunk/vendor/plugins/paperclip/Appraisals
+END
+Gemfile.lock
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/!svn/ver/182/jobs/trunk/vendor/plugins/paperclip/Gemfile.lock
+END
+paperclip.gemspec
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/!svn/ver/182/jobs/trunk/vendor/plugins/paperclip/paperclip.gemspec
+END
+LICENSE
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/182/jobs/trunk/vendor/plugins/paperclip/LICENSE
+END
+Rakefile
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/!svn/ver/182/jobs/trunk/vendor/plugins/paperclip/Rakefile
+END
+init.rb
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/182/jobs/trunk/vendor/plugins/paperclip/init.rb
+END
+Gemfile
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/182/jobs/trunk/vendor/plugins/paperclip/Gemfile
+END
+README.md
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/182/jobs/trunk/vendor/plugins/paperclip/README.md
+END

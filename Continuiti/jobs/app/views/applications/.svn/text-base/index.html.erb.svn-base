@@ -1,0 +1,25 @@
+<span class="heading">My Job Applications</span>
+                         <br><br><br>
+<span class="heading">Sent Job Applications(<%=@applications.count%>)</span>
+<br><br>
+<% if @applications.blank? %>
+    No sent job applications found.
+<% else %>
+<table width="100%">
+  <tr>
+    <th width="120px">Date</th>
+    <th>Job</th>
+    <th width="100px"></th>
+  </tr>
+
+<% @applications.each do |application| %>
+  <tr>
+    <td><%= application.created_at.strftime('%b %d')%></td>
+    <td><%= link_to application.job.title, {:controller=>:applications, :action=>:show,:id=>application.id} %></td>
+    <td><%#= APP_CONFIG['job_application_status'][application.status] %></td>
+  </tr>
+<% end %>
+</table>
+<br />
+<% end %>
+

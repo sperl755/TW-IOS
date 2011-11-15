@@ -1,0 +1,17 @@
+digraph G
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="SampleViewController",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$interface_sample_view_controller.html"];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="AuthenticationViewController",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$interface_authentication_view_controller.html"];
+  Node1 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="QueueViewController",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$interface_queue_view_controller.html"];
+  Node1 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="SynchronousViewController",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$interface_synchronous_view_controller.html"];
+  Node1 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="UploadViewController",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$interface_upload_view_controller.html"];
+  Node1 -> Node6 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 [label="WebPageViewController",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$interface_web_page_view_controller.html"];
+}

@@ -1,0 +1,41 @@
+<style>
+	.fieldWithErrors{
+		display: inline;
+	}
+</style>
+
+<div style="width:520px;padding: 40px 0 0 130px;">
+	<% form_for(@skill) do |f| %>
+  <%= f.error_messages %>
+
+  <!-- <p>
+    <%#= f.label :country %>:
+    <%#= f.collection_select :country, Country.find(:all, :order => "name"), :name,:name %>
+  </p> -->
+  <p>
+    <div style="float:left;width:150px;"><b><%= f.label :title %>:</b></div>
+     <div style="float: right; width:350px;"><%= f.text_field :title %></div>
+	 <div style="clear:both;"></div>
+  </p>
+  <p>
+    <div style="float:left;width:150px;"><b><%= f.label :description %>:</b></div>
+    <div style="float: right; width:350px;"><%= f.text_area :description %></div>
+	<div style="clear:both;"></div>
+  </p>
+  <p>
+    <div style="float:left;width:160px;"><b><%= f.label :from_date %>:</b></div>
+    <div style="float: right; width:350px;"><%= f.date_select :from_date %></div>
+	<div style="clear:both;"></div>
+  </p>
+  <p>
+    <div style="float:left;width:150px;"><b><%= f.label :until_date %>:</b></div>
+    <div style="float: right; width:350px;"><%= f.date_select :until_date %></div>
+	<div style="clear:both;"></div>
+  </p>
+  <p>
+    <div style="float:left;width:150px;vertical-align:top;" ></div>
+    <div style="float: right; width:350px;"> <%= f.submit %> or <%= link_to 'Cancel', user_path(current_user) %></div>
+	<div style="clear:both;"></div>
+  </p>
+<% end %>
+</div>

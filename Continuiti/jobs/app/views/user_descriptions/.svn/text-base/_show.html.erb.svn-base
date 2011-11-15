@@ -1,0 +1,16 @@
+<%- if @my_user_description.blank? %>
+  <%- if current_user && current_user.id.eql?(@user.id) %>
+    Please add an about.
+  <%- else %>
+    No description
+  <%- end %>
+<%- else %>
+  <%- if current_user && current_user.id.eql?(@my_user_description.user_id) %>
+    <%= link_to_remote 'Edit', :url => edit_user_user_descriptions_path(current_user.id), :loading => "$('edit_and_remove_user_description_ajax_loader').show()", :success => "$('edit_and_remove_user_description_ajax_loader').hide()", :method => :get %>
+    <%= link_to_remote 'Remove', :url => user_user_descriptions_path(current_user.id), :loading => "$('edit_and_remove_user_description_ajax_loader').show()", :success => "$('edit_and_remove_user_description_ajax_loader').hide()", :confirm => 'Are you sure?', :method => :delete %>
+    <span id="edit_and_remove_user_description_ajax_loader" style="display: none"><%= image_tag "LoaderIcon.gif", :style => "width:15px" %></span>
+  <%- end %>
+  <br />
+  <%=h @my_user_description.description %>
+<%- end %>
+<br />

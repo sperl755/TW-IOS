@@ -1,0 +1,31 @@
+<h1>Listing jobs</h1>
+
+<table>
+  <tr>
+    <th>Jobtype</th>
+    <th>Job title</th>
+    <th>Task start date</th>
+    <th>Task end date</th>
+    <th>Action chosen</th>
+    <th>Make template</th>
+	<th colspan="3">Action</th>
+  </tr>
+
+<% @jobs.each do |job| %>
+  <tr>
+    <td><%=h job.jobtype.title if job.jobtype %></td>
+    <td><%=h job.title %></td>
+    <td><%=h job.task_start_date %></td>
+    <td><%=h job.task_end_date %></td>
+    <td><%=h job.action_chosen %></td>
+    <td><%=h job.make_template %></td>
+    <td><%= link_to 'Show', job %></td>
+    <td><%= link_to 'Edit', edit_job_path(job.title.parameterize.wrapped_string,job.id) %></td>
+    <td><%= link_to 'Destroy', job, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+<%= will_paginate @jobs %><br />
+<%= link_to 'New job', new_job_path %>

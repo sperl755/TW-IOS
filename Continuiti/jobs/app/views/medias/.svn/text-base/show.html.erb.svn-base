@@ -1,0 +1,16 @@
+<h2><%= @media.title %></h2>
+
+<p><%= link_to :download, @media.media.url %>
+
+<h3>Description</h3>
+<p>
+  <%= @media.description %>
+</p>
+
+<h3>Notes</h3>
+<p>
+  <%= @media.notes %>
+</p>
+
+<%= link_to 'Edit', edit_user_media_path(params[:user_id], @media) %> |
+<%= link_to 'Back', user_medias_path(params[:user_id]) %>

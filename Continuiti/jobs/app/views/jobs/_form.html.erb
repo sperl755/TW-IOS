@@ -1,0 +1,280 @@
+<%= javascript_include_tag "multifile" %>
+<%= calendar_date_select_includes %>
+<style>
+	.fieldWithErrors{
+		display: inline;
+	}
+</style>
+<% form_for(@job, :html => {:multipart => true}) do |f| %>
+  <%= f.error_messages %>
+  <%
+     if @job.jobtype_id.nil?
+        @job.jobtype_id = !params[:jobtype_id].blank? ? params[:jobtype_id] : 2
+     end
+  %>
+   <div style="display:none;">
+    <%#= f.label :jobtype_id %>:<br />
+    <%#= f.collection_select :jobtype_id, Jobtype.find_all_by_active(1),:id,:title, {:include_blank => 'Please select'}%>
+     <%=f.hidden_field :jobtype_id %>
+  </div>
+  <p>
+    <%= f.label :title %>:<br />
+    <%= f.text_field :title,{:title=>APP_CONFIG['job_title_default_text'],:onfocus=>"job_title_focus()",:onblur=>"job_title_blur()"} %>
+  </p>
+  <% if !@job.jobtype.title.include?("Staffing")%>
+  <p>
+    <%= f.label :category_id %>:<br />
+  <%#= f.collection_select :category_id, Category.categories('job_offering'), :id, :name, {:include_blank=>'Please select'} %>
+
+    <%= f.select :category_id, APP_CONFIG['job_categories'],{:include_blank=>"Please select"} %>
+  </p>
+   <% end %>
+    
+
+
+  <p>
+    <%= f.label :description, 'Provide details about what you need here' %>:<br />
+    <%= f.text_area :description,:rows=>8,:cols=>45,:title=>APP_CONFIG['job_detail_description_default_text'],:onfocus=>"job_detail_description_focus()",:onblur=>"job_detail_description_blur()" %>
+  </p>
+
+  <% if @job.jobtype.title.include?("Staffing")%>
+  <p>
+    <%= f.label :company_description, 'Company Description' %>:<br />
+    <%= f.text_area :company_description,:rows=>8,:cols=>45,:title=>APP_CONFIG['company_description_default_text'],:onfocus=>"company_description_focus()",:onblur=>"company_description_blur()" %>
+  </p>
+
+  <p>
+    <%= f.label :video, 'Related Video'%>(Embed link):<br />
+    <%= f.text_area :video,:rows=>4,:cols=>45 %>
+  </p>
+
+  <p>
+    <%= f.label :requirement_list %>:<br />
+    <%= f.text_area :requirement_list,:rows=>8,:cols=>45,:title=>APP_CONFIG['requirement_list_default_text'],:onfocus=>"requirement_list_focus()",:onblur=>"requirement_list_blur()" %>
+  </p>
+
+   <p>
+    <%= f.label :compensation %>:<br />
+    <%= f.text_field :compensation %>
+  </p>
+
+   <p>
+    <%= f.label :duration %>:<br />
+    <%= f.text_field :duration %>
+  </p>
+
+   <p>
+    <%= f.label :hours_per_week %>:<br />
+    <%= f.text_field :hours_per_week %>
+  </p>
+        <% @job.task_location_type_id = 2 %>
+        <%= f.hidden_field :task_location_type_id %>
+        <% select_location = @job.task_location_type_id ==2 ? true : false %>
+  <% else %>
+
+  <%
+  if @job.private_description.nil?
+    without_private_notes_display = "display:block"
+    with_private_notes_display = "display:none"
+  else
+    without_private_notes_display = "display:none"
+    with_private_notes_display = "display:block"
+  end
+%>
+  <p onclick="show_private_notes()" id="without_private_notes" style="<%=without_private_notes_display%>">
+    <%= image_tag 'right_arrow.gif'%> If there are private details that only the person working should know, enter them here:)
+  </p>
+  <p id="with_private_notes" style="<%=with_private_notes_display%>">
+    <span onclick="hide_private_notes()"><%= image_tag 'down_arrow.gif'%> <%= f.label :private_description, 'Add private notes' %></span><br />
+    <%= f.text_area :private_description,:rows=>8,:cols=>45,:title=>APP_CONFIG['job_detail_private_default_text'],:onfocus=>"job_detail_private_focus()",:onblur=>"job_detail_private_blur()" %>
+  </p>
+  <p>
+
+          Task location <br />
+    <% select_remote = @job.task_location_type_id ==1 || @job.task_location_type_id.nil? ? true : false %>
+    <% select_location = @job.task_location_type_id ==2 ? true : false %>
+          Remote: <%= f.radio_button :task_location_type_id, 1, {:checked=>select_remote,:onchange=>"select_location(this)"}  %> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+          Choose a location: <%= f.radio_button :task_location_type_id, 2, {:checked=>select_location,:onchange=>"select_location(this)"}  %>
+
+  <%#= f.select :task_location_type_id, Job::TASK_LOCATION_TYPES,{:include_blank=>"Please select"} %>
+  </p>
+
+   <% end %>
+    
+  <% display_location = select_location ? "display:block;" : "display:none;" %>
+  <div id="toggle_location" style="padding-bottom:25px;<%=display_location%>">
+    <div class="specify_address">Specify an address</div>
+
+    <div id="location">
+      <p>
+      <div id="select_address">
+      <%
+         pp job_locations = @job.locations
+         pp "KKKKKKKKKKKK"
+         @locations.each { |loc|
+            #if !job_locations.nil? && !job_locations.include?(loc)
+         pp loc
+         pp job_locations
+        %>
+              <%=check_box_tag "job[location_ids][]", loc.id, job_locations.include?(loc) %>  <%=loc.location_name+", "+loc.address1+", "+loc.city+", "+loc.state+", "+loc.country.name+", "+loc.zip+"<br>"%>
+
+       <%  # end
+          } %>
+                
+      <br /><br /><br />
+
+      </div>
+      <div id="locations">
+        <%#= render :partial => "location", :collection => @job.locations %>
+      </div>
+      </p>
+
+      <p>
+        <%= add_location_link %>
+      </p>
+    </div>
+  </div>
+
+<% if @job.jobtype.title.include?("Staffing")
+    @job.cost_method_id = CostMethod.hourly_method.id
+    %>
+   <%= f.hidden_field :cost_method_id%>
+   <p>
+    <%= f.label :task_on_date, 'Preferred Start Date' %>:<br />
+     <%= f.calendar_date_select :task_on_date, :time=>false, :popup => "force" %>
+  </p>
+
+        <p>
+          <%= f.label :staffing_position_type_id, 'Type' %>:<br />
+    <%= f.collection_select :staffing_position_type_id, StaffingPositionType.find_all_by_active(1),:id,:title, {:include_blank => 'Please select'}%>
+        </p>
+         <p>
+    <%= f.label :industry_id %>:<br />
+    <%= f.collection_select :industry_id, Industry.find_all_by_active(1), :id, :name, {:include_blank=>'Please select'}%>
+  </p>
+        <p>
+          <%= f.label :staffing_position_category_id, 'Function' %>:<br />
+    <%= f.collection_select :staffing_position_category_id, StaffingPositionCategory.find_all_by_active(1),:id,:title, {:include_blank => 'Please select'}%>
+        </p>
+<% else %>
+  <p>
+    <%= f.label :task_start_date, 'When should this task be started?' %><br />
+    <% task_duration_type_check = @job.task_duration_type.nil? || @job.task_duration_type  ? true : false%>
+    <% #task_start_on = @job.task_location_type_id ==2 ? true : false %>
+          <%= f.radio_button :task_duration_type, true, {:checked=>task_duration_type_check}  %> Between
+                 <%= f.calendar_date_select :task_start_date, :time=>false, :popup => "force" %> at
+    <%=f.time_select :task_start_time,{ :default => Time.now.change(:hour => 9), :simple_time_select => true,
+:minute_interval => 10, :time_separator => ""} %>
+    and
+    <%= f.calendar_date_select :task_end_date, :time=>false, :popup => "force" %> at
+    <%=f.time_select :task_end_time,{ :default => Time.now.change(:hour => 9), :simple_time_select => true,
+:minute_interval => 10, :time_separator => ""} %>
+
+    <br /><br />
+
+          <%= f.radio_button :task_duration_type, false, {:checked=>!task_duration_type_check}  %> Exactly on
+            <%= f.calendar_date_select :task_on_date, :time=>false, :popup => "force" %> at
+    <%=f.time_select :task_on_time,{ :default => Time.now.change(:hour => 9), :simple_time_select => true,
+:minute_interval => 10, :time_separator => ""} %>
+
+  </p>
+  
+
+  <p>
+    <%= f.label :cost_method_id, 'Offer a fixed price or pay hourly' %>:<br />
+  <%#= f.select :cost_method_id, Job::COST_METHOD_OF_SERVICE,{:include_blank=>"Please select"}, {:onchange => "#{remote_function(:url  => {:action => "update_form"}, :update => "form_partial_span", :with => "'cost_method='+$(job_cost_method_id).value")}"} %>
+    <%= f.collection_select :cost_method_id, CostMethod.find_all_by_active(1),:id,:title, {:include_blank => 'Please select'}, {:onchange => "#{remote_function(:url  => {:action => "update_form"}, :update => "form_partial_span", :with => "'cost_method='+$(job_cost_method_id).value")}"} %>
+  </p>
+
+  <span id="form_partial_span">
+    <% if @job && !@job.cost_method_id.blank? && @job.cost_method_id > 0%>
+      <%= render :partial=>'update_form'%>
+    <% end %>
+  </span>
+
+  <p>
+    <%= f.label :skills, 'Are any particular skills required?' %><br />
+    <%= f.text_area :skills,:rows=>8,:cols=>45 %>
+  </p>                                                                              
+
+  <p>
+    <%= f.label :vehicle, 'Is a vehicle or anything special required to perform your request?' %><br />
+  <%#= f.select :vehicle_id, Job::VEHICLES_AND_TRANSPORT, {:include_blank=>"Please select"}%>
+    <%= f.text_field :vehicle,{:title=>APP_CONFIG['job_vehicle_default_text'],:onfocus=>"job_vehicle_focus()",:onblur=>"job_vehicle_blur()"} %>
+  </p>
+
+  <!-- <p>
+  <%= f.label :action_chosen %>:<br />
+  <%= f.text_field :action_chosen %>
+  </p>
+  <p>
+    <%= f.label :make_template, 'Save as a task template' %>:<br />
+    <%= f.check_box :make_template %>
+  </p> -->
+   <% end %>
+
+
+
+
+  
+
+    <p>Attachments: (Max of <%= Job::Max_Attachments %> each under <%= Job::Max_Attachment_Size/1.megabyte%>MB)
+      <% if @job.user_files.count >= Job::Max_Attachments %>
+        <input id="newfile_data" type="file" disabled />
+      <% else %>
+        <input id="newfile_data" type="file" />
+      <% end %>
+      <div id="attachment_list"><ul id="pending_files"></ul></div>
+
+  </p>
+  <% if !@job.id.nil? && @job.user_files.size > 0 %>
+    <p><b>Attached Files:</b><div id="attachment_list"><%= render :partial => "user_files/attachment", :collection => @job.user_files %></div></p>
+  <% end %>
+
+      <script type="text/javascript">
+          var multi_selector = new MultiSelector($('pending_files'), <%= Job::Max_Attachments %>);
+          multi_selector.addElement($('newfile_data'));
+      </script>
+      
+  <p>
+    <% if @job.nil?%>
+      <%= f.submit 'Continue' %>
+    <% else %>
+      <%= f.submit 'Update' %>
+    <% end %>
+  </p>
+<% end %>
+<%= javascript_include_tag "jquery/jquery-1.5.1" %>
+<%= javascript_include_tag "jquery/jquery.ui.core" %>
+<%= javascript_include_tag "jquery/jquery.ui.widget" %>
+<%= javascript_include_tag "jquery/jquery.ui.accordion" %>
+
+<%= stylesheet_link_tag "jquery/jquery.ui.all" %>
+
+<script> 
+  jQuery.noConflict();
+  jQuery(function() {
+    jQuery( "#toggle_location" ).accordion({
+      header: 'div.specify_address',
+      collapsible: true
+      //autoheight: true,
+      //active: false
+    });
+    jQuery( "#location" ).height("")
+    jQuery('#remove_location_id').val('');
+  });
+	
+  //jQuery end
+	
+  var job_title_default_text = "<%= APP_CONFIG['job_title_default_text'] %>"
+  var job_detail_description_default_text = "<%= APP_CONFIG['job_detail_description_default_text'] %>"
+  var job_detail_private_default_text=	"<%=APP_CONFIG['job_detail_private_default_text']%>"
+  var company_description_default_text =   "<%=APP_CONFIG['company_description_default_text']%>"
+  var requirement_list_default_text =   "<%=APP_CONFIG['requirement_list_default_text']%>"
+  var job_category_personal = "<%=APP_CONFIG['job_category_personal']%>"
+  var job_category_small_business = "<%=APP_CONFIG['job_category_small_business']%>"
+  var job_category_corporate = "<%=APP_CONFIG['job_category_corporate']%>"
+  var job_vehicle_default_text = "<%=APP_CONFIG['job_vehicle_default_text']%>"
+
+</script>
+<%= javascript_include_tag "job"%>

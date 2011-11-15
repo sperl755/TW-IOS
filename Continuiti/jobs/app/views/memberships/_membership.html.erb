@@ -1,0 +1,26 @@
+<div class="membership">
+  <% new_or_existing = membership.new_record? ? 'new' : 'existing' %>
+  <% prefix = "user[#{new_or_existing}_membership_attributes][]" %>
+  <% fields_for prefix, membership do |membership_form| -%>
+    <p>
+    <div style="float:left;width:150px;"><b><%= membership_form.label :name %>:</b></div>
+    <div style="float: right; width:350px;"><%= membership_form.text_field :name %></div>
+    <div style="clear:both;"></div>
+  </p>
+  <p>
+  <div style="float:left;width:160px;"><b><%= membership_form.label :from_date, "From" %>:</b></div>
+  <div style="float: right; width:350px;"><%= membership_form.date_select :from_date %></div>
+  <div style="clear:both;"></div>
+  </p>
+  <p>
+  <div style="float:left;width:150px;"><b><%= membership_form.label :until_date, "Until" %>:</b></div>
+  <div style="float: right; width:350px;"><%= membership_form.date_select :until_date %></div>
+  <div style="clear:both;"></div>
+  </p>
+  <p>
+  <div style="float:left;width:150px;vertical-align:top;" ></div>
+  <div style="float: right; width:350px;"><%= link_to_function "remove" , "$(this).up('.membership').remove()" %></div>
+  <div style="clear:both;"></div>
+  </p>
+<% end -%>
+</div>

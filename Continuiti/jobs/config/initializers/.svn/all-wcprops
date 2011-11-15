@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/!svn/ver/195/jobs/trunk/config/initializers
+END
+authlogic_connect_config.rb
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/!svn/ver/195/jobs/trunk/config/initializers/authlogic_connect_config.rb
+END
+inflections.rb
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/!svn/ver/17/jobs/trunk/config/initializers/inflections.rb
+END
+session_store.rb
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/17/jobs/trunk/config/initializers/session_store.rb
+END
+backtrace_silencers.rb
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/!svn/ver/17/jobs/trunk/config/initializers/backtrace_silencers.rb
+END
+new_rails_defaults.rb
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/17/jobs/trunk/config/initializers/new_rails_defaults.rb
+END
+mime_types.rb
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/17/jobs/trunk/config/initializers/mime_types.rb
+END
+app_constants.rb
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/138/jobs/trunk/config/initializers/app_constants.rb
+END

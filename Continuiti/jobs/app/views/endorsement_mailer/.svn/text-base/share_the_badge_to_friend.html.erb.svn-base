@@ -1,0 +1,15 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+  <body>
+    <h1>Hi there</h1>
+    <p> You have got a badge from <%= @sender.name %>.
+      <br />
+      <br /><%= image_tag "default_badge/waze_big.png", :style => "width:70px" %>
+      <br /><%= @badge.name %>
+      <br/></p>
+    <p>Thanks and have a great day!</p>
+  </body>
+</html>

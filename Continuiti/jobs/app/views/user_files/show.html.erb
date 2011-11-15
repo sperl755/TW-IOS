@@ -1,0 +1,23 @@
+<p>
+  <b>Data file name:</b>
+  <%=h @asset.data_file_name %>
+</p>
+
+<p>
+  <b>Data content type:</b>
+  <%=h @asset.data_content_type %>
+</p>
+
+<p>
+  <b>Data file size:</b>
+  <%=h @asset.data_file_size %>
+</p>
+
+<p>
+  <b>Attachable:</b>
+  <%=h @asset.attachable %>
+</p>
+
+
+<%= link_to 'Edit', edit_asset_path(@asset) %> |
+<%= link_to 'Back', assets_path %>

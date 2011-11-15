@@ -1,0 +1,22 @@
+<b>What types of opportunities are you interested in?</b>
+<br />
+<br />
+<span id="error_message" style="color: red;display: none">Please select one or more selections</span>
+<%- form_remote_tag :url => user_opportunity_preferences_path(current_user.id), :loading => "$('create_opportunity_preferences_ajax_loader').show()", :success => "$('create_opportunity_preferences_ajax_loader').hide()" do %>
+  <div style="width: 800px">
+    <%- @opportunity_preferences.each_with_index do |opportunity_preference, index| %>
+      <div style="float: left;width: 300px">
+        <%= check_box_tag "opportunity_preference[#{opportunity_preference.id}]", opportunity_preference.id, true %> <%= opportunity_preference.name %>
+      </div>
+      <%- if ((index+1) % 2).zero? %>
+        <div class="clear"></div>
+      <%- end %>
+    <%- end %>
+  </div>
+  <%= submit_tag "Create" %> <span id="create_opportunity_preferences_ajax_loader" style="display:none;"><%= image_tag "LoaderIcon.gif", :style => "width:15px" %></span>
+<%- end %>
+<br />
+<%= link_to_remote('Cancel', :url => index_user_opportunity_preferences_path(current_user.id), :method => :get, :html => {:class=>"profile_link"}, :loading => "$('list_index_opportunity_preferences_ajax_loader').show()", :success => "$('list_index_opportunity_preferences_ajax_loader').hide()") %>
+<span id="list_index_opportunity_preferences_ajax_loader" style="display:none;">
+  <%= image_tag "LoaderIcon.gif", :style => "width:15px" %>
+</span>

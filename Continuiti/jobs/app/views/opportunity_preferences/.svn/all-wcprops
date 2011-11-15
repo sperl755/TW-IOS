@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/!svn/ver/305/jobs/trunk/app/views/opportunity_preferences
+END
+edit.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/!svn/ver/305/jobs/trunk/app/views/opportunity_preferences/edit.html.erb
+END
+new.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/!svn/ver/305/jobs/trunk/app/views/opportunity_preferences/new.html.erb
+END
+update.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/!svn/ver/305/jobs/trunk/app/views/opportunity_preferences/update.html.erb
+END
+create.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/!svn/ver/305/jobs/trunk/app/views/opportunity_preferences/create.html.erb
+END

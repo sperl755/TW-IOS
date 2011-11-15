@@ -1,0 +1,50 @@
+<%= stylesheet_link_tag 'company' %>
+<div id="company_page">
+   <% form_tag search_user_companies_path(current_user.id),:method=>:post  do %>
+    Search: <input type="text" name="searchterm" /><input type="submit" value="Search" />
+  <% end %>
+  
+  <h1>Listing companies</h1>
+ 
+<% unless params[:searchterm].blank? %>
+<h1>Search results for '<%= params[:searchterm] %>' (<%= @search.results.size %> results) </h1>
+<ul>
+  <% @search.each_hit_with_result do |hit, company| %>
+    <li>Title: <%= company.name -%>, ID: <%= company.id -%>, SearchScore: <%= hit.score %></li>
+  <% end %>
+  
+  <%=link_to 'All Companies', user_companies_url(current_user.id)%>
+</ul>
+<% else %>
+  <table>
+    <tr>
+      <th class="photo">Photo</th>
+      <th class="name_url">Name and Url</th>
+      <th class="description">Description</th>
+      <th class="description">Mission philosophy</th>
+      <th class="description">Core values</th>
+      <th class="description">What we look for</th>
+      <th class="company_page_name">Company page name</th>
+      <th class="manage">Manage</th>
+    </tr>
+
+    <% @companies.each do |company| %>
+      <tr>
+        <td class="photo"><%= image_tag company.company_photo_url(:thumb) %></td>
+        <td class="name_url"><%= company.name %><%="\n" %><%= company.company_url %></td>
+        <td class="description"><%= company.description %></td>
+        <td class="description"><%= company.mission_philosophy %></td>
+        <td class="description"><%= company.core_values %></td>
+        <td class="description"><%= company.what_we_look_for %></td>
+        <td class="company_page_name"><%= company.company_page_name %></td>
+        <td class="manage"><%= link_to 'Show', user_company_path(@user, company) %>
+          <br /><%= link_to 'Edit', edit_user_company_path(current_user, company) %>
+          <br /><%="\n" %><%= link_to 'Destroy', user_company_path(current_user, company), :confirm => 'Are you sure?', :method => :delete %></td>
+      </tr>
+    <% end %>
+  </table>
+<% end %>
+  <br />
+
+  <%= link_to 'New company', new_user_company_path(current_user) %>
+</div>

@@ -1,0 +1,78 @@
+
+\begin{DoxyItemize}
+\item \hyperlink{_installing_InstallingIOS}{\-Installing (i\-O\-S)}
+\item \hyperlink{_installing_InstallMacOSX}{\-Installing (\-Mac \-O\-S \-X)}
+\end{DoxyItemize}\hypertarget{_installing_InstallingIOS}{}\section{\-Installing (i\-O\-S)}\label{_installing_InstallingIOS}
+
+\begin{DoxyItemize}
+\item \-Add a {\ttfamily \-New \-Target}. \-Select {\ttfamily \-Cocoa \-Touch -\/$>$ \-Application}. \-Name it {\ttfamily \-Tests} (or something similar).
+\item \-Add the {\ttfamily \-G\-H\-Unit\-I\-O\-S.\-framework} to your project.
+\item \-Add the following frameworks to {\ttfamily \-Linked \-Libraries}\-:
+\begin{DoxyItemize}
+\item {\ttfamily \-G\-H\-Unit\-I\-O\-S.\-framework}
+\item {\ttfamily \-Core\-Graphics.\-framework}
+\item {\ttfamily \-Foundation.\-framework}
+\item {\ttfamily \-U\-I\-Kit.\-framework}
+\end{DoxyItemize}
+\item \-Under '\-Framework \-Search \-Paths' make sure the (parent) directory to \-G\-H\-Unit.\-framework is listed.
+\item \-Under '\-Other \-Linker \-Flags' in the {\ttfamily \-Tests} target, add {\ttfamily -\/\-Obj\-C} and {\ttfamily -\/all\-\_\-load}
+\item \-By default, the \-Tests-\/\-Info.\-plist file includes {\ttfamily \-Main\-Window} for {\ttfamily \-Main nib file base name}. \-You should clear this field.
+\item \-Add the \-G\-H\-Unit\-I\-O\-S\-Test\-Main.\-m (\href{http://github.com/gabriel/gh-unit/blob/master/Project-IPhone/GHUnitIOSTestMain.m}{\tt http\-://github.\-com/gabriel/gh-\/unit/blob/master/\-Project-\/\-I\-Phone/\-G\-H\-Unit\-I\-O\-S\-Test\-Main.\-m}) file into your project.
+\item (\-Optional) \-Create and and set a prefix header ({\ttfamily \-Tests\-\_\-\-Prefix.\-pch}) and add {\ttfamily \#import $<$\-G\-H\-Unit\-I\-O\-S/\-G\-H\-Unit.\-h$>$} to it, and then you won't have to include that import for every test.
+\item (\-Optional) \hyperlink{_command_line_Makefile}{\-Install \-Makefile}
+\item \hyperlink{_examples}{\-Create a test}
+\end{DoxyItemize}
+
+\-Now you can create a test (either by subclassing {\ttfamily \-Sen\-Test\-Case} or {\ttfamily \hyperlink{interface_g_h_test_case}{\-G\-H\-Test\-Case}}), adding it to your test target.\hypertarget{_installing_InstallMacOSX}{}\section{\-Installing (\-Mac O\-S X)}\label{_installing_InstallMacOSX}
+\-You can install it globally in /\-Library/\-Frameworks or with a little extra effort embed it with your project.\hypertarget{_installing_InstallLibraryFrameworks}{}\subsection{\-Installing in /\-Library/\-Frameworks}\label{_installing_InstallLibraryFrameworks}
+
+\begin{DoxyItemize}
+\item \-Copy {\ttfamily \-G\-H\-Unit.\-framework} to {\ttfamily /\-Library/\-Frameworks/}
+\item \-Add a {\ttfamily \-New \-Target}. \-Select {\ttfamily \-Cocoa -\/$>$ \-Application}. \-Name it {\ttfamily \-Tests} (or something similar).
+\item \-In the {\ttfamily \-Target '\-Tests' \-Info} window, {\ttfamily \-General} tab\-:
+\begin{DoxyItemize}
+\item \-Add a linked library, under {\ttfamily \-Mac \-O\-S \-X 10.\-X \-S\-D\-K} section, select {\ttfamily \-G\-H\-Unit.\-framework}
+\item \-If your main target is a library\-: \-Add a linked library, and select your main target.
+\item \-If your main target is an application, you will need to include these source files in the {\ttfamily \-Test} project manually.
+\item \-Add a direct dependency, and select your project. (\-This will cause your application or framework to build before the test target.)
+\end{DoxyItemize}
+\item \-Copy \-G\-H\-Unit\-Test\-Main.\-m (\href{http://github.com/gabriel/gh-unit/tree/master/Classes-MacOSX/GHUnitTestMain.m}{\tt http\-://github.\-com/gabriel/gh-\/unit/tree/master/\-Classes-\/\-Mac\-O\-S\-X/\-G\-H\-Unit\-Test\-Main.\-m}) into your project and include in the \-Test target.
+\item \-Now create a test (either by subclassing {\ttfamily \-Sen\-Test\-Case} or {\ttfamily \hyperlink{interface_g_h_test_case}{\-G\-H\-Test\-Case}}), adding it to your test target. (\-See example test case below.)
+\item \-By default, the \-Tests-\/\-Info.\-plist file includes {\ttfamily \-Main\-Window} for {\ttfamily \-Main nib file base name}. \-You should clear this field.
+\item (\-Optional) \hyperlink{_command_line_Makefile}{\-Install \-Makefile}
+\item \hyperlink{_examples}{\-Create a test}
+\end{DoxyItemize}\hypertarget{_installing_InstallProject}{}\subsection{\-Installing in your project}\label{_installing_InstallProject}
+
+\begin{DoxyItemize}
+\item \-Add a {\ttfamily \-New \-Target}. \-Select {\ttfamily \-Cocoa -\/$>$ \-Application}. \-Name it {\ttfamily \-Tests} (or something similar).
+\item \-In the \-Finder, copy {\ttfamily \-G\-H\-Unit.\-framework} to your project directory (maybe in \-My\-Project/\-Frameworks/.)
+\item \-In the {\ttfamily \-Tests} target, add the {\ttfamily \-G\-H\-Unit.\-framework} files (from \-My\-Project/\-Frameworks/). \-It should now be visible as a {\ttfamily \-Linked \-Framework} in the target.
+\item \-In the {\ttfamily \-Tests} target, under \-Build \-Settings, add {\ttfamily /../\-Frameworks} to {\ttfamily \-Runpath \-Search \-Paths} (\-Under \-All \-Configurations)
+\item \-In the {\ttfamily \-Tests} target, add {\ttfamily \-New \-Build \-Phase} $|$ {\ttfamily \-New \-Copy \-Files \-Build \-Phase}.
+\begin{DoxyItemize}
+\item \-Change the \-Destination to {\ttfamily \-Frameworks}.
+\item \-Drag {\ttfamily \-G\-H\-Unit.\-framework} into the the build phase
+\item \-Make sure the copy phase appears before any {\ttfamily \-Run \-Script} phases
+\end{DoxyItemize}
+\item \-Copy \-G\-H\-Unit\-Test\-Main.\-m (\href{http://github.com/gabriel/gh-unit/tree/master/Classes-MacOSX/GHUnitTestMain.m}{\tt http\-://github.\-com/gabriel/gh-\/unit/tree/master/\-Classes-\/\-Mac\-O\-S\-X/\-G\-H\-Unit\-Test\-Main.\-m}) into your project and include in the \-Test target.
+\end{DoxyItemize}
+
+
+\begin{DoxyItemize}
+\item \-If your main target is a library\-:
+\begin{DoxyItemize}
+\item \-In the {\ttfamily \-Target '\-Tests' \-Info} window, {\ttfamily \-General} tab\-:
+\begin{DoxyItemize}
+\item \-Add a linked library, and select your main target; \-This is so you can link your test target against your main target, and then you don't have to manually include source files in both targets.
+\end{DoxyItemize}
+\end{DoxyItemize}
+\item \-If your main target is an application, you will need to include these source files to the {\ttfamily \-Test} project manually.
+\end{DoxyItemize}
+
+
+\begin{DoxyItemize}
+\item \-Now create a test (either by subclassing {\ttfamily \-Sen\-Test\-Case} or {\ttfamily \hyperlink{interface_g_h_test_case}{\-G\-H\-Test\-Case}}), adding it to your test target. (\-See example test case below.)
+\item \-By default, the \-Tests-\/\-Info.\-plist file includes {\ttfamily \-Main\-Window} for {\ttfamily \-Main nib file base name}. \-You should clear this field.
+\item (\-Optional) \hyperlink{_command_line_Makefile}{\-Install \-Makefile}
+\item \hyperlink{_examples}{\-Create a test} 
+\end{DoxyItemize}

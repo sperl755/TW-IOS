@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/366/jobs/trunk/app/views/memberships
+END
+edit.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/256/jobs/trunk/app/views/memberships/edit.html.erb
+END
+_index.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/!svn/ver/366/jobs/trunk/app/views/memberships/_index.html.erb
+END
+index.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/256/jobs/trunk/app/views/memberships/index.html.erb
+END
+new.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/256/jobs/trunk/app/views/memberships/new.html.erb
+END
+_membership.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/!svn/ver/256/jobs/trunk/app/views/memberships/_membership.html.erb
+END
+show.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/256/jobs/trunk/app/views/memberships/show.html.erb
+END
+_form.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/359/jobs/trunk/app/views/memberships/_form.html.erb
+END
+_edit.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/359/jobs/trunk/app/views/memberships/_edit.html.erb
+END

@@ -1,0 +1,21 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  name: MyString
+  user: 
+
+two:
+  name: MyString
+  user: 
+
+# == Schema Information
+#
+# Table name: lists
+#
+#  id         :integer(4)      not null, primary key
+#  name       :string(255)
+#  user_id    :integer(4)
+#  created_at :datetime
+#  updated_at :datetime
+#
+

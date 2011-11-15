@@ -1,0 +1,10 @@
+page.hide "attachment_#{@user_file_id}"
+page.remove "attachment_#{@user_file_id}"
+
+# check that a newfile_data id exists
+page.select('newfile_data').each do |element|
+  page.assign 'multi_selector.max', @allowed
+  if @allowed < Job::Max_Attachments
+    page << "if ($('newfile_data').disabled) { $('newfile_data').disabled = false };"
+  end
+end

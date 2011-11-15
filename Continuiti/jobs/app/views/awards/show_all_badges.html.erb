@@ -1,0 +1,42 @@
+<h3 style="font-size:16px;border-bottom:1px solid #CCCCCC">Badges</h3>
+
+<style>
+  .fieldWithErrors{
+    display: inline;
+  }
+</style>
+
+<div style="width:520px;padding: 40px 0 0 130px;">
+  <%- row_count = (@badges.size / 5.to_f).ceil %>
+  <table>
+    <%- total_badges = @badges.size %>
+    <%- badges_counter = 1 %>
+    <%- 1..row_count.times do %>
+      <%- first_column_count_per_row = 1 %>
+      <tr>
+        <%- total_badges.times do |ind| %>
+          <%- if @badges[badges_counter - 1] and @my_badges.include?(@badges[badges_counter - 1].id) %>
+            <td align="center" valign="top">
+              <table>
+                <tr><td align="center"><%= image_tag @badges[badges_counter - 1].photo.url, :style => "width:70px" %></td></tr>
+                <tr><td align="center"><%= @badges[badges_counter - 1].name %></td></tr>
+              </table>
+            </td>
+          <%- elsif !@badges[badges_counter - 1].blank? %>
+            <td align="center" valign="top">
+              <table>
+                <tr><td align="center"><%= image_tag "default_badges/locked.gif", :style => "width:70px" %></td></tr>
+                <tr><td align="center"><%= @badges[badges_counter - 1].name %></td></tr>
+              </table>
+            </td>
+          <%- end %>
+          <%- badges_counter += 1 %>
+          <%- first_column_count_per_row += 1 %>
+          <%- if first_column_count_per_row.eql?(6) %>
+            <%- break %>
+          <%- end %>
+        <%- end %>
+      </tr>
+    <%- end %>
+  </table>
+</div>

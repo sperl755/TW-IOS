@@ -1,0 +1,22 @@
+<h1>Listing certifications</h1>
+
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Award date</th>
+  </tr>
+
+<% @certifications.each do |certification| %>
+  <tr>
+    <td><%=h certification.title %></td>
+    <td><%=h certification.award_date %></td>
+    <td><%= link_to 'Show', certification %></td>
+    <td><%= link_to 'Edit', edit_certification_path(certification) %></td>
+    <td><%= link_to 'Destroy', certification, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New certification', new_certification_path %>

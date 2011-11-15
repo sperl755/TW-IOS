@@ -1,0 +1,250 @@
+- @meta = { :description => "#{@user.login}'s profile on #{AppConfig.community_name}.", :keywords => "#{@user.login}, #{@user.tags.join(", ") unless @user.tags.nil?}", :robots => AppConfig.robots_meta_show_content }
+- @section = @user.eql?(current_user) ? 'my_profile' : 'users'
+- @sidebar_left = true
+
+
+- if @is_current_user and @user.vendor? and (@user.offerings.empty? or @user.description.nil? )
+  %p
+    ? Hey, you're a
+    = AppConfig.community_name
+    Pro! You should
+    = link_to :update_your_profile.l, edit_user_path(@user)
+    \! Add your skills, contact info and Web site.
+
+
+.yui-b
+  -box do 
+    = render :partial => 'profile_user_info_sidebar', :locals => {:user => @user}
+
+  - if @user.description
+    -box :id => "about_me" do
+      %h3
+        =:about_me.l
+      %p= @user.description
+
+  -box :class => 'alt', :id => 'friends' do
+    %h3
+      =:my_friends.l
+      = link_to "(#{@friend_count})", accepted_user_friendships_path(@user) if @friend_count > 5
+    %p
+      - if !@user.facebook_friends_count.nil? && @user.facebook_friends_count > 0
+        = "#{@user.login} has #{@user.facebook_friends_count} facebook friends.<br>"
+      = link_to "&raquo; #{:invite_a_friend.l :site => AppConfig.community_name}", invite_user_path(@user) if @is_current_user
+      %br= link_to "&raquo; #{:view_all_my_friend_requests.l} (#{@pending_friendships_count})", pending_user_friendships_path(@user) if @is_current_user
+    - @accepted_friendships.each do |user|
+      =render :partial => "users/sidebar_user", :locals => {:user => user}
+    -if @accepted_friendships.size > 4
+      %h6.all
+        =link_to :see_all.l, accepted_user_friendships_path(@user)
+  - unless @users_comments.empty?
+    -box :class => 'yui-g alt', :id => 'photo_comments' do
+      %h3=:my_recent_comments.l
+      - @users_comments.each do |comment|
+        %dl.vcard
+          %dt.photo
+            - if comment.recipient
+              = link_to image_tag(comment.recipient.avatar_photo_url(:thumb), :alt => "#{comment.recipient.login}", :width => '50', :height => '50'), commentable_url(comment)
+          %dd.fn
+            - if comment.commentable.eql?(comment.recipient)
+              %strong= :to.l + ": #{link_to comment.recipient.login, commentable_url(comment)}"
+            - else
+              %br
+              %strong= :on_commentable.l + ": #{link_to comment.commentable_name, commentable_url(comment)} (#{comment.commentable_type.l})"
+          %dd
+            %p= "\"#{truncate_words( comment.comment, 10, '...')}\""
+
+
+  - unless @photo_comments.empty?
+    -box :class => 'yui-g alt', :id => 'photo_comments' do
+      %h3=:photo_comments.l
+      - @photo_comments.each do |comment|
+        %dl.vcard
+          %dt.photo
+            = link_to(image_tag(comment.commentable.public_filename(:thumb), :width => '50', :height => '50'), user_photo_path(@user, comment.commentable))
+          %dd.fn= "#{comment.username}" + " " + :says.l + ":"
+          %dd
+            = truncate_words(comment.comment, 10)
+            %br
+            = link_to "&raquo; " + :view_comment.l, user_photo_path(@user, comment.commentable) + "#comment_#{comment.id}"
+
+#yui-main
+  .yui-b
+    /
+      - if @photos.empty? and @recent_posts.empty?
+        -box :class => "alt first_alt" do
+          %h3= :small_profile.l :user => @user.login
+
+    - unless @photos.empty?
+      -box :id => "photos" do
+        %h3=:my_photos.l
+        - @photos.each do |photo|
+          = link_to image_tag( photo.public_filename(:thumb), :class => "polaroid"), user_photo_path(@user, photo)
+
+        %h6.all.right= link_to :view_all_my_photos.l, user_photos_path(@user)
+        = "#{link_to(:add_a_photo.l, new_user_photo_path(@user))}" if @is_current_user
+
+    -# unless current_user.nil?
+    -box :id => "about_me" do
+      %h3
+        ="About"
+        - if current_user
+          %span{:style=>"padding-left:504px;"}
+            - if current_user && current_user.id.eql?(@user.id) && current_user.user_description.blank?
+              %span{:id => "add_new_user_description_ajax_loader", :style => "display:none;padding-left:546px;"}= image_tag "LoaderIcon.gif", :style => "width:15px"
+              %span{:id => "add_new_user_description_navigation"}= link_to_remote 'Add an about', :url => new_user_user_descriptions_path(current_user.id), :html => {:class=>"profile_link", :onclick => "$('add_new_user_description_ajax_loader').show()"}, :method => :get
+      #add_user_description_form
+      %span{:id => "user_description_index_container"}= render :partial => "user_descriptions/show"
+      %h3="Current Background and Expertise"
+      = render :partial => "users/current_background_summary"
+
+      %h3="Trust Factors"
+      = render :partial => "rating"
+
+      - if !@educations.blank? || (current_user && current_user.id.eql?(@user.id))
+        %h3
+          = Education
+          - if current_user
+            %span{:style=>"padding-left:450px;"}
+              - if current_user && current_user.id.eql?(@user.id)
+                %span{:id => "add_new_education_ajax_loader", :style => "display:none;padding-left:546px;"}= image_tag "LoaderIcon.gif", :style => "width:15px"
+                = link_to_remote 'Add a school', :url => new_education_path, :html => {:class=>"profile_link", :onclick => "$('add_new_education_ajax_loader').show()"}
+        #add_education_form
+        %span{:id => "education_index_container"}= render :partial => "educations/index"
+
+      =# render :partial => "lists/index"
+      - if !@experiences.blank? || (current_user && current_user.id.eql?(@user.id))
+        %h3
+          = Experience
+          - if current_user
+            %span{:style=>"padding-left:450px;"}
+              - if current_user && current_user.id.eql?(@user.id )
+                %span{:id => "add_new_experience_ajax_loader", :style => "display:none;padding-left:546px;"}= image_tag "LoaderIcon.gif", :style => "width:15px"
+                = link_to_remote 'Add a position', :url => new_experience_path, :html => {:class=>"profile_link", :onclick => "$('add_new_experience_ajax_loader').show()"}
+        #add_experience_form
+        %span{:id => "experience_index_container"}= render :partial => "experiences/index"
+      =# render :partial => "awards
+      - if !@skills.blank? || (current_user && current_user.id.eql?(@user.id))
+        %h3
+          = Skill
+          - if current_user
+            %span{:style=>"padding-left:530px;"}
+              - if current_user && current_user.id.eql?(@user.id)
+                %span{:id => "add_new_skill_ajax_loader", :style => "display:none;padding-left:558px;"}= image_tag "LoaderIcon.gif", :style => "width:15px"
+                = link_to_remote 'Add a skill', :url => new_user_skill_path, :html => {:class => "profile_link", :onclick => "$('add_new_skill_ajax_loader').show()"}
+        #add_skill_form
+        - if @skills.blank?
+          - if current_user
+            %span{:id => "skill_index_container"} Please add skill
+          - else
+            %span{:id => "skill_index_container"} No skill
+        - else
+          %span{:id => "skill_index_container"}= render :partial => "user_skills/index"
+      - if !@certifications.blank? || (current_user && current_user.id.eql?(@user.id))
+        %h3
+          = Certification
+          - if current_user
+            %span{:style=>"padding-left:403px;"}
+              - if current_user && current_user.id.eql?(@user.id)
+                %span{:id => "add_new_certification_ajax_loader", :style => "display:none;padding-left:511px;"}= image_tag "LoaderIcon.gif", :style => "width:15px"
+                = link_to_remote 'Add a certification', :url => new_certification_path, :html => {:class=>"profile_link", :onclick => "$('add_new_certification_ajax_loader').show()"}
+        #add_certification_form
+        - if @certifications.blank?
+          - if current_user
+            %span{:id => "certification_index_container"} Please add certification
+          - else
+            %span{:id => "certification_index_container"} No certification
+        - else
+          %span{:id => "certification_index_container"}= render :partial => "certifications/index"
+      - if !@interests.blank? || (current_user && current_user.id.eql?(@user.id))
+        %h3
+          = Interest
+          - if current_user
+            %span{:style=>"padding-left:476px;"}
+              - if current_user && current_user.id.eql?(@user.id)
+                %span{:id => "add_new_interest_ajax_loader", :style => "display:none;padding-left:541px;"}= image_tag "LoaderIcon.gif", :style => "width:15px"
+                = link_to_remote 'Add a interest', :url => new_interest_path, :html => {:class=>"profile_link", :onclick => "$('add_new_interest_ajax_loader').show()"}
+        #add_interest_form
+        - if @interests.blank?
+          - if current_user
+            %span{:id => "interest_index_container"} Please add interest
+          - else
+            %span{:id => "interest_index_container"} No interest
+        - else
+          %span{:id => "interest_index_container"}= render :partial => "interests/index"
+      - if !@interests.blank? || (current_user && current_user.id.eql?(@user.id))
+        %h3
+          = Membership
+          - if current_user
+            %span{:style=>"padding-left:428px;"}
+              - if current_user && current_user.id.eql?(@user.id)
+                %span{:id => "add_new_membership_ajax_loader", :style => "display:none;padding-left:521px;"}= image_tag "LoaderIcon.gif", :style => "width:15px"
+                = link_to_remote 'Add a membership', :url => new_membership_path, :html => {:class=>"profile_link", :onclick => "$('add_new_membership_ajax_loader').show()"}
+        #add_membership_form
+        - if @memberships.blank?
+          - if current_user
+            %span{:id => "membership_index_container"} Please add membership
+          - else
+            %span{:id => "membership_index_container"} No membership
+        - else
+          %span{:id => "membership_index_container"}= render :partial => "memberships/index"
+
+      - if !@endorsements.blank? || (current_user && current_user.id.eql?(@user.id))
+        %h3= "Endorsements (<span id='endorsement_counter'>#{@endorsements.size}</span>)"
+        ="85% of employers say a positive online reputation influences their hiring desicions.<br /><br />"
+        %span{:id => "endorsements_index_container"}= render :partial => "endorsements/my_endorsements"
+        - if current_user && current_user.id.eql?(@user.id)
+          = button_to "Get Endorsed", get_endorsement_endorsements_path, :method => :get
+
+    - unless @recent_posts.empty?
+      -box :id => "posts" do
+        %h3=:recent_blog_posts.l
+        = render :partial => 'posts/post', :collection => @recent_posts
+        %h6.right.all= link_to :view_my_blog.l, user_posts_path(@user)
+
+    - unless @clippings.empty?
+      -box :id => "clippings" do
+        %h3=:my_clippings.l
+        - @clippings.each do |clipping|
+          %a{"href"=>"#{h user_clipping_url(@user, clipping)}"}
+            %img.clipping.polaroid{"src"=>"#{h clipping.image_uri(:thumb)}", :width => '100', :height => '100'}
+        %h6.all.right= link_to :view_all_my_clippings.l, user_clippings_path(@user)
+    
+    - if !@my_badges.blank? || (current_user && current_user.id.eql?(@user.id))
+      .box
+        %h3="Badges"
+        = render :partial => "awards/my_last_five_badges"
+
+    - if !@my_opportunity_preferences.blank? || (current_user && current_user.id.eql?(@user.id))
+      .box
+        %h3="Opportunity Preferences"
+        %span{:id => "opportunity_preference_container"}= render :partial => "users/opportunity_preferences_list"
+
+    - if !@my_general_availabilities.blank? || (current_user && current_user.id.eql?(@user.id))
+      .box
+        %h3="General Availability"
+        %span{:id => "general_availability_container"}= render :partial => "general_availabilities/general_availability_list"
+
+    = render :partial => "user_addresses_show"
+	
+    /
+      -box :class => 'hfeed comments', :id => 'comments' do
+        %h3=:profile_comments.l
+        %h2=:add_your_comment.l
+        %p= render :partial => 'comments/comment_form', :locals => {:commentable => @user}
+        %a#newest_comment
+        = render :partial => 'comments/comment', :collection => @comments
+        %span#more_comments_links= more_user_comments_links
+
+
+=stylesheet_link_tag "jquery/jquery.tooltip"
+=javascript_include_tag "jquery/jquery-1.5.1"
+=javascript_include_tag "jquery/jquery.tooltip"
+
+:javascript
+  jQuery.noConflict();
+  jQuery("#rating_tooltip").tooltip({
+    bodyHandler: function() {
+      return jQuery("#avg_rating_tooltip").html();
+    },
+    showURL: false
+  });

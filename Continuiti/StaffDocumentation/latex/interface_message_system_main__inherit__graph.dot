@@ -1,0 +1,15 @@
+digraph G
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="MessageSystemMain",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled" fontcolor="black"];
+  Node2 -> Node1 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+  Node2 [label="\<InboxOrSentboxProtocol\>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$protocol_inbox_or_sentbox_protocol-p.html"];
+  Node3 -> Node1 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+  Node3 [label="\<ConversationSelectionProtocol\>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$protocol_conversation_selection_protocol-p.html"];
+  Node4 -> Node1 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+  Node4 [label="\<SentMessageProtocol\>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$protocol_sent_message_protocol-p.html"];
+  Node5 -> Node1 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+  Node5 [label="\<MessageDetailsControllerProtocol\>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$protocol_message_details_controller_protocol-p.html"];
+}

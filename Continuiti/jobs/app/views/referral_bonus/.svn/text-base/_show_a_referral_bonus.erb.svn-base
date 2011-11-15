@@ -1,0 +1,11 @@
+<%form_remote_for referral_bonus, :url => user_referral_bonu_path(current_user, referral_bonus), :method => :put do |f|%>
+  <ul id=<%= "referral_bonus_#{referral_bonus.id}" %>>
+    <li style="float:left; width: 100px;"><%=h referral_bonus.percent %></li>
+    <li style="float:left; width: 200px;"><%=h referral_bonus.maximum_per_user %></li>
+    <li style="float:left; width: 200px;"><%=h referral_bonus.maximum %></li>
+    <li style="float:left; width: 200px;"><%= link_to_function  "Edit" do |page|
+        page.replace_html "referral_bonus_#{referral_bonus.id}", :partial => 'edit_a_referral_bonus',  :locals => {:referral_bonus => referral_bonus, :f => f}
+      end%>
+    </li>
+  </ul>
+<% end %>

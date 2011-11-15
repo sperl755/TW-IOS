@@ -1,0 +1,224 @@
+TStaffItToMe
+v7
+r1
+cCheck dependencies
+
+N/Users/anthonysierra/Documents/Work/Continuiti/StaffItToMe/Art Assets/PNG Files/1Mile.png
+c000000004E09F10C0000000000000B4F
+t1309274380
+s2895
+
+N/Users/anthonysierra/Documents/Work/Continuiti/StaffItToMe/Art Assets/PNG Files/69MILE.png
+c000000004E09F1870000000000000C56
+t1309274503
+s3158
+
+N/Users/anthonysierra/Documents/Work/Continuiti/StaffItToMe/Art Assets/PNG Files/CheckOff.png
+c000000004E0114FF0000000000000C1F
+t1308693759
+s3103
+
+N/Users/anthonysierra/Documents/Work/Continuiti/StaffItToMe/Art Assets/PNG Files/CheckOn.png
+c000000004E0115470000000000000FD6
+t1308693831
+s4054
+
+N/Users/anthonysierra/Documents/Work/Continuiti/StaffItToMe/Art Assets/PNG Files/FacebookNormal.png
+c000000004DFBEFFE0000000000001789
+t1308356606
+s6025
+
+N/Users/anthonysierra/Documents/Work/Continuiti/StaffItToMe/Art Assets/PNG Files/FacebookPressed.png
+c000000004DFBF02C000000000000175D
+t1308356652
+s5981
+
+N/Users/anthonysierra/Documents/Work/Continuiti/StaffItToMe/Art Assets/PNG Files/LogoAndMessage.png
+c000000004DFB8B2A000000000000202B
+t1308330794
+s8235
+
+N/Users/anthonysierra/Documents/Work/Continuiti/StaffItToMe/Art Assets/PNG Files/SlideScreenBackground.png
+c000000004E049AA4000000000000BDE0
+t1308924580
+s48608
+
+N/Users/anthonysierra/Documents/Work/Continuiti/StaffItToMe/Art Assets/PNG Files/TwitterNormal.png
+c000000004E04DC910000000000001027
+t1308941457
+s4135
+
+N/Users/anthonysierra/Documents/Work/Continuiti/StaffItToMe/Art Assets/PNG Files/TwitterPressed.png
+c000000004E04DCD900000000000011AE
+t1308941529
+s4526
+
+N/Users/anthonysierra/Documents/Work/Continuiti/StaffItToMe/JSONFILE.json
+c000000004E1F710D000000000000112F
+t1310683405
+s4399
+
+N/Users/anthonysierra/Documents/Work/Continuiti/StaffItToMe/StaffItToMe/en.lproj/InfoPlist.strings
+c000000004DFAE109000000000000002D
+t1308287241
+s45
+
+N/Users/anthonysierra/Documents/Work/Continuiti/StaffItToMe/StaffItToMe/en.lproj/MainWindow.xib
+c000000004DFBECA40000000000002539
+t1308355748
+s9529
+
+N/Users/anthonysierra/Documents/Work/Continuiti/StaffItToMe/Twitter+OAuth/Libraries & Headers/jQueryInject.txt
+c000000004C0FA30400000000000007A0
+t1276093188
+s1952
+
+N/Users/anthonysierra/Documents/Work/Continuiti/StaffItToMe/Twitter+OAuth/Libraries & Headers/jQueryInjectLandscape.txt
+c000000004C0FA30400000000000007A0
+t1276093188
+s1952
+
+N/Users/anthonysierra/Documents/Work/Continuiti/StaffItToMe/Twitter+OAuth/SAOAuthTwitterEngine/twitter_load.png
+c000000004C0FA3040000000000009155
+t1276093188
+s37205
+
+N/Users/anthonysierra/Documents/Work/Continuiti/StaffItToMe/build/Debug/StaffItToMe.app
+t2
+s0
+
+N/Users/anthonysierra/Documents/Work/Continuiti/StaffItToMe/build/Debug/StaffItToMe.app/Contents/Info.plist
+t2
+s0
+
+N/Users/anthonysierra/Documents/Work/Continuiti/StaffItToMe/build/Debug/StaffItToMe.app/Contents/PkgInfo
+t2
+s0
+
+N/Users/anthonysierra/Documents/Work/Continuiti/StaffItToMe/build/Debug/StaffItToMe.app/Contents/Resources/1Mile.png
+t2
+s0
+
+N/Users/anthonysierra/Documents/Work/Continuiti/StaffItToMe/build/Debug/StaffItToMe.app/Contents/Resources/69MILE.png
+t2
+s0
+
+N/Users/anthonysierra/Documents/Work/Continuiti/StaffItToMe/build/Debug/StaffItToMe.app/Contents/Resources/CheckOff.png
+t2
+s0
+
+N/Users/anthonysierra/Documents/Work/Continuiti/StaffItToMe/build/Debug/StaffItToMe.app/Contents/Resources/CheckOn.png
+t2
+s0
+
+N/Users/anthonysierra/Documents/Work/Continuiti/StaffItToMe/build/Debug/StaffItToMe.app/Contents/Resources/FacebookNormal.png
+t2
+s0
+
+N/Users/anthonysierra/Documents/Work/Continuiti/StaffItToMe/build/Debug/StaffItToMe.app/Contents/Resources/FacebookPressed.png
+t2
+s0
+
+N/Users/anthonysierra/Documents/Work/Continuiti/StaffItToMe/build/Debug/StaffItToMe.app/Contents/Resources/JSONFILE.json
+t2
+s0
+
+N/Users/anthonysierra/Documents/Work/Continuiti/StaffItToMe/build/Debug/StaffItToMe.app/Contents/Resources/LogoAndMessage.png
+t2
+s0
+
+N/Users/anthonysierra/Documents/Work/Continuiti/StaffItToMe/build/Debug/StaffItToMe.app/Contents/Resources/SlideScreenBackground.png
+t2
+s0
+
+N/Users/anthonysierra/Documents/Work/Continuiti/StaffItToMe/build/Debug/StaffItToMe.app/Contents/Resources/TwitterNormal.png
+t2
+s0
+
+N/Users/anthonysierra/Documents/Work/Continuiti/StaffItToMe/build/Debug/StaffItToMe.app/Contents/Resources/TwitterPressed.png
+t2
+s0
+
+N/Users/anthonysierra/Documents/Work/Continuiti/StaffItToMe/build/Debug/StaffItToMe.app/Contents/Resources/en.lproj/InfoPlist.strings
+t2
+s0
+
+N/Users/anthonysierra/Documents/Work/Continuiti/StaffItToMe/build/Debug/StaffItToMe.app/Contents/Resources/en.lproj/MainWindow.nib
+t2
+s0
+
+N/Users/anthonysierra/Documents/Work/Continuiti/StaffItToMe/build/Debug/StaffItToMe.app/Contents/Resources/jQueryInject.txt
+t2
+s0
+
+N/Users/anthonysierra/Documents/Work/Continuiti/StaffItToMe/build/Debug/StaffItToMe.app/Contents/Resources/jQueryInjectLandscape.txt
+t2
+s0
+
+N/Users/anthonysierra/Documents/Work/Continuiti/StaffItToMe/build/Debug/StaffItToMe.app/Contents/Resources/twitter_load.png
+t2
+s0
+
+NStaffItToMe/StaffItToMe-Info.plist
+c000000004DFBC0900000000000000541
+t1308344464
+s1345
+
+CCheck dependencies
+r0
+lSLF07#2@18"Check dependencies332703106#332703106#0(63"[BEROR]error: There is no SDK with the name or path 'iphoneos'1(4@55"error: There is no SDK with the name or path 'iphoneos'332703106#18446744073709551615#0#0(1@0"0(0#1#0"32651522506817640#0"0#
+
+CCompileXIB /Users/anthonysierra/Documents/Work/Continuiti/StaffItToMe/StaffItToMe/en.lproj/MainWindow.xib
+r0
+
+CCopyStringsFile /Users/anthonysierra/Documents/Work/Continuiti/StaffItToMe/build/Debug/StaffItToMe.app/Contents/Resources/en.lproj/InfoPlist.strings StaffItToMe/en.lproj/InfoPlist.strings
+r0
+
+CCpResource build/Debug/StaffItToMe.app/Contents/Resources/1Mile.png "Art Assets/PNG Files/1Mile.png"
+r0
+
+CCpResource build/Debug/StaffItToMe.app/Contents/Resources/69MILE.png "Art Assets/PNG Files/69MILE.png"
+r0
+
+CCpResource build/Debug/StaffItToMe.app/Contents/Resources/CheckOff.png "Art Assets/PNG Files/CheckOff.png"
+r0
+
+CCpResource build/Debug/StaffItToMe.app/Contents/Resources/CheckOn.png "Art Assets/PNG Files/CheckOn.png"
+r0
+
+CCpResource build/Debug/StaffItToMe.app/Contents/Resources/FacebookNormal.png "Art Assets/PNG Files/FacebookNormal.png"
+r0
+
+CCpResource build/Debug/StaffItToMe.app/Contents/Resources/FacebookPressed.png "Art Assets/PNG Files/FacebookPressed.png"
+r0
+
+CCpResource build/Debug/StaffItToMe.app/Contents/Resources/JSONFILE.json JSONFILE.json
+r0
+
+CCpResource build/Debug/StaffItToMe.app/Contents/Resources/LogoAndMessage.png "Art Assets/PNG Files/LogoAndMessage.png"
+r0
+
+CCpResource build/Debug/StaffItToMe.app/Contents/Resources/SlideScreenBackground.png "Art Assets/PNG Files/SlideScreenBackground.png"
+r0
+
+CCpResource build/Debug/StaffItToMe.app/Contents/Resources/TwitterNormal.png "Art Assets/PNG Files/TwitterNormal.png"
+r0
+
+CCpResource build/Debug/StaffItToMe.app/Contents/Resources/TwitterPressed.png "Art Assets/PNG Files/TwitterPressed.png"
+r0
+
+CCpResource build/Debug/StaffItToMe.app/Contents/Resources/jQueryInject.txt "Twitter+OAuth/Libraries & Headers/jQueryInject.txt"
+r0
+
+CCpResource build/Debug/StaffItToMe.app/Contents/Resources/jQueryInjectLandscape.txt "Twitter+OAuth/Libraries & Headers/jQueryInjectLandscape.txt"
+r0
+
+CCpResource build/Debug/StaffItToMe.app/Contents/Resources/twitter_load.png Twitter+OAuth/SAOAuthTwitterEngine/twitter_load.png
+r0
+
+CProcessInfoPlistFile /Users/anthonysierra/Documents/Work/Continuiti/StaffItToMe/build/Debug/StaffItToMe.app/Contents/Info.plist StaffItToMe/StaffItToMe-Info.plist
+r0
+
+CTouch /Users/anthonysierra/Documents/Work/Continuiti/StaffItToMe/build/Debug/StaffItToMe.app
+r0
+

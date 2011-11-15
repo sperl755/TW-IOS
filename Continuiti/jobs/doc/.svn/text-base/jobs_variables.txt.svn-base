@@ -1,0 +1,20 @@
+Status:
+
+fields(column) name: status in jobs table
+
+0 Inactive
+1. open (default)
+2. assigned (a worker is chosen)
+3 filled
+4 in progress (the worker has started the job)
+5 completed (the worker has finished the job)
+6 cancelled (the job was cancelled by admin, or by buyer only if still in open or assigned status but not if in progress or completed)
+
+
+
+
+Visibility
+
+fields(column) name: visible_status in jobs table
+0: private (default)
+1: public

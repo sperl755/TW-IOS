@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/!svn/ver/297/jobs/trunk/app/views/contracts
+END
+index.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/272/jobs/trunk/app/views/contracts/index.html.erb
+END
+show.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/!svn/ver/297/jobs/trunk/app/views/contracts/show.html.erb
+END
+employer_end.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/!svn/ver/272/jobs/trunk/app/views/contracts/employer_end.html.erb
+END
+contractor_end.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/!svn/ver/272/jobs/trunk/app/views/contracts/contractor_end.html.erb
+END

@@ -1,0 +1,13 @@
+<h3>
+  <%= "You can pay any of the following users. For now all users are listed. We'll update soon to list only hired users of this job #{@job.title}" %>
+</h3>
+<% form_tag send_payments_to_users_job_path(@job) do %>
+  <% @users.each do |user| %>
+    <% if user != current_user %>
+      <%= check_box_tag "user[ids][]", user.id %>
+      <%= user.login %>
+      <br/>
+    <% end %>
+  <% end %>
+  <%= submit_tag "Pay" %>
+<% end %>

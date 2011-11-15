@@ -1,0 +1,29 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  job_id: 1
+  application_id: 1
+  paid_amount: 1.5
+  fees: 1.5
+  type: 
+
+two:
+  job_id: 1
+  application_id: 1
+  paid_amount: 1.5
+  fees: 1.5
+  type: 
+
+# == Schema Information
+#
+# Table name: bids
+#
+#  id             :integer(4)      not null, primary key
+#  job_id         :integer(4)
+#  application_id :integer(4)
+#  paid_amount    :float
+#  fees           :float
+#  created_at     :datetime
+#  updated_at     :datetime
+#
+

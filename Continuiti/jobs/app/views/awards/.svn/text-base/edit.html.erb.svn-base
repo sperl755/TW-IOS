@@ -1,0 +1,28 @@
+<h1>Editing award</h1>
+
+<% form_for(@award,:html => { :multipart => true }) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :level %><br />
+    <%= f.text_field :level %>
+  </p>
+  <p>
+    <%= f.label :description %><br />
+    <%= f.text_area :description %>
+  </p>
+  <p>
+    <%= f.label :award_type_id %><br />
+    <%= f.select :award_type_id, options_from_collection_for_select(@award_types, "id", "name"), :prompt => "Select the type" %>
+  </p>
+  <%= render :partial => 'form', :locals => { :f => f } %>  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @award %> |
+<%= link_to 'Back', awards_path %>

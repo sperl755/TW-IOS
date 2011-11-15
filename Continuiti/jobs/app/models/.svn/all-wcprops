@@ -1,0 +1,371 @@
+K 25
+svn:wc:ra_dav:version-url
+V 39
+/svn/!svn/ver/375/jobs/trunk/app/models
+END
+payment.rb
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/353/jobs/trunk/app/models/payment.rb
+END
+user_notifier.rb
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/!svn/ver/270/jobs/trunk/app/models/user_notifier.rb
+END
+experience_level.rb
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/90/jobs/trunk/app/models/experience_level.rb
+END
+background.rb
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/356/jobs/trunk/app/models/background.rb
+END
+company_follower.rb
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/64/jobs/trunk/app/models/company_follower.rb
+END
+company_photo.rb
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/!svn/ver/64/jobs/trunk/app/models/company_photo.rb
+END
+media.rb
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/svn/!svn/ver/94/jobs/trunk/app/models/media.rb
+END
+order_transaction.rb
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/176/jobs/trunk/app/models/order_transaction.rb
+END
+industry.rb
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/80/jobs/trunk/app/models/industry.rb
+END
+staffing_position_category.rb
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/177/jobs/trunk/app/models/staffing_position_category.rb
+END
+endorsement.rb
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/273/jobs/trunk/app/models/endorsement.rb
+END
+certification.rb
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/!svn/ver/357/jobs/trunk/app/models/certification.rb
+END
+experience.rb
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/345/jobs/trunk/app/models/experience.rb
+END
+cart.rb
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/svn/!svn/ver/176/jobs/trunk/app/models/cart.rb
+END
+task_location.rb
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/!svn/ver/157/jobs/trunk/app/models/task_location.rb
+END
+membership.rb
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/359/jobs/trunk/app/models/membership.rb
+END
+award_user.rb
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/66/jobs/trunk/app/models/award_user.rb
+END
+time_unit.rb
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/162/jobs/trunk/app/models/time_unit.rb
+END
+award.rb
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/!svn/ver/283/jobs/trunk/app/models/award.rb
+END
+experience_functional_area.rb
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/!svn/ver/90/jobs/trunk/app/models/experience_functional_area.rb
+END
+referral.rb
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/353/jobs/trunk/app/models/referral.rb
+END
+application.rb
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/368/jobs/trunk/app/models/application.rb
+END
+user_general_availability.rb
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/!svn/ver/375/jobs/trunk/app/models/user_general_availability.rb
+END
+user_transportation_access.rb
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/124/jobs/trunk/app/models/user_transportation_access.rb
+END
+general_availability.rb
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/328/jobs/trunk/app/models/general_availability.rb
+END
+cart_item.rb
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/176/jobs/trunk/app/models/cart_item.rb
+END
+cost_method.rb
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/186/jobs/trunk/app/models/cost_method.rb
+END
+list.rb
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svn/!svn/ver/66/jobs/trunk/app/models/list.rb
+END
+endorsement_mailer.rb
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/370/jobs/trunk/app/models/endorsement_mailer.rb
+END
+user_skill.rb
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/369/jobs/trunk/app/models/user_skill.rb
+END
+category.rb
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/80/jobs/trunk/app/models/category.rb
+END
+contract.rb
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/274/jobs/trunk/app/models/contract.rb
+END
+user_file.rb
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/183/jobs/trunk/app/models/user_file.rb
+END
+skill.rb
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/!svn/ver/369/jobs/trunk/app/models/skill.rb
+END
+user.rb
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/svn/!svn/ver/353/jobs/trunk/app/models/user.rb
+END
+vehicle.rb
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/!svn/ver/70/jobs/trunk/app/models/vehicle.rb
+END
+user_description.rb
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/309/jobs/trunk/app/models/user_description.rb
+END
+user_session.rb
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/!svn/ver/226/jobs/trunk/app/models/user_session.rb
+END
+user_work_type.rb
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/124/jobs/trunk/app/models/user_work_type.rb
+END
+invitation.rb
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/270/jobs/trunk/app/models/invitation.rb
+END
+message.rb
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/206/jobs/trunk/app/models/message.rb
+END
+staffing_position_type.rb
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/177/jobs/trunk/app/models/staffing_position_type.rb
+END
+list_item.rb
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/66/jobs/trunk/app/models/list_item.rb
+END
+degree.rb
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/!svn/ver/289/jobs/trunk/app/models/degree.rb
+END
+office.rb
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/!svn/ver/88/jobs/trunk/app/models/office.rb
+END
+rate.rb
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/svn/!svn/ver/297/jobs/trunk/app/models/rate.rb
+END
+interest.rb
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/347/jobs/trunk/app/models/interest.rb
+END
+bid.rb
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svn/!svn/ver/162/jobs/trunk/app/models/bid.rb
+END
+award_type.rb
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/285/jobs/trunk/app/models/award_type.rb
+END
+access_token.rb
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/!svn/ver/195/jobs/trunk/app/models/access_token.rb
+END
+country.rb
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/317/jobs/trunk/app/models/country.rb
+END
+company.rb
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/317/jobs/trunk/app/models/company.rb
+END
+location.rb
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/330/jobs/trunk/app/models/location.rb
+END
+referral_bonus.rb
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/353/jobs/trunk/app/models/referral_bonus.rb
+END
+user_opportunity_preference.rb
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/!svn/ver/375/jobs/trunk/app/models/user_opportunity_preference.rb
+END
+api.rb
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svn/!svn/ver/251/jobs/trunk/app/models/api.rb
+END
+job.rb
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svn/!svn/ver/353/jobs/trunk/app/models/job.rb
+END
+opportunity_preference.rb
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/296/jobs/trunk/app/models/opportunity_preference.rb
+END
+education.rb
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/344/jobs/trunk/app/models/education.rb
+END
+order.rb
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/!svn/ver/176/jobs/trunk/app/models/order.rb
+END
+jobtype.rb
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/!svn/ver/66/jobs/trunk/app/models/jobtype.rb
+END

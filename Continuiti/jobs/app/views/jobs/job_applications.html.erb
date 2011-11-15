@@ -1,0 +1,6 @@
+<span class="job_title"><%=h @job.title %></span>  &nbsp; &nbsp; &nbsp; &nbsp;
+
+(<%= APP_CONFIG['job_visible_status'][@job.visible_status].upcase%> - <%= link_to 'View/Edit', show_job_path(@job.title.parameterize.downcase.wrapped_string,@job.id) %>)
+
+<br /><br /><br />
+<%=render :partial =>"applications/application_list" %>

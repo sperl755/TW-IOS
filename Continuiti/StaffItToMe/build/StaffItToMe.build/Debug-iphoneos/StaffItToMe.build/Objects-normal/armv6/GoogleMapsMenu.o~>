@@ -1,0 +1,6 @@
+In file included from /Users/anthonysierra/Documents/Work/Continuiti/StaffItToMe/StaffItToMe/GMapMenuController.h:10,
+                 from /Users/anthonysierra/Documents/Work/Continuiti/StaffItToMe/StaffItToMe/JobSearchController.h:10,
+                 from /Users/anthonysierra/Documents/Work/Continuiti/StaffItToMe/StaffItToMe/StaffItToMeAppDelegate.h:15,
+                 from /Users/anthonysierra/Documents/Work/Continuiti/StaffItToMe/StaffItToMe/GoogleMapsMenu.h:12,
+                 from /Users/anthonysierra/Documents/Work/Continuiti/StaffItToMe/StaffItToMe/GoogleMapsMenu.m:9:
+/Users/anthonysierra/Documents/Work/Continuiti/StaffItToMe/StaffItToMe/Menu.h:17: error: expected specifier-qualifier-list before 'GoogleMapsMenu'

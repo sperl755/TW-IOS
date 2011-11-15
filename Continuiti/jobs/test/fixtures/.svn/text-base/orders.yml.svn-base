@@ -1,0 +1,15 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  cart_id: 1
+  ip_address: MyString
+  user_id: 1
+  card_type: MyString
+  card_expires_on: 2011-05-17
+
+two:
+  cart_id: 1
+  ip_address: MyString
+  user_id: 1
+  card_type: MyString
+  card_expires_on: 2011-05-17

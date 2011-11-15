@@ -1,0 +1,269 @@
+K 25
+svn:wc:ra_dav:version-url
+V 38
+/svn/!svn/ver/369/jobs/trunk/test/unit
+END
+experience_level_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/!svn/ver/90/jobs/trunk/test/unit/experience_level_test.rb
+END
+order_transaction_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/176/jobs/trunk/test/unit/order_transaction_test.rb
+END
+user_description_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/309/jobs/trunk/test/unit/user_description_test.rb
+END
+user_work_type_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/124/jobs/trunk/test/unit/user_work_type_test.rb
+END
+staffing_position_category_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/!svn/ver/186/jobs/trunk/test/unit/staffing_position_category_test.rb
+END
+useraddress_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/124/jobs/trunk/test/unit/useraddress_test.rb
+END
+list_item_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/!svn/ver/87/jobs/trunk/test/unit/list_item_test.rb
+END
+task_location_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/120/jobs/trunk/test/unit/task_location_test.rb
+END
+degree_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/142/jobs/trunk/test/unit/degree_test.rb
+END
+award_user_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/!svn/ver/87/jobs/trunk/test/unit/award_user_test.rb
+END
+interest_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/!svn/ver/257/jobs/trunk/test/unit/interest_test.rb
+END
+award_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/87/jobs/trunk/test/unit/award_test.rb
+END
+award_type_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/275/jobs/trunk/test/unit/award_type_test.rb
+END
+referral_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/!svn/ver/353/jobs/trunk/test/unit/referral_test.rb
+END
+country_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/87/jobs/trunk/test/unit/country_test.rb
+END
+user_transportation_access_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/!svn/ver/124/jobs/trunk/test/unit/user_transportation_access_test.rb
+END
+order_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/176/jobs/trunk/test/unit/order_test.rb
+END
+education_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/!svn/ver/156/jobs/trunk/test/unit/education_test.rb
+END
+endorsement_mailer_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/268/jobs/trunk/test/unit/endorsement_mailer_test.rb
+END
+user_skill_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/257/jobs/trunk/test/unit/user_skill_test.rb
+END
+payment_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/176/jobs/trunk/test/unit/payment_test.rb
+END
+skill_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/369/jobs/trunk/test/unit/skill_test.rb
+END
+users_award_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/34/jobs/trunk/test/unit/users_award_test.rb
+END
+certification_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/257/jobs/trunk/test/unit/certification_test.rb
+END
+endorsement_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/268/jobs/trunk/test/unit/endorsement_test.rb
+END
+invitation_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/270/jobs/trunk/test/unit/invitation_test.rb
+END
+staffing_position_type_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/186/jobs/trunk/test/unit/staffing_position_type_test.rb
+END
+experience_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/157/jobs/trunk/test/unit/experience_test.rb
+END
+cart_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/176/jobs/trunk/test/unit/cart_test.rb
+END
+membership_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/257/jobs/trunk/test/unit/membership_test.rb
+END
+bid_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/162/jobs/trunk/test/unit/bid_test.rb
+END
+experience_functional_area_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/!svn/ver/90/jobs/trunk/test/unit/experience_functional_area_test.rb
+END
+application_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/160/jobs/trunk/test/unit/application_test.rb
+END
+user_general_availability_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/!svn/ver/306/jobs/trunk/test/unit/user_general_availability_test.rb
+END
+user_location_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/124/jobs/trunk/test/unit/user_location_test.rb
+END
+general_availability_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/!svn/ver/306/jobs/trunk/test/unit/general_availability_test.rb
+END
+cart_item_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/!svn/ver/176/jobs/trunk/test/unit/cart_item_test.rb
+END
+referral_bonus_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/353/jobs/trunk/test/unit/referral_bonus_test.rb
+END
+location_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/!svn/ver/132/jobs/trunk/test/unit/location_test.rb
+END
+user_opportunity_preference_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/!svn/ver/296/jobs/trunk/test/unit/user_opportunity_preference_test.rb
+END
+opportunity_preference_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/296/jobs/trunk/test/unit/opportunity_preference_test.rb
+END
+job_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/158/jobs/trunk/test/unit/job_test.rb
+END
+list_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/87/jobs/trunk/test/unit/list_test.rb
+END
+jobtype_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/87/jobs/trunk/test/unit/jobtype_test.rb
+END

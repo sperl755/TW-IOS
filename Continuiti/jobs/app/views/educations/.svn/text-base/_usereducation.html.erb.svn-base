@@ -1,0 +1,13 @@
+<!--
+<% educations = Education.find(:all) %>
+<h3>Educations</h3>
+<% if educations.length == 0 %>
+Your Education is important particularly at the begining of your career. Enter in each of the individual stages of your education in the given fields. The entries will be listed in chronological order starting with the most recent one first.
+<% else %>
+	<% for education in educations %>
+	<h2><%= education.degree %>,</h2>
+	From: <%= education.from_month %>-<%= education.from_year %><br />To: <%= education.end_month %>-<%= education.end_year %><br />	
+	<%= education.major %>,<%= education.country %><br />
+	<% end %>
+<% end %>
+-->

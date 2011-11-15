@@ -1,0 +1,25 @@
+<%- interests = @interests || interests %>
+<%- i = 1 %>
+<%- interests.each_with_index do |interest, interest_index| %>
+
+  <b><%= interest.name %></b>
+  <% if current_user and current_user.id.eql?(interest.user_id) %>
+    <%= link_to_remote 'Edit', :url => edit_interest_path(interest), :loading => "$('edit_and_remove_interest_ajax_loader_#{interest_index}').show()", :success => "$('edit_and_remove_interest_ajax_loader_#{interest_index}').hide()", :method => :get %>
+    <%= link_to_remote 'Remove', :url => interest_path(interest), :loading => "$('edit_and_remove_interest_ajax_loader_#{interest_index}').show()", :success => "$('edit_and_remove_interest_ajax_loader_#{interest_index}').hide()", :confirm => 'Are you sure?', :method => :delete %>
+    <span id="edit_and_remove_interest_ajax_loader_<%= interest_index %>" style="display: none"><%= image_tag "LoaderIcon.gif", :style => "width:15px" %></span>
+  <% end %>
+  <br />
+
+  <%- if interests.size != i %>
+    <div style="padding-top: 5px;"></div>
+    <hr style="border: 1px dotted #cccccc; ">
+    <div style="padding-top: 10px;"></div>
+  <%- elsif current_user && current_user.interests.size != i %>
+    <div style="padding-top: 5px;"></div>
+    <hr style="border: 1px dotted #cccccc; ">
+    <div style="padding-top: 10px;"></div>
+  <%- end %>
+  <%- i = i + 1 %>
+<%- end %>
+
+<br />

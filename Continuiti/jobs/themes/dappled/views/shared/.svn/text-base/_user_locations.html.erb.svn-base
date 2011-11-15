@@ -1,0 +1,24 @@
+<div class="loc">
+	<div class="user_location" style="width:75%;float:left;">
+	  <% new_or_existing = user_location.new_record? ? 'new' : 'existing' %>
+	  <% prefix = "job[#{new_or_existing}_user_location_attributes][]" %>
+    <% user_location.country_id = 208 if user_location.new_record? %>
+	  <% fields_for prefix, user_location do |user_location_form| %>
+	    
+		<table width="100%">
+			<tr><td>Location Name:</td><td><%= user_location_form.text_field :address_name %></td></tr>
+			<tr><td>Contact: </td><td><%= user_location_form.text_field :contact_name %> </td></tr>
+			<tr><td>Phone: </td><td><%= user_location_form.text_field :phone %> </td></tr>
+			<tr><td> Address:</td><td><%= user_location_form.text_field :address1 %> </td></tr>
+			<tr><td> City: </td><td><%= user_location_form.text_field :city %> </td></tr>
+			<tr><td>State: </td><td>  <%= user_location_form.text_field :state %> </td></tr>
+			<tr><td>Zipcode: </td><td> <%= user_location_form.text_field :zipcode %></td></tr>
+			<tr><td>Country: </td><td><%= user_location_form.collection_select :country_id, Country.find(:all), :id, :name, {:include_blank=>'Please select'}%> </td></tr>
+		</table>
+	  <% end %>
+	</div>
+	<% user_location_id = user_location.id.nil? ? '' : user_location.id%>
+	<div style="width:25%;float:left;"><%#=link_to 'Remove', '#;', {:onclick=>"remove_fields(this, '#{user_location_id}')",:class=>"remove_link"}%> 
+	<%= link_to_function "remove" , "$(this).up('.loc').remove()", :class=>"remove_link" %> </div>
+	<div style="clear:both;"></div>
+</div>

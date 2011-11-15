@@ -1,0 +1,22 @@
+<h1>Listing interests</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>User</th>
+  </tr>
+
+<% @interests.each do |interest| %>
+  <tr>
+    <td><%=h interest.name %></td>
+    <td><%=h interest.user_id %></td>
+    <td><%= link_to 'Show', interest %></td>
+    <td><%= link_to 'Edit', edit_interest_path(interest) %></td>
+    <td><%= link_to 'Destroy', interest, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New interest', new_interest_path %>

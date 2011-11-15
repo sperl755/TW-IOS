@@ -1,0 +1,13 @@
+<h3>Opportunity Preferences</h3>
+<label for="opportunity_preferences">What types of opportunities are you interested in?</label>
+<div style="width: 800px">
+  <%- @opportunity_preferences.each_with_index do |opportunity_preference, index| %>
+    <div style="float: left;width: 300px">
+      <%= check_box_tag "opportunity_preference[#{opportunity_preference.id}]", opportunity_preference.id, (!params[:opportunity_preference].blank? and !params[:opportunity_preference]["#{opportunity_preference.id}"].blank? ? true : false) %> <%= opportunity_preference.name %>
+    </div>
+    <%- if ((index+1) % 2).zero? %>
+      <div class="clear"></div>
+    <%- end %>
+  <%- end %>
+</div>
+<div class="clear"></div>

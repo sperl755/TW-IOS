@@ -1,0 +1,45 @@
+<br><br>
+<table width="100%" cellpadding="3px" cellspacing="1px">
+ <% if @jobs.blank? %>
+       <tr><td height="60px" align="center">No matching records found.</td></tr>
+ <% else %>
+  <tr style="background-color:#CCCCCC;">
+    <td height="33px" style="border-right:1px solid #FFFFFF;">Job</td>
+    <td width="130px" style="border-right:1px solid #FFFFFF;">Applicants</td>
+    <td width="200px" style="border-right:1px solid #FFFFFF;">Active Candidates</td>
+    <td width="70px" style="border-right:1px solid #FFFFFF;">Visibility</td>
+    <td width="60px">Share</td>
+  </tr>
+  <%
+     i = 0
+     @jobs.each { |job|
+  i += 1
+     bgcol = i%2==0 ? "cornsilk" : "#FFFFFF"
+  %>
+  <tr style="background-color:<%=bgcol%>;">
+    <td height="33px" style="border-right:1px solid #FFFFFF;"><%=link_to job.title, show_job_url(job.title.parameterize.downcase.wrapped_string,job.id)%></td>
+    <td> <%=link_to (job.applications.count), job_applications_url(job.id,"applied")%> </td>
+    <td> <%=link_to (application_count(job.id,APP_CONFIG['job_application_status']["active"])), job_applications_url(job.id,"active")%> </td>
+    <td> <%=APP_CONFIG['job_visible_status'][job.visible_status].titleize%> </td>
+    <td>
+      <%# home_url = home_url.chomp!%>
+      <%=link_to (image_tag 'facebook-share.jpg'), "http://www.facebook.com/sharer/sharer.php?u="+application_url.chomp('/')+show_job_path(job.title.parameterize.wrapped_string,job.id),:class=>"share_facebook", :name=>"Share" %> </td>
+  </tr>
+
+  <%
+     }
+ end   #if @jobs.blank? 
+%>
+ </table>
+
+<script type="text/javascript">
+jQuery.noConflict();
+jQuery('.share_facebook').click(function() {
+    
+   jQuery('.share_facebook').popupWindow({
+     height:300, width:500, top:50, left:50
+   });
+     return false;
+});
+
+</script>

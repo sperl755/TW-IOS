@@ -1,0 +1,73 @@
+<style>
+  .fieldWithErrors{
+    display: inline;
+  }
+</style>
+
+<div style="width:520px;padding: 40px 0 0 100px;">
+  <% form_remote_for(@experience, :url => experience_path(@experience), :loading => "$('add_new_experience_form_process_ajax_loader').show()", :success => "$('add_new_experience_form_process_ajax_loader').hide()") do |f| %>
+    <p>
+    <div style="float:left;width:110px;"><b><%= f.label :company_name %>:</b></div>
+    <span id="experience_company_name_cant_be_blank_0" style="display: none"><div style="float: right; width:390px; color: red">Company name can't be blank</div></span>
+    <div style="float: right; width:390px;"><%= f.text_field :company_name, :id => "experience_0_company_name",
+        :onchange => "validateFieldCantBeBlank('experience_0_company_name', 'experience_company_name_cant_be_blank_0')" %></div>
+    <div style="clear:both;"></div>
+  </p>
+  <p>
+  <div style="float:left;width:110px;"><b><%= f.label :company_url %>:</b></div>
+  <span id="experience_company_url_not_valid_0" style="display: none"><div style="float: right; width:390px; color: red">You have entered an invalid link.</div></span>
+  <div style="float: right; width:390px;"><%= f.text_field :company_url, :id => "experience_0_company_url", :onchange => "validateURLAddress('experience_0_company_url', 'experience_company_url_not_valid_0')" %></div>
+  <div style="clear:both;"></div>
+  </p>
+  <p>
+  <div style="float:left;width:110px;"><b><%= f.label :title %>:</b></div>
+  <span id="experience_title_cant_be_blank_0" style="display: none"><div style="float: right; width:390px; color: red">Title can't be blank</div></span>
+  <div style="float: right; width:390px;"><%= f.text_field :title, :id => "experience_0_title",
+      :onchange => "validateFieldCantBeBlank('experience_0_title', 'experience_title_cant_be_blank_0')" %></div>
+  <div style="clear:both;"></div>
+  </p>
+
+  <p>
+  <div style="float:left;width:110px;display:inline;"><b>Time Period:</b></div>
+  <span id="experience_start_month_cant_be_blank_0" style="display: none"><div style="float:right;width:390px;color: red">Please select a start month.</div></span>
+  <span id="experience_end_month_cant_be_blank_0" style="display: none"><div style="float:right;width:390px;color: red">Please select an end month.</div></span>
+  <span id="experience_year_must_enter_after_1900_0" style="display: none"><div style="float:right;width:390px;color: red">Please enter a year after 1900.</div></span>
+  <span id="experience_end_year_must_enter_after_1900_0" style="display: none"><div style="float:right;width:390px;color: red">Please enter an end year after 1900.</div></span>
+  <span id="experience_end_year_must_greater_than_start_year_0" style="display: none"><div style="float:right;width:390px;color: red">End year must equal or greater than start year.</div></span>
+  <div style="float: right; width:390px;">
+    <%= f.check_box :current, :id => "experience_0_current",
+      :onclick => "toggleDatePresent(this.checked, 0)" %> I currently work here<br />
+    <%@experience.from_month = @experience.from_month.blank? ? nil : @experience.from_month.to_i%>
+    <%= select_month( @experience.from_month, {:field_name => :from_month, :prefix => "experience",:prompt=>"Select"}, {:onchange => "validateFieldCantBeBlank('experience_0_from_month', 'experience_start_month_cant_be_blank_0')"}) %>
+    <%= f.text_field :from_year, :size => 4, :maxlength => 4, :id => "experience_0_from_year",
+      :onchange => "validateBetweenFromAndEndYear('experience_0_from_year', 'experience_0_end_year', $('experience_0_current').checked, 'start year', 'experience_year_must_enter_after_1900_0', 'experience_end_year_must_greater_than_start_year_0', 'experience_end_year_must_enter_after_1900_0', 'experience_start_month_cant_be_blank_0', 'experience_end_month_cant_be_blank_0', 'experience_0_from_month', 'experience_0_end_month')" %>
+    to
+    <%
+    to_display = @experience.current.nil? || !@experience.current ? "display:inline; " : "display:none; "
+    to_current_display = @experience.current.nil? || !@experience.current ? "display:none; " : "display:inline; "
+  %>
+    <span id="to_0" style="<%=to_display%>">
+      <%@experience.end_month = @experience.end_month.blank? ? nil : @experience.end_month.to_i%>
+      <%=  select_month( @experience.end_month, {:field_name => :end_month, :prefix => "experience",:prompt=>"Select"}, {:onchange => "validateFieldCantBeBlank('experience_0_end_month', 'experience_end_month_cant_be_blank_0')"}) %>
+      <%= f.text_field :end_year, :size => 4, :maxlength => 4, :id => "experience_0_end_year",
+        :onchange => "validateBetweenFromAndEndYear('experience_0_from_year', 'experience_0_end_year', $('experience_0_current').checked, 'end year', 'experience_year_must_enter_after_1900_0', 'experience_end_year_must_greater_than_start_year_0', 'experience_end_year_must_enter_after_1900_0', 'experience_start_month_cant_be_blank_0', 'experience_end_month_cant_be_blank_0', 'experience_0_from_month', 'experience_0_end_month')" %>
+    </span>
+
+    <span id="to_current_0" style="<%=to_current_display%>">Present</span>
+  </div>
+  <div style="clear:both;"></div>
+  </p>
+
+  <p>
+  <div style="float:left;width:110px;vertical-align:top;" ><b><%= f.label :description %>:</b></div>
+  <div style="float: right; width:390px;"><%= f.text_area :description,:rows=>7,:cols=>55 %></div>
+  <div style="clear:both;"></div>
+  </p>
+  <p>
+  <div style="float:left;width:150px;vertical-align:top;" ></div>
+  <div style="float:right;width:350px;"><%= submit_tag "Update", :onclick => "window.experienceFormIndex = 0;return validateAllExperienceFields('after button click')" %> or <%= link_to_function 'Cancel', "$(\"add_experience_form\").innerHTML = \"\"" %><span id="add_new_experience_form_process_ajax_loader" style="display: none"><%= image_tag "LoaderIcon.gif", :style => "width:15px" %></span></div>
+  <div style="clear:both;"></div>
+  </p>
+<% end %>
+</div>
+

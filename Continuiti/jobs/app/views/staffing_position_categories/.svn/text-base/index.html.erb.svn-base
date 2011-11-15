@@ -1,0 +1,22 @@
+<h1>Listing staffing_position_categories</h1>
+
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Active</th>
+  </tr>
+
+<% @staffing_position_categories.each do |staffing_position_category| %>
+  <tr>
+    <td><%=h staffing_position_category.title %></td>
+    <td><%=h staffing_position_category.active %></td>
+    <td><%= link_to 'Show', staffing_position_category %></td>
+    <td><%= link_to 'Edit', edit_staffing_position_category_path(staffing_position_category) %></td>
+    <td><%= link_to 'Destroy', staffing_position_category, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New staffing_position_category', new_staffing_position_category_path %>

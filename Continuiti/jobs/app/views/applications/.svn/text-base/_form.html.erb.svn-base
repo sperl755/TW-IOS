@@ -1,0 +1,89 @@
+<style>
+	.fieldWithErrors{
+		display: inline;
+	}
+</style>
+<%= calendar_date_select_includes %>
+
+<% form_for(@application, :html => { :multipart => true }) do |f| %>
+  <%#= f.error_messages %>
+    <%= error_messages_for :bid, :application %>
+  <%#= @bid.errors.full_messages %>
+    <%= f.hidden_field :job_id %>
+  <div style="padding:5px;">
+    <span style="font-weight:bold;font-size:25px;"><%=@job.title%></span> <br><br>
+    <%=@job.description%>  <br>
+  </div>
+
+Starting:  <%= f.calendar_date_select :start_date, :time=>false, :popup => "force" %> at
+    <%=f.time_select :start_time,{ :default => Time.now.change(:hour => 9), :simple_time_select => true,
+:minute_interval => 10, :time_separator => ""} %>
+
+  <% if !@job.fixed_cost_amount.nil? %>
+  <div style="vertical-align:top;width:550px;padding:5px;">
+   <div style="width:100px;float:left;">
+
+     Fixed Cost:</div>
+    <div style="float: right;width:450px;">
+      $ <%= f.text_field :fixed_cost_amount, :size=>7, :maxlength=>10 %>.00</div>
+    <div style="clear:both;"></div>
+  </div>
+  <% elsif !@job.hourly_rate.nil? %>
+    <div style="vertical-align:top;width:550px;padding:5px;">
+   <div style="width:100px;float:left;">
+
+     Hourly Rate:</div>
+    <div style="float: right;width:450px;">
+      $ <%= f.text_field :hourly_rate, :size=>7, :maxlength=>10 %>.00 / hour</div>
+    <div style="clear:both;"></div>
+  </div>
+  <% elsif !@job.annual_salary.nil? %>
+     <div style="vertical-align:top;width:550px;padding:5px;">
+   <div style="width:100px;float:left;">
+
+     Annual Salary:</div>
+    <div style="float: right;width:450px;">
+      $ <%= f.text_field :annual_salary, :size=>7, :maxlength=>10 %>.00</div>
+    <div style="clear:both;"></div>
+  </div>
+  <% end %>
+  <!-- <div style="vertical-align:top;width:550px;padding:5px;">
+   <div style="width:100px;float:left;"> Fees:</div>
+    <div style="float: right;width:450px;"> <span id="fees"></span> <%#= f.hidden_field :fees %></div>
+    <div style="clear:both;"></div>
+  </div>
+
+  <div style="vertical-align:top;width:550px;padding:5px;">
+   <div style="width:100px;float:left;"> Bill for buyer:</div>
+    <div style="float: right;width:450px;">  <span id="tot_payment"></span> <%#= f.text_field :total_payment %></div>
+    <div style="clear:both;"></div>
+  </div> -->
+
+    
+  <!-- <div style="vertical-align:top;width:550px;padding:5px;">
+   <div style="width:100px;float:left;"> <%#= f.label :cover_letter %>:</div>
+    <div style="float: right;width:450px;"> <%#= f.text_area :cover_letter, :rows=>8, :cols=>60 %></div>
+    <div style="clear:both;"></div>
+  </div>
+
+  <div style="width:550px;padding:5px;">
+   <div style="width:100px;float:left;">
+    Attach file:</div>
+    <div style="float: right;width:450px;"><%#= f.file_field :file %></div>
+    <div style="clear:both;"></div>
+  </div> -->
+
+   <div style="width:550px;padding:5px;">
+   <div style="width:100px;float:left;">Agree to terms:</div>
+     <div style="float: right;width:450px;"><%= f.check_box :terms_of_service %></div>
+    <div style="clear:both;"></div>
+  </div>
+
+  <div style="width:550px;padding:5px;">
+   <div style="width:100px;float:left;"> </div>
+     <div style="float: right;width:450px;"><%= f.submit 'Create' %></div>
+    <div style="clear:both;"></div>
+  </div>
+
+
+<% end %>

@@ -1,0 +1,52 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1038\cocoasubrtf350
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fnil\fcharset0 Menlo-Regular;\f2\froman\fcharset0 Times-Roman;
+}
+{\colortbl;\red255\green255\blue255;\red166\green23\blue0;\red51\green122\blue135;\red128\green18\blue178;
+}
+\margl1440\margr1440\vieww9000\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\ql\qnatural\pardirnatural
+
+\f0\fs24 \cf0 Document 1.1\
+Needed For iPhone App:\
+Logon Screen:\
+Way to send a NSString to preferably a URL on the Ruby server that takes in a username and a password and returns false for that person having an account and true if that person does have an account.\
+Also I believe we will need a way so the user can choose login with Facebook and\
+we on the iPhone app verify that this person has a Facebook and then we from the app send the username to the ruby server where the ruby server logs in the person.\
+\
+2)Menu\
+This requires a call where the iPhone sends a String such as view&apply and then not sure what criteria the search is based off of but then the ruby servers sends a xml file with a list of the jobs with title hours money times and distance. And I believe we will need a job id for when the user clicks more so that way we can simply access information about the job with an id. Not a hundred percent sure how the backing store works for this all. Also a list of keywords to search against would be nice however it is not necessary. here is a sample of how the xml file can be formatted.\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\ql\qnatural\pardirnatural
+
+\f1\fs22 \cf2 \CocoaLigature0 <?xml\cf0  \cf3 version\cf0  = \cf4 "1.0"\cf0 ?\cf2 >\cf0 \
+\cf2 <\cf0 jobs\cf2 >\cf0 \
+	\cf2 <\cf0 Job1\
+    name = \cf4 "Secretary"\cf0 \
+    hours =\cf4 "8 hours"\cf0  \
+    pay = \cf4 "$80"\cf0 \
+    starttime = \cf4 "8Am june 1"\cf0 \
+    distance = \cf4 "2 miles"\cf0 \
+	keywords = "secretary donuts coffee paper"\
+    \cf2 />\cf0 \
+\cf2 </\cf0 jobs\cf2 >\
+\
+As far as distance goes I am not sure whether it would be more beneficial for the site to calculate that based off an address entered previously during signup such as the persons residence or whether me doing the math on the iphone would be best. just instead of distance, I would need the latitude and longitude of the job.\
+**Revision iPhone and Android need to send the longitude and latitude to the server and then Ruby Server will return xml data based of those coordinates. --Reason: Longitude and Latitude are not available online.\
+\
+\cf0 And so it would be job1 job2 and so on.\
+3b) As for the job details I am thinking maybe I send you a job id or I search for that job with the specific criteria? I am not a hundred percent sure how you guys are saving jobs currently.\
+\
+Issues:\
+\pard\pardeftab720\ql\qnatural
+
+\f2\fs24 \cf0 \CocoaLigature1 So I have the app setup right now to where if you are using cellular connnectivity it tells you that it would be better to use wifi but the application will work. Here is my sentence for it "Warning" "You are currently connected via cellular connection. For best results it is recommended to switch to a wifi connection.". And then for no connectivity I notify them that there is no internet connection and that the app will not be able to work by saying this "Warning" "You are currently not connected to the internet this application will not be able to access account information.". First off should it have this ability and second off what would be replaced with the sentences I have. Those are placeholders they should be changed to whoever is doing the design.
+\f1\fs22 \CocoaLigature0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\ql\qnatural\pardirnatural
+\cf0 Questions:\
+What is the best way to query the data?\
+What mechanisms should I use to go through database. Raw data feeds or can I do it from the iPhone?\
+What is the best classes for JSON parsing and where can I get them?\
+Is the method I currently am using for communication with the ruby server a good way to go about this?\
+Do you know about twitter sign in and iPhone?\
+Would you recommend asynchronous or synchronous for google maps part and login?\
+What is your recommendation for the formatting of our xml file based off of what you have seen for the project?\
+Do you know about Facebook? If so how would I achieve the username from the Facebook object?}

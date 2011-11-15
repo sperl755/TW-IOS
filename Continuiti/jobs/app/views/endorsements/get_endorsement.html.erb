@@ -1,0 +1,32 @@
+<h3 style="font-size:16px;border-bottom:1px solid #CCCCCC">Get endorsement</h3>
+
+<style>
+  .fieldWithErrors{
+    display: inline;
+  }
+</style>
+
+<div style="width:520px;padding: 40px 0 0 130px;">
+  <% form_tag(send_invite_mail_endorsements_path) do %>
+  <p>
+    <div style="float:left;width:150px;"><b>Message's subject:</b></div>
+    <div style="float: right; width:350px;"><%= text_field_tag "message_subject", (params[:message_subject] || "Please endorse me") %></div>
+    <div style="clear:both;"></div>
+  </p>
+    <p>
+    <div style="float:left;width:150px;"><b>Message:</b></div>
+    <div style="float: right; width:350px;"><%= text_area_tag "message", (params[:message] || "I was hoping you would take a moment to endorse my work on Jobsite.  You can endorse my profession experience, skills, or write a few words about me.    Thanks in advance for your help,  #{current_user.name.titleize}"), :rows => 4, :cols => 40 %></div>
+    <div style="clear:both;"></div>
+  </p>
+  <p>
+  <div style="float:left;width:150px;"><b>Friend's Emails:</b></div>
+  <div style="float: right; width:350px;"><%= text_area_tag "email", params[:email], :rows => 4, :cols => 40 %></div>
+  <div style="clear:both;"></div>
+  </p>
+  <p>
+  <div style="float:left;width:150px;vertical-align:top;"></div>
+  <div style="float:right;width:350px;"><%= submit_tag "Create" %> or <%= link_to 'Cancel', user_path(current_user) %></div>
+  <div style="clear:both;"></div>
+  </p>
+<% end %>
+</div>

@@ -1,0 +1,37 @@
+<%= javascript_include_tag "jquery/jquery-1.5.1" %>
+<%= javascript_include_tag "jquery/jquery.ui.core" %>
+<%= javascript_include_tag "jquery/jquery.ui.widget" %>
+<%= javascript_include_tag "jquery/jquery.ui.accordion" %>
+
+<%= stylesheet_link_tag "jquery/jquery.ui.all" %>
+  <p>
+  	Task Location Type <br />
+  <% display_location = "display:block;" %>
+  <div id="toggle_location" style="padding-bottom:25px;<%=display_location%>">
+	<div class="specify_address">Specify an address</div>
+  <div id="location">
+  <p>
+    <div id="user_location">
+      <%= render :partial => "task_location", :collection => @user.user_locations %>
+    </div>
+  </p>
+
+  <p>
+    <%= add_task_location_link %>
+  </p>
+<script> 
+	jQuery.noConflict();
+		jQuery(function() {
+			jQuery( "#toggle_location" ).accordion({
+				header: 'div.specify_address', 
+				collapsible: true,
+				//autoheight: true,
+				//active: false 
+			});
+			jQuery( "#location" ).height("")
+			jQuery('#remove_location_id').val('');
+		});
+		
+	//jQuery end	
+</script>
+<%= javascript_include_tag "job"%>

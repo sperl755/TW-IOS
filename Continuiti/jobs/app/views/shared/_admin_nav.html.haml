@@ -1,0 +1,31 @@
+-box do
+  %h3=:admin.l
+
+  %ul.list
+    %li= link_to_unless_current :features.l, homepage_features_path
+    - if feature_enabled?('categories')
+      %li= link_to_unless_current :categories.l, categories_path
+    - if feature_enabled?('contests')
+      %li= link_to_unless_current :contests.l, contests_path
+    %li= link_to_unless_current :countries.l, countries_path
+    %li= link_to_unless_current :degrees.l, degrees_path
+    %li= link_to_unless_current :metro_areas.l, metro_areas_path
+    %li= link_to_unless_current :awards.l, awards_path
+    %li= link_to_unless_current :award_users.l, award_users_path
+    %li= link_to_unless_current "Award types", award_types_path
+    - if feature_enabled?('skills')
+      %li= link_to_unless_current :skills.l, new_skill_path 
+    - if feature_enabled?('events')
+      %li= link_to_unless_current :events.l, admin_events_path
+    %li= link_to_unless_current :statistics.l, statistics_path
+    %li= link_to_unless_current :ads.l, ads_path 
+    %li= link_to_unless_current :comments.l, admin_comments_path 
+    %li= link_to_unless_current :tags.l, admin_tags_path
+    %li= link_to_unless_current :admin_pages.l, admin_pages_path
+    %li= link_to_unless_current 'Jobs', jobs_path
+    %li= link_to_unless_current 'Job Types', jobtypes_path
+    %li= link_to_unless_current 'Industries', industries_path
+    %li= link_to_unless_current 'Time Units', time_units_path
+    %li= link_to_unless_current 'Cost Methods', cost_methods_path
+    %li= link_to_unless_current 'Vehicles on job', vehicles_path
+    %li= link_to_unless_current 'Referral Bonus System', user_referral_bonus_path(current_user)

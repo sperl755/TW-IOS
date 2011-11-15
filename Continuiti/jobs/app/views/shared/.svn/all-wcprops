@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/svn/!svn/ver/369/jobs/trunk/app/views/shared
+END
+_user_menu.html.haml
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/!svn/ver/255/jobs/trunk/app/views/shared/_user_menu.html.haml
+END
+_admin_nav.html.haml
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/!svn/ver/353/jobs/trunk/app/views/shared/_admin_nav.html.haml
+END
+_scripts_and_styles.html.haml
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/!svn/ver/369/jobs/trunk/app/views/shared/_scripts_and_styles.html.haml
+END

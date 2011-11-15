@@ -1,0 +1,49 @@
+<% 
+if @experiences.blank? %>
+  <%- if current_user %>
+    Please add position.
+  <%- else %>
+    No experience
+  <%- end %>
+<% else
+  i = 1
+  @experiences.each_with_index do |experience, exp_index|
+  %>
+    <b><%=h experience.title %></b>
+    <% if current_user && current_user.id.eql?(experience.user_id) %>
+      <%= link_to_remote 'Edit', :url => edit_experience_path(experience), :loading => "$('edit_and_remove_experience_ajax_loader_#{exp_index}').show()", :success => "$('edit_and_remove_experience_ajax_loader_#{exp_index}').hide()", :method => :get %>
+      <%= link_to_remote 'Remove', :url => experience_path(experience), :loading => "$('edit_and_remove_experience_ajax_loader_#{exp_index}').show()", :success => "$('edit_and_remove_experience_ajax_loader_#{exp_index}').hide()", :confirm => 'Are you sure?', :method => :delete %>
+      <span id="edit_and_remove_experience_ajax_loader_<%= exp_index %>" style="display: none"><%= image_tag "LoaderIcon.gif", :style => "width:15px" %></span>
+    <% end %>
+    <br />
+    <b><%=link_to experience.company_name, experience.company_url,{:target=>"_blank"}%></b>  <br />
+    <%=experience_duration(experience)%><br />
+
+    <% if !experience.description.blank? %>
+      <%=h experience.description %><br />
+    <% end %>
+
+    <% if !experience.industry.blank? %>
+      Industry: <%=h experience.industry %><br />
+    <% end %>
+
+    <% if !experience.city.blank? %>
+      City: <%=h experience.city %><br />
+    <% end %>
+
+    <% if @experiences.size != i%>
+      <div style="padding-top: 5px;"></div>
+      <hr style="border: 1px dotted #cccccc; ">
+      <div style="padding-top: 10px;"></div>
+    <%- elsif current_user && current_user.experiences.size != i %>
+      <div style="padding-top: 5px;"></div>
+      <hr style="border: 1px dotted #cccccc; ">
+      <div style="padding-top: 10px;"></div>
+    <% end
+    i = i + 1
+  end %>
+
+<% end %>
+<br />
+
+

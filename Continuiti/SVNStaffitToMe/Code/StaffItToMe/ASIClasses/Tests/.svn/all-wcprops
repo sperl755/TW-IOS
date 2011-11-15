@@ -1,0 +1,179 @@
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/220/ios/StaffItToMe/ASIClasses/Tests
+END
+PerformanceTests.m
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/220/ios/StaffItToMe/ASIClasses/Tests/PerformanceTests.m
+END
+ASIFormDataRequestTests.m
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/!svn/ver/220/ios/StaffItToMe/ASIClasses/Tests/ASIFormDataRequestTests.m
+END
+BlocksTests.h
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/220/ios/StaffItToMe/ASIClasses/Tests/BlocksTests.h
+END
+ASIWebPageRequestTests.h
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/!svn/ver/220/ios/StaffItToMe/ASIClasses/Tests/ASIWebPageRequestTests.h
+END
+ClientCertificateTests.h
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/!svn/ver/220/ios/StaffItToMe/ASIClasses/Tests/ClientCertificateTests.h
+END
+ProxyTests.h
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/220/ios/StaffItToMe/ASIClasses/Tests/ProxyTests.h
+END
+BlocksTests.m
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/220/ios/StaffItToMe/ASIClasses/Tests/BlocksTests.m
+END
+ASIDataCompressorTests.h
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/!svn/ver/220/ios/StaffItToMe/ASIClasses/Tests/ASIDataCompressorTests.h
+END
+StressTests.h
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/220/ios/StaffItToMe/ASIClasses/Tests/StressTests.h
+END
+ASITestCase.h
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/220/ios/StaffItToMe/ASIClasses/Tests/ASITestCase.h
+END
+ASIHTTPRequestTests.h
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/!svn/ver/220/ios/StaffItToMe/ASIClasses/Tests/ASIHTTPRequestTests.h
+END
+ASIWebPageRequestTests.m
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/!svn/ver/220/ios/StaffItToMe/ASIClasses/Tests/ASIWebPageRequestTests.m
+END
+GHUnitTestMain.m
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/!svn/ver/220/ios/StaffItToMe/ASIClasses/Tests/GHUnitTestMain.m
+END
+ClientCertificateTests.m
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/!svn/ver/220/ios/StaffItToMe/ASIClasses/Tests/ClientCertificateTests.m
+END
+ProxyTests.m
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/220/ios/StaffItToMe/ASIClasses/Tests/ProxyTests.m
+END
+ASIDownloadCacheTests.h
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/!svn/ver/220/ios/StaffItToMe/ASIClasses/Tests/ASIDownloadCacheTests.h
+END
+ASIDataCompressorTests.m
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/!svn/ver/220/ios/StaffItToMe/ASIClasses/Tests/ASIDataCompressorTests.m
+END
+StressTests.m
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/220/ios/StaffItToMe/ASIClasses/Tests/StressTests.m
+END
+ASITestCase.m
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/220/ios/StaffItToMe/ASIClasses/Tests/ASITestCase.m
+END
+ASIHTTPRequestTests.m
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/!svn/ver/220/ios/StaffItToMe/ASIClasses/Tests/ASIHTTPRequestTests.m
+END
+ASIS3RequestTests.h
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/!svn/ver/220/ios/StaffItToMe/ASIClasses/Tests/ASIS3RequestTests.h
+END
+ASINetworkQueueTests.h
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/!svn/ver/220/ios/StaffItToMe/ASIClasses/Tests/ASINetworkQueueTests.h
+END
+ASIDownloadCacheTests.m
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/!svn/ver/220/ios/StaffItToMe/ASIClasses/Tests/ASIDownloadCacheTests.m
+END
+ASICloudFilesRequestTests.h
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/!svn/ver/220/ios/StaffItToMe/ASIClasses/Tests/ASICloudFilesRequestTests.h
+END
+ASIS3RequestTests.m
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/!svn/ver/220/ios/StaffItToMe/ASIClasses/Tests/ASIS3RequestTests.m
+END
+ASINetworkQueueTests.m
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/!svn/ver/220/ios/StaffItToMe/ASIClasses/Tests/ASINetworkQueueTests.m
+END
+PerformanceTests.h
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/220/ios/StaffItToMe/ASIClasses/Tests/PerformanceTests.h
+END
+ASIFormDataRequestTests.h
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/!svn/ver/220/ios/StaffItToMe/ASIClasses/Tests/ASIFormDataRequestTests.h
+END
+ASICloudFilesRequestTests.m
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/!svn/ver/220/ios/StaffItToMe/ASIClasses/Tests/ASICloudFilesRequestTests.m
+END

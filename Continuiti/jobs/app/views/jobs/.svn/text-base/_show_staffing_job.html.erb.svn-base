@@ -1,0 +1,45 @@
+<h3 style="font-size:16px;border-bottom:1px solid #CCCCCC">Open Position</h3>
+
+<p>
+  <b><%=h @job.title %></b>
+</p>
+
+
+
+<p>
+  <% @loc = @job.task_locations
+         @loc.each { |loc|
+             %>
+           <%=loc.city+", "+loc.state+"<br>"%>
+               <%
+                  }
+               %>
+</p>
+
+<p><%=h @job.description %></p>
+<br>
+<%= @job.video %>
+
+
+<p><b>About Our Client</b> <br><br> <%=h @job.company_description %></p>
+<p><b>About You</b> <br><br> <%=h @job.requirement_list %></p>
+
+
+
+<p>
+<b> Important things</b> <br>
+  <b>Location:</b>
+  <% @loc = @job.task_locations
+         @loc.each { |loc|
+             %>
+           <%=loc.city+", "+loc.state+"<br>"%>
+               <%
+                  }
+               %>
+  <br>
+  <b>compensation:</b> <%=@job.compensation%>  <br>
+  <b>duration:</b> <%=@job.duration%>   <br>
+  <b>Hours Per Week:</b> <%=@job.hours_per_week%> <br>
+  <b>Type:</b> <%=@job.staffing_position_type.title%><br>
+  <b>Preferred start date:</b> <%=h @job.task_on_date.strftime('%b %d, %Y') %> <br>
+</p>

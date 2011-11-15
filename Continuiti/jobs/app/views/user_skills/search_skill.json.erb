@@ -1,0 +1,13 @@
+<%- suggestions = "[" %>
+<%- @suggested_skills.each_with_index do |val, index| %>
+  <%- unless index.eql?(@suggested_skills.size - 1) %>
+    <%- suggestions << "'#{val.name}'," %>
+  <%- else %>
+    <%- suggestions << "'#{val.name}'" %>
+  <%- end %>
+<%- end %>
+<%- suggestions << "]" %>
+{
+'query':'<%= params[:query] %>',
+'suggestions':<%= suggestions %>
+}

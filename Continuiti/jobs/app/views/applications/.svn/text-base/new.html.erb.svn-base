@@ -1,0 +1,5 @@
+<br />
+<h1>New application</h1>
+
+<br />
+<%=render :partial=>'form'%>

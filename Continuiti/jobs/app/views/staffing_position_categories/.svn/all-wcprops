@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/!svn/ver/177/jobs/trunk/app/views/staffing_position_categories
+END
+edit.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/!svn/ver/177/jobs/trunk/app/views/staffing_position_categories/edit.html.erb
+END
+index.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/!svn/ver/177/jobs/trunk/app/views/staffing_position_categories/index.html.erb
+END
+new.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/!svn/ver/177/jobs/trunk/app/views/staffing_position_categories/new.html.erb
+END
+show.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/!svn/ver/177/jobs/trunk/app/views/staffing_position_categories/show.html.erb
+END

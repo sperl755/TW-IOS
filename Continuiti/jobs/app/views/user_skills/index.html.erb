@@ -1,0 +1,28 @@
+<h1>Listing user_skills</h1>
+
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Description</th>
+    <th>From date</th>
+    <th>Until date</th>
+    <th>User</th>
+  </tr>
+
+<% @user_skills.each do |user_skill| %>
+  <tr>
+    <td><%=h user_skill.title %></td>
+    <td><%=h user_skill.description %></td>
+    <td><%=h user_skill.from_date %></td>
+    <td><%=h user_skill.until_date %></td>
+    <td><%=h user_skill.user_id %></td>
+    <td><%= link_to 'Show', user_skill %></td>
+    <td><%= link_to 'Edit', edit_user_skill_path(user_skill) %></td>
+    <td><%= link_to 'Destroy', user_skill, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New user_skill', new_user_skill_path %>

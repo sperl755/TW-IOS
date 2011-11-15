@@ -1,0 +1,26 @@
+<b>When do you have time available for work requests?</b>
+<br />
+<br />
+<span id="error_message" style="color: red;display: none">Please select one or more selections</span>
+<span id="new_custom_availability_form_container"></span>
+<span id="nav_new_custom_availability"><%= link_to_remote('New custom availability', :url => new_custom_availability_general_availabilities_path, :method => :get, :html => {:class=>"profile_link"}, :loading => "$('new_custom_availability_ajax_loader').show()", :success => "$('new_custom_availability_ajax_loader').hide()") %></span>
+<span id="new_custom_availability_ajax_loader" style="display:none;"><%= image_tag "LoaderIcon.gif", :style => "width:15px" %></span>
+<%- form_remote_tag :url => general_availabilities_path, :loading => "$('create_general_availability_ajax_loader').show()", :success => "$('create_general_availability_ajax_loader').hide()" do %>
+  <div style="width: 800px" id="general_availability_form_container">
+    <%- @general_availabilities.each_with_index do |general_availability, index| %>
+      <div style="float: left;width: 300px">
+        <%= check_box_tag "general_availability[#{general_availability.id}]", general_availability.id, true %> <%= general_availability.name %>
+      </div>
+      <%- if ((index+1) % 2).zero? %>
+        <div class="clear"></div>
+      <%- end %>
+    <%- end %>
+  </div>
+  <div class="clear"></div>
+  <%= submit_tag "Create" %> <span id="create_general_availability_ajax_loader" style="display:none;"><%= image_tag "LoaderIcon.gif", :style => "width:15px" %></span>
+<%- end %>
+<br />
+<%= link_to_remote('Cancel', :url => index_general_availabilities_path, :method => :get, :html => {:class=>"profile_link"}, :loading => "$('list_index_general_availability_ajax_loader').show()", :success => "$('list_index_general_availability_ajax_loader').hide()") %>
+<span id="list_index_general_availability_ajax_loader" style="display:none;">
+  <%= image_tag "LoaderIcon.gif", :style => "width:15px" %>
+</span>

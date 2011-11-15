@@ -1,0 +1,8 @@
+<div id="custom_availability_cant_blank" style="color: red;display: none">Name can't be blank</div>
+<div id="custom_availability_name_has_been_taken" style="color: red;display: none">Name has been taken</div>
+<%- form_remote_tag :url => save_new_custom_availability_general_availabilities_path, :loading => "$('create_custom_general_availability_ajax_loader').show()", :success => "$('create_custom_general_availability_ajax_loader').hide()" do %>
+  <%= hidden_field_tag "user_id", current_user.id %>
+  <%= text_field_tag "custom_general_availability", params[:custom_general_availability], :onchange => "validateFieldCantBeBlank('custom_general_availability', 'custom_availability_cant_blank')" %> <%= submit_tag "Create" %> <span id="create_custom_general_availability_ajax_loader" style="display:none;"><%= image_tag "LoaderIcon.gif", :style => "width:15px" %></span>
+<%- end %>
+<%= link_to_function 'Cancel', "$(\"new_custom_availability_form_container\").innerHTML = \"\";$('nav_new_custom_availability').show()" %>
+<br />

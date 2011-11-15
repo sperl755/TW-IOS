@@ -1,0 +1,24 @@
+<h1>Listing awards</h1>
+
+<table>
+  <tr>
+    <th>Image</th>
+    <th>Details</th>
+  </tr>
+
+<% @awards.each do |award| %>
+  <tr>
+	<td><%= image_tag award.photo.url(:small) %></td>
+    <td>Award Name:<%=h award.name %><br />
+    Award Level:<%=h award.level %><br />
+    Award Description:<%=h award.description %></td>
+    <td><%= link_to 'Show', award %></td>
+    <td><%= link_to 'Edit', edit_award_path(award) %></td>
+    <td><%= link_to 'Destroy', award, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New award', new_award_path %>

@@ -1,0 +1,50 @@
+<h1>Listing experiences</h1>
+
+<table>
+  <tr>
+    <th>Company</th>
+    <th>Company url</th>
+    <th>Industry</th>
+    <th>Functional area</th>
+    <th>Country</th>
+    <th>City</th>
+    <th>Title</th>
+    <th>Career level</th>
+    <th>From month</th>
+    <th>From year</th>
+    <th>End month</th>
+    <th>End year</th>
+    <th>Current</th>
+    <th>Description</th>
+    <th>From date</th>
+    <th>End date</th>
+  </tr>
+
+<% @experiences.each do |experience| %>
+  <tr>
+    <td><%=h experience.company %></td>
+    <td><%=h experience.company_url %></td>
+    <td><%=h experience.industry %></td>
+    <td><%=h experience.functional_area %></td>
+    <td><%=h experience.country %></td>
+    <td><%=h experience.city %></td>
+    <td><%=h experience.title %></td>
+    <td><%=h experience.career_level %></td>
+    <td><%=h experience.from_month %></td>
+    <td><%=h experience.from_year %></td>
+    <td><%=h experience.end_month %></td>
+    <td><%=h experience.end_year %></td>
+    <td><%=h experience.current %></td>
+    <td><%=h experience.description %></td>
+    <td><%=h experience.from_date %></td>
+    <td><%=h experience.end_date %></td>
+    <td><%= link_to 'Show', experience %></td>
+    <td><%= link_to 'Edit', edit_experience_path(experience) %></td>
+    <td><%= link_to 'Destroy', experience, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New experience', new_experience_path %>

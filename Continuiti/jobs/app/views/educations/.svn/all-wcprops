@@ -1,0 +1,59 @@
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/!svn/ver/360/jobs/trunk/app/views/educations
+END
+edit.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/147/jobs/trunk/app/views/educations/edit.html.erb
+END
+_index.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/360/jobs/trunk/app/views/educations/_index.html.erb
+END
+index.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/34/jobs/trunk/app/views/educations/index.html.erb
+END
+_education.html,erb
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/!svn/ver/25/jobs/trunk/app/views/educations/_education.html,erb
+END
+_usereducation.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/!svn/ver/34/jobs/trunk/app/views/educations/_usereducation.html.erb
+END
+new.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/!svn/ver/147/jobs/trunk/app/views/educations/new.html.erb
+END
+show.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/!svn/ver/34/jobs/trunk/app/views/educations/show.html.erb
+END
+_form.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/352/jobs/trunk/app/views/educations/_form.html.erb
+END
+_edit.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/352/jobs/trunk/app/views/educations/_edit.html.erb
+END

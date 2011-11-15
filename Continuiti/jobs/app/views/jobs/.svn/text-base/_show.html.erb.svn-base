@@ -1,0 +1,44 @@
+<!-- <p>
+  <b>Job detail private:</b>
+<%=h @job.private_description %>
+</p>
+
+<p>
+  <b>Task start time date:</b>
+<%=h @job.task_start_date %>
+</p>
+
+<p>
+  <b>Task completed by time date:</b>
+<%=h @job.task_end_date %>
+</p>
+
+<p>
+  <b>Your time estimate:</b>
+<%=h @job.your_time_estimate %>
+</p>
+
+<p>
+  <b>Your cost estimate per hour:</b>
+<%=h @job.your_cost_estimate_per_hour %>
+</p>
+
+<p>
+  <b>Your estimated expense to do task:</b>
+<%=h @job.your_estimated_expense_to_do_task %>
+</p>
+
+<p>
+  <b>Total cost calculated:</b>
+<%=h @job.total_cost_calculated %>
+</p> -->
+
+<p>
+  <b>Vehicle required:</b>
+  <%=h @job.vehicle%>
+</p>
+
+<!-- <p>
+  <b>Action chosen:</b>
+<%#=h @job.action_chosen %>
+</p> -->

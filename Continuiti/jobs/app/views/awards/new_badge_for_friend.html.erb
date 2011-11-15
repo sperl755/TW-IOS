@@ -1,0 +1,23 @@
+<h3 style="font-size:16px;border-bottom:1px solid #CCCCCC">Share a badge to a friend</h3>
+
+<style>
+  .fieldWithErrors{
+    display: inline;
+  }
+</style>
+
+<div style="width:520px;padding: 40px 0 0 130px;">
+  <%- form_tag(share_badge_to_friend_awards_path) do %>
+    <%= hidden_field_tag "badge_id", params[:badge_id] %>
+    <table>
+      <tr>
+        <td><%= image_tag @selected_badge_for_friend.photo.url, :style => "width:140px" %></td>
+        <td>Share this badge with a friend or colleague<br /><%= text_area_tag "emails", nil, :rows => 5, :cols => 40 %></td>
+      </tr>
+      <tr>
+        <td colspan="2" align="right"><%= submit_tag "Share" %></td>
+      </tr>
+    </table>
+  <%- end %>
+  <%= link_to "Browse all shareable badges", show_all_available_badges_for_friend_awards_path %>
+</div>

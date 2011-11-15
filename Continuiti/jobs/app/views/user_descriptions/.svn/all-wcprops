@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/!svn/ver/374/jobs/trunk/app/views/user_descriptions
+END
+_show.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/!svn/ver/374/jobs/trunk/app/views/user_descriptions/_show.html.erb
+END
+_form.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/!svn/ver/309/jobs/trunk/app/views/user_descriptions/_form.html.erb
+END
+_edit.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/!svn/ver/309/jobs/trunk/app/views/user_descriptions/_edit.html.erb
+END

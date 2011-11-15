@@ -1,0 +1,22 @@
+<div class="certification">
+  <% new_or_existing = certification.new_record? ? 'new' : 'existing' %>
+  <% prefix = "user[#{new_or_existing}_certification_attributes][]" %>
+  <% fields_for prefix, certification do |certification_form| -%>
+    <p>
+    <div style="float:left;width:150px;"><b><%= certification_form.label :title %>:</b></div>
+    <div style="float: right; width:350px;"><%= certification_form.text_field :title %></div>
+    <div style="clear:both;"></div>
+  </p>
+  <p>
+  <div style="float:left;width:160px;"><b><%= certification_form.label :award_date %>:</b></div>
+  <div style="float: right; width:350px;"><%= certification_form.date_select :award_date %></div>
+  <div style="clear:both;"></div>
+  </p>
+  <p>
+  <div style="float:left;width:150px;vertical-align:top;" ></div>
+  <div style="float: right; width:350px;"><%= link_to_function "remove" , "$(this).up('.certification').remove()" %></div>
+  <div style="clear:both;"></div>
+  </p>
+<% end -%>
+</div>
+

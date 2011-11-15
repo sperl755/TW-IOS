@@ -1,0 +1,26 @@
+<%- memberships = @memberships || memberships %>
+<%- i = 1 %>
+<%- memberships.each_with_index do |membership, membership_index| %>
+
+  <b><%= membership.name %></b>
+  <% if current_user and current_user.id.eql?(membership.user_id) %>
+    <%= link_to_remote 'Edit', :url => edit_membership_path(membership), :loading => "$('edit_and_remove_membership_ajax_loader_#{membership_index}').show()", :success => "$('edit_and_remove_membership_ajax_loader_#{membership_index}').hide()", :method => :get %>
+    <%= link_to_remote 'Remove', :url => membership_path(membership), :loading => "$('edit_and_remove_membership_ajax_loader_#{membership_index}').show()", :success => "$('edit_and_remove_membership_ajax_loader_#{membership_index}').hide()", :confirm => 'Are you sure?', :method => :delete %>
+    <span id="edit_and_remove_membership_ajax_loader_<%= membership_index %>" style="display: none"><%= image_tag "LoaderIcon.gif", :style => "width:15px" %></span>
+  <% end %>
+  <br />
+  <%=h membership.from_date.strftime("%B %Y") %> to <%=h membership.until_date.strftime("%B %Y") %>
+
+  <%- if memberships.size != i %>
+    <div style="padding-top: 5px;"></div>
+    <hr style="border: 1px dotted #cccccc; ">
+    <div style="padding-top: 10px;"></div>
+  <%- elsif current_user && current_user.memberships.size != i %>
+    <div style="padding-top: 5px;"></div>
+    <hr style="border: 1px dotted #cccccc; ">
+    <div style="padding-top: 10px;"></div>
+  <%- end %>
+  <%- i = i + 1 %>
+<%- end %>
+
+<br />

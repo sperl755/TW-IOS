@@ -1,0 +1,23 @@
+<p>
+  <span class="job_title"><%=h @job.title %></span> <br/>
+<% if !@job.jobtype.title.include?("Staffing")%>
+  <span class="specify_text"><%=@job.cost_method.title%></span>,
+  <% if @job.cost_method.title.include?('Fixed') %>
+    Est. Cost: $<%=@job.fixed_cost_amount%> USD
+  <% elsif @job.cost_method.title.include?('Hourly') %>
+    Est. Time: <%=@job.average_expected_time%> <%=time_unit=@job.time_unit.name%>, Est. Cost: $<%=@job.average_expected_cost%> USD
+  <% elsif @job.cost_method.title.include?('Custom') %>
+    Est. Time: <%=@job.average_expected_time%>, Est. Cost: $<%=@job.average_expected_cost%> USD
+  <% end %>
+  - Posted
+  <%
+  ago = distance_of_time_in_words(@job.created_at, Time.now, true)
+  if ago.blank?
+  %>
+    <%=@job.created_at.strftime('%m/%d/%Y')%>
+  <% else %>
+    <%=@job.created_at.strftime('%m/%d/%Y')+"("+ago+")"%>
+  <% end %>
+
+</p>
+  <% end %>

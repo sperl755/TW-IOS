@@ -1,0 +1,54 @@
+End contract
+
+<br />
+<br />
+<br />
+<% if params[:process_no] == "0" %>
+You are about to end the contract with <%=user_display_name(@contract.user)%> 
+During this process you will have the opportunity to rate this Employer.
+
+After the contract is ended,  <br /><br /><br />
+
+<ul>
+    <li>Your access to the company's Team Room, Bugzilla, and Message List will be disabled.<br /></li>
+    <li>You will no longer be able to log any time to your Work Diary<br /></li>
+    <li>You will no longer be able to modify your Work Diary - please be sure to verify the times before ending this contract<br /></li>
+    <li>the employer will be asked to provide feedback on this contract<br /></li>
+</ul>
+<br />
+Click <%= link_to "here", contractor_end_path(@contract.id,1) %> in order to continue with ending this contract. <br /><br />
+<% elsif params[:process_no] == "1" %>
+Job description matched actual work: <%= ratings_for @contract, @contract.contractor,:show_user_rating=>true, :dimension => :actual_work_matched%>
+Professionalism: <%= ratings_for @contract, @contract.contractor,:show_user_rating=>true, :dimension => :professionalism%>
+deadlines: <%= ratings_for @contract, @contract.contractor,:show_user_rating=>true, :dimension => :deadlines%>
+communication: <%= ratings_for @contract, @contract.contractor,:show_user_rating=>true, :dimension => :communication%>
+cooperation: <%= ratings_for @contract, @contract.contractor,:show_user_rating=>true, :dimension => :cooperation%>
+  
+    <!-- Score: -->      <%#= ratings_for @contract, :show_user_rating => true%>           <br />
+Contract: <%=@contract.title%>   <br />    <br />
+Contractor: <%=user_display_name(@contract.contractor) %>   <br />    <br />
+Start Date: <%=display_date_with_ago_words(@contract.start_datetime) %>   <br />    <br />
+End Date:   <%= @contract.end_datetime.nil? ? Date.today.strftime('%d %b, %Y') : display_date_with_ago_words(@contract.end_datetime)%>   <br /> <br />
+<% form_for(@contract) do |f| %>
+  <%= f.error_messages %>
+  <%=hidden_field_tag 'process_no', "1"%>
+  <% @contract.feedback_type = 'contractor' %>
+  <%=f.hidden_field :feedback_type%>
+  <p>
+    <%= f.label :end_contractor_comment, "Comment" %>: <br />
+    <%= f.text_area :end_contractor_comment, :rows=>6, :cols=>60 %>
+  </p>
+
+  <p>
+    <%= f.label :work_again_with_employer, "I would work again for this employer" %>:
+    Yes: <%= f.radio_button :work_again_with_employer, true%> &nbsp; &nbsp; &nbsp; No: <%= f.radio_button :work_again_with_employer, false%>
+  </p>
+
+  <p>
+    <%= f.submit 'Submit' %>
+  </p>
+        
+<% end %>
+<% end %>    
+<%= link_to "Back to My Contracts", contracts_url %> <br />
+

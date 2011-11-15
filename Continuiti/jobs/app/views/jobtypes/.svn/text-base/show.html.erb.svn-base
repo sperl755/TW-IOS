@@ -1,0 +1,18 @@
+<p>
+  <b>Title:</b>
+  <%=h @jobtype.title %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%=h @jobtype.description %>
+</p>
+
+<p>
+  <b>Active:</b>
+  <%=h @jobtype.active %>
+</p>
+
+
+<%= link_to 'Edit', edit_jobtype_path(@jobtype) %> |
+<%= link_to 'Back', jobtypes_path %>

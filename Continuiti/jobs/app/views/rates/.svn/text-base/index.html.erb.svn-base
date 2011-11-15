@@ -1,0 +1,120 @@
+<b>Contracts and feedback - <%=user_display_name(@user)%></b>    <br> <br> <br>
+
+<% @contracts.each { |contract| %>
+
+    <%= contract.job.title %>
+
+    <table width="100%">
+      <tr>
+        <td width="50%" valign="top">
+            <b>Feedback to contractor(<%=user_display_name(contract.contractor)%>):</b><br /> <br><br>
+          <% unless contract.end_employer_comment.blank? %>
+
+
+              <%=contract.end_employer_comment%>
+              <br /><br />
+            <%average_rating = average_rating(contract.user.id,contract.id,"Contract")
+            rating_percentage = (average_rating.to_f/5)*100
+            %>
+        <div class="classification"><div class="cover"></div><div class="progress" style="width: <%=rating_percentage%>%;"></div> </div>
+              <%=average_rating.to_f.round(2)%>
+                  <br /><br />
+        <div style="width:240px;">
+          <div style="width:100px;float:left;"> Skills:</div>
+          <div style="width:140px;float:right;"> <%= ratings_for contract, contract.user, :show_user_rating => true, :force_static=>true, :small=>true, :dimension => :skills %></div>
+          <div style="clear:both;" />
+        </div>
+
+              <div style="width:240px;">
+          <div style="width:100px;float:left;">Quality: </div>
+          <div style="width:140px;float:right;"><%= ratings_for contract, contract.user, :show_user_rating => true, :force_static=>true, :small=>true, :dimension => :quality %></div>
+          <div style="clear:both;" />
+        </div>
+
+              <div style="width:240px;">
+          <div style="width:100px;float:left;">Availability: </div>
+          <div style="width:140px;float:right;"><%= ratings_for contract, contract.user, :show_user_rating => true, :force_static=>true, :small=>true, :dimension => :availability %></div>
+          <div style="clear:both;" />
+        </div>
+
+              <div style="width:240px;">
+          <div style="width:100px;float:left;">Deadlines:  </div>
+          <div style="width:140px;float:right;"><%= ratings_for contract, contract.user, :show_user_rating => true, :force_static=>true, :small=>true, :dimension => :deadlines %></div>
+          <div style="clear:both;" />
+        </div>
+
+              <div style="width:240px;">
+          <div style="width:100px;float:left;">Communication: </div>
+          <div style="width:140px;float:right;"> <%= ratings_for contract, contract.user, :show_user_rating => true, :force_static=>true, :small=>true, :dimension => :communication %></div>
+          <div style="clear:both;" />
+        </div>
+
+              <div style="width:240px;">
+          <div style="width:100px;float:left;">Co-operation:  </div>
+          <div style="width:140px;float:right;"><%= ratings_for contract, contract.user, :show_user_rating => true, :force_static=>true, :small=>true, :dimension => :cooperation %></div>
+          <div style="clear:both;" />
+        </div>
+
+              <div style="width:240px;">
+          <div style="width:100px;float:left;">
+    <% else %>
+          No feedback to contractor
+    <% end %>
+
+        </td>
+        <td width="50%" valign="top">
+          <b>Feedback to employer(<%=user_display_name(contract.user)%>):</b>  <br /> <br><br>
+          <% unless contract.end_contractor_comment.blank? %>
+            
+              <%=contract.end_contractor_comment%>
+              <br /><br />
+            <%average_rating = average_rating(contract.contractor.id,contract.id,"Contract")
+            rating_percentage = (average_rating.to_f/5)*100
+            %>
+        <div class="classification"><div class="cover"></div><div class="progress" style="width: <%=rating_percentage%>%;"></div></div><%=average_rating.to_f.round(2)%>
+                  <br /><br />
+        <div style="width:365px;">
+          <div style="width:225px;float:left;"> Job description matched actual work:  </div>
+          <div style="width:140px;float:right;"><%= ratings_for contract, contract.contractor, :show_user_rating => true, :force_static=>true, :small=>true, :dimension => :actual_work_matched %></div>
+          <div style="clear:both;" />
+        </div>
+
+              <div style="width:240px;">
+          <div style="width:100px;float:left;">Professionalism: </div>
+          <div style="width:140px;float:right;"> <%= ratings_for contract, contract.contractor, :show_user_rating => true, :force_static=>true, :small=>true, :dimension => :professionalism %></div>
+          <div style="clear:both;" />
+        </div>
+
+              <div style="width:240px;">
+          <div style="width:100px;float:left;">Deadlines:  </div>
+          <div style="width:140px;float:right;"><%= ratings_for contract, contract.contractor, :show_user_rating => true, :force_static=>true, :small=>true, :dimension => :deadlines %></div>
+          <div style="clear:both;" />
+        </div>
+
+              <div style="width:240px;">
+          <div style="width:100px;float:left;">Communication: </div>
+          <div style="width:140px;float:right;"> <%= ratings_for contract, contract.contractor, :show_user_rating => true, :force_static=>true, :small=>true, :dimension => :communication %></div>
+          <div style="clear:both;" />
+        </div>
+
+              <div style="width:240px;">
+          <div style="width:100px;float:left;">Co-operation: </div>
+          <div style="width:140px;float:right;"> <%= ratings_for contract, contract.contractor, :show_user_rating => true, :force_static=>true, :small=>true, :dimension => :cooperation %></div>
+          <div style="clear:both;" />
+        </div>
+
+              <div style="width:240px;">
+          <div style="width:100px;float:left;">
+    <% else %>
+          No feedback to employer
+    <% end %>
+
+        </td>
+      </tr>
+      <tr><td colspan="2"> </td> </tr>
+    </table>
+
+ <%
+ }
+ %>
+

@@ -1,0 +1,54 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  country: MyString
+  organization: MyString
+  degree: MyString
+  major: MyString
+  from_month: MyString
+  from_year: 1
+  end_month: MyString
+  end_year: 1
+  description: MyText
+  from_date: 2011-04-18
+  end_date: 2011-04-18
+  user: 
+
+two:
+  country: MyString
+  organization: MyString
+  degree: MyString
+  major: MyString
+  from_month: MyString
+  from_year: 1
+  end_month: MyString
+  end_year: 1
+  description: MyText
+  from_date: 2011-04-18
+  end_date: 2011-04-18
+  user: 
+
+
+
+
+# == Schema Information
+#
+# Table name: educations
+#
+#  id           :integer(4)      not null, primary key
+#  country      :string(255)
+#  organization :string(255)
+#  degree_id    :integer(4)
+#  major        :string(255)
+#  from_year    :integer(4)
+#  end_year     :integer(4)
+#  description  :text
+#  from_date    :date
+#  end_date     :date
+#  user_id      :integer(4)
+#  created_at   :datetime
+#  updated_at   :datetime
+#  url          :string(255)
+#  activities   :text
+#
+

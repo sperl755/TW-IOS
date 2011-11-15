@@ -1,0 +1,179 @@
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svn/!svn/ver/353/jobs/trunk/test/unit/helpers
+END
+general_availabilities_helper_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/!svn/ver/306/jobs/trunk/test/unit/helpers/general_availabilities_helper_test.rb
+END
+award_users_helper_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/!svn/ver/34/jobs/trunk/test/unit/helpers/award_users_helper_test.rb
+END
+interests_helper_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/!svn/ver/257/jobs/trunk/test/unit/helpers/interests_helper_test.rb
+END
+awards_helper_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/!svn/ver/34/jobs/trunk/test/unit/helpers/awards_helper_test.rb
+END
+award_types_helper_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/!svn/ver/285/jobs/trunk/test/unit/helpers/award_types_helper_test.rb
+END
+referrals_helper_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/!svn/ver/353/jobs/trunk/test/unit/helpers/referrals_helper_test.rb
+END
+applications_helper_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/!svn/ver/160/jobs/trunk/test/unit/helpers/applications_helper_test.rb
+END
+cart_items_helper_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/!svn/ver/176/jobs/trunk/test/unit/helpers/cart_items_helper_test.rb
+END
+staffing_position_categories_helper_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/!svn/ver/186/jobs/trunk/test/unit/helpers/staffing_position_categories_helper_test.rb
+END
+jobs_helper_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/31/jobs/trunk/test/unit/helpers/jobs_helper_test.rb
+END
+opportunity_preferences_helper_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/!svn/ver/305/jobs/trunk/test/unit/helpers/opportunity_preferences_helper_test.rb
+END
+educations_helper_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/!svn/ver/25/jobs/trunk/test/unit/helpers/educations_helper_test.rb
+END
+lists_helper_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/!svn/ver/36/jobs/trunk/test/unit/helpers/lists_helper_test.rb
+END
+orders_helper_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/!svn/ver/176/jobs/trunk/test/unit/helpers/orders_helper_test.rb
+END
+jobtypes_helper_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/31/jobs/trunk/test/unit/helpers/jobtypes_helper_test.rb
+END
+user_skills_helper_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/!svn/ver/257/jobs/trunk/test/unit/helpers/user_skills_helper_test.rb
+END
+users_awards_helper_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/!svn/ver/34/jobs/trunk/test/unit/helpers/users_awards_helper_test.rb
+END
+user_descriptions_helper_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/!svn/ver/309/jobs/trunk/test/unit/helpers/user_descriptions_helper_test.rb
+END
+endorsements_helper_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/!svn/ver/268/jobs/trunk/test/unit/helpers/endorsements_helper_test.rb
+END
+earnings_helper_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/!svn/ver/353/jobs/trunk/test/unit/helpers/earnings_helper_test.rb
+END
+certifications_helper_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/!svn/ver/257/jobs/trunk/test/unit/helpers/certifications_helper_test.rb
+END
+referral_bonus_helper_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/!svn/ver/353/jobs/trunk/test/unit/helpers/referral_bonus_helper_test.rb
+END
+staffing_position_types_helper_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/!svn/ver/186/jobs/trunk/test/unit/helpers/staffing_position_types_helper_test.rb
+END
+experiences_helper_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/!svn/ver/30/jobs/trunk/test/unit/helpers/experiences_helper_test.rb
+END
+countries_helper_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/!svn/ver/28/jobs/trunk/test/unit/helpers/countries_helper_test.rb
+END
+carts_helper_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/!svn/ver/176/jobs/trunk/test/unit/helpers/carts_helper_test.rb
+END
+list_items_helper_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/!svn/ver/36/jobs/trunk/test/unit/helpers/list_items_helper_test.rb
+END
+degrees_helper_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/!svn/ver/29/jobs/trunk/test/unit/helpers/degrees_helper_test.rb
+END
+memberships_helper_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/!svn/ver/257/jobs/trunk/test/unit/helpers/memberships_helper_test.rb
+END

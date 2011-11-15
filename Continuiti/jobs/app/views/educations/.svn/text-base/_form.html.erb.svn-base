@@ -1,0 +1,86 @@
+<script type="text/javascript">
+  window.formIndex = 0;
+</script>
+<style>
+  .fieldWithErrors{
+    display: inline;
+  }
+</style>
+
+<div style="width:520px;padding: 40px 0 0 100px;">
+  <% form_remote_tag(:url => educations_path, :method => :post,
+    :loading => "$('add_new_education_form_process_ajax_loader').show()",
+    :success => "$('add_new_education_form_process_ajax_loader').hide()") do %>
+    <div id="education_fields">
+      <div class="education_field">
+        <p>
+        <div style="float:left;width:150px;"><b>School/University:</b></div>
+        <span id="education_university_cant_be_blank_0" style="display: none"><div style="float: right; width:350px; color: red">School/University can't blank</div></span>
+        <div style="float: right; width:350px;"><%= text_field_tag "education[0][organization]", nil,
+            :onchange => "validateFieldCantBeBlank('education_0_organization', 'education_university_cant_be_blank_0')" %></div>
+        <div style="clear:both;"></div>
+        </p>
+        <p>
+        <div style="float:left;width:150px;"><b>School/University URL:</b></div>
+        <span id="education_university_url_not_valid_0" style="display: none"><div style="float: right; width:350px; color: red">School/University URL is not valid</div></span>
+        <div style="float: right; width:350px;"><%= text_field_tag "education[0][url]", nil, :onchange => "validateURLAddress('education_0_url', 'education_university_url_not_valid_0')" %></div>
+        <div style="clear:both;"></div>
+        </p>
+        <p>
+        <div style="float:left;width:160px;"><b>Degree:</b></div>
+        <span id="education_degree_cant_be_blank_0" style="display: none"><div style="float: right; width:350px; color: red">Degree can't blank</div></span>
+        <div style="float: right; width:350px;">
+          <%= text_field_tag "education[0][degree]", nil, :size => 4,
+            :onchange => "validateFieldCantBeBlank('education_0_degree', 'education_degree_cant_be_blank_0')" %>
+        </div>
+        <div style="clear:both;"></div>
+        </p>
+        <p>
+        <div style="float:left;width:150px;"><b>Field(s) of study:</b></div>
+        <span id="education_major_cant_be_blank_0" style="display: none"><div style="float: right; width:350px; color: red">Field(s) of study can't blank</div></span>
+        <div style="float: right; width:350px;"><%= text_field_tag "education[0][major]", nil,
+            :onchange => "validateFieldCantBeBlank('education_0_major', 'education_major_cant_be_blank_0')" %></div>
+        <div style="clear:both;"></div>
+        </p>
+        <p>
+        <div style="float:left;width:150px;display:inline;"><b>Dates Attended:</b></div>
+        <span id="education_year_must_enter_after_1900_0" style="display: none"><div style="float:right;width:350px;color: red">Please enter a start year after 1900.</div></span>
+        <span id="education_end_year_must_enter_after_1900_0" style="display: none"><div style="float:right;width:350px;color: red">Please enter an end year after 1900.</div></span>
+        <span id="education_end_year_must_greater_than_start_year_0" style="display: none"><div style="float:right;width:350px;color: red">End year must equal or greater than start year.</div></span>
+        <div style="float:right;width:350px;">
+          <%= text_field_tag "education[0][from_year]", nil, :size => 4, :maxlength => 4,
+            :onchange => "validateDateAttended('start year', 0)" %>
+          to
+          <%= text_field_tag "education[0][end_year]", nil, :size => 4, :maxlength => 4,
+            :onchange => "validateDateAttended('end year', 0)" %>
+        </div>
+        <div style="clear:both;"></div>
+        </p>
+        <p>
+        <div style="float:left;width:160px;vertical-align:top;" ><b>Activities and Societies:</b></div>
+        <div style="float: right; width:350px;"><%= text_area_tag "education[0][activities]", nil, :rows => 7, :cols => 55 %></div>
+        <div style="clear:both;"></div>
+        </p>
+        <p>
+        <div style="float:left;width:150px;vertical-align:top;" ><b>Additional Notes:</b></div>
+        <div style="float: right; width:350px;"><%= text_area_tag "education[0][description]", nil, :rows => 7, :cols => 55 %></div>
+        <div style="clear:both;"></div>
+        </p>
+        <p>
+          <%= link_to_function "remove" , "$(this).up('.education_field').remove();$$('.education_field').length == 0 ? $('cancel_add_education').click() : false;" %>
+        </p>
+      </div>
+    </div>
+    <p>
+      <%= link_to_function "+ Add another position", "addNewEducationMultipleForm()" %>
+    </p>
+    <p>
+    <div style="float:left;width:150px;vertical-align:top;" ></div>
+    <div style="float: right; width:350px;">
+      <%= submit_tag "Save changes", :onclick => "return validateAllEducationFields();" %> or <%= link_to_function 'Cancel', "$(\"add_education_form\").innerHTML = \"\"", :id => "cancel_add_education" %>
+      <span id="add_new_education_form_process_ajax_loader" style="display: none"><%= image_tag "LoaderIcon.gif", :style => "width:15px" %></span>
+    </div>
+    <div style="clear:both;"></div>
+  </p>
+<%- end %>
+</div>

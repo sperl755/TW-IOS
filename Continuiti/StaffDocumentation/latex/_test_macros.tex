@@ -1,0 +1,42 @@
+\-The following test macros are included.
+
+\-These macros are directly from\-: \-G\-T\-M\-Sen\-Test\-Case.\-h (\href{http://code.google.com/p/google-toolbox-for-mac/source/browse/trunk/UnitTesting/GTMSenTestCase.h}{\tt http\-://code.\-google.\-com/p/google-\/toolbox-\/for-\/mac/source/browse/trunk/\-Unit\-Testing/\-G\-T\-M\-Sen\-Test\-Case.\-h}) prefixed with \-G\-H so as not to conflict with the \-G\-T\-M macros if you are using those in your project.
+
+\-The {\ttfamily description} argument appends extra information for when the assert fails; though most of the time you might leave it as nil.
+
+
+\begin{DoxyCode}
+ GHAssertNoErr(a1, description, ...)
+ GHAssertErr(a1, a2, description, ...)
+ GHAssertNotNULL(a1, description, ...)
+ GHAssertNULL(a1, description, ...)
+ GHAssertNotEquals(a1, a2, description, ...)
+ GHAssertNotEqualObjects(a1, a2, desc, ...)
+ GHAssertOperation(a1, a2, op, description, ...)
+ GHAssertGreaterThan(a1, a2, description, ...)
+ GHAssertGreaterThanOrEqual(a1, a2, description, ...)
+ GHAssertLessThan(a1, a2, description, ...)
+ GHAssertLessThanOrEqual(a1, a2, description, ...)
+ GHAssertEqualStrings(a1, a2, description, ...)
+ GHAssertNotEqualStrings(a1, a2, description, ...)
+ GHAssertEqualCStrings(a1, a2, description, ...)
+ GHAssertNotEqualCStrings(a1, a2, description, ...)
+ GHAssertEqualObjects(a1, a2, description, ...)
+ GHAssertEquals(a1, a2, description, ...)
+ GHAbsoluteDifference(left,right) (MAX(left,right)-MIN(left,right))
+ GHAssertEqualsWithAccuracy(a1, a2, accuracy, description, ...)
+ GHFail(description, ...)
+ GHAssertNil(a1, description, ...)
+ GHAssertNotNil(a1, description, ...)
+ GHAssertTrue(expr, description, ...)
+ GHAssertTrueNoThrow(expr, description, ...)
+ GHAssertFalse(expr, description, ...)
+ GHAssertFalseNoThrow(expr, description, ...)
+ GHAssertThrows(expr, description, ...)
+ GHAssertThrowsSpecific(expr, specificException, description, ...)
+ GHAssertThrowsSpecificNamed(expr, specificException, aName, description, ...)
+ GHAssertNoThrow(expr, description, ...)
+ GHAssertNoThrowSpecific(expr, specificException, description, ...)
+ GHAssertNoThrowSpecificNamed(expr, specificException, aName, description, ...)
+\end{DoxyCode}
+ 

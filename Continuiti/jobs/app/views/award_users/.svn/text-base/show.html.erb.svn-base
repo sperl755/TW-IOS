@@ -1,0 +1,13 @@
+<p>
+  <b>User:</b>
+  <%=h @award_user.user %>
+</p>
+
+<p>
+  <b>Award:</b>
+  <%=h @award_user.award %>
+</p>
+
+
+<%= link_to 'Edit', edit_award_user_path(@award_user) %> |
+<%= link_to 'Back', award_users_path %>

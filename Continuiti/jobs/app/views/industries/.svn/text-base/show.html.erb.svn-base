@@ -1,0 +1,13 @@
+<p>
+  <b>Name:</b>
+  <%=h @industry.name %>
+</p>
+
+<p>
+  <b>Active:</b>
+  <%=h @industry.active %>
+</p>
+
+
+<%= link_to 'Edit', edit_industry_path(@industry) %> |
+<%= link_to 'Back', industries_path %>

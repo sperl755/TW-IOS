@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/!svn/ver/183/jobs/trunk/app/views/user_files
+END
+edit.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/183/jobs/trunk/app/views/user_files/edit.html.erb
+END
+_attachment.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/!svn/ver/183/jobs/trunk/app/views/user_files/_attachment.html.erb
+END
+index.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/183/jobs/trunk/app/views/user_files/index.html.erb
+END
+new.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/!svn/ver/183/jobs/trunk/app/views/user_files/new.html.erb
+END
+destroy.rjs
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/183/jobs/trunk/app/views/user_files/destroy.rjs
+END
+show.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/183/jobs/trunk/app/views/user_files/show.html.erb
+END

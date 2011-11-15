@@ -1,0 +1,27 @@
+        <div id="user_location_addresses" class="alt">
+          <h3>Your location</h3>
+          <% @user.locations.each do |location| %>
+					<%= puts 'location' %>
+					<%= puts location.inspect %>
+            <div id="user_location_map" style="border: none;">
+              <%= @map[:location => location.location_name].to_html unless @map[:location => location.location_name].blank? %>
+              <%= @map[:location => location.location_name].div(:width => 276, :height => 150) %>
+            </div>
+            <div id="user_location_address">
+              <p>
+                <% unless location.address1.blank? %>
+                  <%=h location.address1 %><br />
+                <% end %>
+                <% unless location.city.blank? %>
+                  <%=h location.city + "," %>
+                <% end %>
+                <% unless location.state.blank? %>
+                  <%=h location.state + "," %><br/>
+                <% end %>
+                <% unless location.zip.blank? %>
+                  <%=h location.zip%><br/>
+                <%end%>
+              </p>
+            </div>
+          <%  end %>
+        </div>

@@ -1,0 +1,16 @@
+<div class="interest">
+  <% new_or_existing = interest.new_record? ? 'new' : 'existing' %>
+  <% prefix = "user[#{new_or_existing}_interest_attributes][]" %>
+  <% fields_for prefix, interest do |interest_form| -%>
+    <p>
+    <div style="float:left;width:150px;"><b><%= interest_form.label :name %>:</b></div>
+    <div style="float: right; width:350px;"><%= interest_form.text_field :name %></div>
+    <div style="clear:both;"></div>
+  </p>
+  <p>
+  <div style="float:left;width:150px;vertical-align:top;" ></div>
+  <div style="float: right; width:350px;"><%= link_to_function "remove" , "$(this).up('.interest').remove()" %></div>
+  <div style="clear:both;"></div>
+  </p>
+<% end -%>
+</div>

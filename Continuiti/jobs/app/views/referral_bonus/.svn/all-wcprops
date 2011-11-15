@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/353/jobs/trunk/app/views/referral_bonus
+END
+index.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/!svn/ver/353/jobs/trunk/app/views/referral_bonus/index.html.erb
+END
+_edit_a_referral_bonus.erb
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/!svn/ver/353/jobs/trunk/app/views/referral_bonus/_edit_a_referral_bonus.erb
+END
+_show_a_referral_bonus.erb
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/!svn/ver/353/jobs/trunk/app/views/referral_bonus/_show_a_referral_bonus.erb
+END

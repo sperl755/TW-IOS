@@ -1,0 +1,40 @@
+digraph G
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="FriendFacebookBroadcast",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled" fontcolor="black"];
+  Node2 -> Node1 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="\<FBRequestDelegate\>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$protocol_f_b_request_delegate-p.html"];
+  Node3 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" facebook" ,fontname="Helvetica"];
+  Node3 [label="Facebook",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$interface_facebook.html"];
+  Node4 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="NSObject",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_n_s_object.html"];
+  Node5 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="\<FBLoginDialogDelegate\>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$protocol_f_b_login_dialog_delegate-p.html"];
+  Node4 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 -> Node3 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" _fbDialog\n_loginDialog" ,fontname="Helvetica"];
+  Node6 [label="FBDialog",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$interface_f_b_dialog.html"];
+  Node7 -> Node6 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" _serverURL" ,fontname="Helvetica"];
+  Node7 [label="NSString",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_n_s_string.html"];
+  Node8 -> Node3 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" _expirationDate" ,fontname="Helvetica"];
+  Node8 [label="NSDate",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_n_s_date.html"];
+  Node9 -> Node3 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" _request" ,fontname="Helvetica"];
+  Node9 [label="FBRequest",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$interface_f_b_request.html"];
+  Node4 -> Node9 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 -> Node9 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 -> Node9 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 -> Node9 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 -> Node9 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 -> Node9 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node7 -> Node9 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" _httpMethod\n_url" ,fontname="Helvetica"];
+  Node7 -> Node3 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" _localAppId\n_appId\n_accessToken" ,fontname="Helvetica"];
+}

@@ -1,0 +1,19 @@
+<h1>New award_user</h1>
+
+<% form_for(@award_user) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :user %><br />
+	<%= f.collection_select :user_id, User.find(:all, :order => "login"), :id, :login %>
+  </p>
+  <p>
+    <%= f.label :award %><br />
+	<%= f.collection_select :award_id, Award.find(:all, :order => "name"), :id, :name %>
+  </p>
+  <p>
+    <%= f.submit 'Create' %>
+  </p>
+<% end %>
+
+<%= link_to 'Back', award_users_path %>

@@ -1,0 +1,19 @@
+<%= f.error_messages %>
+<p>
+  <%= f.file_field :media %>
+</p>
+<p>
+  <%= f.label :title %><br />
+  <%= f.text_field :title %>
+</p>
+<p>
+  <%= f.label :description %><br />
+  <%= f.text_area :description %>
+</p>
+<p>
+  <%= f.label :notes %><br />
+  <%= f.text_area :notes %>
+</p>
+<p>
+  <%= f.submit 'Create' %>
+</p>

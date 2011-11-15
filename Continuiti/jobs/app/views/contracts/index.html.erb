@@ -1,0 +1,26 @@
+<h1>Listing contracts</h1>
+
+<table width="100%">
+  <tr>
+    <th>ID</th>
+    <th>Job Title</th>
+    <th>Status</th>
+    <th></th>
+  </tr>
+
+<% @contracts.each do |contract| %>
+  <tr>
+    <td width="10%"><%=h contract.id %></td>
+    <td width="40%"><%=link_to (contract.job.title), contract %></td>
+    <td width="18%"><% contract_status_hash = APP_CONFIG['contract_status'].invert %>
+    <%=contract_status_hash[contract.status]%> </td>
+    <td width="18%">
+
+      
+
+    </td>
+    <td><%#= link_to 'Show', contract %></td>
+    
+  </tr>
+<% end %>
+</table>

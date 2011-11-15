@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/175/jobs/trunk/themes/dappled/views/layouts
+END
+application.html.haml
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/!svn/ver/175/jobs/trunk/themes/dappled/views/layouts/application.html.haml
+END
+admin.html.haml
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/!svn/ver/74/jobs/trunk/themes/dappled/views/layouts/admin.html.haml
+END

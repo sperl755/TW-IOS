@@ -1,0 +1,17 @@
+<%= stylesheet_link_tag 'company' %>
+<div id="company_page">
+  <div id="company_page_top">
+    <div id="edit_company">
+      <%= link_to 'My Companies', user_companies_path(current_user) %>
+    </div>
+
+    <div class="clear"></div>
+  </div>
+  <% form_for @company, :url => user_companies_path(current_user), :html => { :multipart => true } do |f| %>
+    <div id="company_page_details">
+      <%= render :partial => 'form', :locals => {:f => f} %>
+      <p><input id="submit" type="submit" value="Create Company" style="float: right;" /></p>
+    </div>
+    
+    <%end%>
+</div>
