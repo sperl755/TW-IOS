@@ -145,7 +145,8 @@ static NSString *my_checkin_checkout_url = @"https://helium.staffittome.com/apis
     NSString *old_timezone_minutes = [the_time substringWithRange:NSMakeRange(23,2)];
     printf("Old timezone minutes: %d\n", [old_timezone_minutes intValue]);
     
-    //Get checkin gmt offset in seconds.
+    /*Convert the old gmt offset to seconds. It usually comes in the form
+     of hours and minutes. Also do a check to see if it is negative.*/
     int old_gmt_offset;
     if ([old_timezone_hour characterAtIndex:0] == '-')
     {
@@ -161,12 +162,17 @@ static NSString *my_checkin_checkout_url = @"https://helium.staffittome.com/apis
     int current_minutes_time;
     int old_minutes_time;
     
+    //Get the current time and get the current date in order to calculate
+    //How long the person was working.
     NSDateFormatter *timeFormat = [[NSDateFormatter alloc] init];
-    [timeFormat setDateFormat:@"HH:mm:ss"];
+    [timeFormat setDateFormat:@"dd HH:mm:ss"];
     NSString *the_current_time = [timeFormat stringFromDate:[NSDate date]];
     printf("The Current Time is %s", [the_current_time UTF8String]);
-    NSString *current_hour = [the_current_time substringWithRange:NSMakeRange(0, 2)];
-    NSString *current_minutes = [the_current_time substringWithRange:NSMakeRange(3, 2)];
+    NSString *current_date_in_month = [the_current_time substringWithRange:NSMakeRange(0, 2)];
+    printf("\nThe current day is %s", [current_date_in_month UTF8String]);
+    printf("\nThe old day is %s", [old_day UTF8String]);
+    NSString *current_hour = [the_current_time substringWithRange:NSMakeRange(3, 2)];
+    NSString *current_minutes = [the_current_time substringWithRange:NSMakeRange(6, 2)];
     if (current_gmt_offset == old_gmt_offset)
     {
         current_hours_time = [current_hour intValue];
@@ -181,6 +187,7 @@ static NSString *my_checkin_checkout_url = @"https://helium.staffittome.com/apis
         int hour_difference = floor(minutes_difference/60);
         int remainder_minutes = minutes_difference%60;
         printf("Hour diff: %d, Minute Remainder: %d", hour_difference, remainder_minutes);
+        
         current_hours_time = [current_hour intValue];
         current_minutes_time = [current_minutes intValue];
         old_minutes_time = remainder_minutes + [old_minutes intValue];
@@ -193,31 +200,84 @@ static NSString *my_checkin_checkout_url = @"https://helium.staffittome.com/apis
         int hour_difference = floor(minutes_difference/60);
         int remainder_minutes = minutes_difference%60;
         printf("Hour diff: %d, Minute Remainder: %d", hour_difference, remainder_minutes);
+        
         current_hours_time = hour_difference + [current_hour intValue];
         current_minutes_time = remainder_minutes + [current_minutes intValue];
         old_minutes_time = [old_minutes intValue];
         old_hours_time = [old_hour intValue];
     }
-    
-    int hours_worked_time = current_hours_time - old_hours_time;
-    int minutes_worked_time;
-    if (current_minutes_time < old_minutes_time)
+    //Calculate the day difference if there is one.
+    if ([current_date_in_month intValue] > [old_day intValue])
     {
-        hours_worked_time--;
-        int temp = 60 - old_minutes_time;
-        temp += current_minutes_time;
-        minutes_worked_time = temp;
+        printf("%d", current_hours_time);
+        //if the new time is less then the older checkin time
+        if ((current_hours_time* 60) + current_minutes_time < (old_hours_time * 60) + old_minutes_time)
+        {
+            int hours_worked = 24 - old_hours_time;
+            int minutes_worked = 60 - old_minutes_time;
+            for (int i = [current_date_in_month intValue] - 1; i > [old_day intValue]; i--)
+            {
+                hours_worked += 24;
+            }
+            hours_worked += current_hours_time;
+            minutes_worked += current_minutes_time;
+            hour_count = hours_worked;
+            minute_count = minutes_worked;
+            checkin_in = YES;
+            [self requestFinished:nil];
+            printf("Hours Worked: %d", hours_worked);
+            printf("Minutes Worked: %d", minutes_worked);
+        }
+        else if ((current_hours_time*60) + current_minutes_time > (old_hours_time * 60) + old_minutes_time)
+        {
+            int hours_worked = current_hours_time - old_hours_time;
+            int minutes_worked_time;
+            if (current_minutes_time < old_minutes_time)
+            {
+                hours_worked--;
+                int temp = 60 - old_minutes_time;
+                temp += current_minutes_time;
+                minutes_worked_time = temp;
+            }
+            else
+            {
+                minutes_worked_time = current_minutes_time - old_minutes_time;
+            }
+            for (int i = [current_date_in_month intValue]; i > [old_day intValue]; i--)
+            {
+                hours_worked += 24;
+            }
+            hour_count = hours_worked;
+            minute_count = minutes_worked_time;
+            checkin_in = YES;
+            [self requestFinished:nil];
+            printf("Hours Worked: %d", hours_worked);
+            printf("Minutes Worked: %d", minutes_worked_time);
+        }
     }
     else
     {
-        minutes_worked_time = current_minutes_time - old_minutes_time;
+        int hours_worked_time = current_hours_time - old_hours_time;
+        int minutes_worked_time;
+        if (current_minutes_time < old_minutes_time)
+        {
+            hours_worked_time--;
+            int temp = 60 - old_minutes_time;
+            temp += current_minutes_time;
+            minutes_worked_time = temp;
+        }
+        else
+        {
+            minutes_worked_time = current_minutes_time - old_minutes_time;
+        }
+        hour_count = hours_worked_time;
+        minute_count = minutes_worked_time;
+        checkin_in = YES;
+        [self requestFinished:nil];
+        printf("Hours Worked: %d", hours_worked_time);
+        printf("Minutes Worked: %d", minutes_worked_time);
     }
-    hour_count = hours_worked_time;
-    minute_count = minutes_worked_time;
-    checkin_in = YES;
-    [self requestFinished:nil];
-    printf("Hours Worked: %d", hours_worked_time);
-    printf("Minutes Worked: %d", minutes_worked_time);
+    
 }
 -(void)setBackgroundImageToModuleLast
 {
