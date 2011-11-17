@@ -66,13 +66,30 @@
     CustomCategoryCell *my_category;
     switch (indexPath.row) {
         case 1:
-            my_category = [[CustomCategoryCell alloc] initWithFrame:CGRectMake(0, 0, 0, 0) andCategory:@"Industry" andDetail:app_delegate.user_state_information.industry_search_type];
+            //Test for blank industry search type because blank actually means all,
+            //but we need it to be blank for searching and sending the request to
+            //the server.
+            if ([app_delegate.user_state_information.industry_search_type isEqualToString:@""])
+            {
+                my_category = [[CustomCategoryCell alloc] initWithFrame:CGRectMake(0, 0, 0, 0) andCategory:@"Industry" andDetail:@"All"];
+            }
+            else
+            {
+                my_category = [[CustomCategoryCell alloc] initWithFrame:CGRectMake(0, 0, 0, 0) andCategory:@"Industry" andDetail:app_delegate.user_state_information.industry_search_type];
+            }
             break;
         /*case 1:
             my_category = [[CustomCategoryCell alloc] initWithFrame:CGRectMake(0, 0, 0, 0) andCategory:@"Salary" andDetail:app_delegate.user_state_information.salary_search_type];*/
             break;
         case 0:
-            my_category = [[CustomCategoryCell alloc] initWithFrame:CGRectMake(0, 0, 0, 0) andCategory:@"Job Type" andDetail:app_delegate.user_state_information.distance_search_type];
+            if ([app_delegate.user_state_information.distance_search_type isEqualToString:@""])
+            {
+                my_category = [[CustomCategoryCell alloc] initWithFrame:CGRectMake(0, 0, 0, 0) andCategory:@"Job Type" andDetail:@"All"];
+            }
+            else
+            {
+                my_category = [[CustomCategoryCell alloc] initWithFrame:CGRectMake(0, 0, 0, 0) andCategory:@"Job Type" andDetail:app_delegate.user_state_information.distance_search_type];   
+            }
             break;
     }
     [cell.contentView addSubview:my_category];

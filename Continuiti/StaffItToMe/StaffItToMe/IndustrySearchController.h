@@ -18,6 +18,7 @@
     UIImageView *background_image;
     NSArray *list_of_industries;
     UITableView *search_table;
+    LoadingView *load_view;
 }
 @property (nonatomic, retain) id <IndustrySearchProtocol> delegate;
 @end

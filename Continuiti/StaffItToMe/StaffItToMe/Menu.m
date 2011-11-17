@@ -56,7 +56,10 @@
     }
     else if (google_map != nil)
     {
+        [google_map setDie];
         [google_map removeFromSuperview];
+        [google_map release];
+        google_map = nil;
     }
     filter_screen = [[SearchFilterScreen alloc] initWithFrame:[UIScreen mainScreen].applicationFrame];
     [filter_screen setFrame:CGRectMake(0, 35,320, 331)];
@@ -98,6 +101,7 @@
 {
     if (google_map != nil)
     {
+        [google_map setDie];
         [google_map removeFromSuperview];
         [google_map release];
         google_map = nil;
@@ -164,18 +168,12 @@
     [request setTimeOutSeconds:30];
     [request setDelegate:self];
     [request startAsynchronous];
-    //show a alertview that we are accessing the credentials and talking to the server.
-    load_message = [[UIAlertView alloc] initWithTitle:@"Loading..." message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:nil];
-    [load_message show];
-    UIActivityIndicatorView *active = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-    active.center = CGPointMake(load_message.bounds.size.width / 2, load_message.bounds.size.height - 40);
-    [active startAnimating];
-    [load_message addSubview:active];
-    [active release];
+    load_view = [[LoadingView alloc] initWithFrame:CGRectMake(0, -50, 320, 480)];
+    [self addSubview:load_view];
 }
 -(void)requestFinished:(ASIHTTPRequest *)request
 {
-	[load_message dismissWithClickedButtonIndex:0 animated:YES];
+    [load_view removeFromSuperview];
     printf("This is the job json file: %s", [[request responseString] UTF8String]);
     StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate];
     [app_delegate.user_state_information populateJobArrayWithJSONString:[request responseString]];

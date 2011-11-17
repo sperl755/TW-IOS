@@ -17,20 +17,47 @@
     if (self) {
 
         // Custom initialization
-        search_table = [[UITableView alloc] initWithFrame:CGRectMake(0, 5, 320, 370) style:UITableViewStylePlain];
-        search_table.dataSource = self;
-        search_table.delegate = self;
+        
+        NSMutableString *industry_list_address = [NSMutableString stringWithString:@"https://helium.staffittome.com/moreapis/industries"];
+        StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*) [[UIApplication sharedApplication] delegate];
+        //Acesss the server with solr parameters
+        //Perform the accessing of the server.
+        NSURL *url = [NSURL URLWithString:industry_list_address];
+        ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
+        [request setRequestMethod:@"POST"];
+        [request setValidatesSecureCertificate:NO];
+        [request setPostValue:app_delegate.user_state_information.sessionKey forKey:@"session_key"];
+        [request setTimeOutSeconds:30];
+        [request setDelegate:self];
+        [request startAsynchronous];
         UIImageView *table_background = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Background"]];
         table_background.frame = CGRectMake(0, 0, 320, 380);
-        search_table.separatorColor = [UIColor clearColor];
-        search_table.backgroundColor = [UIColor clearColor];
         [self.view addSubview:table_background];
-        [self.view addSubview:search_table];
-        list_of_industries = [[NSArray alloc] initWithArray:[NSArray arrayWithObjects:@"All", @"Being Awesome", @"Cooking", @"Hiking Awsomely", @"Bing super cool", @"Transforming Islands", nil]];
         
+        load_view = [[LoadingView alloc] initWithFrame:CGRectMake(0, -50, 320, 480)];
+        [self.view addSubview:load_view];
         
     }
     return self;
+}
+-(void)requestFinished:(ASIHTTPRequest *)request
+{
+    [load_view removeFromSuperview];
+    search_table = [[UITableView alloc] initWithFrame:CGRectMake(0, 5, 320, 370) style:UITableViewStylePlain];
+    search_table.dataSource = self;
+    search_table.delegate = self;
+    search_table.separatorColor = [UIColor clearColor];
+    search_table.backgroundColor = [UIColor clearColor];
+    [self.view addSubview:search_table];
+    //Get the industries
+    NSArray *industries_from_json = [[request responseString] JSONValue];
+    NSMutableArray *industry_names = [[NSMutableArray alloc] initWithCapacity:industries_from_json.count];
+    [industry_names addObject:@"All"];
+    for (int i = 0; i < industries_from_json.count; i++)
+    {
+        [industry_names addObject:[[industries_from_json objectAtIndex:i] objectAtIndex:0]];
+    }
+    list_of_industries = [[NSArray alloc] initWithArray:industry_names];
 }
 
 -(void)goToInbox
@@ -53,7 +80,14 @@
         return;
     }
     StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate];
-    app_delegate.user_state_information.industry_search_type = [list_of_industries objectAtIndex:indexPath.row-1];
+    if ([[list_of_industries objectAtIndex:indexPath.row-1] isEqualToString:@"All"])
+    {
+        app_delegate.user_state_information.industry_search_type = @"";
+    }
+    else
+    {
+        app_delegate.user_state_information.industry_search_type = [list_of_industries objectAtIndex:indexPath.row-1];
+    }
     [search_table reloadData];
     
     //Pop to root view controller.
@@ -78,7 +112,7 @@
         my_category = [[CustomCategoryCell alloc] initWithFrame:CGRectMake(0, 0, 0, 0) andCategory:[list_of_industries objectAtIndex:indexPath.row-1] andDetail:@""];
         [my_category hideArrow];
         StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate];
-        if ([[list_of_industries objectAtIndex:indexPath.row-1] isEqualToString:app_delegate.user_state_information.industry_search_type])
+        if ([[list_of_industries objectAtIndex:indexPath.row-1] isEqualToString:app_delegate.user_state_information.industry_search_type] || ([[list_of_industries objectAtIndex:indexPath.row-1] isEqualToString:@"All"] && [app_delegate.user_state_information.industry_search_type isEqualToString:@""]))
         {
             [my_category addCheckmark];
         }

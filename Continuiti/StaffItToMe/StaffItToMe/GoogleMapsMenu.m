@@ -31,6 +31,10 @@ static NSString *GMAP_ANNOTATION_SELECTED = @"GMAP";
     [request setPostValue:app_delegate.user_state_information.sessionKey forKey:@"session_key"];
     [request setPostValue:[NSString stringWithFormat:@"%f", main_map_view.centerCoordinate.latitude] forKey:@"latitude"];
     [request setPostValue:[NSString stringWithFormat:@"%f", main_map_view.centerCoordinate.longitude] forKey:@"longitude"];
+    //set the currently selected industry type
+    [request setPostValue:app_delegate.user_state_information.industry_search_type forKey:@"industry_name"];
+    //set the currently selected job_type_name
+    [request setPostValue:app_delegate.user_state_information.distance_search_type forKey:@"job_type_name"];
     printf("%f", (main_map_view.region.span.latitudeDelta * 111));
     [request setPostValue:[NSString stringWithFormat:@"%f", (main_map_view.region.span.latitudeDelta * 111)] forKey:@"distance"];
     [request setTimeOutSeconds:30];
@@ -166,10 +170,17 @@ static NSString *GMAP_ANNOTATION_SELECTED = @"GMAP";
     printf("%d", annotations.count);
      [main_map_view addAnnotations:annotations];
 }
+-(void)setDie
+{
+    need_to_die = YES;
+}
 - (id)initWithFrame:(CGRect)frame withLocation:(CLLocation*)the_location
 {
     self = [super initWithFrame:frame];
     if (self) {
+        //This variable will be set to die when the map needs to be
+        //deallocated and they are changing the screen.
+        need_to_die = NO;
         
         header_shadow = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 10)];
         header_shadow.image = [UIImage imageNamed:@"header_shadow"];
@@ -264,6 +275,10 @@ static NSString *GMAP_ANNOTATION_SELECTED = @"GMAP";
     }
     return self;
 }
+-(void)clearSearchBarText
+{
+    search_bar_text.text = @"";
+}
 -(BOOL)checkMatchItem:(NSString*)item withPhrase:(NSString*)phrase
 {
     BOOL match = NO;
@@ -335,15 +350,33 @@ static NSString *GMAP_ANNOTATION_SELECTED = @"GMAP";
 }
 -(void)textViewDidBeginEditing:(UITextView *)textView
 {
+    //popover.hidden = YES;
     search_bar_text.center = CGPointMake(search_bar_text.center.x, search_bar_text.center.y - 150);
     search_bar_background.center = CGPointMake(search_bar_background.center.x, search_bar_background.center.y - 150);
+    
+    if (clear_text_x == nil)
+    {
+        clear_text_x = [UIButton buttonWithType:UIButtonTypeCustom];
+        [clear_text_x setImage:[UIImage imageNamed:@"search_x"] forState:UIControlStateNormal];
+        clear_text_x.frame = CGRectMake(search_bar_text.frame.origin.x + search_bar_text.frame.size.width - 26, search_bar_text.frame.origin.y - 1, 20, 20);
+        [clear_text_x addTarget:self action:@selector(clearSearchBarText) forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:clear_text_x];
+    }
+    else
+    {
+        clear_text_x.center = CGPointMake(clear_text_x.center.x, clear_text_x.center.y - 150);
+        clear_text_x.hidden = NO;
+    }
 }
 -(BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
 {
     if ([text isEqualToString:@"\n"])
     {
+        popover.hidden = NO;
         search_bar_text.center = CGPointMake(search_bar_text.center.x, search_bar_text.center.y + 150);
         search_bar_background.center = CGPointMake(search_bar_background.center.x, search_bar_background.center.y + 150);
+        clear_text_x.center = CGPointMake(clear_text_x.center.x, clear_text_x.center.y + 150);
+        clear_text_x.hidden = YES;
         [search_bar_text resignFirstResponder];
         [self updateMapView];
     }
@@ -426,6 +459,10 @@ static NSString *GMAP_ANNOTATION_SELECTED = @"GMAP";
 
 -(void)requestFinished:(ASIHTTPRequest *)request
 {
+    if (need_to_die)
+    {
+        return;
+    }
     [load_view removeFromSuperview];
     if (loading_job && !is_loading)
     {
@@ -518,7 +555,7 @@ static NSString *GMAP_ANNOTATION_SELECTED = @"GMAP";
     popover.delegate = self;
     popover.react_to_tap = @selector(viewJob);
     popover.center = CGPointMake(center_of_popover.x, center_of_popover.y - 65);
-    [self addSubview:popover];
+    [self insertSubview:popover atIndex:1];
 }
 -(void)hideAnnotation
 {

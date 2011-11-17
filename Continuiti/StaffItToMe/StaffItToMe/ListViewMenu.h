@@ -13,8 +13,12 @@
 @interface ListViewMenu : UIView <UITableViewDataSource, UITextViewDelegate,UITableViewDelegate>{
     UIImageView *header_shadow;
     UITableView *table_view;
+    //Search bar assets
     UIImageView *search_bar_background;
     UITextView *search_bar_text;
+    UIButton *clear_text_x;
+    
+    LoadingView *load_view;
     UIAlertView *load_message;
     NSMutableArray *table_data;
 }

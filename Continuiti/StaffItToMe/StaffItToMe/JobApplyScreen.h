@@ -25,7 +25,7 @@
 	UIButton *start_at_btn;
 	UIDatePicker *date_picker;
 	UITextView *description_txt;
-    UIAlertView *load_message;
+    LoadingView *load_view;
 }
 @property (retain) id <ApplyScreenProtocol> delegate;
 

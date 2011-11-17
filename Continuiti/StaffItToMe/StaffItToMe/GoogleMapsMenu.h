@@ -24,8 +24,11 @@
     BOOL loading_job;
     LoadingView *big_load_view;
     
+    UIButton *clear_text_x;
     UIImageView *search_bar_background;
     UITextView *search_bar_text;
+    
+    
     NSMutableArray *table_data;
     NSTimer *job_search_update;
     UIImageView *job_description_image;
@@ -36,9 +39,11 @@
     double previous_delta;
     double previous_latitude;
     double previous_longitude;
+    BOOL need_to_die;
     BOOL is_loading;
     CLLocationCoordinate2D current_selected_annotation_coordinate;
 }
+-(void)setDie;
 - (id)initWithFrame:(CGRect)frame withLocation:(CLLocation*)the_location;
 -(void)changeCenter:(CLLocation*)the_location;
 -(void)updateCriteriaWithMapPosition;

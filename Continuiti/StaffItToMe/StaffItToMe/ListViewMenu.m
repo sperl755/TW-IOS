@@ -74,6 +74,23 @@
 {
     search_bar_text.center = CGPointMake(search_bar_text.center.x, search_bar_text.center.y - 150);
     search_bar_background.center = CGPointMake(search_bar_background.center.x, search_bar_background.center.y - 150);
+    if (clear_text_x == nil)
+    {
+        clear_text_x = [UIButton buttonWithType:UIButtonTypeCustom];
+        [clear_text_x setImage:[UIImage imageNamed:@"search_x"] forState:UIControlStateNormal];
+        clear_text_x.frame = CGRectMake(search_bar_text.frame.origin.x + search_bar_text.frame.size.width - 26, search_bar_text.frame.origin.y - 1, 20, 20);
+        [clear_text_x addTarget:self action:@selector(clearSearchBarText) forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:clear_text_x];
+    }
+    else
+    {
+        clear_text_x.center = CGPointMake(clear_text_x.center.x, clear_text_x.center.y - 150);
+        clear_text_x.hidden = NO;
+    }
+}
+-(void)clearSearchBarText
+{
+    search_bar_text.text = @"";
 }
 -(BOOL)checkMatchItem:(NSString*)item withPhrase:(NSString*)phrase
 {
@@ -149,6 +166,8 @@
     {
         search_bar_text.center = CGPointMake(search_bar_text.center.x, search_bar_text.center.y + 150);
         search_bar_background.center = CGPointMake(search_bar_background.center.x, search_bar_background.center.y + 150);
+        clear_text_x.center = CGPointMake(clear_text_x.center.x, clear_text_x.center.y + 150);
+        clear_text_x.hidden = YES;
         [search_bar_text resignFirstResponder];
         [self filterTable];
     }
@@ -178,15 +197,10 @@
         }
     }
     
-    //Get Job Information
-    //show a alertview that we are accessing the credentials and talking to the server.
-    load_message = [[UIAlertView alloc] initWithTitle:@"Loading..." message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:nil];
-    [load_message show];
-    UIActivityIndicatorView *active = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-    active.center = CGPointMake(load_message.bounds.size.width / 2, load_message.bounds.size.height - 40);
-    [active startAnimating];
-    [load_message addSubview:active];
-    [active release];
+    //show that we are loading the information about the job
+    load_view = [[LoadingView alloc] initWithFrame:CGRectMake(0, -100, 320, 480)];
+    [self addSubview:load_view];
+    
     
     NSMutableString *job_info_url = [[[NSMutableString alloc] initWithString:@"http://helium.staffittome.com/apis/"] autorelease];
     [job_info_url appendString:[NSString stringWithFormat:@"%d", [[delegate.user_state_information.job_array objectAtIndex:delegate.user_state_information.current_job_in_array] job_id]]];
@@ -206,7 +220,7 @@
 }
 -(void)requestFinished:(ASIHTTPRequest *)request
 {
-    [load_message dismissWithClickedButtonIndex:0 animated:YES];
+    [load_view removeFromSuperview];
     NSDictionary *request_info = [NSDictionary dictionaryWithObject:[request responseString] forKey:@"responseString"];
     printf("\n\n\nThis is stuff: %s", [[request responseString] UTF8String]);
     [[NSNotificationCenter defaultCenter] postNotificationName:@"jumpToJobDetail" object:self userInfo:request_info];

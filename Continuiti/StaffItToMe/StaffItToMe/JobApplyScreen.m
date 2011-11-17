@@ -148,7 +148,7 @@ static NSString *job_apply_address = @"http://hydrogen.xen.exoware.net:3000/apis
 }
 -(void)requestFinished:(ASIHTTPRequest *)request
 {
-    [load_message dismissWithClickedButtonIndex:0 animated:YES];
+    [load_view removeFromSuperview];
     if ([[request responseString] isEqualToString:@"Application has been successfully submitted."])
     {
         UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Congratulations!" message:@"Your application was succesfully submitted!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
@@ -181,13 +181,9 @@ static NSString *job_apply_address = @"http://hydrogen.xen.exoware.net:3000/apis
     [request setTimeOutSeconds:30];
     [request setDelegate:self];
     [request startAsynchronous];
-    //show a alertview that we are accessing the credentials and talking to the server.
-    load_message = [[UIAlertView alloc] initWithTitle:@"Loading..." message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:nil];
-    [load_message show];
-    UIActivityIndicatorView *active = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-    active.center = CGPointMake(load_message.bounds.size.width / 2, load_message.bounds.size.height - 40);
-    [active startAnimating];
-    [load_message addSubview:active];
+    
+    load_view = [[LoadingView alloc] initWithFrame:CGRectMake(0, -50, 320, 480)];
+    [self.view addSubview:load_view];
 }
 -(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {

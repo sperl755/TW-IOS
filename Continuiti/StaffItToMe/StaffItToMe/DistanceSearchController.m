@@ -48,7 +48,14 @@
         return;
     }
     StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate];
-    app_delegate.user_state_information.distance_search_type = [list_of_industries objectAtIndex:indexPath.row-1];
+    if ([[list_of_industries objectAtIndex:indexPath.row-1] isEqualToString:@"All"])
+    {
+        app_delegate.user_state_information.distance_search_type = @"";
+    }
+    else
+    {
+        app_delegate.user_state_information.distance_search_type = [list_of_industries objectAtIndex:indexPath.row-1];   
+    }
     [search_table reloadData];
     
     //Pop to root view controller.
@@ -73,7 +80,7 @@
         my_category = [[CustomCategoryCell alloc] initWithFrame:CGRectMake(0, 0, 0, 0) andCategory:[list_of_industries objectAtIndex:indexPath.row-1] andDetail:@""];
         [my_category hideArrow];
         StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate];
-        if ([[list_of_industries objectAtIndex:indexPath.row-1] isEqualToString:app_delegate.user_state_information.distance_search_type])
+        if ([[list_of_industries objectAtIndex:indexPath.row-1] isEqualToString:app_delegate.user_state_information.distance_search_type] || ([[list_of_industries objectAtIndex:indexPath.row-1] isEqualToString:@"All"] && [app_delegate.user_state_information.distance_search_type isEqualToString:@""]))
         {
             [my_category addCheckmark];
         }

@@ -24,6 +24,7 @@
     UIButton *option_button;
     UIImageView *seperator_view;
     
+    LoadingView *load_view;
     UIAlertView *load_message;
     
 	//0 means not anything 1 means map 2 means list

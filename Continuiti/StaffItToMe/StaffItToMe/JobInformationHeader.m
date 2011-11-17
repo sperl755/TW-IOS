@@ -101,7 +101,7 @@ static NSString *job_company_info_address = @"https://helium.staffittome.com/api
 -(void)requestFinished:(ASIHTTPRequest *)request
 {
     printf("\n\n\n\n\n\nThis is the application response: %s\n\n", [[request responseString] UTF8String]);
-    [load_message dismissWithClickedButtonIndex:0 animated:YES];
+    [load_view removeFromSuperview];
     if (company_information)
     {
         [delegate respondToCompanyTouch:[request responseString]];
@@ -161,13 +161,8 @@ static NSString *job_company_info_address = @"https://helium.staffittome.com/api
     [request setTimeOutSeconds:30];
     [request setDelegate:self];
     [request startAsynchronous];
-    //show a alertview that we are accessing the credentials and talking to the server.
-    load_message = [[UIAlertView alloc] initWithTitle:@"Loading..." message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:nil];
-    [load_message show];
-    UIActivityIndicatorView *active = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-    active.center = CGPointMake(load_message.bounds.size.width / 2, load_message.bounds.size.height - 40);
-    [active startAnimating];
-    [load_message addSubview:active];
+    load_view = [[LoadingView alloc] initWithFrame:CGRectMake(0, -50, 320, 480)];
+    [self.superview addSubview:load_view];
 }
 /*
 // Only override drawRect: if you perform custom drawing.
