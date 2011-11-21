@@ -12,6 +12,7 @@
 #import "UserSummaryProfileModule.h"
 #import "UserCapabilitiesProfileModule.h"
 #import "UserExperienceProfileModule.h"
+#import "UserEducationsModule.h"
 @protocol ProfileViewProtocol <NSObject>
 -(void)goToFacebookBroadcast;
 @end;

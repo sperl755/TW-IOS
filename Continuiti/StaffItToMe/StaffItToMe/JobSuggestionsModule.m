@@ -192,8 +192,8 @@ static NSString *job_suggestion_rl = @"https://helium.staffittome.com/apis/job_s
         job_two_name.text = @"";
         job_two_description.text = @"";
     }
-    
     information_loaded = YES;
+    [delegate finishedLoadingSuggestedJob];
 }
 -(void)scrollThroughJobs
 {

@@ -79,11 +79,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "StaffItToMe/InboxController.m"
-         timestampString = "343005242.687669"
+         timestampString = "343425844.561202"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "92"
-         endingLineNumber = "92"
+         startingLineNumber = "93"
+         endingLineNumber = "93"
          landmarkName = "-requestFinished:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -93,11 +93,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "StaffItToMe/InboxController.m"
-         timestampString = "343005242.687669"
+         timestampString = "343425844.561202"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "61"
-         endingLineNumber = "61"
+         startingLineNumber = "62"
+         endingLineNumber = "62"
          landmarkName = "-goToConversation:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -135,11 +135,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "StaffItToMe/ProfileViewController.h"
-         timestampString = "340532787.236764"
+         timestampString = "343424316.482601"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "28"
-         endingLineNumber = "28"
+         startingLineNumber = "29"
+         endingLineNumber = "29"
          landmarkName = "@interface ProfileViewController"
          landmarkType = "2">
       </FileBreakpoint>
@@ -203,11 +203,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "StaffItToMe/StaffOutMain.m"
-         timestampString = "343001189.952497"
+         timestampString = "343425714.321086"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "86"
-         endingLineNumber = "86"
+         startingLineNumber = "87"
+         endingLineNumber = "87"
          landmarkName = "-goToInbox"
          landmarkType = "5">
       </FileBreakpoint>
@@ -293,6 +293,48 @@
          startingLineNumber = "212"
          endingLineNumber = "212"
          landmarkName = "-setCheckedInWithTime:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "StaffItToMe/HomeScreen.m"
+         timestampString = "343604362.647184"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "124"
+         endingLineNumber = "124"
+         landmarkName = "-scrollViewDidEndDragging:willDecelerate:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "StaffItToMe/HomeScreen.m"
+         timestampString = "343604428.404976"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "83"
+         endingLineNumber = "83"
+         landmarkName = "-scrollViewDidScroll:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "StaffItToMe/PullRefreshHeader.m"
+         timestampString = "343604006.828218"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "44"
+         endingLineNumber = "44"
+         landmarkName = "-rotate:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

@@ -28,7 +28,8 @@
         nav_back.frame = CGRectMake(0, 0, 320, 43);
         nav_back.tag = 132;
         UIImageView *logo = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo"]];
-        logo.frame = CGRectMake(90, 10, 139, 21);
+        logo.frame = CGRectMake(50, 0, 200, 40);
+        logo.center = CGPointMake(320/2, logo.center.y);
         front_page = [[StaffOutFrontPage alloc] initWithNibName:@"StaffOutFrontPage" bundle:nil];
         front_page.delegate = self;
         nav_control = [[UINavigationController alloc] initWithRootViewController:front_page];

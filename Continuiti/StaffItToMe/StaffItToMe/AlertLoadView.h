@@ -13,7 +13,7 @@
 {
     UIImageView *load_background;
     UITextView *text_view;
-    
+    UIButton *remove_me;
 }
 - (id)initWithFrame:(CGRect)frame andText:(NSString*)the_string;
 

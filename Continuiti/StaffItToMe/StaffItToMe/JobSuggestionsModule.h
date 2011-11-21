@@ -10,6 +10,7 @@
 #import "ASIFormDataRequest.h"
 @protocol JobSuggestionProtocol <NSObject>
 -(void)respondToSuggestionSelection;
+-(void)finishedLoadingSuggestedJob;
 @end
 
 @interface JobSuggestionsModule : UIView 

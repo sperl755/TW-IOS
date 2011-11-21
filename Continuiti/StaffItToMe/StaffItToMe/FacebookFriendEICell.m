@@ -93,12 +93,10 @@ static NSString *endorse_link = @"https://helium.staffittome.com/apis/endorse";
 }
 -(void)sendEndorsement
 {
-    load_message = [[UIAlertView alloc] initWithTitle:@"Loading..." message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:nil];
-    [load_message show];
-    UIActivityIndicatorView *active = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-    active.center = CGPointMake(load_message.bounds.size.width / 2, load_message.bounds.size.height - 40);
-    [active startAnimating];
-    [load_message addSubview:active];
+    //Show that they are loading the endorsement
+    load_view = [[LoadingView alloc] initWithFrame:CGRectMake(0, -150, 320, 480)];
+    [self.superview addSubview:load_view];
+    
     
     StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate];
     //Perform the accessing of the server.
@@ -116,15 +114,18 @@ static NSString *endorse_link = @"https://helium.staffittome.com/apis/endorse";
 }
 -(void)request:(FBRequest *)request didLoad:(id)result
 {
-    UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Posted" message:@"You have succesfully invited your friend!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    [message show];
-    [message release];
+    AlertLoadView *alert = [[AlertLoadView alloc] initWithFrame:CGRectMake(0, -150, 320, 480) andText:@"You have succesfully invited your friend!"];
+    [self.superview addSubview:alert];
 }
 -(void)request:(FBRequest *)request didFailWithError:(NSError *)error
 {
     UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Unable to post" message:@"Unable to send request, user could have posting turned off!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
     [message show];
     [message release];
+}
+-(void)requestFinished:(ASIHTTPRequest *)request
+{
+    [load_view removeFromSuperview];
 }
 
 /*
@@ -146,7 +147,6 @@ static NSString *endorse_link = @"https://helium.staffittome.com/apis/endorse";
     [friend_one_endorse_btn release];
     [friend_facebook_id release];
     [facebook release];
-    [load_message release];
     [super dealloc];
 }
 

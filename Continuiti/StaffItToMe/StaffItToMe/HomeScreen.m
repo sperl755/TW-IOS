@@ -27,6 +27,7 @@
         module_array = [[NSArray alloc] initWithArray:[NSArray arrayWithObjects:my_header, spam_friends, job_suggests, nil]];
         [spam_friends release];
         [job_suggests release];
+        
     }
     return self;
 }
@@ -64,7 +65,77 @@
     
     my_table_view.allowsSelection = NO;
     my_table_view.backgroundColor = [UIColor clearColor];
+    refresh_header = [[PullRefreshHeader alloc] initWithFrame:CGRectMake(0, -70, 320, 70)];
+    [my_table_view addSubview:refresh_header];
     
+}
+-(void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+    printf("Bega");
+}
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    printf("Scrolling");
+    if ([refresh_header isLoaded])
+    {
+        my_table_view.contentOffset = CGPointMake(0, -refresh_header.frame.size.height);
+        my_table_view.userInteractionEnabled = NO;
+        printf(";alksjdf;laksdjf;laskdjf;alksdjf;laskdjf");
+        return;
+    }
+    if (![refresh_header isLoaded])
+    {
+        [refresh_header rotate:my_table_view.contentOffset];
+        return;
+    }
+}
+-(void)request:(FBRequest *)request didLoad:(id)result
+{
+    //Get the facebook friends
+    StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate];
+    [app_delegate.user_state_information.my_facebook_friends removeAllObjects];
+    NSMutableArray *dciont = [[result objectForKey:@"friends"] objectForKey:@"data"];
+    for (int i = 0; i < dciont.count; i++)
+    {
+        FacebookFriend *friend = [[FacebookFriend alloc] init];
+        friend.friend_id = [[dciont objectAtIndex:i] objectForKey:@"id"];
+        friend.name = [[dciont objectAtIndex:i] objectForKey:@"name"];
+        [app_delegate.user_state_information.my_facebook_friends addObject:friend];
+        [friend release];
+    }
+    
+    //Reset the screen
+    im_available = YES;
+    SpamYourFriends *spam_friends = [[SpamYourFriends alloc] init];
+    JobSuggestionsModule *job_suggests = [[JobSuggestionsModule alloc] init];
+    job_suggests.delegate = self;
+    my_header = [[UserInformationHeader alloc] init];
+    my_header.delegate = self;
+    module_array = [[NSArray alloc] initWithArray:[NSArray arrayWithObjects:my_header, spam_friends, job_suggests, nil]];
+    [spam_friends release];
+    [job_suggests release];
+}
+-(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
+{
+    if ([refresh_header isLoaded])
+    {
+        my_table_view.contentOffset = CGPointMake(0, -refresh_header.frame.size.height);
+        my_table_view.userInteractionEnabled = NO;
+        facebook = [[Facebook alloc] initWithAppId:@"187212574660004"];
+        facebook.accessToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"FBAccessTokenKey"];
+        facebook.expirationDate = [[NSUserDefaults standardUserDefaults] objectForKey:@"FBExpirationDateKey"];
+        NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"friends, first_name, last_name, id, locale, gender, birthday, email, link, name", @"fields", nil];
+        [facebook requestWithGraphPath:@"me" andParams:parameters andDelegate:self];
+    }
+    printf("end");
+}
+-(void)finishedLoadingSuggestedJob
+{
+    [refresh_header reset];
+    [my_table_view reloadData];
+    my_table_view.contentOffset = CGPointMake(0, 0);
+    my_table_view.userInteractionEnabled = YES; 
+    requesting = NO;
 }
 -(void)reloadTableData
 {

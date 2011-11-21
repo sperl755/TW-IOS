@@ -18,7 +18,7 @@
     UIButton *friend_one_invite_btn;
     UIButton *friend_one_endorse_btn;
     NSString *friend_facebook_id;
-    UIAlertView *load_message;
+    LoadingView *load_view;
     Facebook *facebook;
 }
 

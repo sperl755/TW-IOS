@@ -31,6 +31,7 @@
         text_view = [[UITextView alloc] initWithFrame:CGRectMake((frame.size.width/2) - 75/2, (frame.size.height/2) - 75/2, 0, 0)];
         text_view.center = load_background.center;
         text_view.text = the_string;
+        text_view.editable = NO;
         text_view.backgroundColor = [UIColor clearColor];
         text_view.textColor = [UIColor whiteColor];
         [self addSubview:text_view];
@@ -45,10 +46,19 @@
         load_background.center = CGPointMake(frame.size.width/2, frame.size.height/2);
         text_view.frame = CGRectMake((frame.size.width/2) - 75/2, (frame.size.height/2) - 75/2, 75, 75);
         [UIView commitAnimations];
+        
+        remove_me = [UIButton buttonWithType:UIButtonTypeCustom];
+        remove_me.frame = CGRectMake((frame.size.width/2)-(frame.size.width * BackgroundWidth)/2,  load_background.frame.size.height  - 25+ ((frame.size.height/2)-(frame.size.height*BackgroundHeight)/2), frame.size.width * BackgroundWidth, 100*BackgroundHeight);
+        [remove_me setBackgroundImage:[UIImage imageNamed:@"loading_spinner_bg"] forState:UIControlStateNormal];
+        [self addSubview:remove_me];
+        [remove_me addTarget:self action:@selector(removeMyselfFromView) forControlEvents:UIControlEventTouchUpInside];
     }
     return self;
 }
-
+-(void)removeMyselfFromView
+{
+    [self removeFromSuperview];
+}
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
@@ -60,6 +70,9 @@
 
 - (void)dealloc
 {
+    [load_background release];
+    [text_view release];
+    [remove_me release];
     [super dealloc];
 }
 

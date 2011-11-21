@@ -43,7 +43,8 @@
     nav_back.frame = CGRectMake(0, 0, 320, 43);
     nav_back.tag = 132;
     UIImageView *logo = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo"]];
-    logo.frame = CGRectMake(90, 10, 139, 21);
+    logo.frame = CGRectMake(50, 0, 200, 40);
+    logo.center = CGPointMake(320/2, logo.center.y);
     //This is extremely important. DO NOT CHANGE THESE LINES these are for
     //IOS 5 COMPATIBILITY ISSUES
     [nav_control.navigationBar insertSubview:nav_back atIndex:1];

@@ -115,10 +115,12 @@
     NSDictionary *response_data = [[request responseString] JSONValue];
     NSArray *capability_array = [response_data objectForKey:@"capabilities"];
     NSArray *experiences_array = [response_data objectForKey:@"experiences"];
+    NSArray *education_array = [response_data objectForKey:@"educations"];
     //Fill Modules with recieved data
     UserSummaryProfileModule *user_summary = [[UserSummaryProfileModule alloc] initWithString:[response_data objectForKey:@"summary"]];
     UserCapabilitiesProfileModule *user_capabilities = [[UserCapabilitiesProfileModule alloc] initWithArray:capability_array];
     UserExperienceProfileModule *user_experience = [[UserExperienceProfileModule alloc] initWithArray:experiences_array];
+    UserEducationsModule *user_education = [[UserEducationsModule alloc] initWithArray:education_array];
     
     
     logout_button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
@@ -126,7 +128,7 @@
     logout_button.frame = CGRectMake(5, 0, 300, 55);
     [logout_button addTarget:self action:@selector(logUserOut) forControlEvents:UIControlEventTouchUpInside];
     
-    module_array = [[NSArray alloc] initWithArray:[NSArray arrayWithObjects:my_header, user_summary, user_capabilities, user_experience, logout_button, nil]];
+    module_array = [[NSArray alloc] initWithArray:[NSArray arrayWithObjects:my_header, user_summary, user_capabilities, user_experience, user_education, logout_button, nil]];
     
     my_table_view = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 370)];
     my_table_view.delegate = self;

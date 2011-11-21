@@ -13,12 +13,14 @@
 #import "UISwitch-Extended.h"
 #import "ASSwitch.h"
 #import "UserInformationHeader.h"
+#import "PullRefreshHeader.h"
+#import "Facebook.h"
 @protocol HomeScreenProtocol <NSObject>
 -(void)goToFaceBookBroadcast;
 -(void)respondToSuggestedJob;
 @end
 
-@interface HomeScreen : UIViewController <ASSwitchDelegateProtocol, UserInfoHeaderProtocol, JobSuggestionProtocol>
+@interface HomeScreen : UIViewController <ASSwitchDelegateProtocol, UserInfoHeaderProtocol, JobSuggestionProtocol, UIScrollViewDelegate, FBRequestDelegate>
 {
     IBOutlet UIButton *im_available_btn;
     BOOL im_available;
@@ -32,6 +34,9 @@
     IBOutlet UITableView *my_table_view;
     UserInformationHeader *my_header;
     NSArray *module_array;
+    PullRefreshHeader *refresh_header;
+    Facebook *facebook;
+    BOOL requesting;
 }
 -(IBAction)goToFriendBroadcast;
 -(IBAction)changeFacebookPeeps;
