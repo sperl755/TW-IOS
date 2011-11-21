@@ -71,16 +71,13 @@
 }
 -(void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
-    printf("Bega");
 }
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    printf("Scrolling");
     if ([refresh_header isLoaded])
     {
         my_table_view.contentOffset = CGPointMake(0, -refresh_header.frame.size.height);
         my_table_view.userInteractionEnabled = NO;
-        printf(";alksjdf;laksdjf;laskdjf;alksdjf;laskdjf");
         return;
     }
     if (![refresh_header isLoaded])
@@ -127,7 +124,6 @@
         NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"friends, first_name, last_name, id, locale, gender, birthday, email, link, name", @"fields", nil];
         [facebook requestWithGraphPath:@"me" andParams:parameters andDelegate:self];
     }
-    printf("end");
 }
 -(void)finishedLoadingSuggestedJob
 {

@@ -11,6 +11,7 @@
 #import "MyJobsModule.h"
 #import "UserInformationHeader.h"
 #import "JobApplicationsModule.h"
+#import "PullRefreshHeader.h"
 
 @protocol JobAndApplicationProtocol <NSObject>
 -(void)goToFacebookBroadcast;
@@ -18,7 +19,7 @@
 -(void)goToCheckinWithJobArrayPosition:(int)the_array_position;
 @end
 
-@interface MyJobsAndApplications : UIViewController <UserInfoHeaderProtocol, MyJobsModuleProtocol, UITableViewDelegate, UITableViewDataSource, JobApplicationModuleProtocol>
+@interface MyJobsAndApplications : UIViewController <UserInfoHeaderProtocol, MyJobsModuleProtocol, UITableViewDelegate, UITableViewDataSource, JobApplicationModuleProtocol, UIScrollViewDelegate>
 {
     BOOL im_available;
     UIImageView *background;
@@ -26,6 +27,7 @@
     UITableView *my_table_view;
     NSArray *module_array;
     MyJobsModule *my_jobs_module;
+    PullRefreshHeader *refresh_header;
 }
 @property (nonatomic, retain) id <JobAndApplicationProtocol> delegate;
 @end
