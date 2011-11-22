@@ -24,8 +24,7 @@
     UIButton *my_connection_button;
     UILabel *connections_label;
     UIImageView *my_available_switch_background;
-    
-    UIAlertView *load_message;
+    LoadingView *load_view;
 }
 
 -(id)initWithPos:(int)the_position;

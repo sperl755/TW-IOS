@@ -190,7 +190,7 @@
     StaffItToMeAppDelegate *delegate = (StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate];
     for (int i = 0; i < delegate.user_state_information.job_array.count; i++)
     {
-        if ([[table_data objectAtIndex:indexPath.row] job_id] -1 == [[delegate.user_state_information.job_array objectAtIndex:i] job_id])
+        if ([[table_data objectAtIndex:indexPath.row] job_id] == [[delegate.user_state_information.job_array objectAtIndex:i] job_id])
         {
             delegate.user_state_information.current_job_in_array = i;
             break;

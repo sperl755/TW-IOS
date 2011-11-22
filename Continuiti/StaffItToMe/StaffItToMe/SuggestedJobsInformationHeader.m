@@ -21,7 +21,7 @@ static NSString *job_apply_address = @"https://helium.staffittome.com/apis/submi
         header_shadow = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 10)];
         header_shadow.image = [UIImage imageNamed:@"header_shadow"];
         [self addSubview:header_shadow];
-        StaffItToMeAppDelegate *app_delegate = [[UIApplication sharedApplication] delegate];
+        StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*) [[UIApplication sharedApplication] delegate];
         //Setup the available switch background.
         my_available_switch_background = [[UIImageView alloc] initWithFrame:CGRectMake(250, 10, 70, 60)];
         [my_available_switch_background setImage:[UIImage imageNamed:@"distance_box"]];
@@ -95,7 +95,7 @@ static NSString *job_apply_address = @"https://helium.staffittome.com/apis/submi
 -(void)requestFinished:(ASIHTTPRequest *)request
 {
     printf("\n\n\n\n\n\nThis is the application response: %s\n\n", [[request responseString] UTF8String]);
-    [load_message dismissWithClickedButtonIndex:0 animated:YES];
+    [load_view removeFromSuperview];
     if ([[request responseString] isEqualToString:@"Application has been successfully submitted."])
     {
         UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Congratulations!" message:@"Your application was succesfully submitted!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
@@ -126,12 +126,8 @@ static NSString *job_apply_address = @"https://helium.staffittome.com/apis/submi
     [request setDelegate:self];
     [request startAsynchronous];
     //show a alertview that we are accessing the credentials and talking to the server.
-    load_message = [[UIAlertView alloc] initWithTitle:@"Loading..." message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:nil];
-    [load_message show];
-    UIActivityIndicatorView *active = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-    active.center = CGPointMake(load_message.bounds.size.width / 2, load_message.bounds.size.height - 40);
-    [active startAnimating];
-    [load_message addSubview:active];
+    load_view = [[LoadingView alloc] initWithFrame:CGRectMake(0, -50, 320, 480)];
+    [self.superview addSubview:load_view];
 }
 /*
  // Only override drawRect: if you perform custom drawing.

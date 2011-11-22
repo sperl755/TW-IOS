@@ -20,10 +20,9 @@
     UISearchBar *search_bar;
     
     
-    UIAlertView *load_message;
     NSMutableArray *pre_made_cells;
     
-    
+    LoadingView *load_view;
     NSMutableArray *original_people;
     NSMutableArray *original_facebook_ids;
     

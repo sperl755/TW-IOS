@@ -342,12 +342,8 @@
 -(void)sendProposal
 {
     
-    load_message = [[UIAlertView alloc] initWithTitle:@"Loading..." message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:nil];
-    [load_message show];
-    UIActivityIndicatorView *active = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-    active.center = CGPointMake(load_message.bounds.size.width / 2, load_message.bounds.size.height - 40);
-    [active startAnimating];
-    [load_message addSubview:active];
+    load_view = [[LoadingView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
+    [self.view addSubview:load_view];
     
     StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*) [[UIApplication sharedApplication] delegate];
     // Custom initialization
@@ -368,7 +364,7 @@
 }
 -(void)requestFinished:(ASIHTTPRequest *)request
 {
-    [load_message dismissWithClickedButtonIndex:0 animated:YES];
+    [load_view removeFromSuperview];
     UIAlertView *aler = [[UIAlertView alloc] initWithTitle:@"" message:@"Your proposal was submitted!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
     [aler show];
     [aler release];

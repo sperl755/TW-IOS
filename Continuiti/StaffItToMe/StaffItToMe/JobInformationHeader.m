@@ -138,12 +138,8 @@ static NSString *job_company_info_address = @"https://helium.staffittome.com/api
     [request setDelegate:self];
     [request startAsynchronous];
     //show a alertview that we are accessing the credentials and talking to the server.
-    load_message = [[UIAlertView alloc] initWithTitle:@"Loading..." message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:nil];
-    [load_message show];
-    UIActivityIndicatorView *active = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-    active.center = CGPointMake(load_message.bounds.size.width / 2, load_message.bounds.size.height - 40);
-    [active startAnimating];
-    [load_message addSubview:active];
+    load_view = [[LoadingView alloc] initWithFrame:CGRectMake(0, -50, 320, 480)];
+    [self.superview addSubview:load_view];
     company_information = YES;
 }
 -(void)sendApplication

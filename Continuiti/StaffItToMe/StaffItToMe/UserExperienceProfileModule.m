@@ -41,6 +41,10 @@
     if ((self = [super init]))
     {
         //Create Header
+        if (the_experiences.count < 1)
+        {
+            return self;
+        }
         UIImage *header_image = [UIImage imageNamed:@"module_header.png"];
         module_header_background = [[UIImageView alloc] initWithImage:header_image];
         module_header_background.frame = CGRectMake(5, 0, 310, 33);

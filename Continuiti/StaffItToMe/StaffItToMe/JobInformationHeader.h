@@ -25,7 +25,6 @@
     UILabel *connections_label;
     UIImageView *my_available_switch_background;
     LoadingView *load_view;
-    UIAlertView *load_message;
     BOOL company_information;
     
 }

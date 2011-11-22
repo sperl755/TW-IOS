@@ -46,8 +46,7 @@
     //Message Assets
     UITextView *message_txt;
     
-    UIAlertView *load_message;
-    
+    LoadingView *load_view;
     /**Testing
      */
     FindRightSpotArrows *positioning_arrows;

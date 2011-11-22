@@ -26,7 +26,7 @@
     JobDetailScreen *job_detail_screen;
     
     //ALertView for accessing the server
-    UIAlertView *load_message;
+    LoadingView *load_view;
 }
 -(void)properlyPopViewController;
 @end

@@ -15,12 +15,8 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        load_message = [[UIAlertView alloc] initWithTitle:@"Loading..." message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:nil];
-        [load_message show];
-        UIActivityIndicatorView *active = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-        active.center = CGPointMake(load_message.bounds.size.width / 2, load_message.bounds.size.height - 40);
-        [active startAnimating];
-        [load_message addSubview:active];
+        load_view = [[LoadingView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
+        [self.view addSubview:load_view];
 
         begin = 0;
         end = 24;
@@ -64,7 +60,7 @@
         search_dc.searchResultsDataSource = self;
         search_dc.searchResultsDelegate = self;
         [self.view addSubview:table];
-        [load_message dismissWithClickedButtonIndex:0 animated:YES];
+        [load_view removeFromSuperview];
         
     }
     return self;

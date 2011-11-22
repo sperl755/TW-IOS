@@ -63,7 +63,7 @@ static NSString *job_suggestion_rl = @"https://helium.staffittome.com/apis/job_s
         /*
          Set Frame of this module
          */
-        [self setFrame:CGRectMake(5, 0, 310, 130)];
+        [self setFrame:CGRectMake(5, 0, 310, 160)];
         current_suggested_job_position = 0;
     }
     return self;
@@ -194,6 +194,7 @@ static NSString *job_suggestion_rl = @"https://helium.staffittome.com/apis/job_s
     }
     information_loaded = YES;
     [delegate finishedLoadingSuggestedJob];
+    [self setFrame:CGRectMake(5, 0, 310, 160)];
 }
 -(void)scrollThroughJobs
 {
