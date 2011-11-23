@@ -17,4 +17,6 @@
 @property (nonatomic, retain) NSString *profile_pic;
 
 
+-(id)initWithCoder:(NSCoder*)aDecoder;
+-(void)encodeWithCoder:(NSCoder*)aCoder;
 @end

@@ -70,4 +70,7 @@
 @property (nonatomic) float longitude;
 @property (nonatomic) float latitude;
 
+-(id)initWithCoder:(NSCoder*)aDecoder;
+-(void)encodeWithCoder:(NSCoder*)aCoder;
+
 @end

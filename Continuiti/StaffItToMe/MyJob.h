@@ -35,4 +35,6 @@
 //An array of job billing history objects.
 @property (nonatomic, assign) NSMutableArray *job_history;
 
+-(id)initWithCoder:(NSCoder*)aDecoder;
+-(void)encodeWithCoder:(NSCoder*)aCoder;
 @end

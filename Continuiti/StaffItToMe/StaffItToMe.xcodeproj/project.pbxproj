@@ -236,6 +236,7 @@
 		4667980613B5131E00F20D79 /* TwitterBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = 4667980513B5131E00F20D79 /* TwitterBtn.m */; };
 		4667980913B5147200F20D79 /* TwitterNormal.png in Resources */ = {isa = PBXBuildFile; fileRef = 4667980713B5147200F20D79 /* TwitterNormal.png */; };
 		4667980A13B5147200F20D79 /* TwitterPressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 4667980813B5147200F20D79 /* TwitterPressed.png */; };
+		46688E3F147CC405004D44E0 /* UIImage-Extended.m in Sources */ = {isa = PBXBuildFile; fileRef = 46688E3E147CC405004D44E0 /* UIImage-Extended.m */; };
 		4669D6BC13E8797300CAB975 /* FacebookButtonPressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 4669D6BA13E8797300CAB975 /* FacebookButtonPressed.png */; };
 		4669D6BE13E87BEA00CAB975 /* LoginBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 4669D6BD13E87BEA00CAB975 /* LoginBackground.png */; };
 		4669D6C313E88E8600CAB975 /* HomeScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 4669D6C113E88E8600CAB975 /* HomeScreen.m */; };
@@ -303,6 +304,7 @@
 		46AFD8B7141B3E4A0063140C /* send_proposal_pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 46AFD8B5141B3E4A0063140C /* send_proposal_pressed.png */; };
 		46AFD8B8141B3E4A0063140C /* send_proposal.png in Resources */ = {isa = PBXBuildFile; fileRef = 46AFD8B6141B3E4A0063140C /* send_proposal.png */; };
 		46B1510213AF0DFA008B6644 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46B1510113AF0DFA008B6644 /* SystemConfiguration.framework */; };
+		46BB09BD147CC2010077320E /* CodeableUIImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 46BB09BC147CC2010077320E /* CodeableUIImage.m */; };
 		46BE4C9F141F194900898626 /* CustomGoogleMapBubble.m in Sources */ = {isa = PBXBuildFile; fileRef = 46BE4C9E141F194900898626 /* CustomGoogleMapBubble.m */; };
 		46D498831411F2EB00E28EDE /* JobSkillsModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 46D498821411F2EB00E28EDE /* JobSkillsModule.m */; };
 		46D4B52F147AD46300B70C2D /* PullRefreshHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 46D4B52E147AD46300B70C2D /* PullRefreshHeader.m */; };
@@ -676,6 +678,8 @@
 		4667980513B5131E00F20D79 /* TwitterBtn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwitterBtn.m; sourceTree = "<group>"; };
 		4667980713B5147200F20D79 /* TwitterNormal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TwitterNormal.png; sourceTree = "<group>"; };
 		4667980813B5147200F20D79 /* TwitterPressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TwitterPressed.png; sourceTree = "<group>"; };
+		46688E3D147CC405004D44E0 /* UIImage-Extended.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage-Extended.h"; path = "CoderBreadAndButters/UIImage-Extended.h"; sourceTree = "<group>"; };
+		46688E3E147CC405004D44E0 /* UIImage-Extended.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage-Extended.m"; path = "CoderBreadAndButters/UIImage-Extended.m"; sourceTree = "<group>"; };
 		4669D6BA13E8797300CAB975 /* FacebookButtonPressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FacebookButtonPressed.png; sourceTree = "<group>"; };
 		4669D6BD13E87BEA00CAB975 /* LoginBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LoginBackground.png; sourceTree = "<group>"; };
 		4669D6C013E88E8600CAB975 /* HomeScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeScreen.h; sourceTree = "<group>"; };
@@ -785,6 +789,8 @@
 		46AFD8B5141B3E4A0063140C /* send_proposal_pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = send_proposal_pressed.png; path = "Art Assets/Dali's PNG Files/send_proposal_pressed.png"; sourceTree = SOURCE_ROOT; };
 		46AFD8B6141B3E4A0063140C /* send_proposal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = send_proposal.png; path = "Art Assets/Dali's PNG Files/send_proposal.png"; sourceTree = SOURCE_ROOT; };
 		46B1510113AF0DFA008B6644 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		46BB09BB147CC2010077320E /* CodeableUIImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CodeableUIImage.h; path = CoderBreadAndButters/CodeableUIImage.h; sourceTree = "<group>"; };
+		46BB09BC147CC2010077320E /* CodeableUIImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CodeableUIImage.m; path = CoderBreadAndButters/CodeableUIImage.m; sourceTree = "<group>"; };
 		46BE4C9D141F194900898626 /* CustomGoogleMapBubble.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomGoogleMapBubble.h; sourceTree = "<group>"; };
 		46BE4C9E141F194900898626 /* CustomGoogleMapBubble.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomGoogleMapBubble.m; sourceTree = "<group>"; };
 		46D498811411F2EB00E28EDE /* JobSkillsModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JobSkillsModule.h; sourceTree = "<group>"; };
@@ -972,6 +978,7 @@
 		464F35A513B8F0C0003E9323 /* Data Classes */ = {
 			isa = PBXGroup;
 			children = (
+				46BB09B7147CC1100077320E /* CoderBreadAndButters */,
 				466A488313FD860F0093E509 /* ASSwitch.h */,
 				466A488413FD860F0093E509 /* ASSwitch.m */,
 				464F35A713B8F0E3003E9323 /* SmallJobs.h */,
@@ -1663,6 +1670,17 @@
 			name = Icon;
 			sourceTree = "<group>";
 		};
+		46BB09B7147CC1100077320E /* CoderBreadAndButters */ = {
+			isa = PBXGroup;
+			children = (
+				46BB09BB147CC2010077320E /* CodeableUIImage.h */,
+				46BB09BC147CC2010077320E /* CodeableUIImage.m */,
+				46688E3D147CC405004D44E0 /* UIImage-Extended.h */,
+				46688E3E147CC405004D44E0 /* UIImage-Extended.m */,
+			);
+			name = CoderBreadAndButters;
+			sourceTree = "<group>";
+		};
 		46D5315C1407151000820892 /* Global UI Classes */ = {
 			isa = PBXGroup;
 			children = (
@@ -2091,6 +2109,8 @@
 				4658EE1C1469996E00A8C0A2 /* AlertLoadView.m in Sources */,
 				46E556A814783BA6009F000E /* UserEducationsModule.m in Sources */,
 				46D4B52F147AD46300B70C2D /* PullRefreshHeader.m in Sources */,
+				46BB09BD147CC2010077320E /* CodeableUIImage.m in Sources */,
+				46688E3F147CC405004D44E0 /* UIImage-Extended.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

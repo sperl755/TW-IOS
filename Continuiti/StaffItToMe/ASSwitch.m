@@ -7,6 +7,9 @@
 //
 
 #import "ASSwitch.h"
+#define on_image_decode_key @"on_image_decode_key"
+#define off_image_decode_key @"off_image_decode_key"
+#define slider_decode_key @"slider_decode_key"
 
 
 @implementation ASSwitch

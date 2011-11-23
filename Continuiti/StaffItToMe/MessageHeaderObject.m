@@ -11,7 +11,14 @@
 #import "StaffItToMeAppDelegate.h"
 #import "JSON.h"
 #import "ConversationMessage.h"
-
+#define MY_DATE_KEY @"MYDATEKEY"
+#define BODY_KEY    @"MYBODYKEY"
+#define SUBJECT_KEY @"SUBJECTKEY"
+#define MY_RECIPIENT_ID_KEY @"MYRECIPEIENTID"
+#define MY_SENDER_ID_KEY    @"MYSENDERID"
+#define MY_NAME_SENDER_KEY  @"MYSENDERNAMEKEY"
+#define RECIPIENT_NAME_KEY  @"RECIPIENT_NAME_KEY"
+#define MESSAGE_IDS @"MYMESSAGEIDS"
 @implementation MessageHeaderObject
 @synthesize my_date;
 @synthesize my_body;
@@ -23,6 +30,33 @@
 @synthesize my_message_id;
 @synthesize my_conversations;
 
+-(id)initWithCoder:(NSCoder*)aDecoder
+{
+    if ((self = [super init]))
+    {
+        my_date = [[aDecoder decodeObjectForKey:MY_DATE_KEY] retain];
+        my_body = [[aDecoder decodeObjectForKey:BODY_KEY] retain];
+        my_subject = [[aDecoder decodeObjectForKey:SUBJECT_KEY] retain];
+        my_recipient_id = [[aDecoder decodeObjectForKey:MY_RECIPIENT_ID_KEY] retain];
+        my_sender_id = [[aDecoder decodeObjectForKey:MY_SENDER_ID_KEY] retain];
+        my_sender_name = [[aDecoder decodeObjectForKey:MY_NAME_SENDER_KEY] retain];
+        my_recipient_name = [[aDecoder decodeObjectForKey:RECIPIENT_NAME_KEY] retain];
+        my_message_id = [[aDecoder decodeObjectForKey:MESSAGE_IDS] retain];
+        
+    }
+    return self;
+}
+-(void)encodeWithCoder:(NSCoder*)aCoder
+{
+    [aCoder encodeObject:my_date forKey:MY_DATE_KEY];
+    [aCoder encodeObject:my_body forKey:BODY_KEY];
+    [aCoder encodeObject:my_subject forKey:SUBJECT_KEY];
+    [aCoder encodeObject:my_recipient_id forKey:MY_RECIPIENT_ID_KEY];
+    [aCoder encodeObject:my_sender_id forKey:MY_SENDER_ID_KEY];
+    [aCoder encodeObject:my_sender_name forKey:MY_NAME_SENDER_KEY];
+    [aCoder encodeObject:my_recipient_name forKey:RECIPIENT_NAME_KEY];
+    [aCoder encodeObject:my_message_id forKey:MESSAGE_IDS];
+}
 -(void)retrieveConversations
 {
     NSMutableString *the_url_String = [NSMutableString stringWithString:@"https://helium.staffittome.com/apis/"];

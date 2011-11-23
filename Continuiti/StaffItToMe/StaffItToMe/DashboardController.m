@@ -69,7 +69,7 @@ static NSString *staff_out_address = @"http://hydrogen.xen.exoware.net:3000/apis
         
         //nav_control.delegate = self;
         [self.view addSubview:nav_control.view];
-        staff_yourself = [[StaffYourself alloc] initWithNibName:@"StaffYourself" bundle:nil];
+        /*staff_yourself = [[StaffYourself alloc] initWithNibName:@"StaffYourself" bundle:nil];
         staff_yourself.title = @"Staff Yourself";
         staff_yourself.delegate = self;
         staff_out_1 = [[StaffOutSegment1 alloc] initWithNibName:@"StaffOutSegment1" bundle:nil];
@@ -80,7 +80,7 @@ static NSString *staff_out_address = @"http://hydrogen.xen.exoware.net:3000/apis
         staff_out_2.delegate = self;
         
         friend_facebook_broadcast = [[FriendFacebookBroadcast alloc] initWithNibName:@"FriendFacebookBroadcast" bundle:nil];
-        friend_facebook_broadcast.delegate = self;
+        friend_facebook_broadcast.delegate = self;*/
     }
     return self;
 }

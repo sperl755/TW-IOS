@@ -9,7 +9,20 @@
 #import "USERINFORMATIONANDAPPSTATE.h"
 #import "ASIFormDataRequest.h"
 #import "StaffItToMeAppDelegate.h"
-
+#define CURRENT_TAB_BAR_KEY @"current_tab_bar"
+#define USER_NAME_KEY @"User_Name"
+#define SESSION_KEY_KEY @"SessionKey"
+#define INDUSTRY_SEARCH_KEY @"IndustrySearchType"
+#define SALARY_SEARCH_KEY @"Salary_Search_type"
+#define DISTANCE_SEARCH_KEY @"Salary_Search_type"
+#define JOB_ARRAY_KEY @"jobArray"
+#define MY_JOB_ARRAY_KEY @"MYJOBARRAY"
+#define MY_JOB_SUGGESTED_ARRAY_KEY @"SuggestedJOBS"
+#define MY_FACEBOOK_FRIENDS_KEY @"Facebookfriendarraykey"
+#define MY_INBOX_MESSAGES_KEY   @"MYinboxarraykey"
+#define MY_SENT_MESSAGES_KEY    @"MYsentMessagesKey"
+#define PICTURE_URL_KEY    @"MYPICTUREURLKEY"
+#define MY_USER_INFORMATION_KEY @"MYUSERInFORMATION"
 
 @implementation USERINFORMATIONANDAPPSTATE
 @synthesize currentTabBar;
@@ -34,6 +47,95 @@
 @synthesize current_suggested_job_in_array;
 static NSString *user_locale_address = @"https://hydrogen.xen.exoware.net:3000/apis/available";
 
+-(id)initWithCoder:(NSCoder*)aDecoder
+{
+    if ((self = [super init]))
+    {
+        currentTabBar = [[aDecoder decodeObjectForKey:CURRENT_TAB_BAR_KEY] retain];   
+        userName = [[aDecoder decodeObjectForKey:USER_NAME_KEY] retain];
+        sessionKey = [[aDecoder decodeObjectForKey:SESSION_KEY_KEY] retain];
+        industry_search_type = [[aDecoder decodeObjectForKey:INDUSTRY_SEARCH_KEY] retain];
+        salary_search_type = [[aDecoder decodeObjectForKey:SALARY_SEARCH_KEY] retain];
+        picture_url = [[aDecoder decodeObjectForKey:PICTURE_URL_KEY] retain];
+        distance_search_type = [[aDecoder decodeObjectForKey:DISTANCE_SEARCH_KEY] retain];
+        my_user_info = [[aDecoder decodeObjectForKey:MY_USER_INFORMATION_KEY] retain];
+        if ([aDecoder decodeObjectForKey:JOB_ARRAY_KEY] != nil){
+            job_array = [[aDecoder decodeObjectForKey:JOB_ARRAY_KEY] retain];
+        }else{
+            printf("NIL AS HECK");
+        }
+        if ([aDecoder decodeObjectForKey:MY_JOB_SUGGESTED_ARRAY_KEY] != nil){
+            my_suggested_jobs = [[aDecoder decodeObjectForKey:MY_JOB_SUGGESTED_ARRAY_KEY] retain];
+        }else{
+            printf("NIL AS HECK");
+        }
+        if ([aDecoder decodeObjectForKey:MY_JOB_ARRAY_KEY] != nil){
+            my_jobs = [[aDecoder decodeObjectForKey:MY_JOB_ARRAY_KEY] retain];
+        }else{
+            printf("NIL AS HECK");
+        }
+        if ([aDecoder decodeObjectForKey:MY_FACEBOOK_FRIENDS_KEY] != nil){
+            my_facebook_friends = [[aDecoder decodeObjectForKey:MY_FACEBOOK_FRIENDS_KEY] retain];
+        }else{
+            printf("NIL AS HECK");
+        }
+        if ([aDecoder decodeObjectForKey:MY_INBOX_MESSAGES_KEY] != nil){
+            my_inbox_messages = [[aDecoder decodeObjectForKey:MY_INBOX_MESSAGES_KEY] retain];
+        }else{
+            printf("NIL AS HECK");
+        }
+        if ([aDecoder decodeObjectForKey:MY_SENT_MESSAGES_KEY] != nil){
+            my_sent_messages = [[aDecoder decodeObjectForKey:MY_SENT_MESSAGES_KEY] retain];
+        }else{
+            printf("NIL AS HECK");
+        }
+        local_manager = [[LocationManager alloc] init];
+        local_manager.delegate = self;
+        im_available = YES;
+    }
+    return self;
+}
+-(void)encodeWithCoder:(NSCoder*)aCoder
+{
+    [aCoder encodeObject:currentTabBar forKey:CURRENT_TAB_BAR_KEY];
+    [aCoder encodeObject:userName forKey:USER_NAME_KEY];
+    [aCoder encodeObject:sessionKey forKey:SESSION_KEY_KEY];
+    [aCoder encodeObject:industry_search_type forKey:INDUSTRY_SEARCH_KEY];
+    [aCoder encodeObject:salary_search_type forKey:SALARY_SEARCH_KEY];
+    [aCoder encodeObject:distance_search_type forKey:DISTANCE_SEARCH_KEY];
+    [aCoder encodeObject:picture_url forKey:PICTURE_URL_KEY];
+    [aCoder encodeObject:my_user_info forKey:MY_USER_INFORMATION_KEY];
+    if (job_array != nil){
+        [aCoder encodeObject:job_array forKey:JOB_ARRAY_KEY];
+    }else{
+        printf("Job array is nil");
+    }
+    if (my_suggested_jobs != nil){
+        [aCoder encodeObject:my_suggested_jobs forKey:MY_JOB_SUGGESTED_ARRAY_KEY];
+    }else{
+        printf("Job array is nil");
+    }
+    if (my_jobs != nil){
+        [aCoder encodeObject:my_jobs forKey:MY_JOB_ARRAY_KEY];
+    }else{
+        printf("Job array is nil");
+    }
+    if (my_facebook_friends != nil){
+        [aCoder encodeObject:my_facebook_friends forKey:MY_FACEBOOK_FRIENDS_KEY];
+    }else{
+        printf("Job array is nil");
+    }
+    if (my_inbox_messages != nil){
+        [aCoder encodeObject:my_inbox_messages forKey:MY_INBOX_MESSAGES_KEY];
+    }else{
+        printf("Job array is nil");
+    }
+    if (my_sent_messages != nil){
+        [aCoder encodeObject:my_sent_messages forKey:MY_SENT_MESSAGES_KEY];
+    }else{
+        printf("Job array is nil");
+    }
+}
 -(id)init
 {
     if ((self = [super init]))

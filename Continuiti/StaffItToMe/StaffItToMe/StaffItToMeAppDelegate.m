@@ -29,9 +29,21 @@ static NSString *staff_it_to_me_address = @"www.google.com";
 { 
     //test to see whether this IOS device is even connected.
     [self connectionFunction];
-    //allocate and create the user data model
-    user_state_information = [[USERINFORMATIONANDAPPSTATE alloc] init];
     
+    if ([NSKeyedUnarchiver unarchiveObjectWithFile:[NSHomeDirectory() stringByAppendingPathComponent:@"Documents/appstate.archive"]] != nil && [[NSUserDefaults standardUserDefaults] objectForKey:@"FBExpirationDateKey"] != nil && [[NSUserDefaults standardUserDefaults] objectForKey:@"FBAccessTokenKey"] != nil)
+    {
+        user_state_information = [NSKeyedUnarchiver unarchiveObjectWithFile:[NSHomeDirectory() stringByAppendingPathComponent:@"Documents/appstate.archive"]];
+        my_available_switch_array = [[NSMutableArray alloc] initWithCapacity:11];
+        printf("%s", [user_state_information.currentTabBar UTF8String]);
+        [self goToMainApp];
+        return;
+    }
+    else
+    {
+        //allocate and create the user data model
+        user_state_information = [[USERINFORMATIONANDAPPSTATE alloc] init];
+        user_state_information.currentTabBar = @"Home";
+    }
     //Add Notification to go to the main app after login is confirmed.
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(goToMainApp) name:@"GoToMainApp" object:nil];
 	got_facebook_info  = NO;
@@ -63,6 +75,10 @@ static NSString *staff_it_to_me_address = @"www.google.com";
      Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
      If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
      */
+    
+    
+    NSString *write_path = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents/appstate.archive"] retain];
+    [NSKeyedArchiver archiveRootObject:user_state_information toFile:write_path];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
@@ -198,7 +214,7 @@ static NSString *staff_it_to_me_address = @"www.google.com";
     [tab_bar_controller.tabBar insertSubview:tab_background atIndex:1];
     
     tab_bar_controller.viewControllers = [NSArray arrayWithObjects:home, search, jobs, main_profile, broadcast, nil];
-    user_state_information.currentTabBar = @"Home";
+    
     if ([user_state_information.currentTabBar isEqualToString:@"FindWork"]) {
         tab_bar_controller.selectedViewController = search;
     }
@@ -221,7 +237,28 @@ static NSString *staff_it_to_me_address = @"www.google.com";
     tab_bar_controller.viewControllers = [NSArray arrayWithObjects:home, search, jobs, main_profile, broadcast, nil];
     if (viewController == search)
     {
+        user_state_information.currentTabBar = @"FindWork";
         [search properlyToRootViewController];
+    }
+    else if (viewController == jobs)
+    {
+        user_state_information.currentTabBar = @"MyJobs";
+    }
+    else if (viewController == broadcast)
+    {
+        user_state_information.currentTabBar = @"Profile";
+    }
+    else if (viewController == home)
+    {
+        user_state_information.currentTabBar = @"Home";
+    }
+    else if (viewController == main_profile)
+    {
+        user_state_information.currentTabBar = @"Inbox";
+    }
+    else if (viewController == my_messages_inbox)
+    {
+        user_state_information.currentTabBar = @"Messages";
     }
 }
 -(void)setCurrentTabBar:(NSString*)the_tab

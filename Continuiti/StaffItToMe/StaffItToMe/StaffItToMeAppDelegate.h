@@ -22,6 +22,7 @@
 #import "MessageSystemMain.h"
 #import "ProfileMain.h"
 #import "StaffOutMain.h"
+#import "FacebookFriendEICell.h"
 @class StaffItToMeViewController;
 
 @interface StaffItToMeAppDelegate : NSObject <UIApplicationDelegate,FBRequestDelegate, FBSessionDelegate, SA_OAuthTwitterEngineDelegate, SA_OAuthTwitterControllerDelegate, UITabBarControllerDelegate> {

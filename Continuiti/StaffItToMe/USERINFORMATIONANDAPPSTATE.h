@@ -25,6 +25,8 @@
     //BOOL im_available;
     
 }
+-(id)initWithCoder:(NSCoder*)aDecoder;
+-(void)encodeWithCoder:(NSCoder*)aCoder;
 -(void)getUserInformation:(NSString*)user_information;
 -(void)populateUserCapabilities;
 -(void)populateMyJobArrayWithJSONString:(NSString*)the_string;

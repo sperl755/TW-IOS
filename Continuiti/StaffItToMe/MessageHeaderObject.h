@@ -25,4 +25,6 @@
 -(id)initWithDate:(NSString*)the_date body:(NSString*)the_body subject:(NSString*)the_subject recipient_id:(NSString*)the_recipient_id sender_id:(NSString*)the_sender_id sender_name:(NSString*)the_sender_name recipient_name:(NSString*)the_recipient_name message_id:(NSString*)the_message_id;
 -(void)retrieveConversations;
 
+-(id)initWithCoder:(NSCoder*)aDecoder;
+-(void)encodeWithCoder:(NSCoder*)aCoder;
 @end

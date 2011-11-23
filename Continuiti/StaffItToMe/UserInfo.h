@@ -17,4 +17,6 @@
 @property (nonatomic, retain) NSString *last_name;
 @property (nonatomic, retain) NSString *full_name;
 @property int user_id;
+-(id)initWithCoder:(NSCoder*)aDecoder;
+-(void)encodeWithCoder:(NSCoder*)aCoder;
 @end

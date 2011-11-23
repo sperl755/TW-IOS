@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "Facebook.h"
-
+#import "CodeableUIImage.h"
 
 @interface FacebookFriendEICell : UIView <FBRequestDelegate> {
     UIImageView *module_row_one_background;
@@ -21,6 +21,9 @@
     LoadingView *load_view;
     Facebook *facebook;
 }
+/**EncoderTestingMethod*/
+-(NSString*)getFriendName;
+-(float)getWidth;
 
 -(id)initWithFriendName:(NSString*)friend_name friend_id:(NSString*)friend_id;
 @end

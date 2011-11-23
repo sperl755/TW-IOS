@@ -8,10 +8,70 @@
 
 #import "FacebookFriendEICell.h"
 #import "StaffItToMeAppDelegate.h"
-
+#define module_row_one_background_key @"module_row_one_background"
+#define friend_one_picture_key @"friend_one_picture"
+#define friend_one_label_key @"friend_one_label"
+#define friend_one_invite_key @"friend_one_invite"
+#define friend_one_endorse_key @"friend_one_endorse"
+#define friend_id_key @"friend_id_key"
 @implementation FacebookFriendEICell
 static NSString *endorse_link = @"https://helium.staffittome.com/apis/endorse";
-
+-(id)initWithCoder:(NSCoder *)aDecoder
+{
+    if ((self = [super init]))
+    {
+        facebook = [[Facebook alloc] initWithAppId:@"187212574660004"];
+        facebook.accessToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"FBAccessTokenKey"];
+        facebook.expirationDate = [[NSUserDefaults standardUserDefaults] objectForKey:@"FBExpirationDateKey"];
+        
+        //Create back
+        module_row_one_background = [[aDecoder decodeObjectForKey:module_row_one_background_key] retain];
+        module_row_one_background.frame = CGRectMake(0, 0, 310, 42);
+        [self addSubview:module_row_one_background];
+        
+        friend_one_picture = [[aDecoder decodeObjectForKey:friend_one_picture_key] retain];
+        [friend_one_picture setFrame:CGRectMake(module_row_one_background.frame.origin.x + 10, module_row_one_background.frame.origin.y + 8, 25, 25)];
+        [self addSubview:friend_one_picture];
+        
+        //add nice overlay to compliment photo
+        friend_one_overlay = [[UIImageView alloc] initWithFrame:friend_one_picture.frame];
+        friend_one_overlay.image = [UIImage imageNamed:@"50x50_overlay"];
+        [self addSubview:friend_one_overlay];
+        
+        //module_row_one_background = [[aDecoder decodeObjectForKey:module_row_one_background_key] retain];
+        //friend_one_picture = [[aDecoder decodeObjectForKey:friend_one_picture_key] retain];
+        friend_one_name = [[aDecoder decodeObjectForKey:friend_one_label_key] retain];
+        friend_one_name.backgroundColor = [UIColor clearColor];
+        [self addSubview:friend_one_name];
+        
+        friend_one_invite_btn = [[aDecoder decodeObjectForKey:friend_one_invite_key] retain];
+        [self addSubview:friend_one_invite_btn.imageView];
+        
+        friend_one_endorse_btn = [[aDecoder decodeObjectForKey:friend_one_endorse_key] retain];
+        [self addSubview:friend_one_endorse_btn];
+        
+        friend_facebook_id = [[aDecoder decodeObjectForKey:friend_id_key] retain];
+    }
+    return self;
+}
+-(void)encodeWithCoder:(NSCoder *)aCoder
+{
+    [aCoder encodeObject:module_row_one_background forKey:module_row_one_background_key];
+    [aCoder encodeObject:friend_one_picture forKey:friend_one_picture_key];
+    [aCoder encodeObject:friend_one_name forKey:friend_one_label_key];
+    [aCoder encodeObject:friend_one_invite_btn forKey:friend_one_invite_key];
+    [aCoder encodeObject:friend_one_endorse_btn forKey:friend_one_endorse_key];
+    [aCoder encodeObject:friend_facebook_id forKey:friend_id_key];
+}
+/**EncoderTestingMethod*/
+-(NSString*)getFriendName
+{
+    return friend_one_name.text;
+}
+-(float)getWidth
+{
+    return module_row_one_background.frame.size.height;
+}
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
