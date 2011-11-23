@@ -28,7 +28,7 @@
             [top_label appendString:@" at "];
             [top_label appendString:[[app_delegate.user_state_information.job_array objectAtIndex:the_position] company]];
         }
-        UILabel *top_txt = [[UILabel alloc] initWithFrame:CGRectMake(8, 5, 200, 20)];
+        UILabel *top_txt = [[UILabel alloc] initWithFrame:CGRectMake(8, 5, 170, 20)];
         //top_txt.textColor = [UIColor colorWithRed:49.0/255 green:72.0/255 blue:106.0/255 alpha:1];
         top_txt.backgroundColor = [UIColor clearColor];
         [top_txt setFont:[UIFont fontWithName:@"HelveticaNeueLTCom-Md" size:11]];
@@ -39,7 +39,7 @@
         NSMutableString *bottom_label = [[NSMutableString alloc] initWithString:[[app_delegate.user_state_information.job_array objectAtIndex:the_position] job_type_title]];
         [bottom_label appendString:@" / "];
         [bottom_label appendString:[[app_delegate.user_state_information.job_array objectAtIndex:the_position] industry_name]];
-        UILabel *bottom_txt = [[UILabel alloc] initWithFrame:CGRectMake(8, 22, 200, 20)];
+        UILabel *bottom_txt = [[UILabel alloc] initWithFrame:CGRectMake(8, 22, 170, 20)];
         bottom_txt.textColor = [UIColor colorWithRed:153.0/255 green:153.0/255 blue:153.0/255 alpha:1];
         bottom_txt.backgroundColor = [UIColor clearColor];
         [bottom_txt setFont:[UIFont fontWithName:@"HelveticaNeueLTCom-Md" size:9]];

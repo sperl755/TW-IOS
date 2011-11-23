@@ -11,6 +11,11 @@
 
 @implementation ListViewMenu
 
+/**
+ This will initalize the list view for loooking at jobs.
+ Primary Use of this class is displaying what is being seen on the Google map but in list view.
+ @variable frame - the frame of this class as the list view is a view.
+ */
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
@@ -59,7 +64,7 @@
         search_bar_background.image = [UIImage imageNamed:@"search_box"];
         [self addSubview:search_bar_background];
         
-        search_bar_text = [[UITextView alloc] initWithFrame:CGRectMake(search_bar_background.frame.origin.x, search_bar_background.frame.origin.y + 13, search_bar_background.frame.size.width - 30, search_bar_background.frame.size.height + 5)];
+        search_bar_text = [[UITextView alloc] initWithFrame:CGRectMake(search_bar_background.frame.origin.x + 2, search_bar_background.frame.origin.y + 13, search_bar_background.frame.size.width - 30, search_bar_background.frame.size.height + 5)];
         search_bar_text.delegate = self;
         search_bar_text.backgroundColor = [UIColor clearColor];
         [self addSubview:search_bar_text];
@@ -70,6 +75,12 @@
     }
     return self;
 }
+/**
+ This will listen for the search bar at the bottom of the screen to be clicked.
+ Upon click it will display keyboard change the search icon to an x icon and allow the
+ user to filter the jobs in the list.
+ @variable textView - the current text view that was clicked.
+ */
 -(void)textViewDidBeginEditing:(UITextView *)textView
 {
     search_bar_text.center = CGPointMake(search_bar_text.center.x, search_bar_text.center.y - 150);
@@ -77,8 +88,8 @@
     if (clear_text_x == nil)
     {
         clear_text_x = [UIButton buttonWithType:UIButtonTypeCustom];
-        [clear_text_x setImage:[UIImage imageNamed:@"search_x"] forState:UIControlStateNormal];
-        clear_text_x.frame = CGRectMake(search_bar_text.frame.origin.x + search_bar_text.frame.size.width - 26, search_bar_text.frame.origin.y - 1, 20, 20);
+        search_bar_background.image = [UIImage imageNamed:@"search_box_remove"];
+        clear_text_x.frame = CGRectMake(search_bar_text.frame.origin.x + search_bar_text.frame.size.width - 6, search_bar_text.frame.origin.y - 1, 20, 20);
         [clear_text_x addTarget:self action:@selector(clearSearchBarText) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:clear_text_x];
     }
@@ -88,10 +99,19 @@
         clear_text_x.hidden = NO;
     }
 }
+/**
+ This function is called by the invisible clear_text_x button.
+ It clears the search bar for convienience.
+ */
 -(void)clearSearchBarText
 {
     search_bar_text.text = @"";
 }
+/**
+ A simple algorithm that checks to see if a text (item) contains a pattern (phrase)
+ @variable item - the Text that is being searched through
+ @variable phrase - the pattern that is being looked for in the text.
+ */
 -(BOOL)checkMatchItem:(NSString*)item withPhrase:(NSString*)phrase
 {
     BOOL match = NO;
@@ -99,6 +119,10 @@
     match = [containsPredicate evaluateWithObject:item];
     return match;
 }
+/**
+ Filter table will reload the table with a filter if there is one and without.
+ ALWAYS USE FOR RELOADING TABLES DATA.
+ */
 -(void)filterTable
 {
     [table_data removeAllObjects];
@@ -165,6 +189,7 @@
     if ([text isEqualToString:@"\n"])
     {
         search_bar_text.center = CGPointMake(search_bar_text.center.x, search_bar_text.center.y + 150);
+        search_bar_background.image = [UIImage imageNamed:@"search_box"];
         search_bar_background.center = CGPointMake(search_bar_background.center.x, search_bar_background.center.y + 150);
         clear_text_x.center = CGPointMake(clear_text_x.center.x, clear_text_x.center.y + 150);
         clear_text_x.hidden = YES;
@@ -183,8 +208,22 @@
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [table_data count];
+    return [table_data count] + 1;
 }
+-(void)reloadMyJobTable
+{
+    [self filterTable];
+}
+-(NSString*)getFilterText
+{
+    return search_bar_text.text;
+}
+-(void)setFilterText:(NSString *)the_text
+{
+    search_bar_text.text = the_text;
+    [self filterTable];
+}
+
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     StaffItToMeAppDelegate *delegate = (StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate];
@@ -247,7 +286,7 @@
         [cell.contentView addSubview:my_jobs_label];
         return cell;
     }
-    JobDisplayCell *cell_information = [[[JobDisplayCell alloc] initWithFrame:CGRectMake(0, 0, 310, 33) pictureURL:@"" name:[[table_data objectAtIndex:indexPath.row] title] description:[[table_data objectAtIndex:indexPath.row] company] detail:[[table_data objectAtIndex:indexPath.row] compensation]] autorelease];
+    JobDisplayCell *cell_information = [[[JobDisplayCell alloc] initWithFrame:CGRectMake(0, 0, 310, 33) pictureURL:@"" name:[[table_data objectAtIndex:indexPath.row-1] title] description:[[table_data objectAtIndex:indexPath.row-1] company] detail:[[table_data objectAtIndex:indexPath.row-1] compensation]] autorelease];
     if (indexPath.row == table_data.count -1)
     {
         [cell_information setBackgroundImageToModuleRowLast];

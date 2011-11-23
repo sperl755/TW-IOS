@@ -39,12 +39,20 @@
     //Email Assets
     UILabel *subject_email_lbl;
     UITextField *email_text;
+    /**Odd variable. Basically detects whether this is the first 
+     time the person has touched this text so that the text
+     that was there before can act like a place holder.
+     This is the same for all bools with this naming convention.
+     */
+    BOOL email_text_touched;
     
     //SUbject assets
     UILabel *email_lbl;
     UITextField *subject_txt;
+    BOOL subject_text_touched;
     //Message Assets
     UITextView *message_txt;
+    BOOL message_text_touched;
     
     LoadingView *load_view;
     /**Testing

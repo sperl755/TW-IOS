@@ -181,7 +181,7 @@
     
     //Create Value Display
     my_value_display = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"SliderValueIndicator"]];
-    my_value_display.frame = CGRectMake(87, 30, 39.5, 29.5);
+    my_value_display.frame = CGRectMake(75, 30, 39.5, 29.5);
     [capability_view addSubview:my_value_display];
     
     //Create value of slider
@@ -373,6 +373,11 @@
 {
     if (message_txt == message_txt)
     {
+        if (!message_text_touched)
+        {
+            message_text_touched = YES;
+            message_txt.text = @"";
+        }
         message_txt.textColor = [UIColor colorWithRed:110.0/255 green:146.0/255 blue:212.0/255 alpha:1];
     }
     my_table_view.center = CGPointMake(my_table_view.center.x, my_table_view.center.y - 200);
@@ -397,10 +402,20 @@
 {
     if (textField == email_text)
     {
+        if (!email_text_touched)
+        {
+            email_text_touched = YES;
+            email_text.text = @"";
+        }
         email_text.textColor = [UIColor colorWithRed:110.0/255 green:146.0/255 blue:212.0/255 alpha:1];
     }
     else if (textField == subject_txt)
     {
+        if(!subject_text_touched)
+        {
+            subject_text_touched = YES;
+            subject_txt.text = @"";
+        }
         subject_txt.textColor = [UIColor colorWithRed:110.0/255 green:146.0/255 blue:212.0/255 alpha:1];
     }
 }

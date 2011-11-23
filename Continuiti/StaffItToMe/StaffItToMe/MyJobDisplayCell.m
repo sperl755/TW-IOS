@@ -13,6 +13,14 @@
 @implementation MyJobDisplayCell
 static NSString *my_checkin_checkout_url = @"https://helium.staffittome.com/apis/checkin_checkout";
 @synthesize delegate;
+/**
+ This will initailize a my job cell. A My job cell is a cell to go in a table view that both checks in and out, automatically and manually for you.
+ @variable frame - Frame of the object 
+ @variable the_url - Useless
+ @variable the_name - The name of the Job you are contracted to
+ @variable the_description - The description provided with the job
+ @variable the_position - The position in the global my job array that this cell belongs to.
+ */
 - (id)initWithFrame:(CGRect)frame urlString:(NSString*)the_url name:(NSString*)the_name description:(NSString*)the_description arrayPosition:(int)the_position
 {
     self = [super initWithFrame:frame];
@@ -72,15 +80,21 @@ static NSString *my_checkin_checkout_url = @"https://helium.staffittome.com/apis
     }
     return self;
 }
+/**
+ This will cause a pop up to have you pick a date and a time for checking in.
+ Then it will calculate the time using setCheckedInWithTime, switch the manual
+ to check out and grey out the checkin button so it cant be used and sets the checkin_in to YES
+ so other jobs may not be checked in.
+ */
 -(void)manualButtonAction
 {
     //[delegate reactToManualButton:array_position];
-}/*
--(void)checkinButtonAction
-{
-    [delegate reactToCheckinButton:array_position];
-}*/
+}
 
+/**
+ This method will check in the user and send the message up to the server
+ checking in the person on the site.
+ */
 -(void)checkinButtonAction
 {
     StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate];
@@ -117,6 +131,10 @@ static NSString *my_checkin_checkout_url = @"https://helium.staffittome.com/apis
     /********************Above is the asihttprequest *********////
     
 }
+/**
+ Sets the cell checked in and calculates the time that it has been checked in then displays to user.
+ @variable the_time - Time in yyyy-MM-dd'T'hh:mm:ss-timezone
+ */
 -(void)setCheckedInWithTime:(NSString*)the_time
 {
     NSMutableString *current_date_gmt_offset = [[NSMutableString alloc] initWithString:[[NSTimeZone localTimeZone] description]];
@@ -279,12 +297,19 @@ static NSString *my_checkin_checkout_url = @"https://helium.staffittome.com/apis
     }
     
 }
+/**
+ If this is the last cell in the table then the background rounds out in the bottoms.
+ */
 -(void)setBackgroundImageToModuleLast
 {
     UIImage *image = [UIImage imageNamed:@"module_row_last"];
     UIImage *stretched = [image stretchableImageWithLeftCapWidth:(image.size.width/2)-1 topCapHeight:(image.size.height/2)-1];
     [module_row_one_background setImage:stretched];
 }
+/**
+ Once the server has responded it is handled in this method. If i am checking in on this call then I show the timer and show the distance and start increasing the time
+ If I was not then I was checking out so then  I show checkin and reset most of the assets.
+ */
 -(void)requestFinished:(ASIHTTPRequest *)request
 {
     [load_message dismissWithClickedButtonIndex:0 animated:YES];
@@ -320,7 +345,9 @@ static NSString *my_checkin_checkout_url = @"https://helium.staffittome.com/apis
         checkin_in = YES;
     }
 }
-
+/**
+ This method increases the timer label that shows how long someone has been checked in.
+ */
 -(void)increaseLabel
 {
     if (timer_done)
@@ -339,6 +366,9 @@ static NSString *my_checkin_checkout_url = @"https://helium.staffittome.com/apis
     timer_display.text = [NSString stringWithFormat:@"%d:%d:%d", hour_count, minute_count, second_count];
     [self performSelector:@selector(increaseLabel) withObject:nil afterDelay:1.0];
 }
+/**
+ This stops the timer and also performs a checkout
+ */
 -(void)stopTimer
 {
     timer_done = YES;
@@ -373,17 +403,18 @@ static NSString *my_checkin_checkout_url = @"https://helium.staffittome.com/apis
     second_count = 0;
     hour_count = 0;
 }
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
-}
-*/
 
 - (void)dealloc
 {
+    [module_row_one_background release];
+    [job_one_name release];
+    [job_one_picture release];
+    [job_one_description release];
+    [check_in_out_label release];
+    [manual_button release];
+    [checkin_button release];
+    [load_message release];
+    [timer_display release];
     [super dealloc];
 }
 

@@ -307,6 +307,7 @@ static NSString *user_locale_address = @"https://hydrogen.xen.exoware.net:3000/a
 }
 -(void)populateMyInboxWithString:(NSString *)the_string
 {
+    printf("This is the inbox information %s", [the_string UTF8String]);
     [my_inbox_messages removeAllObjects];
     NSArray *data = [the_string JSONValue];
     for (int i = 0; i < data.count; i++)
@@ -332,7 +333,7 @@ static NSString *user_locale_address = @"https://hydrogen.xen.exoware.net:3000/a
         printf("%d", message_id);
         //allocate an MessageHeaderObject
         MessageHeaderObject *message_header = [[MessageHeaderObject alloc] initWithDate:[[data objectAtIndex:i] objectForKey:@"created_at"] body:[[data objectAtIndex:i] objectForKey:@"body"] subject:
-                                               [[data objectAtIndex:i] objectForKey:@"subject"] recipient_id:@"" sender_id:@"" sender_name:
+                                               [[data objectAtIndex:i] objectForKey:@"subject"] recipient_id:@"" sender_id:[[NSString stringWithFormat:@"%d", message_id] retain] sender_name:
                                                [[data objectAtIndex:i] objectForKey:@"sender_name"] recipient_name:@"" message_id:[NSString stringWithFormat:@"%d", message_id]];
         [my_sent_messages addObject:message_header];
         

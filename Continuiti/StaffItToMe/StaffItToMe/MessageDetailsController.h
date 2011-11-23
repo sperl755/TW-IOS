@@ -20,9 +20,15 @@
     
     UILabel *name_label;
     UITextView *message_txt;
+    /**
+     Odd variable that detects whether this text has been touched before.
+     It is used to detect whether or not to clear the message_txt so 
+     that the text before it can act as a placeholder.
+     */
+    BOOL message_text_touched;
     UIView *item_holder;
     int current_position;
-    UIAlertView *load_message;
+    LoadingView *load_view;
     
     int looking_at_profile;
 }

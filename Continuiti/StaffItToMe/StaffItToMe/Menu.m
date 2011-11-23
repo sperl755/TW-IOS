@@ -52,15 +52,24 @@
 {
     if (filter_screen != nil)
     {
-        [filter_screen removeFromSuperview];
+        if (google_map != nil)
+        {
+            [self sendSubviewToBack:google_map];   
+        }
+        if (list_screen != nil)
+        {
+            [self sendSubviewToBack:list_screen];
+        }
+        //Set the buttons to their appropriate Pictures
+        [map_button setBackgroundImage:[UIImage imageNamed:@"MapButton"] forState:UIControlStateNormal];
+        [list_button setBackgroundImage:[UIImage imageNamed:@"ListButton"] forState:UIControlStateNormal];
+        [option_button setBackgroundImage:[UIImage imageNamed:@"OptionsButtonPressed"] forState:UIControlStateNormal];
+        return;
     }
-    else if (google_map != nil)
-    {
-        [google_map setDie];
+        /*[google_map setDie];
         [google_map removeFromSuperview];
         [google_map release];
-        google_map = nil;
-    }
+        google_map = nil;*/
     filter_screen = [[SearchFilterScreen alloc] initWithFrame:[UIScreen mainScreen].applicationFrame];
     [filter_screen setFrame:CGRectMake(0, 35,320, 331)];
     [filter_screen setDelegate:self];
@@ -77,6 +86,27 @@
 -(void)mapAction
 {
     list_or_map = 1;
+    if (google_map != nil)
+    {
+        if (list_screen != nil)
+        {
+            [self sendSubviewToBack:list_screen];
+            [google_map setFilterText:[list_screen getFilterText]];
+        }
+        if (filter_screen != nil)
+        {
+            [self sendSubviewToBack:filter_screen];
+        }
+        //Set the buttons to their appropriate Pictures
+        [map_button setBackgroundImage:[UIImage imageNamed:@"MapButtonPressed"] forState:UIControlStateNormal];
+        [option_button setBackgroundImage:[UIImage imageNamed:@"OptionsButton"] forState:UIControlStateNormal];
+        [list_button setBackgroundImage:[UIImage imageNamed:@"ListButton"] forState:UIControlStateNormal];
+        return;
+    }
+    if (list_screen != nil)
+    {
+        [google_map setFilterText:[list_screen getFilterText]];
+    }
     [self updateCriteria];
 }
 -(void)updateCriteriaWithoutLoad
@@ -99,16 +129,23 @@
 }
 -(void)listAction
 {
-    if (google_map != nil)
-    {
-        [google_map setDie];
-        [google_map removeFromSuperview];
-        [google_map release];
-        google_map = nil;
-    }
     if (list_screen != nil)
     {
-        [list_screen removeFromSuperview];
+        if (google_map != nil)
+        {
+            [self sendSubviewToBack:google_map];
+            [list_screen setFilterText:[google_map getFilterText]];
+        }
+        if (filter_screen != nil)
+        {
+            [self sendSubviewToBack:filter_screen];
+        }
+        //Change the buttons to the appropriate pictures.
+        [map_button setBackgroundImage:[UIImage imageNamed:@"MapButton"] forState:UIControlStateNormal];
+        [list_button setBackgroundImage:[UIImage imageNamed:@"ListButtonPressed"] forState:UIControlStateNormal];
+        [option_button setBackgroundImage:[UIImage imageNamed:@"OptionsButton"] forState:UIControlStateNormal];
+        [list_screen reloadMyJobTable];
+        return;
     }
     list_screen = [[ListViewMenu alloc] initWithFrame:CGRectMake(0, 35, 320, 331)];
     [self addSubview:list_screen];
@@ -116,6 +153,10 @@
     [map_button setBackgroundImage:[UIImage imageNamed:@"MapButton"] forState:UIControlStateNormal];
     [list_button setBackgroundImage:[UIImage imageNamed:@"ListButtonPressed"] forState:UIControlStateNormal];
     [option_button setBackgroundImage:[UIImage imageNamed:@"OptionsButton"] forState:UIControlStateNormal];
+    if (google_map != nil)
+    {
+        [list_screen setFilterText:[google_map getFilterText]];
+    }
 }
 -(void)setupListView
 {
@@ -182,7 +223,19 @@
     {
         if (google_map != nil)
         {
-            [google_map removeFromSuperview];
+            if (list_screen != nil)
+            {
+                [self sendSubviewToBack:list_screen];
+            }
+            if (filter_screen != nil)
+            {
+                [self sendSubviewToBack:filter_screen];
+            }
+            //Set the buttons to their appropriate Pictures
+            [map_button setBackgroundImage:[UIImage imageNamed:@"MapButtonPressed"] forState:UIControlStateNormal];
+            [option_button setBackgroundImage:[UIImage imageNamed:@"OptionsButton"] forState:UIControlStateNormal];
+            [list_button setBackgroundImage:[UIImage imageNamed:@"ListButton"] forState:UIControlStateNormal];
+            return;
         }
         google_map = [[GoogleMapsMenu alloc] initWithFrame:CGRectMake(0, 35, 320, 331) withLocation:nil];
         StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*) [[UIApplication sharedApplication] delegate];

@@ -43,6 +43,8 @@
     BOOL is_loading;
     CLLocationCoordinate2D current_selected_annotation_coordinate;
 }
+-(NSString*)getFilterText;
+-(void)setFilterText:(NSString*)the_text;
 -(void)setDie;
 - (id)initWithFrame:(CGRect)frame withLocation:(CLLocation*)the_location;
 -(void)changeCenter:(CLLocation*)the_location;

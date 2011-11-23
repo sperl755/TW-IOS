@@ -22,5 +22,7 @@
     UIAlertView *load_message;
     NSMutableArray *table_data;
 }
-
+-(NSString*)getFilterText;
+-(void)setFilterText:(NSString*)the_text;
+-(void)reloadMyJobTable;
 @end

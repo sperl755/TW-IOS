@@ -10,12 +10,12 @@
 
 
 @implementation AvailableJobsAnnotation
-@synthesize coordinate, name= subtitle, title, pin_id;
+@synthesize coordinate, name, title, pin_id;
 
 -(id)initWithTitle:(NSString*)theTitle subTitle:(NSString*)theSubTitle andCoordinate:(CLLocationCoordinate2D)theCoordinate andID:(int)the_id;
 {
     if ((self = [super init])) {
-        subtitle = [theTitle copy];
+        name = [theTitle retain];
         NSMutableString *asubtitle = [[NSMutableString alloc] initWithString:@"at "];
         [asubtitle appendString:theSubTitle];
         [asubtitle appendString:@" Company"];
@@ -28,7 +28,7 @@
 }
 -(void)dealloc
 {
-    [subtitle release];
+    [name release];
     [title release];
     [super dealloc];
 }

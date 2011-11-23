@@ -118,7 +118,7 @@
         //Create Send Button
         UIImage *send_button_image = [[UIImage imageNamed:@"SendButton"] stretchableImageWithLeftCapWidth:([UIImage imageNamed:@"SendButton"].size.width/2)-1 topCapHeight:([UIImage imageNamed:@"SendButton"].size.height/2)-1];
         UIButton *staff_out_button = [UIButton buttonWithType:UIButtonTypeCustom];
-        [staff_out_button setImage:send_button_image forState:UIControlStateNormal];
+        [staff_out_button setBackgroundImage:send_button_image forState:UIControlStateNormal];
         [staff_out_button addTarget:self action:@selector(respondToMessage) forControlEvents:UIControlEventTouchUpInside];
         staff_out_button.frame = CGRectMake(5, cell_background.frame.origin.y + cell_background.frame.size.height + 12, 89.5, 22.5);
         [item_holder addSubview:staff_out_button];
@@ -131,13 +131,8 @@
 -(void)viewProfile
 {   
     looking_at_profile = 22;
-    load_message = [[UIAlertView alloc] initWithTitle:@"Loading..." message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:nil];
-    [load_message show];
-    UIActivityIndicatorView *active = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-    active.center = CGPointMake(load_message.bounds.size.width / 2, load_message.bounds.size.height - 40);
-    [active startAnimating];
-    [load_message addSubview:active];
-    
+    load_view = [[LoadingView alloc] initWithFrame:CGRectMake(0, -50, 320, 480)];
+    [self.view addSubview:load_view];
     
     StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*) [[UIApplication sharedApplication] delegate];
     NSMutableString *user_information = [[NSMutableString alloc] initWithString:@"https://helium.staffittome.com/apis/"];
@@ -170,20 +165,16 @@
         [request_ror setPostValue:app_delegate.user_state_information.sessionKey forKey:@"session_key"];
         int user_id = app_delegate.user_state_information.my_user_info.user_id;
         printf("%s", [[NSString stringWithFormat:@"%d", user_id] UTF8String]);
-        [request_ror setPostValue:
-         [NSString stringWithFormat:@"%d", app_delegate.user_state_information.my_user_info.user_id] forKey:@"sender_id"];
+        [request_ror setPostValue:[NSString stringWithFormat:@"%d", app_delegate.user_state_information.my_user_info.user_id] forKey:@"sender_id"];
         [request_ror setPostValue:[[app_delegate.user_state_information.my_inbox_messages objectAtIndex:current_position] my_sender_id] forKey:@"recipient_id"];
         [request_ror setPostValue:message_txt.text forKey:@"body"];
         [request_ror setPostValue:subject_label.text forKey:@"subject"];
         [request_ror setPostValue:@"Job"  forKey:@"messageable_type"];
-        [request_ror setPostValue:@"2" forKey:@"messageable_id"];
+        [request_ror setPostValue:@"1" forKey:@"messageable_id"];
         [request_ror startAsynchronous];
-        load_message = [[UIAlertView alloc] initWithTitle:@"Loading..." message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:nil];
-        [load_message show];
-        UIActivityIndicatorView *active = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-        active.center = CGPointMake(load_message.bounds.size.width / 2, load_message.bounds.size.height - 40);
-        [active startAnimating];
-        [load_message addSubview:active];
+        load_view = [[LoadingView alloc] initWithFrame:CGRectMake(0, -50, 320, 480)];
+        [self.view addSubview:load_view];
+        printf(" The ID OF THE PERSON WHO SEN ME THE MESSAGR: %s", [[[app_delegate.user_state_information.my_inbox_messages objectAtIndex:current_position] my_sender_id] UTF8String]);
     }
     @catch (NSException *exception)
     {
@@ -194,7 +185,7 @@
 }
 -(void)requestFinished:(ASIHTTPRequest *)request
 {
-    [load_message dismissWithClickedButtonIndex:0 animated:YES];
+    [load_view removeFromSuperview];
     printf("RESPONSEING: %s", [[request responseString] UTF8String]);
     if (looking_at_profile == 22)
     {
@@ -220,6 +211,11 @@
 }
 -(void)textViewDidBeginEditing:(UITextView *)textView
 {
+    if (!message_text_touched)
+    {
+        message_text_touched = YES;
+        message_txt.text = @"";
+    }
     item_holder.center = CGPointMake(item_holder.center.x, item_holder.center.y - 150);
 }
 -(BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text

@@ -15,6 +15,7 @@
 		460DC29513AC282900A17D44 /* FacebookBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = 460DC29413AC282900A17D44 /* FacebookBtn.m */; };
 		460DC29813AC286800A17D44 /* FacebookNormal.png in Resources */ = {isa = PBXBuildFile; fileRef = 460DC29613AC286800A17D44 /* FacebookNormal.png */; };
 		460DC29913AC286800A17D44 /* FacebookPressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 460DC29713AC286800A17D44 /* FacebookPressed.png */; };
+		4613B57D147C6F2500BD1D4A /* search_box_remove.png in Resources */ = {isa = PBXBuildFile; fileRef = 4613B57C147C6F2500BD1D4A /* search_box_remove.png */; };
 		4614F6831415EA670023E7D6 /* OptionsButtonPressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 4614F6821415EA670023E7D6 /* OptionsButtonPressed.png */; };
 		461AED6F141571B7001F4C5D /* UserSummaryProfileModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 461AED6E141571B7001F4C5D /* UserSummaryProfileModule.m */; };
 		461AED721415790A001F4C5D /* UserCapabilitiesProfileModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 461AED711415790A001F4C5D /* UserCapabilitiesProfileModule.m */; };
@@ -350,6 +351,7 @@
 		460DC29413AC282900A17D44 /* FacebookBtn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FacebookBtn.m; sourceTree = "<group>"; };
 		460DC29613AC286800A17D44 /* FacebookNormal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FacebookNormal.png; sourceTree = "<group>"; };
 		460DC29713AC286800A17D44 /* FacebookPressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FacebookPressed.png; sourceTree = "<group>"; };
+		4613B57C147C6F2500BD1D4A /* search_box_remove.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = search_box_remove.png; path = "Art Assets/Dali's PNG Files/SearchFilterArt/search_box_remove.png"; sourceTree = "<group>"; };
 		4614F6821415EA670023E7D6 /* OptionsButtonPressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = OptionsButtonPressed.png; path = "Art Assets/Dali's PNG Files/SearcFilterButtons/OptionsButtonPressed.png"; sourceTree = SOURCE_ROOT; };
 		461AED6D141571B7001F4C5D /* UserSummaryProfileModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserSummaryProfileModule.h; sourceTree = "<group>"; };
 		461AED6E141571B7001F4C5D /* UserSummaryProfileModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserSummaryProfileModule.m; sourceTree = "<group>"; };
@@ -1528,6 +1530,7 @@
 		469BD69713AB195500EDFE3E /* Art Assets */ = {
 			isa = PBXGroup;
 			children = (
+				4613B57C147C6F2500BD1D4A /* search_box_remove.png */,
 				46D4B530147AD69300B70C2D /* LoadingArrow.png */,
 				46AFD8A3141AFC1C0063140C /* Icon */,
 				469BD69813AB19E100EDFE3E /* PNG Files */,
@@ -1932,6 +1935,7 @@
 				4620825F1468823A009FA136 /* ajax-loader.png in Resources */,
 				46534545147579D60008288B /* search_x.png in Resources */,
 				46D4B531147AD69300B70C2D /* LoadingArrow.png in Resources */,
+				4613B57D147C6F2500BD1D4A /* search_box_remove.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

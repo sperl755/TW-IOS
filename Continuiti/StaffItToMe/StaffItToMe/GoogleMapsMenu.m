@@ -90,8 +90,8 @@ static NSString *GMAP_ANNOTATION_SELECTED = @"GMAP";
 }
 -(void)reloadMap
 {
-    
-    NSMutableArray *toRemove = [NSMutableArray arrayWithCapacity:10];
+    [main_map_view removeAnnotations:main_map_view.annotations];
+   /* NSMutableArray *toRemove = [NSMutableArray arrayWithCapacity:10];
     for (id annotation in main_map_view.annotations)
     {
         [toRemove addObject:annotation];
@@ -99,14 +99,16 @@ static NSString *GMAP_ANNOTATION_SELECTED = @"GMAP";
     if (toRemove.count >= 1)
     {
         [main_map_view removeAnnotations:toRemove];
-    }
+    }*/
+    [annotations removeAllObjects];
     //Fill the map with jobs that are near user.
+    printf("Table Count: %d", [table_data count]);
     for (int i = 0; i < [table_data count]; i++)
     {
         //Get the location of the job
         CLLocationCoordinate2D coordinate = {[[table_data objectAtIndex:i] latitude], [[table_data objectAtIndex:i] longitude]};
         //Create an annotation for it with an id of the current position in the array that the job is in.
-        AvailableJobsAnnotation *a_job = [[[AvailableJobsAnnotation alloc] initWithTitle:@"" subTitle:@"" andCoordinate:coordinate andID:[[table_data objectAtIndex:i] job_id]] retain];
+        AvailableJobsAnnotation *a_job = [[[AvailableJobsAnnotation alloc] initWithTitle:[[table_data objectAtIndex:i] title] subTitle:@"" andCoordinate:coordinate andID:[[table_data objectAtIndex:i] job_id]] retain];
         printf("\n%d", a_job.pin_id);
         if (coordinate.latitude == 0) {
             [a_job release];
@@ -125,12 +127,15 @@ static NSString *GMAP_ANNOTATION_SELECTED = @"GMAP";
     [main_map_view removeFromSuperview];
     [main_map_view release];
     main_map_view = nil;
-    main_map_view = [[MKMapView alloc] initWithFrame:[UIScreen mainScreen].applicationFrame];
+    
+    //REallocate Map View
+    main_map_view = [[MKMapView alloc] initWithFrame:CGRectMake(0, 0, 320, 380)];
     main_map_view.delegate = self;
     [main_map_view addAnnotations:annotations];
     [main_map_view setRegion:beginning_region animated:NO];
     [main_map_view regionThatFits:beginning_region];
-    [main_map_view setCenterCoordinate:beginning_region.center animated:NO];WildcardGestureRecognizer *my_touches_ended_recognizer = [[WildcardGestureRecognizer alloc] init];
+    [main_map_view setCenterCoordinate:beginning_region.center animated:NO];
+    WildcardGestureRecognizer *my_touches_ended_recognizer = [[WildcardGestureRecognizer alloc] init];
     my_touches_ended_recognizer.touchesEndedCallback = ^(NSSet *touches, UIEvent *event)
     {
         [main_map_view touchesEnded:touches withEvent:event];
@@ -217,15 +222,15 @@ static NSString *GMAP_ANNOTATION_SELECTED = @"GMAP";
             [small_jobs release];
         }
         
-        main_map_view = [[MKMapView alloc] initWithFrame:[UIScreen mainScreen].applicationFrame];
+        main_map_view = [[MKMapView alloc] initWithFrame:CGRectMake(0, 0, 320, 380)];
         main_map_view.delegate = self;
-        for (int i = 0; i < 100; i++)
+        /*for (int i = 0; i < 100; i++)
         {
             CLLocationCoordinate2D coordinate = {47.3225,-122.3113889};
             //Create an annotation for it with an id of the current position in the array that the job is in.
             AvailableJobsAnnotation *a_job = [[AvailableJobsAnnotation alloc] initWithTitle:@"" subTitle:@"" andCoordinate:coordinate andID:0];
             [main_map_view addAnnotation:a_job];
-        }
+        }*/
         [self addSubview:main_map_view];
         MKCoordinateRegion beginning_region;
         beginning_region.center.latitude = the_location.coordinate.latitude;
@@ -239,11 +244,11 @@ static NSString *GMAP_ANNOTATION_SELECTED = @"GMAP";
         [self reloadMap];
 
         //Create Search Bar
-        search_bar_background = [[UIImageView alloc] initWithFrame:CGRectMake(1, 297, 318, 43)];
+        search_bar_background = [[UIImageView alloc] initWithFrame:CGRectMake(1, 292, 318, 43)];
         search_bar_background.image = [UIImage imageNamed:@"search_box"];
         [self addSubview:search_bar_background];
         
-        search_bar_text = [[UITextView alloc] initWithFrame:CGRectMake(search_bar_background.frame.origin.x, search_bar_background.frame.origin.y + 13, search_bar_background.frame.size.width - 30, search_bar_background.frame.size.height + 5)];
+        search_bar_text = [[UITextView alloc] initWithFrame:CGRectMake(search_bar_background.frame.origin.x + 2, search_bar_background.frame.origin.y + 13, search_bar_background.frame.size.width - 30, search_bar_background.frame.size.height + 5)];
         search_bar_text.delegate = self;
         search_bar_text.backgroundColor = [UIColor clearColor];
         [self addSubview:search_bar_text];
@@ -357,13 +362,14 @@ static NSString *GMAP_ANNOTATION_SELECTED = @"GMAP";
     if (clear_text_x == nil)
     {
         clear_text_x = [UIButton buttonWithType:UIButtonTypeCustom];
-        [clear_text_x setImage:[UIImage imageNamed:@"search_x"] forState:UIControlStateNormal];
-        clear_text_x.frame = CGRectMake(search_bar_text.frame.origin.x + search_bar_text.frame.size.width - 26, search_bar_text.frame.origin.y - 1, 20, 20);
+        search_bar_background.image = [UIImage imageNamed:@"search_box_remove"];
+        clear_text_x.frame = CGRectMake(search_bar_text.frame.origin.x + search_bar_text.frame.size.width - 6, search_bar_text.frame.origin.y - 1, 20, 20);
         [clear_text_x addTarget:self action:@selector(clearSearchBarText) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:clear_text_x];
     }
     else
     {
+        search_bar_background.image = [UIImage imageNamed:@"search_box_remove"];
         clear_text_x.center = CGPointMake(clear_text_x.center.x, clear_text_x.center.y - 150);
         clear_text_x.hidden = NO;
     }
@@ -373,6 +379,7 @@ static NSString *GMAP_ANNOTATION_SELECTED = @"GMAP";
     if ([text isEqualToString:@"\n"])
     {
         popover.hidden = NO;
+        search_bar_background.image = [UIImage imageNamed:@"search_box"];
         search_bar_text.center = CGPointMake(search_bar_text.center.x, search_bar_text.center.y + 150);
         search_bar_background.center = CGPointMake(search_bar_background.center.x, search_bar_background.center.y + 150);
         clear_text_x.center = CGPointMake(clear_text_x.center.x, clear_text_x.center.y + 150);
@@ -456,6 +463,21 @@ static NSString *GMAP_ANNOTATION_SELECTED = @"GMAP";
     
     
 }
+/**
+ Returns the current text in the search bar for syncing with list view search bar.
+ */
+-(NSString*)getFilterText
+{
+    return search_bar_text.text;
+}
+/**
+ Sets the search bar text for syncing with list view search bar.
+ */
+-(void)setFilterText:(NSString *)the_text
+{
+    search_bar_text.text = the_text;
+    [self updateMapView];
+}
 
 -(void)requestFinished:(ASIHTTPRequest *)request
 {
@@ -513,8 +535,9 @@ static NSString *GMAP_ANNOTATION_SELECTED = @"GMAP";
 {
     MKAnnotationView *annotation_view = nil;
     AvailableJobsAnnotation *annot = (AvailableJobsAnnotation*)annotation;
+    printf("%s", [annot.name UTF8String]);
     CustomAnnotationView *view;
-            view = [[[CustomAnnotationView alloc] initWithAnnotation:annot reuseIdentifier:@"Job"] autorelease];
+            view = [[[CustomAnnotationView alloc] initWithAnnotation:annot reuseIdentifier:annot.name] autorelease];
     [view addObserver:self forKeyPath:@"selected"options:NSKeyValueObservingOptionNew context:GMAP_ANNOTATION_SELECTED];
     
     view.image = [UIImage imageNamed:@"map_marker"];

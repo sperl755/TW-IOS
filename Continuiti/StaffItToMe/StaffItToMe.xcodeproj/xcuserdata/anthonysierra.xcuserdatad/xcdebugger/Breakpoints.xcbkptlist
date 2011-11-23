@@ -121,11 +121,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "StaffItToMe/MyJobDisplayCell.m"
-         timestampString = "339891831.970272"
+         timestampString = "343697190.492567"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "86"
-         endingLineNumber = "86"
+         startingLineNumber = "100"
+         endingLineNumber = "100"
          landmarkName = "-checkinButtonAction"
          landmarkType = "5">
       </FileBreakpoint>
@@ -188,20 +188,6 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          isPathRelative = "1"
-         filePath = "StaffItToMe/StaffOutMain.m"
-         timestampString = "343425714.321086"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "87"
-         endingLineNumber = "87"
-         landmarkName = "-goToInbox"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         isPathRelative = "1"
          filePath = "MessageHeaderObject.m"
          timestampString = "343005341.725117"
          startingColumnNumber = "9223372036854775807"
@@ -217,11 +203,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "StaffItToMe/MyJobDisplayCell.m"
-         timestampString = "343273341.55032"
+         timestampString = "343697190.492567"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "223"
-         endingLineNumber = "223"
+         startingLineNumber = "241"
+         endingLineNumber = "241"
          landmarkName = "-setCheckedInWithTime:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -231,11 +217,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "StaffItToMe/MyJobDisplayCell.m"
-         timestampString = "343273331.512608"
+         timestampString = "343697190.492567"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "212"
-         endingLineNumber = "212"
+         startingLineNumber = "230"
+         endingLineNumber = "230"
          landmarkName = "-setCheckedInWithTime:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -251,6 +237,34 @@
          startingLineNumber = "44"
          endingLineNumber = "44"
          landmarkName = "-rotate:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "StaffItToMe/MessageDetailsController.m"
+         timestampString = "343698209.225209"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "176"
+         endingLineNumber = "176"
+         landmarkName = "-respondToMessage"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "StaffItToMe/GoogleMapsMenu.m"
+         timestampString = "343714481.568846"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "174"
+         endingLineNumber = "174"
+         landmarkName = "-updateMapDisplay"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>
