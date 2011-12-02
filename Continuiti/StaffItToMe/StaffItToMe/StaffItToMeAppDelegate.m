@@ -36,7 +36,7 @@ static NSString *staff_it_to_me_address = @"www.google.com";
         my_available_switch_array = [[NSMutableArray alloc] initWithCapacity:11];
         printf("%s", [user_state_information.currentTabBar UTF8String]);
         [self goToMainApp];
-        return;
+        return YES;
     }
     else
     {

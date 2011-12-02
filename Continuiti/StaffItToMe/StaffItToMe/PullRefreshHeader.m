@@ -23,15 +23,20 @@
         arrow.image = [UIImage imageNamed:@"LoadingArrow"];
         [self addSubview:arrow];
         
-        label = [[UILabel alloc] initWithFrame:CGRectMake(arrow.frame.origin.x + arrow.frame.size.width + 15, arrow.frame.origin.y + 3, 240, 40)];
+        label = [[UILabel alloc] initWithFrame:CGRectMake(arrow.frame.origin.x + arrow.frame.size.width + 15, arrow.frame.origin.y + 3, 140, 40)];
         label.text = @"Pull to Refresh";
         label.textColor = [UIColor colorWithRed:153.0/255 green:153.0/255 blue:153.0/255 alpha:1];
         label.font = [UIFont fontWithName:@"HelveticaNeueLTCom-Md" size:12];
         label.backgroundColor = [UIColor clearColor];
         [self addSubview:label];
         loaded = NO;
+        
     }
     return self;
+}
+-(void)setStartPoint:(CGPoint)the_point
+{
+    start_point = the_point;
 }
 /**
  Okay so this will rotate the arrow until it is time for a refresh
@@ -39,9 +44,19 @@
  */
 -(void)rotate:(CGPoint)the_point
 {
+    if (start_point.y != 0)
+    {
+        return;
+    }
     if (loaded)
     {
         printf("I am loaded");
+        return;
+    }
+    if (the_point.y > -50)
+    {
+        arrow.layer.transform = CATransform3DMakeRotation((M_PI / 180.0) * 0, 0.0f, 0.0f, 1.0f);
+        old_content_offset = the_point;
         return;
     }
     float y_offset = the_point.y - old_content_offset.y;
@@ -79,6 +94,7 @@
     [activity stopAnimating];
     [activity removeFromSuperview];
     angle = 0;
+    start_point = CGPointMake(0, 0);
     old_content_offset = CGPointMake(0, 0);
     [arrow removeFromSuperview];
     [arrow release];

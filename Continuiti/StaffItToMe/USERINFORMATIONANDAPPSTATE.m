@@ -23,6 +23,7 @@
 #define MY_SENT_MESSAGES_KEY    @"MYsentMessagesKey"
 #define PICTURE_URL_KEY    @"MYPICTUREURLKEY"
 #define MY_USER_INFORMATION_KEY @"MYUSERInFORMATION"
+#define MY_USER_LOCAL_KEY @"my-user-location"
 
 @implementation USERINFORMATIONANDAPPSTATE
 @synthesize currentTabBar;
@@ -59,6 +60,7 @@ static NSString *user_locale_address = @"https://hydrogen.xen.exoware.net:3000/a
         picture_url = [[aDecoder decodeObjectForKey:PICTURE_URL_KEY] retain];
         distance_search_type = [[aDecoder decodeObjectForKey:DISTANCE_SEARCH_KEY] retain];
         my_user_info = [[aDecoder decodeObjectForKey:MY_USER_INFORMATION_KEY] retain];
+        my_user_location = [[aDecoder decodeObjectForKey:MY_USER_LOCAL_KEY] retain];
         if ([aDecoder decodeObjectForKey:JOB_ARRAY_KEY] != nil){
             job_array = [[aDecoder decodeObjectForKey:JOB_ARRAY_KEY] retain];
         }else{
@@ -105,6 +107,7 @@ static NSString *user_locale_address = @"https://hydrogen.xen.exoware.net:3000/a
     [aCoder encodeObject:distance_search_type forKey:DISTANCE_SEARCH_KEY];
     [aCoder encodeObject:picture_url forKey:PICTURE_URL_KEY];
     [aCoder encodeObject:my_user_info forKey:MY_USER_INFORMATION_KEY];
+    [aCoder encodeObject:my_user_location forKey:MY_USER_LOCAL_KEY];
     if (job_array != nil){
         [aCoder encodeObject:job_array forKey:JOB_ARRAY_KEY];
     }else{

@@ -17,8 +17,8 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        google_map = [[GoogleMapsMenu alloc] initWithFrame:CGRectMake(0, 35, 320, 331) withLocation:nil];
         StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*) [[UIApplication sharedApplication] delegate];
+        google_map = [[GoogleMapsMenu alloc] initWithFrame:CGRectMake(0, 35, 320, 331) withLocation:app_delegate.user_state_information.my_user_location];
         [google_map changeCenter:app_delegate.user_state_information.my_user_location];
         [self addSubview:google_map];
 		list_or_map = 0;

@@ -71,6 +71,7 @@
 }
 -(void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
+    [refresh_header setStartPoint:my_table_view.contentOffset];
 }
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView
 {

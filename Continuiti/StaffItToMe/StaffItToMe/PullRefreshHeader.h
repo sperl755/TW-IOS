@@ -14,11 +14,15 @@
     UIImageView *arrow;
     UILabel *label;
     
+    CGPoint start_point;
+    
     CGPoint old_content_offset;
     float angle;
     BOOL loaded;
     UIActivityIndicatorView *activity;
+    
 }
+-(void)setStartPoint:(CGPoint)the_point;
 -(BOOL)isLoaded;
 -(void)rotate:(CGPoint)the_point;
 -(void)reset;
