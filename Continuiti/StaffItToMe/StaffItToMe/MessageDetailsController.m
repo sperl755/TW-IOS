@@ -166,7 +166,8 @@
         int user_id = app_delegate.user_state_information.my_user_info.user_id;
         printf("%s", [[NSString stringWithFormat:@"%d", user_id] UTF8String]);
         [request_ror setPostValue:[NSString stringWithFormat:@"%d", app_delegate.user_state_information.my_user_info.user_id] forKey:@"sender_id"];
-        [request_ror setPostValue:[[app_delegate.user_state_information.my_inbox_messages objectAtIndex:current_position] my_sender_id] forKey:@"recipient_id"];
+        //[request_ror setPostValue:[[app_delegate.user_state_information.my_inbox_messages objectAtIndex:current_position] my_sender_name] forKey:@"recipient_id"];
+        [request_ror setPostValue:@"Sam Sperling" forKey:@"recipient_id"];
         [request_ror setPostValue:message_txt.text forKey:@"body"];
         [request_ror setPostValue:subject_label.text forKey:@"subject"];
         [request_ror setPostValue:@"Job"  forKey:@"messageable_type"];

@@ -29,20 +29,27 @@ static NSString *staff_it_to_me_address = @"www.google.com";
 { 
     //test to see whether this IOS device is even connected.
     [self connectionFunction];
-    
-    if ([NSKeyedUnarchiver unarchiveObjectWithFile:[NSHomeDirectory() stringByAppendingPathComponent:@"Documents/appstate.archive"]] != nil && [[NSUserDefaults standardUserDefaults] objectForKey:@"FBExpirationDateKey"] != nil && [[NSUserDefaults standardUserDefaults] objectForKey:@"FBAccessTokenKey"] != nil)
-    {
-        user_state_information = [NSKeyedUnarchiver unarchiveObjectWithFile:[NSHomeDirectory() stringByAppendingPathComponent:@"Documents/appstate.archive"]];
-        my_available_switch_array = [[NSMutableArray alloc] initWithCapacity:11];
-        printf("%s", [user_state_information.currentTabBar UTF8String]);
-        [self goToMainApp];
-        return YES;
+    @try{
+        if ([NSKeyedUnarchiver unarchiveObjectWithFile:[NSHomeDirectory() stringByAppendingPathComponent:@"Documents/appstate.archive"]] != nil && [[NSUserDefaults standardUserDefaults] objectForKey:@"FBExpirationDateKey"] != nil && [[NSUserDefaults standardUserDefaults] objectForKey:@"FBAccessTokenKey"] != nil)
+        {
+            user_state_information = [NSKeyedUnarchiver unarchiveObjectWithFile:[NSHomeDirectory() stringByAppendingPathComponent:@"Documents/appstate.archive"]];
+            my_available_switch_array = [[NSMutableArray alloc] initWithCapacity:11];
+            printf("%s", [user_state_information.currentTabBar UTF8String]);
+            [self goToMainApp];
+            return YES;
+        }
+        else
+        {
+            //allocate and create the user data model
+            user_state_information = [[USERINFORMATIONANDAPPSTATE alloc] init];
+            user_state_information.currentTabBar = @"Home";
+            logged_out = YES;
+        }
     }
-    else
-    {
-        //allocate and create the user data model
+    @catch (NSException *exception) {
         user_state_information = [[USERINFORMATIONANDAPPSTATE alloc] init];
         user_state_information.currentTabBar = @"Home";
+        logged_out = YES;
     }
     //Add Notification to go to the main app after login is confirmed.
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(goToMainApp) name:@"GoToMainApp" object:nil];
@@ -76,9 +83,11 @@ static NSString *staff_it_to_me_address = @"www.google.com";
      If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
      */
     
-    
-    NSString *write_path = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents/appstate.archive"] retain];
-    [NSKeyedArchiver archiveRootObject:user_state_information toFile:write_path];
+    if (!logged_out)
+    {
+        NSString *write_path = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents/appstate.archive"] retain];
+        [NSKeyedArchiver archiveRootObject:user_state_information toFile:write_path];   
+    }
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
@@ -281,6 +290,7 @@ static NSString *staff_it_to_me_address = @"www.google.com";
     }
     else if ([user_state_information.currentTabBar isEqualToString:@"Messages"])
     {
+        tab_bar_controller.viewControllers = [NSArray arrayWithObjects:my_messages_inbox, search, jobs, main_profile, broadcast, nil];
         [tab_bar_controller setSelectedViewController:my_messages_inbox];
     }
     [_window addSubview:tab_bar_controller.view];   
@@ -301,6 +311,8 @@ static NSString *staff_it_to_me_address = @"www.google.com";
 }
 -(void)request:(FBRequest *)request didLoad:(id)result
 {
+    NSString *text = [[NSString alloc] initWithData:[request responseText] encoding:NSUTF8StringEncoding];
+    printf("%s", [text UTF8String]);
     //Perform the accessing of the server.
     printf("The User Facebook ID: %s", [[result objectForKey:@"id"] UTF8String]);
     NSURL *url = [NSURL URLWithString:facebook_address];
@@ -352,6 +364,7 @@ static NSString *staff_it_to_me_address = @"www.google.com";
             //Populate Data before entering app.
             [app_delegate.user_state_information getUserInformation:[request responseString]];
             got_facebook_info = YES;
+            logged_out = NO;
             [_viewController tearLoginScreen];
         }
         else
@@ -424,6 +437,7 @@ static NSString *staff_it_to_me_address = @"www.google.com";
 }
 -(void)logoutFunction
 {
+    logged_out = YES;
     //Kill facebook login credentials
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setObject:nil forKey:@"FBAccessTokenKey"];
@@ -437,8 +451,13 @@ static NSString *staff_it_to_me_address = @"www.google.com";
     ////////////////////////
     ///test to see whether this IOS device is even connected.
     [self connectionFunction];
+    
     //allocate and create the user data model
+    USERINFORMATIONANDAPPSTATE *old = user_state_information;
     user_state_information = [[USERINFORMATIONANDAPPSTATE alloc] init];
+    [old release];
+    NSString *write_path = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents/appstate.archive"] retain];
+    [NSKeyedArchiver archiveRootObject:nil toFile:write_path];
     
     //Add Notification to go to the main app after login is confirmed.
     self.viewController = [[StaffItToMeViewController alloc] init];
@@ -448,7 +467,7 @@ static NSString *staff_it_to_me_address = @"www.google.com";
     my_available_switch_array = [[NSMutableArray alloc] initWithCapacity:11];
     [UIApplication sharedApplication].statusBarHidden = YES;
     ///////////////////////////
-    printf("USER SHOULD BE LOGGED OUT BY THIS PRINTF STATEMENT");
+    printf("USER SHOULD BE LOGGED OUT BY THIS PRINTF STATEMENT");   
 }
 
 @end

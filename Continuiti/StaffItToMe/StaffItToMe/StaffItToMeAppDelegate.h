@@ -40,6 +40,7 @@
     //because we need to make multiple requests at the beginning of login.
     int loadDoneYet;
     LoadingView *load_view;
+    BOOL logged_out;
 }
 -(void)displayLoadViewWithString:(NSString*)the_string;
 -(void)logoutFunction;

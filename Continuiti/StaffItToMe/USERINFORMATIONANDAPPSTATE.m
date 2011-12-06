@@ -48,6 +48,10 @@
 @synthesize current_suggested_job_in_array;
 static NSString *user_locale_address = @"https://hydrogen.xen.exoware.net:3000/apis/available";
 
+/**
+ This method will cause itself to be re insantiated from when it is serialized with coder.
+ It recreates the application state that was there before the person left the app.
+ */
 -(id)initWithCoder:(NSCoder*)aDecoder
 {
     if ((self = [super init]))
@@ -97,6 +101,10 @@ static NSString *user_locale_address = @"https://hydrogen.xen.exoware.net:3000/a
     }
     return self;
 }
+/**
+ This will encode the current state of the data to a backup file that will later be read
+ and reinstantiate this object.
+ */
 -(void)encodeWithCoder:(NSCoder*)aCoder
 {
     [aCoder encodeObject:currentTabBar forKey:CURRENT_TAB_BAR_KEY];
@@ -410,6 +418,13 @@ static NSString *user_locale_address = @"https://hydrogen.xen.exoware.net:3000/a
         
     }
 }
+
+/**
+ So this method takes in the string that is queried for the messages
+ then it goes through and gets that information from the string
+ created the objects and puts them in the array. When the objects are created
+ they start querying the server for their convo information.
+ */
 -(void)populateMyInboxWithString:(NSString *)the_string
 {
     printf("This is the inbox information %s", [the_string UTF8String]);

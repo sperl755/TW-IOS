@@ -15,7 +15,7 @@
 #import "UserInfo.h"
 #import "LocationManager.h"
 #import "DataMaker.h"
-/*
+/**
  This class is everything about the user and is used only
  after login. IT represents the jobs that the user has
  the ones they can get and more.
@@ -32,12 +32,6 @@
 -(void)populateMyJobArrayWithJSONString:(NSString*)the_string;
 -(void)populateJobArrayWithJSONString:(NSString *)the_string;
 -(void)populateSuggestedJobsArrayWithString:(NSString*)the_string;
-/*
- So this method takes in the string that is queried for the messages
- then it goes through and gets that information from the string
- created the objects and puts them in the array. When the objects are created
- they start querying the server for their convo information.
- */
 -(void)populateMyInboxWithString:(NSString*)the_string;
 -(void)startUpdatingUserLocation;
 -(void)stopUpdatingUserLocation;

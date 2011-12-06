@@ -8,6 +8,7 @@
 
 #import "MyJobDisplayCell.h"
 #import "StaffItToMeAppDelegate.h"
+#import "ISO8601DateFormatter.h"
 
 
 @implementation MyJobDisplayCell
@@ -88,9 +89,130 @@ static NSString *my_checkin_checkout_url = @"https://helium.staffittome.com/apis
  */
 -(void)manualButtonAction
 {
-    //[delegate reactToManualButton:array_position];
-}
+    if(checkin_in)//if the next action to happen is a checkin
+    {
+        //but i am already checked in with another job then I dont work.
+        StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate];
+        if (app_delegate.user_state_information.on_my_job) {
+            return;
+        }
+    }
+    NSString *button_text;
+    if(checkin_in)
+    {
+        button_text = @"Checkin";
+    }
+    else if (!checkin_in)
+    {
+        button_text = @"Checkout";
+    }
+    UIActionSheet *menu = [[UIActionSheet alloc] initWithTitle:@"Pick a checkin date\n\n\n\n\n\n\n\n\n\n\n\n\n" 
+                                                   delegate:self
+                                          cancelButtonTitle:@"Cancel"
+                                     destructiveButtonTitle:nil
+                                          otherButtonTitles:button_text, nil];
+    //if I want to check in manually checkin_in should be set to yes saying that the next action is a checkin
+    if (checkin_in)
+    {
+        menu.tag = 21;//Set this for comparing in the delegate callback method.   
+    }
+    else if (!checkin_in)//if i was checked in
+    {
+        menu.tag = 23;//set this for comparing in the delegate callback method.
+    }
 
+    UIDatePicker *datePicker = [[UIDatePicker alloc] initWithFrame:CGRectMake(0, 35, 325, 250)];
+	datePicker.datePickerMode = UIDatePickerModeDateAndTime;
+	datePicker.hidden = NO;
+	datePicker.date = [NSDate date];
+	[datePicker addTarget:self
+                   action:@selector(setManualCheckinString:)
+         forControlEvents:UIControlEventValueChanged];
+	[menu addSubview:datePicker];
+	[datePicker release];
+    [menu showInView:self.superview];
+}
+-(void)setManualCheckinString:(UIDatePicker*)the_date_picker
+{
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy-MM-dd hh:mm:ss-Z"];
+    ISO8601DateFormatter *formateriso = [[ISO8601DateFormatter alloc] init];
+    NSString *dateString = [formatter stringFromDate:the_date_picker.date];
+    NSString *releaser = my_manual_checkin_date_time;
+    my_manual_checkin_date_time = [[NSString alloc] initWithString:dateString];
+    [releaser release];
+    printf("\n%s", [dateString UTF8String]);
+}
+/**
+ Depending on which actionsheet has been clicked various things will happen such as sending a checkin to the server
+ or sending a checkout to the server.
+ */
+-(void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    //If they clicked checkin
+    if (buttonIndex == 0 && actionSheet.tag == 21)//21 becuase we are checking to see if they were checking in or out.
+    {
+        load_message = [[UIAlertView alloc] initWithTitle:@"Loading..." message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:nil];
+        [load_message show];
+        UIActivityIndicatorView *active = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+        active.center = CGPointMake(load_message.bounds.size.width / 2, load_message.bounds.size.height - 40);
+        [active startAnimating];
+        [load_message addSubview:active];
+        StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate];
+        /********************BElow will access the server requesting a checking on the job*****/
+        checkin_date = my_manual_checkin_date_time;
+        //Perform the accessing of the server.
+        NSURL *url = [NSURL URLWithString:my_checkin_checkout_url];
+        ASIFormDataRequest *request_ror = [ASIFormDataRequest requestWithURL:url];
+        [request_ror setRequestMethod:@"POST"];
+        [request_ror setValidatesSecureCertificate:NO];
+        [request_ror setPostValue:app_delegate.user_state_information.sessionKey forKey:@"session_key"];
+        [request_ror setPostValue:@"A Manual Checkin" forKey:@"status_notes"];
+        [request_ror setPostValue:@"true" forKey:@"is_manual"];
+        [request_ror setPostValue:@"checkin" forKey:@"checkin_or_checkout"];
+        printf("\nStart datetime: %s", [my_manual_checkin_date_time UTF8String]);
+        [request_ror setPostValue:my_manual_checkin_date_time forKey:@"start_datetime"];
+        [request_ror setPostValue:@"" forKey:@"end_datetime"];
+        printf("%s", [[[app_delegate.user_state_information.my_jobs objectAtIndex:array_position] my_job_id] UTF8String]);
+        [request_ror setPostValue:[[app_delegate.user_state_information.my_jobs objectAtIndex:array_position] my_job_id] forKey:@"contract_id"];
+        
+        [request_ror setTimeOutSeconds:30];
+        [request_ror setDelegate:self];
+        [request_ror startAsynchronous];
+        /********************Above is the asihttprequest *********////
+        //checkin_in = NO;//set it to no because the next action will be checkin out
+        //[self setCheckedInWithTime:my_manual_checkin_date_time manual:YES];
+    }
+    else if (buttonIndex == 0 && actionSheet.tag == 23)
+    {
+        load_message = [[UIAlertView alloc] initWithTitle:@"Loading..." message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:nil];
+        [load_message show];
+        UIActivityIndicatorView *active = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+        active.center = CGPointMake(load_message.bounds.size.width / 2, load_message.bounds.size.height - 40);
+        [active startAnimating];
+        [load_message addSubview:active];
+        StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate];
+        /********************BElow will access the server requesting a checking on the job*****/
+        //Perform the accessing of the server.
+        NSURL *url = [NSURL URLWithString:my_checkin_checkout_url];
+        ASIFormDataRequest *request_ror = [ASIFormDataRequest requestWithURL:url];
+        [request_ror setRequestMethod:@"POST"];
+        [request_ror setValidatesSecureCertificate:NO];
+        [request_ror setPostValue:app_delegate.user_state_information.sessionKey forKey:@"session_key"];
+        [request_ror setPostValue:@"A Manual Checkout" forKey:@"status_notes"];
+        [request_ror setPostValue:@"true" forKey:@"is_manual"];
+        [request_ror setPostValue:@"checkout" forKey:@"checkin_or_checkout"];
+        [request_ror setPostValue:@"" forKey:@"start_datetime"];
+        [request_ror setPostValue:my_manual_checkin_date_time forKey:@"end_datetime"];
+        [request_ror setPostValue:[[app_delegate.user_state_information.my_jobs objectAtIndex:array_position] my_job_id] forKey:@"contract_id"];
+        [request_ror setTimeOutSeconds:30];
+        [request_ror setDelegate:self];
+        [request_ror startAsynchronous];
+        /********************Above is the asihttprequest *********////
+        //checkin_in = YES;
+        timer_done = YES;
+    }
+}
 /**
  This method will check in the user and send the message up to the server
  checking in the person on the site.
@@ -127,7 +249,7 @@ static NSString *my_checkin_checkout_url = @"https://helium.staffittome.com/apis
     [request_ror setTimeOutSeconds:30];
     [request_ror setDelegate:self];
     [request_ror startAsynchronous];
-    checkin_in = YES;
+    //checkin_in = YES;
     /********************Above is the asihttprequest *********////
     
 }
@@ -135,167 +257,23 @@ static NSString *my_checkin_checkout_url = @"https://helium.staffittome.com/apis
  Sets the cell checked in and calculates the time that it has been checked in then displays to user.
  @variable the_time - Time in yyyy-MM-dd'T'hh:mm:ss-timezone
  */
--(void)setCheckedInWithTime:(NSString*)the_time
+-(void)setCheckedInWithTime:(NSString*)the_time manual:(BOOL)isManual
 {
-    NSMutableString *current_date_gmt_offset = [[NSMutableString alloc] initWithString:[[NSTimeZone localTimeZone] description]];
-    [current_date_gmt_offset deleteCharactersInRange:NSMakeRange(0, 49)];
-    printf("%s", [current_date_gmt_offset UTF8String]);
-    [current_date_gmt_offset deleteCharactersInRange:NSMakeRange(current_date_gmt_offset.length-1, 1)];
-    printf("%s", [current_date_gmt_offset UTF8String]);
-    //get the gmt offset by seconds for where I am
-    int current_gmt_offset = [current_date_gmt_offset intValue];
-    printf("%d", current_gmt_offset);
-    
-    
-    //Get the information about the older checkin date
-    NSString *old_year = [the_time substringWithRange:NSMakeRange(0, 4)];
-    printf("Old year: %d\n", [old_year intValue]);
-    NSString *old_month = [the_time substringWithRange:NSMakeRange(5,2)];
-    printf("Old month: %d\n", [old_month intValue]);
-    NSString *old_day = [the_time substringWithRange:NSMakeRange(8,2)];
-    printf("Old day: %d\n", [old_day intValue]);
-    NSString *old_hour = [the_time substringWithRange:NSMakeRange(11,2)];
-    printf("Old hour: %d\n", [old_hour intValue]);
-    NSString *old_minutes = [the_time substringWithRange:NSMakeRange(14,2)];
-    printf("Old minutes: %d\n", [old_minutes intValue]);
-    NSString *old_timezone_hour = [the_time substringWithRange:NSMakeRange(19,3)];
-    printf("Old timezone_hours: %d\n", [old_timezone_hour intValue]);
-    NSString *old_timezone_minutes = [the_time substringWithRange:NSMakeRange(23,2)];
-    printf("Old timezone minutes: %d\n", [old_timezone_minutes intValue]);
-    
-    /*Convert the old gmt offset to seconds. It usually comes in the form
-     of hours and minutes. Also do a check to see if it is negative.*/
-    int old_gmt_offset;
-    if ([old_timezone_hour characterAtIndex:0] == '-')
-    {
-        old_gmt_offset = ((([old_timezone_hour intValue]*60)*60) -([old_timezone_minutes intValue]*60));
-    }
-    else
-    {
-        old_gmt_offset = ((([old_timezone_hour intValue]*60)*60) +([old_timezone_minutes intValue]*60));
-    }
-    //Times for adjusting based on GMT Time Zone
-    int current_hours_time;
-    int old_hours_time;
-    int current_minutes_time;
-    int old_minutes_time;
-    
-    //Get the current time and get the current date in order to calculate
-    //How long the person was working.
-    NSDateFormatter *timeFormat = [[NSDateFormatter alloc] init];
-    [timeFormat setDateFormat:@"dd HH:mm:ss"];
-    NSString *the_current_time = [timeFormat stringFromDate:[NSDate date]];
-    printf("The Current Time is %s", [the_current_time UTF8String]);
-    NSString *current_date_in_month = [the_current_time substringWithRange:NSMakeRange(0, 2)];
-    printf("\nThe current day is %s", [current_date_in_month UTF8String]);
-    printf("\nThe old day is %s", [old_day UTF8String]);
-    NSString *current_hour = [the_current_time substringWithRange:NSMakeRange(3, 2)];
-    NSString *current_minutes = [the_current_time substringWithRange:NSMakeRange(6, 2)];
-    if (current_gmt_offset == old_gmt_offset)
-    {
-        current_hours_time = [current_hour intValue];
-        current_minutes_time = [current_minutes intValue];
-        old_minutes_time = [old_minutes intValue];
-        old_hours_time = [old_hour intValue];
-    }
-    else if (current_gmt_offset > old_gmt_offset)
-    {
-        //This gives me the minute count difference
-        int  minutes_difference = floor((current_gmt_offset - old_gmt_offset)/60);
-        int hour_difference = floor(minutes_difference/60);
-        int remainder_minutes = minutes_difference%60;
-        printf("Hour diff: %d, Minute Remainder: %d", hour_difference, remainder_minutes);
-        
-        current_hours_time = [current_hour intValue];
-        current_minutes_time = [current_minutes intValue];
-        old_minutes_time = remainder_minutes + [old_minutes intValue];
-        old_hours_time = hour_difference + [old_hour intValue];
-    }
-    else if (current_gmt_offset < old_gmt_offset)
-    {
-        //This gives me the minute count difference
-        int  minutes_difference = floor((old_gmt_offset - current_gmt_offset)/60);
-        int hour_difference = floor(minutes_difference/60);
-        int remainder_minutes = minutes_difference%60;
-        printf("Hour diff: %d, Minute Remainder: %d", hour_difference, remainder_minutes);
-        
-        current_hours_time = hour_difference + [current_hour intValue];
-        current_minutes_time = remainder_minutes + [current_minutes intValue];
-        old_minutes_time = [old_minutes intValue];
-        old_hours_time = [old_hour intValue];
-    }
-    //Calculate the day difference if there is one.
-    if ([current_date_in_month intValue] > [old_day intValue])
-    {
-        printf("%d", current_hours_time);
-        //if the new time is less then the older checkin time
-        if ((current_hours_time* 60) + current_minutes_time < (old_hours_time * 60) + old_minutes_time)
-        {
-            int hours_worked = 24 - old_hours_time;
-            int minutes_worked = 60 - old_minutes_time;
-            for (int i = [current_date_in_month intValue] - 1; i > [old_day intValue]; i--)
-            {
-                hours_worked += 24;
-            }
-            hours_worked += current_hours_time;
-            minutes_worked += current_minutes_time;
-            hour_count = hours_worked;
-            minute_count = minutes_worked;
-            checkin_in = YES;
-            [self requestFinished:nil];
-            printf("Hours Worked: %d", hours_worked);
-            printf("Minutes Worked: %d", minutes_worked);
-        }
-        else if ((current_hours_time*60) + current_minutes_time > (old_hours_time * 60) + old_minutes_time)
-        {
-            int hours_worked = current_hours_time - old_hours_time;
-            int minutes_worked_time;
-            if (current_minutes_time < old_minutes_time)
-            {
-                hours_worked--;
-                int temp = 60 - old_minutes_time;
-                temp += current_minutes_time;
-                minutes_worked_time = temp;
-            }
-            else
-            {
-                minutes_worked_time = current_minutes_time - old_minutes_time;
-            }
-            for (int i = [current_date_in_month intValue]; i > [old_day intValue]; i--)
-            {
-                hours_worked += 24;
-            }
-            hour_count = hours_worked;
-            minute_count = minutes_worked_time;
-            checkin_in = YES;
-            [self requestFinished:nil];
-            printf("Hours Worked: %d", hours_worked);
-            printf("Minutes Worked: %d", minutes_worked_time);
-        }
-    }
-    else
-    {
-        int hours_worked_time = current_hours_time - old_hours_time;
-        int minutes_worked_time;
-        if (current_minutes_time < old_minutes_time)
-        {
-            hours_worked_time--;
-            int temp = 60 - old_minutes_time;
-            temp += current_minutes_time;
-            minutes_worked_time = temp;
-        }
-        else
-        {
-            minutes_worked_time = current_minutes_time - old_minutes_time;
-        }
-        hour_count = hours_worked_time;
-        minute_count = minutes_worked_time;
-        checkin_in = YES;
-        [self requestFinished:nil];
-        printf("Hours Worked: %d", hours_worked_time);
-        printf("Minutes Worked: %d", minutes_worked_time);
-    }
-    
+    NSString *releaser = checkin_date;
+    checkin_date = the_time;
+    [releaser release];
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    ISO8601DateFormatter *formateriso = [[ISO8601DateFormatter alloc] init];
+    NSCalendarUnit unitFlags = NSMonthCalendarUnit | NSDayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit;
+    NSDate *old_date = [formateriso dateFromString:the_time];
+    NSDateComponents *difference = [calendar components:unitFlags fromDate:old_date toDate:[NSDate date] options:0];
+    hour_count = [difference hour];
+    minute_count = [difference minute];
+    second_count = [difference second];
+    day_count = [difference day];
+    month_count = [difference month];
+    //checkin_in = YES;
+    [self requestFinished:nil];
 }
 /**
  If this is the last cell in the table then the background rounds out in the bottoms.
@@ -313,6 +291,7 @@ static NSString *my_checkin_checkout_url = @"https://helium.staffittome.com/apis
 -(void)requestFinished:(ASIHTTPRequest *)request
 {
     [load_message dismissWithClickedButtonIndex:0 animated:YES];
+    printf("\n%s", [[request responseString] UTF8String]);
     if (checkin_in) //if user clicks check in then we change to check out and start timer
     {
         //printf("This is the checkin checkout information %s", [[request responseString] UTF8String]);
@@ -323,19 +302,25 @@ static NSString *my_checkin_checkout_url = @"https://helium.staffittome.com/apis
         check_in_out_label.text = @"Check out";
         check_in_out_label.center = CGPointMake(check_in_out_label.center.x - 3, check_in_out_label.center.y);
         [checkin_button addTarget:self action:@selector(stopTimer) forControlEvents:UIControlEventTouchUpInside];
-        timer_display = [[UILabel alloc] initWithFrame:CGRectMake(150, job_one_name.frame.origin.y + 3, 45, 30)];
-        timer_display.text = [NSString stringWithFormat:@"%d:%d:%d", hour_count, minute_count, second_count];
+        timer_display = [[UILabel alloc] initWithFrame:CGRectMake(120, job_one_name.frame.origin.y + 3, 75, 30)];
+        timer_display.text = [NSString stringWithFormat:@"%d:%d:%d:%d:%d",month_count, day_count, hour_count, minute_count, second_count];
         timer_display.textAlignment = UITextAlignmentRight;
         timer_display.textColor = [UIColor colorWithRed:153.0/255 green:153.0/255 blue:153.0/255 alpha:1];
         timer_display.backgroundColor = [UIColor clearColor];
         timer_display.font = [UIFont fontWithName:@"HelveticaNeueLTCom-Md" size:9];
         [self addSubview:timer_display];
-        [self performSelector:@selector(increaseLabel) withObject:nil afterDelay:1.0];
+        [self performSelector:@selector(updateTimerLook) withObject:nil afterDelay:1.0];
         checkin_in = NO;
     }
     else //If the person clicked check out then we change button back to check in
     {
+        minute_count = 0;
+        second_count = 0;
+        hour_count = 0;
+        day_count = 0;
+        month_count = 0;
         check_in_out_label.text = @"Check In";
+        my_manual_checkin_date_time = nil;
         check_in_out_label.center = CGPointMake(check_in_out_label.center.x + 3, check_in_out_label.center.y);
         StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*) [[UIApplication sharedApplication] delegate];
         app_delegate.user_state_information.on_my_job = NO;
@@ -363,8 +348,27 @@ static NSString *my_checkin_checkout_url = @"https://helium.staffittome.com/apis
         hour_count++;
         minute_count = 0;
     }
-    timer_display.text = [NSString stringWithFormat:@"%d:%d:%d", hour_count, minute_count, second_count];
+    timer_display.text = [NSString stringWithFormat:@"%d:%d:%d:%d:%d",month_count, day_count, hour_count, minute_count, second_count];
     [self performSelector:@selector(increaseLabel) withObject:nil afterDelay:1.0];
+}
+-(void)updateTimerLook
+{
+    if (timer_done)
+    {
+        return;
+    }
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    ISO8601DateFormatter *formateriso = [[ISO8601DateFormatter alloc] init];
+    NSCalendarUnit unitFlags = NSMonthCalendarUnit | NSDayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit;
+    NSDate *old_date = [formateriso dateFromString:checkin_date];
+    NSDateComponents *difference = [calendar components:unitFlags fromDate:old_date toDate:[NSDate date] options:0];
+    hour_count = [difference hour];
+    minute_count = [difference minute];
+    second_count = [difference second];
+    day_count = [difference day];
+    month_count = [difference month];
+    timer_display.text = [NSString stringWithFormat:@"%d:%d:%d:%d:%d",month_count, day_count, hour_count, minute_count, second_count];
+    [self performSelector:@selector(updateTimerLook) withObject:nil afterDelay:1.0];
 }
 /**
  This stops the timer and also performs a checkout
@@ -398,10 +402,12 @@ static NSString *my_checkin_checkout_url = @"https://helium.staffittome.com/apis
     [request_ror setDelegate:self];
     [request_ror startAsynchronous];
     /********************Above is the asihttprequest *********////
-    checkin_in = NO;
+    //checkin_in = NO;
     minute_count = 0;
     second_count = 0;
     hour_count = 0;
+    day_count = 0;
+    month_count = 0;
 }
 
 - (void)dealloc

@@ -13,7 +13,7 @@
 @end
 
 
-@interface MyJobDisplayCell : UIView 
+@interface MyJobDisplayCell : UIView <UIActionSheetDelegate>
 {
     UIImageView *module_row_one_background;
     UIImageView *job_one_picture;
@@ -23,6 +23,7 @@
     UIButton *manual_button;
     UIButton *checkin_button;
     int array_position;
+    NSString *checkin_date;
     
     BOOL checkin_in;
     
@@ -34,10 +35,16 @@
     int second_count;
     int minute_count;
     int hour_count;
+    int day_count;
+    int month_count;
     BOOL timer_done;
+    
+    //Variables for manual checking to function
+    UILabel *manual_checkin_out;
+    NSString *my_manual_checkin_date_time;
 }
 @property (nonatomic, retain) id <MyJobDisplayCellProtocol> delegate;
 - (id)initWithFrame:(CGRect)frame urlString:(NSString*)the_url name:(NSString*)the_name description:(NSString*)the_description arrayPosition:(int)the_position;
 -(void)setBackgroundImageToModuleLast;
--(void)setCheckedInWithTime:(NSString*)the_time;
+-(void)setCheckedInWithTime:(NSString*)the_time manual:(BOOL)isManual;
 @end

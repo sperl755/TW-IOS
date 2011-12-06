@@ -70,7 +70,7 @@ static NSString *my_job_contracts_url = @"https://helium.staffittome.com/apis/my
         //if the job is checked in then set the timer of my job_cell.
         if ([[[app_delegate.user_state_information.my_jobs objectAtIndex:i] my_checkin_chekcout_status] isEqualToString:@"checkedin"])
         {
-            [my_job_cell setCheckedInWithTime:[[app_delegate.user_state_information.my_jobs objectAtIndex:i] start_date_time]];
+            [my_job_cell setCheckedInWithTime:[[app_delegate.user_state_information.my_jobs objectAtIndex:i] start_date_time] manual:NO];
         }
         my_job_cell.delegate = self;
         if (i == app_delegate.user_state_information.my_jobs.count - 1)

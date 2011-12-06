@@ -54,6 +54,7 @@
 		463CFD2B13ABEBBF00869DCE /* SBJsonBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 463CFD1F13ABEBBF00869DCE /* SBJsonBase.m */; };
 		463CFD2C13ABEBBF00869DCE /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 463CFD2113ABEBBF00869DCE /* SBJsonParser.m */; };
 		463CFD2D13ABEBBF00869DCE /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 463CFD2313ABEBBF00869DCE /* SBJsonWriter.m */; };
+		463DB83E148D8830004B924C /* ISO8601DateFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 463DB83D148D8830004B924C /* ISO8601DateFormatter.m */; };
 		46408D341421853100D8644C /* map_marker.png in Resources */ = {isa = PBXBuildFile; fileRef = 46408D331421853100D8644C /* map_marker.png */; };
 		4640AE3A13ECD10E0081C2ED /* CheckOutEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 4640AE3813ECD10E0081C2ED /* CheckOutEntry.m */; };
 		4640AE3B13ECD10E0081C2ED /* CheckOutEntry.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4640AE3913ECD10E0081C2ED /* CheckOutEntry.xib */; };
@@ -415,6 +416,8 @@
 		463CFD2113ABEBBF00869DCE /* SBJsonParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonParser.m; sourceTree = "<group>"; };
 		463CFD2213ABEBBF00869DCE /* SBJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonWriter.h; sourceTree = "<group>"; };
 		463CFD2313ABEBBF00869DCE /* SBJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonWriter.m; sourceTree = "<group>"; };
+		463DB83C148D8830004B924C /* ISO8601DateFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ISO8601DateFormatter.h; sourceTree = "<group>"; };
+		463DB83D148D8830004B924C /* ISO8601DateFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ISO8601DateFormatter.m; sourceTree = "<group>"; };
 		46408D331421853100D8644C /* map_marker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = map_marker.png; path = "Art Assets/map_marker.png"; sourceTree = SOURCE_ROOT; };
 		4640AE3713ECD10E0081C2ED /* CheckOutEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckOutEntry.h; sourceTree = "<group>"; };
 		4640AE3813ECD10E0081C2ED /* CheckOutEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckOutEntry.m; sourceTree = "<group>"; };
@@ -978,6 +981,8 @@
 		464F35A513B8F0C0003E9323 /* Data Classes */ = {
 			isa = PBXGroup;
 			children = (
+				463DB83C148D8830004B924C /* ISO8601DateFormatter.h */,
+				463DB83D148D8830004B924C /* ISO8601DateFormatter.m */,
 				46BB09B7147CC1100077320E /* CoderBreadAndButters */,
 				466A488313FD860F0093E509 /* ASSwitch.h */,
 				466A488413FD860F0093E509 /* ASSwitch.m */,
@@ -2111,6 +2116,7 @@
 				46D4B52F147AD46300B70C2D /* PullRefreshHeader.m in Sources */,
 				46BB09BD147CC2010077320E /* CodeableUIImage.m in Sources */,
 				46688E3F147CC405004D44E0 /* UIImage-Extended.m in Sources */,
+				463DB83E148D8830004B924C /* ISO8601DateFormatter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
