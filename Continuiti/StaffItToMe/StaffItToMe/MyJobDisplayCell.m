@@ -137,7 +137,7 @@ static NSString *my_checkin_checkout_url = @"https://helium.staffittome.com/apis
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"yyyy-MM-dd hh:mm:ss-Z"];
     ISO8601DateFormatter *formateriso = [[ISO8601DateFormatter alloc] init];
-    NSString *dateString = [formatter stringFromDate:the_date_picker.date];
+    NSString *dateString = [[[formateriso dateFromString:[the_date_picker.date description]] description] retain];
     NSString *releaser = my_manual_checkin_date_time;
     my_manual_checkin_date_time = [[NSString alloc] initWithString:dateString];
     [releaser release];
@@ -251,6 +251,9 @@ static NSString *my_checkin_checkout_url = @"https://helium.staffittome.com/apis
     [request_ror startAsynchronous];
     //checkin_in = YES;
     /********************Above is the asihttprequest *********////
+    //ISO8601DateFormatter *formateriso = [[ISO8601DateFormatter alloc] init];
+    //checkin_date = [[formateriso stringFromDate:[NSDate date]] retain];
+    //my_manual_checkin_date_time = [formateriso stringFromDate:[NSDate date]];
     
 }
 /**
@@ -321,6 +324,7 @@ static NSString *my_checkin_checkout_url = @"https://helium.staffittome.com/apis
         month_count = 0;
         check_in_out_label.text = @"Check In";
         my_manual_checkin_date_time = nil;
+        checkin_date = nil;
         check_in_out_label.center = CGPointMake(check_in_out_label.center.x + 3, check_in_out_label.center.y);
         StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*) [[UIApplication sharedApplication] delegate];
         app_delegate.user_state_information.on_my_job = NO;
@@ -360,7 +364,17 @@ static NSString *my_checkin_checkout_url = @"https://helium.staffittome.com/apis
     NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
     ISO8601DateFormatter *formateriso = [[ISO8601DateFormatter alloc] init];
     NSCalendarUnit unitFlags = NSMonthCalendarUnit | NSDayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit;
-    NSDate *old_date = [formateriso dateFromString:checkin_date];
+    NSDate *old_date;
+    if (checkin_date == nil)
+    {
+        checkin_date = [[[formateriso dateFromString:[[NSDate date] description]] description] retain];
+        old_date = [formateriso dateFromString:checkin_date];
+    }
+    else
+    {
+        printf("Checkin Date: %s", [checkin_date UTF8String]);
+        old_date = [formateriso dateFromString:checkin_date];
+    }
     NSDateComponents *difference = [calendar components:unitFlags fromDate:old_date toDate:[NSDate date] options:0];
     hour_count = [difference hour];
     minute_count = [difference minute];
