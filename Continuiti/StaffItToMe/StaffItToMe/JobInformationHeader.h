@@ -26,6 +26,7 @@
     UIImageView *my_available_switch_background;
     LoadingView *load_view;
     BOOL company_information;
+    BOOL adding_myself_to_applied_list;
     
 }
 -(id)initWithPos:(int)the_position;

@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "JobDisplayCell.h"
+@protocol PendingRequestModuleProtocol <NSObject>
+-(void)reloadMyTableView;
+@end
 
 @interface PendingRequestsModule : UIView 
 {
@@ -15,6 +18,8 @@
     UILabel *spam_your_friends_label;
     
 }
+-(id)initRequesting;
 -(id)initWithArray:(NSArray*)the_requests;
+@property (nonatomic, retain) id <PendingRequestModuleProtocol> delegate;
 
 @end

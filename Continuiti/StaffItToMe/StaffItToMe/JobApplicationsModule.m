@@ -11,7 +11,6 @@
 
 @implementation JobApplicationsModule
 @synthesize delegate;
-static NSString *applied_job_url = @"https://helium.staffittome.com/apis/applied_jobs";
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];

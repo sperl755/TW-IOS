@@ -9,16 +9,20 @@
 #import <UIKit/UIKit.h>
 #import "UserCapabilitiesProfileModule.h"
 #import "PendingRequestsModule.h"
+#import "StaffOutHeader.h"
+#import "PullRefreshHeader.h"
 #import "ASIFormDataRequest.h"
 @protocol StaffOutFrontPageProtocol <NSObject>
 -(void)goToProposal;
 @end
 
-@interface StaffOutFrontPage : UIViewController
+@interface StaffOutFrontPage : UIViewController <PendingRequestModuleProtocol, StaffOutHeaderProtocol>
 {
     IBOutlet UILabel *what_waiting;
     IBOutlet UITableView *table_view;
     NSArray *module_array;
+    PullRefreshHeader *refresh_header;
+    BOOL reloading;
 }
 -(IBAction)goToProposalPage;
 @property (nonatomic, retain) id <StaffOutFrontPageProtocol> delegate;

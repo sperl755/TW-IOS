@@ -59,6 +59,18 @@
         navigation_controller.delegate = self;
         [self.view addSubview:navigation_controller.view];
         at_detail_screen = NO;
+        
+        StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate];
+        
+        //Request information about applications
+        NSURL *url = [NSURL URLWithString:applied_job_url];
+        ASIFormDataRequest *request_ror = [ASIFormDataRequest requestWithURL:url];
+        [request_ror setRequestMethod:@"POST"];
+        [request_ror setPostValue:app_delegate.user_state_information.sessionKey forKey:@"session_key"];
+        [request_ror setPostValue:[NSString stringWithFormat:@"%d", app_delegate.user_state_information.my_user_info.user_id] forKey:@"user_id"];
+        [request_ror setTimeOutSeconds:30];
+        [request_ror setDelegate:self];
+        [request_ror startAsynchronous];
     }
     return self;
 }
@@ -119,6 +131,13 @@
 }
 -(void)requestFinished:(ASIHTTPRequest *)request
 {
+    if (!at_detail_screen)
+    {
+        StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate];
+        [app_delegate.user_state_information populateMyAppliedToJobsWithString:[request responseString]];
+        printf("\nThe something:%s\n", [[request responseString] UTF8String]);
+        return;
+    }
     [load_message dismissWithClickedButtonIndex:0 animated:YES];
     at_detail_screen = YES;
     job_detail_screen = [[JobDetailScreen alloc] initWithJSONString:[request responseString]];

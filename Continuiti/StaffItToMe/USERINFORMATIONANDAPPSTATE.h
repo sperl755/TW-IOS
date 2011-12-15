@@ -35,6 +35,7 @@
 -(void)populateMyInboxWithString:(NSString*)the_string;
 -(void)startUpdatingUserLocation;
 -(void)stopUpdatingUserLocation;
+-(void)populateMyAppliedToJobsWithString:(NSString*)the_information;
 -(void)populateMySentMessagesWithString:(NSString *)the_string;
 @property (nonatomic, assign) NSString *currentTabBar;
 @property (nonatomic, assign) NSString *userName;
@@ -55,6 +56,7 @@
 //currently has.
 //This is used on the my jobs tab.
 @property (nonatomic, assign) NSMutableArray *my_jobs;
+@property (nonatomic, assign) NSMutableArray *my_applied_to_jobs;
 //This is used to keep track of all the friends for this user on facebook
 @property (nonatomic, assign) NSMutableArray *my_facebook_friends;
 

@@ -80,6 +80,17 @@ static NSString *job_company_info_address = @"https://helium.staffittome.com/api
         //Display users display name
         my_profile_name.text = [[app_delegate.user_state_information.job_array objectAtIndex:the_position] title];
         company_name.text = [[app_delegate.user_state_information.job_array objectAtIndex:the_position] company];
+        
+        //Do logic to tell whether or not the person has applied to this job before
+        for (int i = 0; i < app_delegate.user_state_information.my_applied_to_jobs.count; i++)
+        {
+            if ([my_profile_name.text isEqualToString:[[app_delegate.user_state_information.my_applied_to_jobs objectAtIndex:i] title]] && [company_name.text isEqualToString:[[app_delegate.user_state_information.my_applied_to_jobs objectAtIndex:i] company]])
+            {
+                my_connection_button.alpha = .2;
+                my_connection_button.userInteractionEnabled = NO;
+            }
+        }
+        
         company_name.textColor = [UIColor colorWithRed:153.0/255 green:153.0/255 blue:153.0/255 alpha:1];
         my_profile_name.backgroundColor = [UIColor clearColor];
         connections_label.backgroundColor = [UIColor clearColor];
@@ -100,6 +111,13 @@ static NSString *job_company_info_address = @"https://helium.staffittome.com/api
 }
 -(void)requestFinished:(ASIHTTPRequest *)request
 {
+    if (adding_myself_to_applied_list)
+    {
+        StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate];
+        [app_delegate.user_state_information populateMyAppliedToJobsWithString:[request responseString]];
+        adding_myself_to_applied_list = NO;
+        return;
+    }
     printf("\n\n\n\n\n\nThis is the application response: %s\n\n", [[request responseString] UTF8String]);
     [load_view removeFromSuperview];
     if (company_information)
@@ -110,6 +128,21 @@ static NSString *job_company_info_address = @"https://helium.staffittome.com/api
     }
     if ([[request responseString] isEqualToString:@"Application has been successfully submitted."])
     {
+        StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate];
+        
+        //Request information about applications
+        NSURL *url = [NSURL URLWithString:applied_job_url];
+        ASIFormDataRequest *request_ror = [ASIFormDataRequest requestWithURL:url];
+        [request_ror setRequestMethod:@"POST"];
+        [request_ror setPostValue:app_delegate.user_state_information.sessionKey forKey:@"session_key"];
+        [request_ror setPostValue:[NSString stringWithFormat:@"%d", app_delegate.user_state_information.my_user_info.user_id] forKey:@"user_id"];
+        [request_ror setTimeOutSeconds:30];
+        [request_ror setDelegate:self];
+        [request_ror startAsynchronous];
+        adding_myself_to_applied_list = YES;
+        my_connection_button.alpha = .2;
+        my_connection_button.userInteractionEnabled = NO;
+        
         UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Congratulations!" message:@"Your application was succesfully submitted!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [message show];
         [message release];

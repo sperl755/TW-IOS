@@ -295,6 +295,7 @@
 		469BD68B13AB188900EDFE3E /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 469BD68913AB188900EDFE3E /* MainWindow.xib */; };
 		469BD68E13AB188900EDFE3E /* StaffItToMeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 469BD68D13AB188900EDFE3E /* StaffItToMeViewController.m */; };
 		469BD69A13AB19E100EDFE3E /* LogoAndMessage.png in Resources */ = {isa = PBXBuildFile; fileRef = 469BD69913AB19E100EDFE3E /* LogoAndMessage.png */; };
+		46AF2C761499A8AC0076DDE3 /* StaffOutHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 46AF2C751499A8AC0076DDE3 /* StaffOutHeader.m */; };
 		46AFD8A6141AFC2B0063140C /* icon57.png in Resources */ = {isa = PBXBuildFile; fileRef = 46AFD8A4141AFC2B0063140C /* icon57.png */; };
 		46AFD8A7141AFC2B0063140C /* sitm_app_icon_512.png in Resources */ = {isa = PBXBuildFile; fileRef = 46AFD8A5141AFC2B0063140C /* sitm_app_icon_512.png */; };
 		46AFD8AA141B0C820063140C /* PendingRequestsModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 46AFD8A9141B0C820063140C /* PendingRequestsModule.m */; };
@@ -779,6 +780,8 @@
 		469BD68C13AB188900EDFE3E /* StaffItToMeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StaffItToMeViewController.h; sourceTree = "<group>"; };
 		469BD68D13AB188900EDFE3E /* StaffItToMeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StaffItToMeViewController.m; sourceTree = "<group>"; };
 		469BD69913AB19E100EDFE3E /* LogoAndMessage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LogoAndMessage.png; sourceTree = "<group>"; };
+		46AF2C741499A8AC0076DDE3 /* StaffOutHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StaffOutHeader.h; sourceTree = "<group>"; };
+		46AF2C751499A8AC0076DDE3 /* StaffOutHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StaffOutHeader.m; sourceTree = "<group>"; };
 		46AFD8A4141AFC2B0063140C /* icon57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon57.png; path = "Art Assets/icon57.png"; sourceTree = "<group>"; };
 		46AFD8A5141AFC2B0063140C /* sitm_app_icon_512.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = sitm_app_icon_512.png; path = "Art Assets/sitm_app_icon_512.png"; sourceTree = "<group>"; };
 		46AFD8A8141B0C820063140C /* PendingRequestsModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PendingRequestsModule.h; sourceTree = "<group>"; };
@@ -1662,6 +1665,8 @@
 			children = (
 				46AFD8A8141B0C820063140C /* PendingRequestsModule.h */,
 				46AFD8A9141B0C820063140C /* PendingRequestsModule.m */,
+				46AF2C741499A8AC0076DDE3 /* StaffOutHeader.h */,
+				46AF2C751499A8AC0076DDE3 /* StaffOutHeader.m */,
 			);
 			name = StaffOutModules;
 			sourceTree = "<group>";
@@ -2117,6 +2122,7 @@
 				46BB09BD147CC2010077320E /* CodeableUIImage.m in Sources */,
 				46688E3F147CC405004D44E0 /* UIImage-Extended.m in Sources */,
 				463DB83E148D8830004B924C /* ISO8601DateFormatter.m in Sources */,
+				46AF2C761499A8AC0076DDE3 /* StaffOutHeader.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

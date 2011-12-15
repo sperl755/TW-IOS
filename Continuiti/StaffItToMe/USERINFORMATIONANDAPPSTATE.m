@@ -24,6 +24,7 @@
 #define PICTURE_URL_KEY    @"MYPICTUREURLKEY"
 #define MY_USER_INFORMATION_KEY @"MYUSERInFORMATION"
 #define MY_USER_LOCAL_KEY @"my-user-location"
+#define MY_APPLIED_TO_JOBS_KEY @"MyAppliedTojObs"
 
 @implementation USERINFORMATIONANDAPPSTATE
 @synthesize currentTabBar;
@@ -45,6 +46,7 @@
 @synthesize my_sent_messages;
 @synthesize on_my_job;
 @synthesize picture_url;
+@synthesize my_applied_to_jobs;
 @synthesize current_suggested_job_in_array;
 static NSString *user_locale_address = @"https://hydrogen.xen.exoware.net:3000/apis/available";
 
@@ -92,6 +94,11 @@ static NSString *user_locale_address = @"https://hydrogen.xen.exoware.net:3000/a
         }
         if ([aDecoder decodeObjectForKey:MY_SENT_MESSAGES_KEY] != nil){
             my_sent_messages = [[aDecoder decodeObjectForKey:MY_SENT_MESSAGES_KEY] retain];
+        }else{
+            printf("NIL AS HECK");
+        }
+        if ([aDecoder decodeObjectForKey:MY_APPLIED_TO_JOBS_KEY] != nil){
+            my_applied_to_jobs = [[aDecoder decodeObjectForKey:MY_APPLIED_TO_JOBS_KEY] retain];
         }else{
             printf("NIL AS HECK");
         }
@@ -146,6 +153,11 @@ static NSString *user_locale_address = @"https://hydrogen.xen.exoware.net:3000/a
     }else{
         printf("Job array is nil");
     }
+    if (my_applied_to_jobs != nil){
+        [aCoder encodeObject:my_sent_messages forKey:MY_APPLIED_TO_JOBS_KEY];
+    }else{
+        printf("Job array is nil");
+    }
 }
 -(id)init
 {
@@ -164,6 +176,7 @@ static NSString *user_locale_address = @"https://hydrogen.xen.exoware.net:3000/a
         my_inbox_messages = [[NSMutableArray alloc] initWithCapacity:100];
         my_suggested_jobs = [[NSMutableArray alloc] initWithCapacity:100];
         my_sent_messages = [[NSMutableArray alloc] initWithCapacity:100];
+        my_applied_to_jobs = [[NSMutableArray alloc] initWithCapacity:100];
         my_user_info = [[UserInfo alloc] init];
         local_manager = [[LocationManager alloc] init];
         local_manager.delegate = self;
@@ -171,7 +184,29 @@ static NSString *user_locale_address = @"https://hydrogen.xen.exoware.net:3000/a
     }
     return self;
 }
-
+-(void)populateMyAppliedToJobsWithString:(NSString *)the_information
+{
+    [my_applied_to_jobs removeAllObjects];
+    NSArray *applied_to_jobs = [the_information JSONValue];
+    for (int i = 0; i < applied_to_jobs.count; i++)
+    {
+        MyJob *temp = [[MyJob alloc] init];
+        if ([[applied_to_jobs objectAtIndex:i] objectForKey:@"title"] == [NSNull null] || [[applied_to_jobs objectAtIndex:i] objectForKey:@"title"] == nil)
+        {
+            temp.title = @"";
+        } else {
+            temp.title = [[[applied_to_jobs objectAtIndex:i] objectForKey:@"title"] retain];
+        }
+        if ([[applied_to_jobs objectAtIndex:i] objectForKey:@"company_name"] == [NSNull null] || [[applied_to_jobs objectAtIndex:i] objectForKey:@"company_name"] == nil)
+        {
+            temp.company = @"";
+        } else {
+            temp.company = [[[applied_to_jobs objectAtIndex:i] objectForKey:@"company_name"] retain];
+        }
+        [my_applied_to_jobs addObject:temp];
+        [temp release];
+    }
+}
 -(void)populateJobArrayWithJSONString:(NSString *)the_string
 {
     [job_array removeAllObjects];

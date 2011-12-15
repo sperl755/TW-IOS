@@ -413,11 +413,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "USERINFORMATIONANDAPPSTATE.m"
-         timestampString = "345597480.315864"
+         timestampString = "345620390.150123"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "430"
-         endingLineNumber = "430"
+         startingLineNumber = "465"
+         endingLineNumber = "465"
          landmarkName = "-populateMyInboxWithString:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -427,11 +427,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "USERINFORMATIONANDAPPSTATE.m"
-         timestampString = "345601360.734153"
+         timestampString = "345620390.150123"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "475"
-         endingLineNumber = "475"
+         startingLineNumber = "510"
+         endingLineNumber = "510"
          landmarkName = "-getUserInformation:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -483,12 +483,40 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "USERINFORMATIONANDAPPSTATE.m"
-         timestampString = "345607301.011484"
+         timestampString = "345620390.150123"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "471"
-         endingLineNumber = "471"
+         startingLineNumber = "506"
+         endingLineNumber = "506"
          landmarkName = "-populateUserCapabilities:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "StaffItToMe/PendingRequestsModule.m"
+         timestampString = "345614172.793449"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "55"
+         endingLineNumber = "55"
+         landmarkName = "-requestFinished:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "StaffItToMe/JobSearchController.m"
+         timestampString = "345620390.150123"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "138"
+         endingLineNumber = "138"
+         landmarkName = "-requestFinished:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>
