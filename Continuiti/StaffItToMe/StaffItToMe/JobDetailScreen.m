@@ -98,7 +98,7 @@
         NSDictionary *json_job_info = [json_info JSONValue];
         NSMutableDictionary *json_job_info_mutable = [NSMutableDictionary dictionaryWithDictionary:json_job_info];
         StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate];
-        array_position = app_delegate.user_state_information.current_job_in_array;
+        array_position = app_delegate.user_state_information.current_suggested_job_in_array;
         background = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Background.png"]];
         background.frame = CGRectMake(0, 0, 320, 480);
         [self.view insertSubview:background atIndex:0];

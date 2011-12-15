@@ -209,12 +209,12 @@ static NSString *job_suggestion_rl = @"https://helium.staffittome.com/apis/job_s
     }
     //If there is more in the array display it.
     if (current_suggested_job_position + 1 < app_delegate.user_state_information.my_suggested_jobs.count)
-    {
+    { 
+        current_suggested_job_position++; 
         job_one_name.text = [[app_delegate.user_state_information.my_suggested_jobs objectAtIndex:current_suggested_job_position] title];
         job_one_description.text = [[app_delegate.user_state_information.my_suggested_jobs objectAtIndex:current_suggested_job_position] company];  
         job_two_name.text = [[app_delegate.user_state_information.my_suggested_jobs objectAtIndex:current_suggested_job_position + 1] title];
-        job_two_description.text = [[app_delegate.user_state_information.my_suggested_jobs objectAtIndex:current_suggested_job_position + 1] company];  
-        current_suggested_job_position++; 
+        job_two_description.text = [[app_delegate.user_state_information.my_suggested_jobs objectAtIndex:current_suggested_job_position + 1] company]; 
     }
     else
     {//Else just bring it back to the beginning of the array.
