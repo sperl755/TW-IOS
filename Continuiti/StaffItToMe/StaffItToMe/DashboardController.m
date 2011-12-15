@@ -127,8 +127,7 @@ static NSString *staff_out_address = @"http://hydrogen.xen.exoware.net:3000/apis
 {
     StaffItToMeAppDelegate *delegate = (StaffItToMeAppDelegate*) [[UIApplication sharedApplication] delegate];
     //show a alertview that we are accessing the credentials and talking to the server.
-    load_view = [[LoadingView alloc] initWithFrame:CGRectMake(0, -50, 320, 480)];
-    [self.view addSubview:load_view];
+    [((StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate]) displayLoadingView];
     
     NSMutableString *job_info_url = [[NSMutableString alloc] initWithString:@"http://helium.staffittome.com/apis/"];
     [job_info_url appendString:[NSString stringWithFormat:@"%d", [[delegate.user_state_information.my_suggested_jobs objectAtIndex:delegate.user_state_information.current_suggested_job_in_array] job_id]]];
@@ -149,8 +148,7 @@ static NSString *staff_out_address = @"http://hydrogen.xen.exoware.net:3000/apis
 -(void)didSubmitProposal
 {
     //show a alertview that we are accessing the credentials and talking to the server.
-    load_view = [[LoadingView alloc] initWithFrame:CGRectMake(0, -50, 320, 480)];
-    [self.view addSubview:load_view];
+    [((StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate]) displayLoadingView];
     
     //Perform the accessing of the server.
     NSURL *url = [NSURL URLWithString:staff_out_address];
@@ -176,7 +174,7 @@ static NSString *staff_out_address = @"http://hydrogen.xen.exoware.net:3000/apis
 }
 - (void)requestFinished:(ASIHTTPRequest *)request
 {
-    [load_view removeFromSuperview];
+    [((StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate]) removeLoadingViewFromWindow];
     job_detail_screen = [[JobDetailScreen alloc] initWithSuggestedJobsArrayWithJSONString:[request responseString]];
     [nav_control pushViewController:job_detail_screen animated:YES];
 }

@@ -432,15 +432,21 @@ static NSString *user_locale_address = @"https://hydrogen.xen.exoware.net:3000/a
     NSArray *data = [the_string JSONValue];
     for (int i = 0; i < data.count; i++)
     {
-        int message_id = [[[data objectAtIndex:i] objectForKey:@"id"] intValue];
-        printf("%d", message_id);
-        //allocate an MessageHeaderObject
-        MessageHeaderObject *message_header = [[MessageHeaderObject alloc] initWithDate:[[data objectAtIndex:i] objectForKey:@"created_at"] body:[[data objectAtIndex:i] objectForKey:@"body"] subject:
-                                               [[data objectAtIndex:i] objectForKey:@"subject"] recipient_id:@"" sender_id:@"" sender_name:
-                                               [[data objectAtIndex:i] objectForKey:@"sender_name"] recipient_name:@"" message_id:[NSString stringWithFormat:@"%d", message_id]];
-        [my_inbox_messages addObject:message_header];
-        
-        [message_header release];
+        @try {
+            int message_id = [[[data objectAtIndex:i] objectForKey:@"messageable_id"] intValue];
+            int sender_id = [[[data objectAtIndex:i] objectForKey:@"id"] intValue];
+            printf("%d", message_id);
+            //allocate an MessageHeaderObject
+            MessageHeaderObject *message_header = [[MessageHeaderObject alloc] initWithDate:[[data objectAtIndex:i] objectForKey:@"created_at"] body:[[data objectAtIndex:i] objectForKey:@"body"] subject:
+                                                   [[data objectAtIndex:i] objectForKey:@"subject"] recipient_id:@"" sender_id:[NSString stringWithFormat:@"%d", sender_id] sender_name:
+                                                   [[data objectAtIndex:i] objectForKey:@"sender_name"] recipient_name:@"" message_id:[NSString stringWithFormat:@"%d", message_id]];
+            [my_inbox_messages addObject:message_header];
+            
+            [message_header release];
+        }
+        @catch (NSException *exception) {
+            printf("Encountered exception when reading inbox JSON information");
+        }
     }
 }
 -(void)populateMySentMessagesWithString:(NSString *)the_string
@@ -460,9 +466,9 @@ static NSString *user_locale_address = @"https://hydrogen.xen.exoware.net:3000/a
         [message_header release];
     }
 }
--(void)populateUserCapabilities
+-(void)populateUserCapabilities:(NSString*)json_information
 {
-    
+    printf("\nJSON INFORMATION ON USER CAPABILITIES STUFF: %s\n", [json_information UTF8String]);
 }
 -(void)getUserInformation:(NSString *)user_information
 {

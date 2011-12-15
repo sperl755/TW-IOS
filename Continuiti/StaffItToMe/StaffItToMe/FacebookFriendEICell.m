@@ -80,6 +80,9 @@ static NSString *endorse_link = @"https://helium.staffittome.com/apis/endorse";
     }
     return self;
 }
+/**
+ Default constructor for this class.
+ */
 -(id)initWithFriendName:(NSString*)friend_name friend_id:(NSString*)friend_id
 {
     if ((self = [super init]))
@@ -154,8 +157,7 @@ static NSString *endorse_link = @"https://helium.staffittome.com/apis/endorse";
 -(void)sendEndorsement
 {
     //Show that they are loading the endorsement
-    load_view = [[LoadingView alloc] initWithFrame:CGRectMake(0, -150, 320, 480)];
-    [self.superview addSubview:load_view];
+    [((StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate]) displayLoadingView];
     
     
     StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate];
@@ -170,7 +172,7 @@ static NSString *endorse_link = @"https://helium.staffittome.com/apis/endorse";
     
     [request_ror setTimeOutSeconds:30];
     [request_ror setDelegate:self];
-    [request_ror startAsynchronous];   
+    [request_ror startAsynchronous];
 }
 -(void)request:(FBRequest *)request didLoad:(id)result
 {
@@ -185,7 +187,7 @@ static NSString *endorse_link = @"https://helium.staffittome.com/apis/endorse";
 }
 -(void)requestFinished:(ASIHTTPRequest *)request
 {
-    [load_view removeFromSuperview];
+    [((StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate]) removeLoadingViewFromWindow];
 }
 
 /*
@@ -206,6 +208,7 @@ static NSString *endorse_link = @"https://helium.staffittome.com/apis/endorse";
     [friend_one_invite_btn release];
     [friend_one_endorse_btn release];
     [friend_facebook_id release];
+    [load_view release];
     [facebook release];
     [super dealloc];
 }

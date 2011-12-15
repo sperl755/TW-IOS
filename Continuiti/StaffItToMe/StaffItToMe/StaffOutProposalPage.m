@@ -20,9 +20,31 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
+        StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate];
+        int user_id = app_delegate.user_state_information.my_user_info.user_id;
+        NSMutableString *url_string = [[NSMutableString alloc] initWithString:@"https://helium.staffittome.com/apis/"];
+        [url_string appendString:[NSString stringWithFormat:@"%d", user_id]];
+        [url_string appendString:@"/capability_list"];
+        //Perform the accessing of fthe server. for the user capabilities
+        NSURL *url = [NSURL URLWithString:url_string];
+        ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
+        [request setRequestMethod:@"POST"];
+        [request setPostValue:app_delegate.user_state_information.sessionKey forKey:@"session_key"];
+        printf("%s", [[NSString stringWithFormat:@"%d", user_id] UTF8String]);
+        [request setPostValue:[NSString stringWithFormat:@"%d", user_id]forKey:@"user_id"];
+        ///Finish request
+        [request setValidatesSecureCertificate:NO];
+        [request setTimeOutSeconds:30];
+        [request setDelegate:self];
+        [request startAsynchronous];
+        getting_information = YES;
+        max_slider_value = 150;
+        min_slider_value = 9.5;
+        pay_type = @"Hourly";
+        
         // Custom initialization
         module_array = [[NSArray alloc] initWithArray:[NSArray arrayWithObjects:[self getHeader],[self getCapabilityDropDown],[self getRateCell], [self getEmailCell], [self getSubjectCell], [self getMessageCell], [self getStaffOutButtonCell], nil]];
-        capability_txt.text = @"Financial Analyst";
+        capability_txt.text = @"Choose a capability";
         positioning_arrows = [[FindRightSpotArrows alloc] initWithFrame:CGRectMake(0, 0, 100, 150)];
         positioning_arrows.center = CGPointMake(200, 200);
         positioning_arrows.delegate = self;
@@ -153,21 +175,25 @@
 -(id)getCapabilityDropDown
 {
     UIView *capability_view = [[UIView alloc] init];
-    
-    UIImageView *cell_background = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"module_row"]];
+    UIButton *background_btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [background_btn setBackgroundImage:[UIImage imageNamed:@"module_row"] forState:UIControlStateNormal];
+    [background_btn setFrame:CGRectMake(5, 0, 310, 42)];
+    [background_btn addTarget:self action:@selector(changeCapability) forControlEvents:UIControlEventTouchUpInside];
+    [capability_view addSubview:background_btn];
+    /*UIImageView *cell_background = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"module_row"]];
     cell_background.frame = CGRectMake(5, 0, 310, 42);
-    [capability_view addSubview:cell_background];
+    [capability_view addSubview:cell_background];*/
     
     //Make category label
-    category = [[UILabel alloc] initWithFrame:CGRectMake(cell_background.frame.origin.x + 10, cell_background.frame.origin.y + 2.5, 200, 40)];
+    category = [[UILabel alloc] initWithFrame:CGRectMake(background_btn.frame.origin.x + 10, background_btn.frame.origin.y + 2.5, 200, 40)];
     [category setFont:[UIFont fontWithName:@"HelveticaNeueLTCom-Md" size:12]];
     category.backgroundColor = [UIColor clearColor];
-    category.text = @"Capability";
+    category.text = @"Capability.";
     category.center = CGPointMake(115, 22);
     [capability_view addSubview:category];
     
     //Make detail label of the cell
-    capability_txt = [[UILabel alloc] initWithFrame:CGRectMake(cell_background.frame.origin.x + 75, cell_background.frame.origin.y + 3,110, 40)];
+    capability_txt = [[UILabel alloc] initWithFrame:CGRectMake(background_btn.frame.origin.x + 75, background_btn.frame.origin.y + 3,110, 40)];
     [capability_txt setFont:[UIFont fontWithName:@"HelveticaNeueLTCom-Md" size:12]];
     capability_txt.backgroundColor = [UIColor clearColor];
     [capability_view addSubview:capability_txt];
@@ -199,19 +225,110 @@
     
     return capability_view;
 }
+-(void)changeCapability
+{
+    menu = [[UIActionSheet alloc] initWithTitle:@"Pick a capability.\n\n\n\n\n\n\n\n\n\n\n\n\n" 
+                                                      delegate:self
+                                             cancelButtonTitle:@"Cancel"
+                                        destructiveButtonTitle:nil
+                                             otherButtonTitles:@"Select", nil];
+    capability_picker_view = [[UIPickerView alloc] initWithFrame:CGRectMake(0, 30, 325, 250)];
+    capability_picker_view.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    capability_picker_view.delegate = self;
+    capability_picker_view.dataSource = self;
+    capability_picker_view.showsSelectionIndicator = YES;
+    [menu addSubview:capability_picker_view];
+    [menu showInView:capability_txt.superview];
+}
+-(void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    module_array = [[NSArray alloc] initWithArray:[NSArray arrayWithObjects:[self getHeader],[self getCapabilityDropDown],[self getRateCell], [self getEmailCell], [self getSubjectCell], [self getMessageCell], [self getStaffOutButtonCell], nil]];
+    [my_table_view reloadData];
+}
+-(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
+{
+    return 1;
+}
+-(NSString*)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
+{
+    NSString* return_string;
+    if (pickerView == capability_picker_view)
+    {
+        if (row == 0)
+        {
+            return_string = @"Choose a capability.";
+        }
+        else
+        {
+            return_string = @"capability";   
+        }
+    }
+    else if (pickerView == rate_picker_view)
+    {
+        if (row == 0)
+        {
+            return_string = @"Hourly";
+        }
+        else if (row == 1)
+        {
+            return_string = @"Fixed";
+        }
+    }
+    return return_string;
+}
+-(NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
+{
+    int return_rows;
+    if (pickerView == capability_picker_view) {
+        return_rows = 3;
+    }
+    else if (pickerView == rate_picker_view) 
+    {
+        return_rows = 2;
+    }
+    return return_rows;
+}
+-(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
+{
+    if (pickerView == capability_picker_view)
+    {
+        
+    }
+    else if (pickerView == rate_picker_view)
+    {
+        //if they selected hourly
+        if (row == 0)
+        {
+            pay_type = @"Hourly";
+            max_slider_value = 150;
+            min_slider_value = 9.5;
+        }
+        else if (row == 1)//if they selected fixed.
+        {
+            pay_type = @"Fixed";
+            max_slider_value = 150000;
+            min_slider_value = 10000;
+        }
+    }
+}
 -(id)getRateCell
 {
     UIView *rate_view = [[UIView alloc] init];
     UIImage *cell_image2 = [UIImage imageNamed:@"module_row"];
     UIImage *cell_stretchable2 = [cell_image2 stretchableImageWithLeftCapWidth:(cell_image2.size.width/2)-1 topCapHeight:(cell_image2.size.height/2)-1];
-    UIImageView *cell_background = [[UIImageView alloc] initWithImage:cell_stretchable2];
+    UIButton *background_btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [background_btn setBackgroundImage:cell_stretchable2 forState:UIControlStateNormal];
+    [background_btn setFrame:CGRectMake(5, 0, 310, 42)];
+    [background_btn addTarget:self action:@selector(changeRateType) forControlEvents:UIControlEventTouchUpInside];
+    [rate_view addSubview:background_btn];
+    /*UIImageView *cell_background = [[UIImageView alloc] initWithImage:cell_stretchable2];
     cell_background.frame = CGRectMake(5, 0, 310, 42);
-    [rate_view addSubview:cell_background];
+    [rate_view addSubview:cell_background];*/
     
-    rate_txt = [[UILabel alloc] initWithFrame:CGRectMake(cell_background.frame.origin.x + 10, cell_background.frame.origin.y -4, 75, 40)];
+    rate_txt = [[UILabel alloc] initWithFrame:CGRectMake(background_btn.frame.origin.x + 10, background_btn.frame.origin.y -4, 75, 40)];
     [rate_txt setFont:[UIFont fontWithName:@"HelveticaNeueLTCom-Md" size:12]];
     rate_txt.backgroundColor = [UIColor clearColor];
-    rate_txt.text = @"Hourly";
+    rate_txt.text = pay_type;
     rate_txt.center = CGPointMake(52.5, 22);
     [rate_view addSubview:rate_txt];
     
@@ -220,7 +337,7 @@
     rate_arrow.center = CGPointMake(78.25, 20);
     [rate_view addSubview:rate_arrow];
     
-    rate_slider = [[ASSLider alloc] initWithFrame:CGRectMake(rate_arrow.frame.origin.x + rate_arrow.frame.size.width + 25, rate_arrow.frame.origin.y - 21, 205, 42) andMaxValue:200 minValue:9.5];
+    rate_slider = [[ASSLider alloc] initWithFrame:CGRectMake(rate_arrow.frame.origin.x + rate_arrow.frame.size.width + 25, rate_arrow.frame.origin.y - 21, 205, 42) andMaxValue:max_slider_value minValue:min_slider_value];
     rate_slider.clipsToBounds = NO;
     rate_slider.center = CGPointMake(197.5, 14);
     rate_view.clipsToBounds = NO;
@@ -233,8 +350,37 @@
     return rate_view;
     
 }
+-(void)changeRateType
+{
+    menu = [[UIActionSheet alloc] initWithTitle:@"Pick a rate type\n\n\n\n\n\n\n\n\n\n\n\n\n" 
+                                       delegate:self
+                              cancelButtonTitle:@"Cancel"
+                         destructiveButtonTitle:nil
+                              otherButtonTitles:@"Select", nil];
+    rate_picker_view = [[UIPickerView alloc] initWithFrame:CGRectMake(0, 30, 325, 250)];
+    rate_picker_view.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    rate_picker_view.delegate = self;
+    rate_picker_view.dataSource = self;
+    rate_picker_view.showsSelectionIndicator = YES;
+    [menu addSubview:rate_picker_view];
+    [menu showInView:rate_txt.superview];
+    
+}
 -(void)reactToASSliderValueChange:(double)the_slider_value
 {
+    if ([pay_type isEqualToString:@"Fixed"])
+    {
+        per_hr = (int)the_slider_value;   
+        [my_value_display setCenter:CGPointMake(rate_slider.frame.origin.x + ([rate_slider getThumbFrame].origin.x + ([rate_slider getThumbFrame].size.width / 2)), my_value_display.center.y)];
+        my_value_display_text.center = CGPointMake(my_value_display.center.x, my_value_display.center.y);
+        NSMutableString *value_text = [[NSMutableString alloc] initWithString:@"$"];
+        int min_value = (int) [rate_slider getCurrentValue];
+        [value_text appendString:[NSString stringWithFormat:@"%d", min_value]];
+        [value_text deleteCharactersInRange:NSMakeRange(3, 3)];
+        [value_text appendString:@"g"];
+        my_value_display_text.text = value_text;
+        return;
+    }
     per_hr = (int)the_slider_value;   
     [my_value_display setCenter:CGPointMake(rate_slider.frame.origin.x + ([rate_slider getThumbFrame].origin.x + ([rate_slider getThumbFrame].size.width / 2)), my_value_display.center.y)];
     my_value_display_text.center = CGPointMake(my_value_display.center.x, my_value_display.center.y);
@@ -364,6 +510,14 @@
 }
 -(void)requestFinished:(ASIHTTPRequest *)request
 {
+    if (getting_information)
+    {
+        StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate];
+        [app_delegate.user_state_information populateUserCapabilities:[request responseString]];
+        printf("\n\n\nThis is theuser capabilities: %s\n\n", [[request responseString] UTF8String]);
+        getting_information = NO;
+        return;
+    }
     [load_view removeFromSuperview];
     UIAlertView *aler = [[UIAlertView alloc] initWithTitle:@"" message:@"Your proposal was submitted!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
     [aler show];

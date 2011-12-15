@@ -20,6 +20,9 @@ static NSString *endorse_link = @"https://helium.staffittome.com/apis/endorse";
     }
     return self;
 }
+/**
+ Default Constructor for creating Spam your friends.
+ */
 -(id)init
 {
     if ((self = [super init])) {
@@ -97,6 +100,7 @@ static NSString *endorse_link = @"https://helium.staffittome.com/apis/endorse";
     }
     for (int i = 0; i < friend_cells.count; i++)
     {
+        [[friend_cells objectAtIndex:i] release];
         [[friend_cells objectAtIndex:i] removeFromSuperview];
     }
     //Empty the array

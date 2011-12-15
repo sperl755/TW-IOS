@@ -13,4 +13,5 @@
     #import <Foundation/Foundation.h>
     #import "LoadingView.h"
     #import "AlertLoadView.h"
+    static NSString *inbox_api_url = @"https://helium.staffittome.com/apis/inbox";
 #endif

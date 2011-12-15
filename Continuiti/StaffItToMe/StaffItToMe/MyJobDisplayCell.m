@@ -152,12 +152,7 @@ static NSString *my_checkin_checkout_url = @"https://helium.staffittome.com/apis
     //If they clicked checkin
     if (buttonIndex == 0 && actionSheet.tag == 21)//21 becuase we are checking to see if they were checking in or out.
     {
-        load_message = [[UIAlertView alloc] initWithTitle:@"Loading..." message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:nil];
-        [load_message show];
-        UIActivityIndicatorView *active = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-        active.center = CGPointMake(load_message.bounds.size.width / 2, load_message.bounds.size.height - 40);
-        [active startAnimating];
-        [load_message addSubview:active];
+        [((StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate]) displayLoadingView];
         StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate];
         /********************BElow will access the server requesting a checking on the job*****/
         checkin_date = my_manual_checkin_date_time;
@@ -185,12 +180,7 @@ static NSString *my_checkin_checkout_url = @"https://helium.staffittome.com/apis
     }
     else if (buttonIndex == 0 && actionSheet.tag == 23)
     {
-        load_message = [[UIAlertView alloc] initWithTitle:@"Loading..." message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:nil];
-        [load_message show];
-        UIActivityIndicatorView *active = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-        active.center = CGPointMake(load_message.bounds.size.width / 2, load_message.bounds.size.height - 40);
-        [active startAnimating];
-        [load_message addSubview:active];
+        [((StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate]) displayLoadingView];
         StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate];
         /********************BElow will access the server requesting a checking on the job*****/
         //Perform the accessing of the server.
@@ -224,13 +214,7 @@ static NSString *my_checkin_checkout_url = @"https://helium.staffittome.com/apis
         return;
     }
     //show a alertview that we are accessing the credentials and talking to the server.
-    load_message = [[UIAlertView alloc] initWithTitle:@"Loading..." message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:nil];
-    [load_message show];
-    UIActivityIndicatorView *active = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-    active.center = CGPointMake(load_message.bounds.size.width / 2, load_message.bounds.size.height - 40);
-    [active startAnimating];
-    [load_message addSubview:active];
-    
+    [((StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate]) displayLoadingView];
     /********************BElow will access the server requesting a checking on the job*****/
     //Perform the accessing of the server.
     NSURL *url = [NSURL URLWithString:my_checkin_checkout_url];
@@ -293,7 +277,7 @@ static NSString *my_checkin_checkout_url = @"https://helium.staffittome.com/apis
  */
 -(void)requestFinished:(ASIHTTPRequest *)request
 {
-    [load_message dismissWithClickedButtonIndex:0 animated:YES];
+    [((StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate]) removeLoadingViewFromWindow];
     printf("\n%s", [[request responseString] UTF8String]);
     if (checkin_in) //if user clicks check in then we change to check out and start timer
     {
@@ -391,12 +375,7 @@ static NSString *my_checkin_checkout_url = @"https://helium.staffittome.com/apis
 {
     timer_done = YES;
     
-    load_message = [[UIAlertView alloc] initWithTitle:@"Loading..." message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:nil];
-    [load_message show];
-    UIActivityIndicatorView *active = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-    active.center = CGPointMake(load_message.bounds.size.width / 2, load_message.bounds.size.height - 40);
-    [active startAnimating];
-    [load_message addSubview:active];
+    [((StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate]) displayLoadingView];
     /********************BElow will access the server requesting a checking on the job*****/
     StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate];
     //Perform the accessing of the server.

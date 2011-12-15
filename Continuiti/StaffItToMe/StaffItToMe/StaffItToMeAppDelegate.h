@@ -42,6 +42,12 @@
     LoadingView *load_view;
     BOOL logged_out;
 }
+/**This function shows the user that we are loading information and
+ temporarily stops the screen from being used*/
+-(void)displayLoadingView;
+/**This function removes the loading view that was shown to the user
+ that we are accessing information*/
+-(void)removeLoadingViewFromWindow;
 -(void)displayLoadViewWithString:(NSString*)the_string;
 -(void)logoutFunction;
 -(void)updateAvailableSwitches;

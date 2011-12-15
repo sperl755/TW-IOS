@@ -13,7 +13,6 @@
 @implementation ConversationSelection
 @synthesize my_table;
 @synthesize delegate;
-static NSString *inbox_api_url = @"https://helium.staffittome.com/apis/inbox";
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];

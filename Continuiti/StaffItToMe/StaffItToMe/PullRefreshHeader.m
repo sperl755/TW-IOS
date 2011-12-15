@@ -50,7 +50,6 @@
     }
     if (loaded)
     {
-        printf("I am loaded");
         return;
     }
     if (the_point.y > -50)
@@ -70,7 +69,6 @@
     [CATransaction commit];
     [UIView commitAnimations];
     old_content_offset = the_point;
-    printf("Angle: %f", angle);
     if (angle <= -180)
     {
         loaded = YES;

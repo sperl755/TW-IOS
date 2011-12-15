@@ -28,7 +28,7 @@
 -(id)initWithCoder:(NSCoder*)aDecoder;
 -(void)encodeWithCoder:(NSCoder*)aCoder;
 -(void)getUserInformation:(NSString*)user_information;
--(void)populateUserCapabilities;
+-(void)populateUserCapabilities:(NSString*)json_information;
 -(void)populateMyJobArrayWithJSONString:(NSString*)the_string;
 -(void)populateJobArrayWithJSONString:(NSString *)the_string;
 -(void)populateSuggestedJobsArrayWithString:(NSString*)the_string;

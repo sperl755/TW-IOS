@@ -95,7 +95,7 @@ static NSString *job_apply_address = @"https://helium.staffittome.com/apis/submi
 -(void)requestFinished:(ASIHTTPRequest *)request
 {
     printf("\n\n\n\n\n\nThis is the application response: %s\n\n", [[request responseString] UTF8String]);
-    [load_view removeFromSuperview];
+    [((StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate]) removeLoadingViewFromWindow];
     if ([[request responseString] isEqualToString:@"Application has been successfully submitted."])
     {
         UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Congratulations!" message:@"Your application was succesfully submitted!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
@@ -126,8 +126,7 @@ static NSString *job_apply_address = @"https://helium.staffittome.com/apis/submi
     [request setDelegate:self];
     [request startAsynchronous];
     //show a alertview that we are accessing the credentials and talking to the server.
-    load_view = [[LoadingView alloc] initWithFrame:CGRectMake(0, -50, 320, 480)];
-    [self.superview addSubview:load_view];
+    [((StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate]) displayLoadingView];
 }
 /*
  // Only override drawRect: if you perform custom drawing.

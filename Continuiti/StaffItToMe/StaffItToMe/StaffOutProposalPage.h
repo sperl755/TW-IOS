@@ -12,8 +12,9 @@
 #import "ASSLider.h"
 #import "FindRightSpotArrows.h"
 
-@interface StaffOutProposalPage : UIViewController <UITextViewDelegate, UITextFieldDelegate, ASSliderProtocol, FindRightSpotArrowProtocol>
+@interface StaffOutProposalPage : UIViewController <UITextViewDelegate, UITextFieldDelegate, ASSliderProtocol, FindRightSpotArrowProtocol, UIPickerViewDelegate, UIPickerViewDataSource, UIActionSheetDelegate>
 {
+    BOOL getting_information;
     IBOutlet ASTableView *my_table_view;
     NSArray *module_array;
     //Data
@@ -26,6 +27,8 @@
     UILabel *capability_lbl;
     UILabel *capability_txt;
     UIImageView *capability_arrow;
+    UIPickerView *capability_picker_view;
+    UIActionSheet *menu;
     
     //Rate Assets
     UILabel *rate_txt;
@@ -33,6 +36,9 @@
     ASSLider *rate_slider;
     UIImageView *my_value_display;
     UILabel *my_value_display_text;
+    UIPickerView *rate_picker_view;
+    int min_slider_value;
+    int max_slider_value;
     
     //UISlider *rate_slider;
     

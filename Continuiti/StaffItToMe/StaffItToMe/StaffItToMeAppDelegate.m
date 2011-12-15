@@ -146,7 +146,11 @@ static NSString *staff_it_to_me_address = @"www.google.com";
     }
     return NO;
 }
-
+-(void)displayLoadingView
+{
+    load_view = [[LoadingView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
+    [_window addSubview:load_view];
+}
 -(void)displayLoadViewWithString:(NSString*)the_string
 {
     AlertLoadView *alert_view = [[AlertLoadView alloc] initWithFrame:CGRectMake(0, 0, 320, 480) andText:@"You have succesfully endorsed your friend great job!"];
@@ -308,6 +312,10 @@ static NSString *staff_it_to_me_address = @"www.google.com";
         return NO;
     }
     return  YES;
+}
+-(void)removeLoadingViewFromWindow
+{
+    [load_view removeFromSuperview];
 }
 -(void)request:(FBRequest *)request didLoad:(id)result
 {
