@@ -21,17 +21,15 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate];
-        int user_id = app_delegate.user_state_information.my_user_info.user_id;
-        NSMutableString *url_string = [[NSMutableString alloc] initWithString:@"https://helium.staffittome.com/apis/"];
-        [url_string appendString:[NSString stringWithFormat:@"%d", user_id]];
-        [url_string appendString:@"/capability_list"];
-        //Perform the accessing of fthe server. for the user capabilities
-        NSURL *url = [NSURL URLWithString:url_string];
+        
+        NSMutableString *user_information = [[NSMutableString alloc] initWithString:@"https://helium.staffittome.com/apis/"];
+        [user_information appendString:[NSString stringWithFormat:@"%d", app_delegate.user_state_information.my_user_info.user_id]];
+        [user_information appendString:@"/profile_details"];
+        //Perform the accessing of fthe server.
+        NSURL *url = [NSURL URLWithString:user_information];
         ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
-        [request setRequestMethod:@"POST"];
-        [request setPostValue:app_delegate.user_state_information.sessionKey forKey:@"session_key"];
-        printf("%s", [[NSString stringWithFormat:@"%d", user_id] UTF8String]);
-        [request setPostValue:[NSString stringWithFormat:@"%d", user_id]forKey:@"user_id"];
+        [request setRequestMethod:@"GET"];
+        
         ///Finish request
         [request setValidatesSecureCertificate:NO];
         [request setTimeOutSeconds:30];
@@ -43,8 +41,8 @@
         pay_type = @"Hourly";
         
         // Custom initialization
+        capability = @"Choose a capability";
         module_array = [[NSArray alloc] initWithArray:[NSArray arrayWithObjects:[self getHeader],[self getCapabilityDropDown],[self getRateCell], [self getEmailCell], [self getSubjectCell], [self getMessageCell], [self getStaffOutButtonCell], nil]];
-        capability_txt.text = @"Choose a capability";
         positioning_arrows = [[FindRightSpotArrows alloc] initWithFrame:CGRectMake(0, 0, 100, 150)];
         positioning_arrows.center = CGPointMake(200, 200);
         positioning_arrows.delegate = self;
@@ -196,6 +194,7 @@
     capability_txt = [[UILabel alloc] initWithFrame:CGRectMake(background_btn.frame.origin.x + 75, background_btn.frame.origin.y + 3,110, 40)];
     [capability_txt setFont:[UIFont fontWithName:@"HelveticaNeueLTCom-Md" size:12]];
     capability_txt.backgroundColor = [UIColor clearColor];
+    capability_txt.text = capability;
     [capability_view addSubview:capability_txt];
     capability_txt.textColor = [UIColor colorWithRed:110.0/255 green:146.0/255 blue:212.0/255 alpha:1];
     capability_txt.textAlignment = UITextAlignmentRight;
@@ -260,7 +259,7 @@
         }
         else
         {
-            return_string = @"capability";   
+            return_string = [my_capabilities_array objectAtIndex:row-1];   
         }
     }
     else if (pickerView == rate_picker_view)
@@ -280,7 +279,7 @@
 {
     int return_rows;
     if (pickerView == capability_picker_view) {
-        return_rows = 3;
+        return_rows = my_capabilities_array.count+1;
     }
     else if (pickerView == rate_picker_view) 
     {
@@ -292,7 +291,14 @@
 {
     if (pickerView == capability_picker_view)
     {
-        
+        if (row == 0)
+        {
+            capability = @"Choose a capability.";
+        }
+        else
+        {
+            capability = [my_capabilities_array objectAtIndex:row-1];   
+        }
     }
     else if (pickerView == rate_picker_view)
     {
@@ -488,10 +494,8 @@
 -(void)sendProposal
 {
     
-    load_view = [[LoadingView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
-    [self.view addSubview:load_view];
-    
     StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*) [[UIApplication sharedApplication] delegate];
+    [((StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate]) displayLoadingView];
     // Custom initialization
     NSURL *url = [NSURL URLWithString:@"https://helium.staffittome.com/apis/create_proposal "];
     ASIFormDataRequest *request_ror = [ASIFormDataRequest requestWithURL:url];
@@ -508,17 +512,26 @@
     [request_ror setPostValue:subject_txt.text forKey:@"subject"];
     [request_ror startAsynchronous];
 }
+-(void)fillCapabilities:(NSString*)the_information
+{
+    my_capabilities_array = [[NSMutableArray alloc] initWithCapacity:11];
+    NSDictionary *response_data = [the_information JSONValue];
+    NSArray *capability_array = [response_data objectForKey:@"capabilities"];
+    for (int i = 0; i < capability_array.count; i++)
+    {
+        [my_capabilities_array addObject:[[capability_array objectAtIndex:i] objectForKey:@"title"]];
+    }
+}
 -(void)requestFinished:(ASIHTTPRequest *)request
 {
     if (getting_information)
     {
-        StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate];
-        [app_delegate.user_state_information populateUserCapabilities:[request responseString]];
+        [self fillCapabilities:[request responseString]];
         printf("\n\n\nThis is theuser capabilities: %s\n\n", [[request responseString] UTF8String]);
         getting_information = NO;
         return;
     }
-    [load_view removeFromSuperview];
+    [((StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate]) removeLoadingViewFromWindow];
     UIAlertView *aler = [[UIAlertView alloc] initWithTitle:@"" message:@"Your proposal was submitted!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
     [aler show];
     [aler release];

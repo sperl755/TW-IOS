@@ -21,6 +21,7 @@
     NSString *pay_type;
     int per_hr;
     NSString *capability;
+    NSMutableArray *my_capabilities_array;
     
     //Capability assets
     UILabel *category;
