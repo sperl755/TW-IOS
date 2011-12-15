@@ -139,6 +139,7 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         //cell.textLabel.text = name;
         [cell.contentView addSubview:friend_information];
+        [friend_information release];
     }
     return cell;
     

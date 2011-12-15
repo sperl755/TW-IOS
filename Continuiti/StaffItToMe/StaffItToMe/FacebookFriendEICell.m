@@ -178,6 +178,7 @@ static NSString *endorse_link = @"https://helium.staffittome.com/apis/endorse";
 {
     AlertLoadView *alert = [[AlertLoadView alloc] initWithFrame:CGRectMake(0, -150, 320, 480) andText:@"You have succesfully invited your friend!"];
     [self.superview addSubview:alert];
+    [alert release];
 }
 -(void)request:(FBRequest *)request didFailWithError:(NSError *)error
 {
