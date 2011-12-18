@@ -11,7 +11,6 @@
 
 
 @implementation SpamYourFriends
-static NSString *endorse_link = @"https://helium.staffittome.com/apis/endorse";
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
@@ -100,7 +99,6 @@ static NSString *endorse_link = @"https://helium.staffittome.com/apis/endorse";
     }
     for (int i = 0; i < friend_cells.count; i++)
     {
-        [[friend_cells objectAtIndex:i] release];
         [[friend_cells objectAtIndex:i] removeFromSuperview];
     }
     //Empty the array

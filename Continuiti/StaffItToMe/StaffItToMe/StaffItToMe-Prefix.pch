@@ -15,4 +15,5 @@
     #import "AlertLoadView.h"
 static NSString *inbox_api_url = @"https://helium.staffittome.com/apis/inbox";
 static NSString *applied_job_url = @"https://helium.staffittome.com/apis/applied_jobs";
+static NSString *endorse_link = @"https://helium.staffittome.com/apis/endorse";
 #endif

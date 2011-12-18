@@ -42,6 +42,8 @@ static NSString *staff_out_address = @"http://hydrogen.xen.exoware.net:3000/apis
         //IOS 5 COMPATIBILITY ISSUES
         [nav_control.navigationBar insertSubview:nav_back atIndex:1];
         [nav_control.navigationBar insertSubview:logo atIndex:2];
+        [nav_back release];
+        [logo release];
         
         
         //Create Back Button
@@ -55,6 +57,8 @@ static NSString *staff_out_address = @"http://hydrogen.xen.exoware.net:3000/apis
         backButtonView.tag = BACK_BUTTON_ID;
         [nav_control.navigationBar insertSubview:backButtonView atIndex:3];
         [[nav_control.navigationBar viewWithTag:BACK_BUTTON_ID] setHidden:YES];
+        [backButtonView release];
+        [myBackButton release];
         
         //Create Top Right Inbox Button
         UIView *inboxButtonView = [[UIView alloc] initWithFrame:CGRectMake(270,5,50,31)];
@@ -65,6 +69,8 @@ static NSString *staff_out_address = @"http://hydrogen.xen.exoware.net:3000/apis
         [myInboxButton addTarget:self action:@selector(goToInbox) forControlEvents:UIControlEventTouchUpInside];
         [inboxButtonView addSubview:myInboxButton];
         [nav_control.navigationBar insertSubview:inboxButtonView atIndex:4];
+        [myInboxButton release];
+        [inboxButtonView release];
         
         
         //nav_control.delegate = self;
@@ -80,9 +86,14 @@ static NSString *staff_out_address = @"http://hydrogen.xen.exoware.net:3000/apis
         staff_out_2.delegate = self;
         
         friend_facebook_broadcast = [[FriendFacebookBroadcast alloc] initWithNibName:@"FriendFacebookBroadcast" bundle:nil];
-        friend_facebook_broadcast.delegate = self;*/
+         friend_facebook_broadcast.delegate = self;*/
     }
     return self;
+}
+-(void)loadFriendContent
+{
+    broadcast_facebook = [[FacebookBroadcast alloc] initWithNibName:@"FacebookBroadcast" bundle:nil];
+    broadcast_facebook.delegate = self;   
 }
 - (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated
 {
@@ -146,6 +157,8 @@ static NSString *staff_out_address = @"http://hydrogen.xen.exoware.net:3000/apis
     /*ConversationViewController *tester = [[ConversationViewController alloc] initWithNibName:@"ConversationViewController" bundle:nil andMessageArray:nil andDateArray:nil];
      [_viewController presentModalViewController:tester animated:YES];*/
     [request_ror startAsynchronous];
+    [job_info_url release];
+    [request_ror release];
 }
 -(void)didSubmitProposal
 {
@@ -174,6 +187,11 @@ static NSString *staff_out_address = @"http://hydrogen.xen.exoware.net:3000/apis
     [request setDelegate:self];
     [request startAsynchronous];
 }
+-(void)viewDidLoad
+{
+    
+    [self performSelectorInBackground:@selector(loadFriendContent) withObject:nil];
+}
 - (void)requestFinished:(ASIHTTPRequest *)request
 {
     [((StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate]) removeLoadingViewFromWindow];
@@ -182,8 +200,6 @@ static NSString *staff_out_address = @"http://hydrogen.xen.exoware.net:3000/apis
 }
 -(void)goToFaceBookBroadcast
 {
-    broadcast_facebook = [[FacebookBroadcast alloc] initWithNibName:@"FacebookBroadcast" bundle:nil];
-    broadcast_facebook.delegate = self;
     [nav_control pushViewController:broadcast_facebook animated:YES];
 }
 @end

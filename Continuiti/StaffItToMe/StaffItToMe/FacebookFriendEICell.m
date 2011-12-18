@@ -15,7 +15,6 @@
 #define friend_one_endorse_key @"friend_one_endorse"
 #define friend_id_key @"friend_id_key"
 @implementation FacebookFriendEICell
-static NSString *endorse_link = @"https://helium.staffittome.com/apis/endorse";
 -(id)initWithCoder:(NSCoder *)aDecoder
 {
     if ((self = [super init]))
