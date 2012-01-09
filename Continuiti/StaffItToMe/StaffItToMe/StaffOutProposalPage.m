@@ -319,38 +319,40 @@
 }
 -(id)getRateCell
 {
-    UIView *rate_view = [[UIView alloc] init];
-    UIImage *cell_image2 = [UIImage imageNamed:@"module_row"];
-    UIImage *cell_stretchable2 = [cell_image2 stretchableImageWithLeftCapWidth:(cell_image2.size.width/2)-1 topCapHeight:(cell_image2.size.height/2)-1];
-    UIButton *background_btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    UIView *rate_view           = [[UIView alloc] init];
+    UIImage *cell_image2        = [UIImage imageNamed:@"module_row"];
+    UIImage *cell_stretchable2  = [cell_image2 stretchableImageWithLeftCapWidth:(cell_image2.size.width/2)-1 topCapHeight:(cell_image2.size.height/2)-1];
+    UIButton *background_btn    = [UIButton buttonWithType:UIButtonTypeCustom];
+    
     [background_btn setBackgroundImage:cell_stretchable2 forState:UIControlStateNormal];
     [background_btn setFrame:CGRectMake(5, 0, 310, 42)];
     [background_btn addTarget:self action:@selector(changeRateType) forControlEvents:UIControlEventTouchUpInside];
     [rate_view addSubview:background_btn];
+    
     /*UIImageView *cell_background = [[UIImageView alloc] initWithImage:cell_stretchable2];
     cell_background.frame = CGRectMake(5, 0, 310, 42);
     [rate_view addSubview:cell_background];*/
     
-    rate_txt = [[UILabel alloc] initWithFrame:CGRectMake(background_btn.frame.origin.x + 10, background_btn.frame.origin.y -4, 75, 40)];
+    rate_txt                    = [[UILabel alloc] initWithFrame:CGRectMake(background_btn.frame.origin.x + 10, background_btn.frame.origin.y -4, 75, 40)];
     [rate_txt setFont:[UIFont fontWithName:@"HelveticaNeueLTCom-Md" size:12]];
-    rate_txt.backgroundColor = [UIColor clearColor];
-    rate_txt.text = pay_type;
-    rate_txt.center = CGPointMake(52.5, 22);
+    rate_txt.backgroundColor    = [UIColor clearColor];
+    rate_txt.text               = pay_type;
+    rate_txt.center             = CGPointMake(52.5, 22);
     [rate_view addSubview:rate_txt];
     
-    rate_arrow = [[UIImageView alloc] initWithFrame:CGRectMake(rate_txt.frame.origin.x + rate_txt.frame.size.width - 15, rate_txt.frame.origin.y, 6.5, 12)];
-    rate_arrow.image = [UIImage imageNamed:@"arrow"];
-    rate_arrow.center = CGPointMake(78.25, 20);
+    rate_arrow          = [[UIImageView alloc] initWithFrame:CGRectMake(rate_txt.frame.origin.x + rate_txt.frame.size.width - 15, rate_txt.frame.origin.y, 6.5, 12)];
+    rate_arrow.image    = [UIImage imageNamed:@"arrow"];
+    rate_arrow.center   = CGPointMake(78.25, 20);
     [rate_view addSubview:rate_arrow];
     
-    rate_slider = [[ASSLider alloc] initWithFrame:CGRectMake(rate_arrow.frame.origin.x + rate_arrow.frame.size.width + 25, rate_arrow.frame.origin.y - 21, 205, 42) andMaxValue:max_slider_value minValue:min_slider_value];
-    rate_slider.clipsToBounds = NO;
-    rate_slider.center = CGPointMake(197.5, 14);
-    rate_view.clipsToBounds = NO;
+    rate_slider                 = [[ASSLider alloc] initWithFrame:CGRectMake(rate_arrow.frame.origin.x + rate_arrow.frame.size.width + 25, rate_arrow.frame.origin.y - 21, 205, 42) andMaxValue:max_slider_value minValue:min_slider_value];
+    rate_slider.clipsToBounds   = NO;
+    rate_slider.center          = CGPointMake(197.5, 14);
+    rate_view.clipsToBounds     = NO;
     [rate_slider hideValueDisplay];
     [rate_view addSubview:rate_slider];
-    rate_slider.delegate = self;
-    rate_slider.tag = UISLIDER_TAG;
+    rate_slider.delegate        = self;
+    rate_slider.tag             = UISLIDER_TAG;
     [rate_view setFrame:CGRectMake(0, 0, 310, 42)];
     
     return rate_view;

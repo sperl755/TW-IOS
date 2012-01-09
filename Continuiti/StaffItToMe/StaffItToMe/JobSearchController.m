@@ -107,19 +107,16 @@
         next_array_spot = 0;
     }
     app_delegate.user_state_information.current_job_in_array = next_array_spot;
-    //show a alertview that we are accessing the credentials and talking to the server.
-    load_message = [[UIAlertView alloc] initWithTitle:@"Loading..." message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:nil];
-    [load_message show];
-    UIActivityIndicatorView *active = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-    active.center = CGPointMake(load_message.bounds.size.width / 2, load_message.bounds.size.height - 40);
-    [active startAnimating];
-    [load_message addSubview:active];
     
+    //show a alertview that we are accessing the credentials and talking to the server.
+    [app_delegate displayLoadingView];
+    
+    //Perform the accessing of the server.
     NSMutableString *job_info_url = [[NSMutableString alloc] initWithString:@"http://helium.staffittome.com/apis/"];
     [job_info_url appendString:[NSString stringWithFormat:@"%d", [[app_delegate.user_state_information.job_array objectAtIndex:next_array_spot] job_id]]];
     [job_info_url appendString:@"/job"];
-    //Perform the accessing of the server.
     NSURL *url = [NSURL URLWithString:job_info_url];
+    
     ASIFormDataRequest *request_ror = [ASIFormDataRequest requestWithURL:url];
     [request_ror setRequestMethod:@"GET"];
     [request_ror setValidatesSecureCertificate:NO];
@@ -131,23 +128,28 @@
 }
 -(void)requestFinished:(ASIHTTPRequest *)request
 {
+    StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate];
     if (!at_detail_screen)
     {
-        StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate];
         [app_delegate.user_state_information populateMyAppliedToJobsWithString:[request responseString]];
         printf("\nThe something:%s\n", [[request responseString] UTF8String]);
         return;
     }
-    [load_message dismissWithClickedButtonIndex:0 animated:YES];
-    at_detail_screen = YES;
-    job_detail_screen = [[JobDetailScreen alloc] initWithJSONString:[request responseString]];
+    [app_delegate removeLoadingViewFromWindow];
+    
+    at_detail_screen    = YES;
+    job_detail_screen   = [[JobDetailScreen alloc] initWithJSONString:[request responseString]];
+    
     job_detail_screen.delegate = self;
-    UISwipeGestureRecognizer *swipe_left_recognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(detailSwipeLeft:)];
-    swipe_left_recognizer.direction = UISwipeGestureRecognizerDirectionLeft;
-    UISwipeGestureRecognizer *swipe_right_recognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(detailSwipeRight:)];
-    swipe_right_recognizer.direction = UISwipeGestureRecognizerDirectionRight;
+    
+    UISwipeGestureRecognizer *swipe_left_recognizer         = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(detailSwipeLeft:)];
+    swipe_left_recognizer.direction                         = UISwipeGestureRecognizerDirectionLeft;
+    UISwipeGestureRecognizer *swipe_right_recognizer        = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(detailSwipeRight:)];
+    swipe_right_recognizer.direction                        = UISwipeGestureRecognizerDirectionRight;
+    
     [job_detail_screen.view addGestureRecognizer:swipe_left_recognizer];
     [job_detail_screen.view addGestureRecognizer:swipe_right_recognizer];
+    
     [navigation_controller popViewControllerAnimated:NO];
     [navigation_controller pushViewController:job_detail_screen animated:NO];
     
@@ -163,14 +165,11 @@
     {
         next_array_spot = 0;
     }
+    
     app_delegate.user_state_information.current_job_in_array = next_array_spot;
+    
     //show a alertview that we are accessing the credentials and talking to the server.
-    load_message = [[UIAlertView alloc] initWithTitle:@"Loading..." message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:nil];
-    [load_message show];
-    UIActivityIndicatorView *active = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-    active.center = CGPointMake(load_message.bounds.size.width / 2, load_message.bounds.size.height - 40);
-    [active startAnimating];
-    [load_message addSubview:active];
+    [app_delegate displayLoadingView];
     
     NSMutableString *job_info_url = [[NSMutableString alloc] initWithString:@"http://helium.staffittome.com/apis/"];
     [job_info_url appendString:[NSString stringWithFormat:@"%d", [[app_delegate.user_state_information.job_array objectAtIndex:next_array_spot] job_id]]];

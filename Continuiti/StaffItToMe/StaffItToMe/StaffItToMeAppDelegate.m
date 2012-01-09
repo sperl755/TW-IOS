@@ -29,11 +29,15 @@ static NSString *staff_it_to_me_address = @"www.google.com";
 { 
     //test to see whether this IOS device is even connected.
     [self connectionFunction];
-    @try{
-        if ([NSKeyedUnarchiver unarchiveObjectWithFile:[NSHomeDirectory() stringByAppendingPathComponent:@"Documents/appstate.archive"]] != nil && [[NSUserDefaults standardUserDefaults] objectForKey:@"FBExpirationDateKey"] != nil && [[NSUserDefaults standardUserDefaults] objectForKey:@"FBAccessTokenKey"] != nil)
+    @try
+    {
+        if ([NSKeyedUnarchiver unarchiveObjectWithFile:[NSHomeDirectory() stringByAppendingPathComponent:@"Documents/appstate.archive"]] != nil
+            && [[NSUserDefaults standardUserDefaults] objectForKey:@"FBExpirationDateKey"] != nil 
+            && [[NSUserDefaults standardUserDefaults] objectForKey:@"FBAccessTokenKey"] != nil)
         {
-            user_state_information = [NSKeyedUnarchiver unarchiveObjectWithFile:[NSHomeDirectory() stringByAppendingPathComponent:@"Documents/appstate.archive"]];
-            my_available_switch_array = [[NSMutableArray alloc] initWithCapacity:11];
+            user_state_information      = [NSKeyedUnarchiver unarchiveObjectWithFile:[NSHomeDirectory() stringByAppendingPathComponent:@"Documents/appstate.archive"]];
+            my_available_switch_array   = [[NSMutableArray alloc] initWithCapacity:11];
+            
             printf("%s", [user_state_information.currentTabBar UTF8String]);
             [self goToMainApp];
             return YES;
@@ -41,8 +45,8 @@ static NSString *staff_it_to_me_address = @"www.google.com";
         else
         {
             //allocate and create the user data model
-            user_state_information = [[USERINFORMATIONANDAPPSTATE alloc] init];
-            user_state_information.currentTabBar = @"Home";
+            user_state_information                  = [[USERINFORMATIONANDAPPSTATE alloc] init];
+            user_state_information.currentTabBar    = @"Home";
             logged_out = YES;
         }
     }

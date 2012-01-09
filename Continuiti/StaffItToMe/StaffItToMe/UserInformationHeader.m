@@ -71,29 +71,15 @@
         
         
         //Set User Profile Picture
-        StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*) [[UIApplication sharedApplication] delegate];
-        printf("%s", [app_delegate.user_state_information.picture_url UTF8String]);
-        if (app_delegate.user_state_information.picture_url.length <=15 || app_delegate.user_state_information.picture_url == nil || app_delegate.user_state_information.picture_url == [NSNull null])
-        {
-            NSMutableString *user_picture_string = [NSMutableString stringWithString:@"http://graph.facebook.com/"];
-            [user_picture_string appendString:app_delegate.user_state_information.facebook_id];
-            [user_picture_string appendString:@"/picture?type=large"];
-            
-            [my_profile_picture setImage:[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:user_picture_string]]]];
-            //[self performSelector:@selector(updateProfilePicture) withObject:nil afterDelay:10.0];
-        }
-        else
-        {
-            [my_profile_picture setImage:[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:app_delegate.user_state_information.picture_url]]]];   
-        }
+        [self updateProfilePicture];
         
         //Display users display name
-        my_profile_name.text = app_delegate.user_state_information.my_user_info.full_name;
-        
-        my_profile_name.font = [UIFont fontWithName:@"HelveticaNeueLTCom-Md" size:12];
-        my_profile_name.backgroundColor = [UIColor clearColor];
-        connections_label.backgroundColor = [UIColor clearColor];
-        connections_label.font = [UIFont fontWithName:@"HelveticaNeueLTCom-Md" size:9];
+        StaffItToMeAppDelegate *app_delegate    = (StaffItToMeAppDelegate*) [[UIApplication sharedApplication] delegate];
+        my_profile_name.text                    = app_delegate.user_state_information.my_user_info.full_name;
+        my_profile_name.font                    = [UIFont fontWithName:@"HelveticaNeueLTCom-Md" size:12];
+        my_profile_name.backgroundColor         = [UIColor clearColor];
+        connections_label.backgroundColor       = [UIColor clearColor];
+        connections_label.font                  = [UIFont fontWithName:@"HelveticaNeueLTCom-Md" size:9];
         
         //Display connections box text
         NSMutableString *connections_text = [[NSMutableString alloc] init];
@@ -119,13 +105,27 @@
 {
     StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*) [[UIApplication sharedApplication] delegate];
     printf("%s", [app_delegate.user_state_information.picture_url UTF8String]);
-    if (app_delegate.user_state_information.picture_url.length <=15 || app_delegate.user_state_information.picture_url == nil || app_delegate.user_state_information.picture_url == [NSNull null])
+    
+    //check to make sure that the picture that we grabbed is not set to the missing_icon.gif;.
+    NSArray *picture_web_components = [app_delegate.user_state_information.picture_url componentsSeparatedByString:@"/"];
+    if ([[picture_web_components objectAtIndex:picture_web_components.count-1] isEqualToString:@"icon_missing_medium.gif"])
     {
-        NSMutableString *user_picture_string = [NSMutableString stringWithString:@"http://graph.facebook.com/"];
+        app_delegate.user_state_information.picture_url = nil;
+    }
+    
+    if (app_delegate.user_state_information.picture_url.length <=15 ||
+        app_delegate.user_state_information.picture_url == nil ||
+        app_delegate.user_state_information.picture_url == [NSNull null])
+    {
+        NSMutableString *user_picture_string    = [NSMutableString stringWithString:@"http://graph.facebook.com/"];
         [user_picture_string appendString:app_delegate.user_state_information.facebook_id];
         [user_picture_string appendString:@"/picture?type=large"];
         
-        [my_profile_picture setImage:[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:user_picture_string]]]];
+        NSURL *user_image_location              = [[NSURL alloc] initWithString:user_picture_string];
+        if (user_image_location != nil)
+        {
+            [my_profile_picture setImage:[UIImage imageWithData:[NSData dataWithContentsOfURL:user_image_location]]];   
+        }
     }
     else
     {
