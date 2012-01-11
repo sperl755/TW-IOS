@@ -24,6 +24,7 @@
 {
     if ((self = [super init]))
     {
+        StaffItToMeAppDelegate *app_delegate    = (StaffItToMeAppDelegate*) [[UIApplication sharedApplication] delegate];
         header_shadow = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 10)];
         header_shadow.image = [UIImage imageNamed:@"header_shadow"];
         [self addSubview:header_shadow];
@@ -34,6 +35,7 @@
         //Create custom switch
         my_available_switch = [[ASSwitch alloc] initWithFrame:CGRectMake(242, 36, 65, 22) andOnImage:[UIImage imageNamed:@"available_no"] offImage:[UIImage imageNamed:@"available_yes"] sliderImage:[UIImage imageNamed:@"available_slider"]];
         my_available_switch.delegate = self;
+        [my_available_switch setOn:app_delegate.user_state_information.im_available];
         [self addSubview:my_available_switch];
         
         //Setup Containers.
@@ -74,7 +76,6 @@
         [self updateProfilePicture];
         
         //Display users display name
-        StaffItToMeAppDelegate *app_delegate    = (StaffItToMeAppDelegate*) [[UIApplication sharedApplication] delegate];
         my_profile_name.text                    = app_delegate.user_state_information.my_user_info.full_name;
         my_profile_name.font                    = [UIFont fontWithName:@"HelveticaNeueLTCom-Md" size:12];
         my_profile_name.backgroundColor         = [UIColor clearColor];

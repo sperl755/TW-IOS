@@ -60,6 +60,7 @@
         my_header.delegate = self;
         my_jobs_module = [[MyJobsModule alloc] initWithFrame:CGRectMake(0, 0, 320, 60)];
         my_jobs_module.delegate = self;
+        [self performSelector:@selector(getApplications) withObject:nil afterDelay:30];
     }
 }
 -(void)reloadTableData

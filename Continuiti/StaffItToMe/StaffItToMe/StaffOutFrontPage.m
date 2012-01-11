@@ -169,7 +169,14 @@
         [request setDelegate:self];
         [request startAsynchronous];
         reloading = YES;
+        [self performSelector:@selector(finishedLoadingSuggestedJob) withObject:nil afterDelay:30];
     }
+}
+-(void)finishedLoadingSuggestedJob
+{
+    [refresh_header reset];
+    table_view.contentOffset = CGPointMake(0, 0);
+    table_view.userInteractionEnabled = YES; 
 }
 - (void)viewDidUnload
 {

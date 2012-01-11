@@ -40,6 +40,8 @@
 
 - (void)viewDidLoad
 {
+    StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate];
+    [app_delegate displayLoadingView];
     [super viewDidLoad];
     background = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Background.png"]];
     background.frame = CGRectMake(0, 0, 320, 480);
@@ -66,7 +68,6 @@
     [my_table_view addSubview:refresh_header];
     
     //Data handling.
-    StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate];
     
     NSMutableString *user_information = [[NSMutableString alloc] initWithString:@"https://helium.staffittome.com/apis/"];
     [user_information appendString:[NSString stringWithFormat:@"%d", app_delegate.user_state_information.my_user_info.user_id]];
@@ -159,10 +160,19 @@
         [request setTimeOutSeconds:30];
         [request setDelegate:self];
         [request startAsynchronous];
+        [self performSelector:@selector(finishedLoadingSuggestedJob) withObject:nil afterDelay:30];
     }
+}
+-(void)finishedLoadingSuggestedJob
+{
+    [refresh_header reset];
+    my_table_view.contentOffset = CGPointMake(0, 0);
+    my_table_view.userInteractionEnabled = YES; 
 }
 -(void)requestFinished:(ASIHTTPRequest *)request
 {
+    StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate];
+    [app_delegate removeLoadingViewFromWindow];
     printf("\nThis is theuser info: %s", [[request responseString] UTF8String]);
     
     NSDictionary *response_data = [[request responseString] JSONValue];

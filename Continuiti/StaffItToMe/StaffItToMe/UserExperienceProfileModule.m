@@ -62,11 +62,8 @@
         
         if (the_experiences.count < 1)
         {
-            JobDisplayCell *no_info = [[JobDisplayCell alloc] initWithFrame:CGRectMake(0, 0, 0, 0) pictureURL:@"" name:@"Programmer" description:@"Part-Time / Tech" detail:@"9 years"];
-            [no_info removeArrow];
-            [self addSubview:no_info];
-            no_info.frame = CGRectMake(5, module_header_background.frame.origin.y + module_header_background.frame.size.height, 310, 33);
-            [self setFrame:CGRectMake(0, 0, 310, 77)];
+            [self removeFromSuperview];
+            return self;
         }
         else
         {

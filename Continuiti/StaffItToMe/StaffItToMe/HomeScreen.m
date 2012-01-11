@@ -124,6 +124,7 @@
         facebook.expirationDate = [[NSUserDefaults standardUserDefaults] objectForKey:@"FBExpirationDateKey"];
         NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"friends, first_name, last_name, id, locale, gender, birthday, email, link, name", @"fields", nil];
         [facebook requestWithGraphPath:@"me" andParams:parameters andDelegate:self];
+        [self performSelector:@selector(finishedLoadingSuggestedJob) withObject:nil afterDelay:30];
     }
 }
 -(void)finishedLoadingSuggestedJob

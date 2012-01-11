@@ -90,7 +90,7 @@
         facebook.accessToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"FBAccessTokenKey"];
         facebook.expirationDate = [[NSUserDefaults standardUserDefaults] objectForKey:@"FBExpirationDateKey"];
         //Create back
-        UIImage *row_background = [UIImage imageNamed:@"module_row_single.png"];
+        UIImage *row_background = [UIImage imageNamed:@"module_row_single"];
         UIImage *stretch_back = [row_background stretchableImageWithLeftCapWidth:(row_background.size.width/2)-1 topCapHeight:(row_background.size.height/2)-1];
         module_row_one_background = [[UIImageView alloc] initWithImage:stretch_back];
         module_row_one_background.frame = CGRectMake(0, 0, 310, 42);

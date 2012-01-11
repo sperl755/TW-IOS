@@ -26,18 +26,17 @@ static NSString *job_suggestion_rl = @"https://helium.staffittome.com/apis/job_s
         // Initialization code
         
         //Create Header
-        UIImage *header_image = [UIImage imageNamed:@"module_header.png"];
-        module_header_background = [[UIImageView alloc] initWithImage:header_image];
-        module_header_background.frame = CGRectMake(0, 0, 310, 32);
+        UIImage *header_image           = [UIImage imageNamed:@"module_header.png"];
+        module_header_background        = [[UIImageView alloc] initWithImage:header_image];
+        module_header_background.frame  = CGRectMake(0, 0, 310, 32);
         [self addSubview:module_header_background];
-        //[header_image release];
         
         //create label for this module
-        job_suggestion_label = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, 200, 22)];
-        job_suggestion_label.textColor = [UIColor colorWithRed:49.0/255 green:72.0/255 blue:106.0/255 alpha:1];
-        job_suggestion_label.backgroundColor = [UIColor clearColor];
-        job_suggestion_label.text = @"Job Discovery";
-        job_suggestion_label.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:12];
+        job_suggestion_label                    = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, 200, 22)];
+        job_suggestion_label.textColor          = [UIColor colorWithRed:49.0/255 green:72.0/255 blue:106.0/255 alpha:1];
+        job_suggestion_label.backgroundColor    = [UIColor clearColor];
+        job_suggestion_label.text               = @"Job Discovery";
+        job_suggestion_label.font               = [UIFont fontWithName:@"HelveticaNeue-Bold" size:12];
         [self addSubview:job_suggestion_label];
         
         //Create button on far right for shuffling.
@@ -105,6 +104,11 @@ static NSString *job_suggestion_rl = @"https://helium.staffittome.com/apis/job_s
 {
     StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate];
     [app_delegate.user_state_information populateSuggestedJobsArrayWithString:[request responseString]];
+    if (app_delegate.user_state_information.my_suggested_jobs.count < 3)
+    {
+        [self removeFromSuperview];
+        return;
+    }
     //Create Row 1
     //module_row_one_background = [UIButton buttonWithType:UIButtonTypeCustom];
     //[module_row_one_background setImage:[UIImage imageNamed:@"module_row"] forState:UIControlStateNormal];
@@ -118,48 +122,45 @@ static NSString *job_suggestion_rl = @"https://helium.staffittome.com/apis/job_s
     [job_one_picture setFrame:CGRectMake(module_row_one_background.frame.origin.x + 10, module_row_one_background.frame.origin.y + 8, 25, 25)];
     [self addSubview:job_one_picture];
     
-    job_one_overlay = [[UIImageView alloc] initWithFrame:job_one_picture.frame];
-    job_one_overlay.image = [UIImage imageNamed:@"50x50_overlay"];
+    job_one_overlay         = [[UIImageView alloc] initWithFrame:job_one_picture.frame];
+    job_one_overlay.image   = [UIImage imageNamed:@"50x50_overlay"];
     [self addSubview:job_one_overlay];
     
-    job_one_name = [[UILabel alloc] initWithFrame:CGRectMake(job_one_picture.frame.origin.x + job_one_picture.frame.size.width + 10, job_one_picture.frame.origin.y-2, 200, 20)];
-    job_one_name.backgroundColor = [UIColor clearColor];
-    job_one_name.font = [UIFont fontWithName:@"HelveticaNeueLTCom-Md" size:10];
+    job_one_name                    = [[UILabel alloc] initWithFrame:CGRectMake(job_one_picture.frame.origin.x + job_one_picture.frame.size.width + 10, job_one_picture.frame.origin.y-2, 200, 20)];
+    job_one_name.backgroundColor    = [UIColor clearColor];
+    job_one_name.font               = [UIFont fontWithName:@"HelveticaNeueLTCom-Md" size:10];
     [self addSubview:job_one_name];
     
-    job_one_description = [[UILabel alloc] initWithFrame:CGRectMake(job_one_name.frame.origin.x, job_one_name.frame.origin.y + job_one_name.frame.size.height - 10, 200, 30)];
-    job_one_description.textColor = [UIColor colorWithRed:153.0/255 green:153.0/255 blue:153.0/255 alpha:1];
+    job_one_description                 = [[UILabel alloc] initWithFrame:CGRectMake(job_one_name.frame.origin.x, job_one_name.frame.origin.y + job_one_name.frame.size.height - 10, 200, 30)];
+    job_one_description.textColor       = [UIColor colorWithRed:153.0/255 green:153.0/255 blue:153.0/255 alpha:1];
     job_one_description.backgroundColor = [UIColor clearColor];
-    job_one_description.font = [UIFont fontWithName:@"HelveticaNeueLTCom-Md" size:9];
+    job_one_description.font            = [UIFont fontWithName:@"HelveticaNeueLTCom-Md" size:9];
     [self addSubview:job_one_description];
     
     
-    arrow_one = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_following"]];
+    arrow_one       = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_following"]];
     arrow_one.frame = CGRectMake(module_row_one_background.frame.origin.x + module_row_one_background.frame.size.width - 23.5, module_row_one_background.frame.origin.y + 15, 12,12);
     [self addSubview:arrow_one];
     
     if (app_delegate.user_state_information.my_suggested_jobs.count >= 1)
     {
-        job_one_name.text = [[app_delegate.user_state_information.my_suggested_jobs objectAtIndex:current_suggested_job_position] title];
-        job_one_description.text = [[app_delegate.user_state_information.my_suggested_jobs objectAtIndex:current_suggested_job_position] company];
+        job_one_name.text           = [[app_delegate.user_state_information.my_suggested_jobs objectAtIndex:current_suggested_job_position] title];
+        job_one_description.text    = [[app_delegate.user_state_information.my_suggested_jobs objectAtIndex:current_suggested_job_position] company];
     }
     else
     {
-        job_one_name.text = @"";
-        job_one_description.text = @"";
+        job_one_name.text           = @"";
+        job_one_description.text    = @"";
     }
     
     //Create Row 2
-   // module_row_two_background = [UIButton buttonWithType:UIButtonTypeCustom];
-    //[module_row_two_background setImage:[UIImage imageNamed:@"module_row_last"] forState:UIControlStateNormal];
-    //[module_row_two_background addTarget:self action:@selector(twoSelected) forControlEvents:UIControlEventTouchUpInside];
-    module_row_two_background = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"module_row_last"]];
+    module_row_two_background       = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"module_row_last"]];
     module_row_two_background.frame = CGRectMake(0, module_row_one_background.frame.origin.y + module_row_one_background.frame.size.height,  310, 42);
     [self addSubview:module_row_two_background];
-    // [row_background release];
+    
     [self setFrame:CGRectMake(5, 0, 310, (module_row_two_background.frame.size.height + module_row_two_background.frame.origin.y) - module_header_background.frame.origin.y)]; 
     
-    arrow_two = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_following"]];
+    arrow_two       = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_following"]];
     arrow_two.frame = CGRectMake(module_row_one_background.frame.origin.x + module_row_one_background.frame.size.width - 23.5, module_row_one_background.frame.origin.y + 15 + module_row_one_background.frame.size.height,12, 12);
     [self addSubview:arrow_two];
     
@@ -168,29 +169,30 @@ static NSString *job_suggestion_rl = @"https://helium.staffittome.com/apis/job_s
     [job_two_picture setFrame:CGRectMake(module_row_two_background.frame.origin.x + 10, module_row_two_background.frame.origin.y + 8, 25, 25)];
     [self addSubview:job_two_picture];
     
-    job_two_overlay = [[UIImageView alloc] initWithFrame:job_two_picture.frame];
-    job_two_overlay.image = [UIImage imageNamed:@"50x50_overlay"];
+    job_two_overlay         = [[UIImageView alloc] initWithFrame:job_two_picture.frame];
+    job_two_overlay.image   = [UIImage imageNamed:@"50x50_overlay"];
     [self addSubview:job_two_overlay];
     
-    job_two_name = [[UILabel alloc] initWithFrame:CGRectMake(job_two_picture.frame.origin.x + job_two_picture.frame.size.width + 10, job_two_picture.frame.origin.y-2, 200, 20)];
-    job_two_name.backgroundColor = [UIColor clearColor];
-    job_two_name.font = [UIFont fontWithName:@"HelveticaNeueLTCom-Md" size:10];
+    job_two_name                    = [[UILabel alloc] initWithFrame:CGRectMake(job_two_picture.frame.origin.x + job_two_picture.frame.size.width + 10, job_two_picture.frame.origin.y-2, 200, 20)];
+    job_two_name.backgroundColor    = [UIColor clearColor];
+    job_two_name.font               = [UIFont fontWithName:@"HelveticaNeueLTCom-Md" size:10];
     [self addSubview:job_two_name];
     
-    job_two_description = [[UILabel alloc] initWithFrame:CGRectMake(job_two_name.frame.origin.x, job_two_name.frame.origin.y + job_two_name.frame.size.height - 10, 200, 30)];
+    job_two_description                 = [[UILabel alloc] initWithFrame:CGRectMake(job_two_name.frame.origin.x, job_two_name.frame.origin.y + job_two_name.frame.size.height - 10, 200, 30)];
     job_two_description.backgroundColor = [UIColor clearColor];
-    job_two_description.font = [UIFont fontWithName:@"HelveticaNeueLTCom-Md" size:9];
-    job_two_description.textColor = [UIColor colorWithRed:153.0/255 green:153.0/255 blue:153.0/255 alpha:1];
+    job_two_description.font            = [UIFont fontWithName:@"HelveticaNeueLTCom-Md" size:9];
+    job_two_description.textColor       = [UIColor colorWithRed:153.0/255 green:153.0/255 blue:153.0/255 alpha:1];
     [self addSubview:job_two_description];
+    
     if (app_delegate.user_state_information.my_suggested_jobs.count >= 2)
     {
-        job_two_name.text = [[app_delegate.user_state_information.my_suggested_jobs objectAtIndex:current_suggested_job_position + 1] title];
-        job_two_description.text = [[app_delegate.user_state_information.my_suggested_jobs objectAtIndex:current_suggested_job_position + 1] company];   
+        job_two_name.text           = [[app_delegate.user_state_information.my_suggested_jobs objectAtIndex:current_suggested_job_position + 1] title];
+        job_two_description.text    = [[app_delegate.user_state_information.my_suggested_jobs objectAtIndex:current_suggested_job_position + 1] company];   
     }
     else
     {
-        job_two_name.text = @"";
-        job_two_description.text = @"";
+        job_two_name.text           = @"";
+        job_two_description.text    = @"";
     }
     information_loaded = YES;
     [delegate finishedLoadingSuggestedJob];
@@ -224,8 +226,6 @@ static NSString *job_suggestion_rl = @"https://helium.staffittome.com/apis/job_s
         job_two_name.text = [[app_delegate.user_state_information.my_suggested_jobs objectAtIndex:current_suggested_job_position + 1] title];
         job_two_description.text = [[app_delegate.user_state_information.my_suggested_jobs objectAtIndex:current_suggested_job_position + 1] company];  
     }
-    AlertLoadView *alert_view = [[AlertLoadView alloc] initWithFrame:CGRectMake(0, 0, 320, 480) andText:@"You have succesfully endorsed your friend great job!"];
-    [app_delegate displayLoadViewWithString:@"You have succesfully endorsed your friend great job!"];
 }
 - (void)dealloc
 {

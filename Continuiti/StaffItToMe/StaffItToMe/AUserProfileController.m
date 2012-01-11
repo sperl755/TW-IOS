@@ -24,6 +24,7 @@
         
         header_shadow.image = [UIImage imageNamed:@"header_shadow"];
         [self.view addSubview:header_shadow];
+        
         //Setup the available switch background.
         UIImageView *my_available_switch_background = [[UIImageView alloc] initWithFrame:CGRectMake(230, 10, 89, 58)];
         [my_available_switch_background setImage:[UIImage imageNamed:@"available_widget"]];
