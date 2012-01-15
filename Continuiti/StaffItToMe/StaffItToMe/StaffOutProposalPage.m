@@ -13,6 +13,7 @@
 #define SUBJECT_TAG 29
 #define MESSAGE_TAG 33
 #define BUTTON_TAG 38
+#define RATE_INPUT_TAG 55
 
 @implementation StaffOutProposalPage
 
@@ -39,6 +40,8 @@
         max_slider_value = 150;
         min_slider_value = 9.5;
         pay_type = @"Hourly";
+        hide_slider = NO;
+        hide_rate_text = YES;
         
         // Custom initialization
         capability = @"Choose a capability";
@@ -138,6 +141,7 @@
     my_table_view.subject_tag_for_listening = SUBJECT_TAG;
     my_table_view.message_tag_for_listening = MESSAGE_TAG;
     my_table_view.button_tag_for_listening = BUTTON_TAG;
+    my_table_view.rate_input_tag_for_listening = RATE_INPUT_TAG;
 }
 
 - (void)viewDidUnload
@@ -207,6 +211,7 @@
     //Create Value Display
     my_value_display = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"SliderValueIndicator"]];
     my_value_display.frame = CGRectMake(75, 30, 39.5, 29.5);
+    my_value_display.hidden = hide_slider;
     [capability_view addSubview:my_value_display];
     
     //Create value of slider
@@ -214,6 +219,7 @@
     my_value_display_text.center = CGPointMake(my_value_display.center.x, my_value_display.center.y);
     my_value_display_text.textColor = [UIColor colorWithRed:49.0/255 green:72.0/255 blue:106.0/255 alpha:1];
     my_value_display_text.textAlignment = UITextAlignmentCenter;
+    my_value_display_text.hidden = hide_slider;
     my_value_display_text.backgroundColor = [UIColor clearColor];
     [my_value_display_text setFont:[UIFont fontWithName:@"HelveticaNeueLTCom-Md" size:9]];
     NSMutableString *value_text = [[NSMutableString alloc] initWithString:@"$"];
@@ -306,12 +312,16 @@
         if (row == 0)
         {
             pay_type = @"Hourly";
+            hide_slider = NO;
+            hide_rate_text = YES;
             max_slider_value = 150;
             min_slider_value = 9.5;
         }
         else if (row == 1)//if they selected fixed.
         {
             pay_type = @"Fixed";
+            hide_slider = YES;
+            hide_rate_text = NO;
             max_slider_value = 150000;
             min_slider_value = 10000;
         }
@@ -347,12 +357,29 @@
     
     rate_slider                 = [[ASSLider alloc] initWithFrame:CGRectMake(rate_arrow.frame.origin.x + rate_arrow.frame.size.width + 25, rate_arrow.frame.origin.y - 21, 205, 42) andMaxValue:max_slider_value minValue:min_slider_value];
     rate_slider.clipsToBounds   = NO;
+    rate_slider.hidden = hide_slider;
     rate_slider.center          = CGPointMake(197.5, 14);
     rate_view.clipsToBounds     = NO;
     [rate_slider hideValueDisplay];
     [rate_view addSubview:rate_slider];
     rate_slider.delegate        = self;
     rate_slider.tag             = UISLIDER_TAG;
+    
+    //Setup Rate Text enter for fixed rate
+    rate_picker_text                        = [[UITextField alloc] initWithFrame:CGRectMake(rate_arrow.frame.origin.x + rate_arrow.frame.size.width + 13, rate_arrow.frame.origin.y, 205, 42)];
+    rate_picker_text.backgroundColor        = [UIColor clearColor];
+    rate_picker_text.textColor              = [UIColor colorWithRed:153.0/255 green:153.0/255 blue:153.0/255 alpha:1];
+    rate_picker_text.tag                    = RATE_INPUT_TAG;
+    rate_picker_text.delegate               = self;
+    rate_picker_text.keyboardType           = UIKeyboardTypeNumbersAndPunctuation;
+    rate_picker_text.text                   = @"Enter rate";
+    rate_picker_text.userInteractionEnabled = YES;
+    rate_picker_text.hidden                 = hide_rate_text;
+    [rate_picker_text setFont:[UIFont fontWithName:@"HelveticaNeueLTCom-Md" size:12]];
+    
+    [rate_view addSubview:rate_picker_text];
+    
+    
     [rate_view setFrame:CGRectMake(0, 0, 310, 42)];
     
     return rate_view;
@@ -587,6 +614,15 @@
         }
         subject_txt.textColor = [UIColor colorWithRed:110.0/255 green:146.0/255 blue:212.0/255 alpha:1];
     }
+    else if (textField == rate_picker_text)
+    {
+        if(!rate_picker_text_touched)
+        {
+            rate_picker_text_touched = YES;
+            rate_picker_text.text = @"";
+        }
+        rate_picker_text.textColor = [UIColor colorWithRed:110.0/255 green:146.0/255 blue:212.0/255 alpha:1];
+    }
 }
 -(void)textFieldDidEndEditing:(UITextField *)textField
 {
@@ -598,9 +634,9 @@
     {
         subject_txt.textColor = [UIColor colorWithRed:153.0/255 green:153.0/255 blue:153.0/255 alpha:1];
     }
-    else if (message_txt == message_txt)
+    else if (textField == rate_picker_text)
     {
-        message_txt.textColor = [UIColor colorWithRed:153.0/255 green:153.0/255 blue:153.0/255 alpha:1];
+        rate_picker_text.textColor = [UIColor colorWithRed:153.0/255 green:153.0/255 blue:153.0/255 alpha:1];
     }
 }
 -(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
@@ -609,6 +645,7 @@
     {
         [email_text resignFirstResponder];
         [subject_txt resignFirstResponder];
+        [rate_picker_text resignFirstResponder];
     }
     return YES;
 }

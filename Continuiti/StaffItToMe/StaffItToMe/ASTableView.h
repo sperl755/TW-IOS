@@ -20,5 +20,6 @@ typedef void (^HandleView)();
 @property (nonatomic) int subject_tag_for_listening;
 @property (nonatomic) int message_tag_for_listening;
 @property (nonatomic) int button_tag_for_listening;
+@property (nonatomic) int rate_input_tag_for_listening;
 
 @end

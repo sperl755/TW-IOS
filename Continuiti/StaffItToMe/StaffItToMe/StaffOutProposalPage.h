@@ -32,6 +32,7 @@
     UIActionSheet *menu;
     
     //Rate Assets
+    UITextField *rate_picker_text;
     UILabel *rate_txt;
     UIImageView *rate_arrow;
     ASSLider *rate_slider;
@@ -40,6 +41,9 @@
     UIPickerView *rate_picker_view;
     int min_slider_value;
     int max_slider_value;
+    BOOL rate_picker_text_touched;
+    BOOL hide_slider;
+    BOOL hide_rate_text;
     
     //UISlider *rate_slider;
     

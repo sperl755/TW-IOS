@@ -16,6 +16,7 @@
 @synthesize subject_tag_for_listening;
 @synthesize message_tag_for_listening;
 @synthesize button_tag_for_listening;
+@synthesize rate_input_tag_for_listening;
 -(UIView*)hitTest:(CGPoint)point withEvent:(UIEvent *)event
 {
     UIView *v = [self viewWithTag:tag_for_listening]; //999 is the tag of your subview, that you want to capture events
@@ -32,6 +33,9 @@
     
     UIView *v5 = [self viewWithTag:button_tag_for_listening];
     CGPoint convertedFifthPoint = [self convertPoint:point toView:v5];
+    
+    UIView *v6 = [self viewWithTag:rate_input_tag_for_listening];
+    CGPoint convertedSixthPoint = [self convertPoint:point toView:v6];
     
     // If the touch is inside the view, let the view handle it
     if ([v pointInside:convertedPoint withEvent:event]) {
@@ -52,6 +56,10 @@
     else if ([v5 pointInside:convertedFifthPoint withEvent:event])
     {
         return v5;
+    }
+    else if ([v6 pointInside:convertedSixthPoint withEvent:event])
+    {
+        return v6;
     }
     else
     {
