@@ -90,11 +90,6 @@ static NSString *staff_out_address = @"http://hydrogen.xen.exoware.net:3000/apis
     }
     return self;
 }
--(void)loadFriendContent
-{
-    broadcast_facebook = [[FacebookBroadcast alloc] initWithNibName:@"FacebookBroadcast" bundle:nil];
-    broadcast_facebook.delegate = self;   
-}
 - (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated
 {
     if([navigationController.viewControllers count ] > 1) {
@@ -140,11 +135,12 @@ static NSString *staff_out_address = @"http://hydrogen.xen.exoware.net:3000/apis
     //show a alertview that we are accessing the credentials and talking to the server.
     [((StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate]) displayLoadingView];
     
-    NSMutableString *job_info_url = [[NSMutableString alloc] initWithString:@"http://helium.staffittome.com/apis/"];
+    NSMutableString *job_info_url = [[NSMutableString alloc] initWithString:@"https://helium.staffittome.com/apis/"];
     int suggested_position = delegate.user_state_information.current_suggested_job_in_array;
     int job_id = [[delegate.user_state_information.my_suggested_jobs objectAtIndex:suggested_position] job_id];
     [job_info_url appendString:[NSString stringWithFormat:@"%d", job_id]];
     [job_info_url appendString:@"/job"];
+    
     //Perform the accessing of the server.
     NSURL *url = [NSURL URLWithString:job_info_url];
     ASIFormDataRequest *request_ror = [ASIFormDataRequest requestWithURL:url];
@@ -157,8 +153,8 @@ static NSString *staff_out_address = @"http://hydrogen.xen.exoware.net:3000/apis
     /*ConversationViewController *tester = [[ConversationViewController alloc] initWithNibName:@"ConversationViewController" bundle:nil andMessageArray:nil andDateArray:nil];
      [_viewController presentModalViewController:tester animated:YES];*/
     [request_ror startAsynchronous];
-    [job_info_url release];
-    [request_ror release];
+    //[job_info_url release];
+    //[request_ror release];
 }
 -(void)didSubmitProposal
 {
@@ -189,8 +185,7 @@ static NSString *staff_out_address = @"http://hydrogen.xen.exoware.net:3000/apis
 }
 -(void)viewDidLoad
 {
-    
-    [self performSelectorInBackground:@selector(loadFriendContent) withObject:nil];
+    [super viewDidLoad];
 }
 - (void)requestFinished:(ASIHTTPRequest *)request
 {
@@ -200,6 +195,7 @@ static NSString *staff_out_address = @"http://hydrogen.xen.exoware.net:3000/apis
 }
 -(void)goToFaceBookBroadcast
 {
-    [nav_control pushViewController:broadcast_facebook animated:YES];
+    StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*) [[UIApplication sharedApplication] delegate];
+    [nav_control pushViewController:[app_delegate getFriendFacebookScreen] animated:YES];
 }
 @end

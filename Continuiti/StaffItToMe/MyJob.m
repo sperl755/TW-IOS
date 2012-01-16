@@ -17,7 +17,7 @@
 #define END_DATE_KEY @"ENDDate"
 #define TIME_ESTIMATE_KEY @"TIMEESTIMATEKEY"
 #define COST_PER_HR_KEY @"CostPerHourEstimate"
-#define ESTIMATED_EXPENSE_KEY @"EstimatedExpense"
+#define ESTIMATED_EXPENSE_KEY @"MYJOBEstimatedExpense"
 #define SKILLS_KEY  @"SKILLSKEYY"
 #define JOB_TYPE_TITLE_KEY  @"JOB_TYPE_TTIEL"
 #define INDUSTRY_NAME_KEY   @"IndustryNameKey"

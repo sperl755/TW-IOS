@@ -21,7 +21,6 @@
     StaffYourself *staff_yourself;
     StaffOutSegment1 *staff_out_1;
     StaffOutSegment2 *staff_out_2;
-    FacebookBroadcast *broadcast_facebook;
     FriendFacebookBroadcast *friend_facebook_broadcast;
     JobDetailScreen *job_detail_screen;
     

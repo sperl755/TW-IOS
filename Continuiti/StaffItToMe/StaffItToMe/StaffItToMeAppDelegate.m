@@ -27,18 +27,53 @@ static NSString *staff_it_to_me_address = @"www.google.com";
 #define SECRET_KEY @"cUKExTEAqwcqsjvmQi2078rwwUnmQknvCWzHCL8snO0"
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 { 
+    [[ApplicationDatabase sharedInstance] createUserInformationTable];
+    [[ApplicationDatabase sharedInstance] createUsersFacebookFriendsTable];
+    
     //test to see whether this IOS device is even connected.
     [self connectionFunction];
-    @try
+    [UIApplication sharedApplication].statusBarHidden = YES;
+    my_available_switch_array = [[NSMutableArray alloc] initWithCapacity:11];
+    
+    //Checks to see if user is currently there.
+    if ([[ApplicationDatabase sharedInstance] hasUserInformationTableBeenPopulated])
+    {
+        user_state_information = [[USERINFORMATIONANDAPPSTATE alloc] init];
+        
+        [user_state_information loadUserInfoFromDatabase];
+        [user_state_information loadUsersFacebookFriendsFromDatabase];
+        logged_out = NO;
+        got_facebook_info = YES;
+        //setup the login and dashboard viewcontroller.
+        self.window.rootViewController = self.viewController;
+        [self.window makeKeyAndVisible];
+        [self goToMainApp];
+    }
+    else
+    {
+        user_state_information = [[USERINFORMATIONANDAPPSTATE alloc] init];
+        user_state_information.currentTabBar = @"Home";
+        logged_out = YES;
+        got_facebook_info = NO;
+        //Add Notification to go to the main app after login is confirmed.
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(goToMainApp) name:@"GoToMainApp" object:nil];
+        //setup the login and dashboard viewcontroller.
+        self.window.rootViewController = self.viewController;
+        [self.window makeKeyAndVisible];
+    }
+    
+    /*@try
     {
         if ([NSKeyedUnarchiver unarchiveObjectWithFile:[NSHomeDirectory() stringByAppendingPathComponent:@"Documents/appstate.archive"]] != nil
             && [[NSUserDefaults standardUserDefaults] objectForKey:@"FBExpirationDateKey"] != nil 
             && [[NSUserDefaults standardUserDefaults] objectForKey:@"FBAccessTokenKey"] != nil)
         {
             user_state_information      = [NSKeyedUnarchiver unarchiveObjectWithFile:[NSHomeDirectory() stringByAppendingPathComponent:@"Documents/appstate.archive"]];
+            [user_state_information loadUserInfoFromDatabase];
+            [user_state_information loadUsersFacebookFriendsFromDatabase];
             my_available_switch_array   = [[NSMutableArray alloc] initWithCapacity:11];
-            
-            printf("%s", [user_state_information.currentTabBar UTF8String]);
+            logged_out = NO;
+            got_facebook_info = YES;
             [self goToMainApp];
             return YES;
         }
@@ -48,21 +83,21 @@ static NSString *staff_it_to_me_address = @"www.google.com";
             user_state_information                  = [[USERINFORMATIONANDAPPSTATE alloc] init];
             user_state_information.currentTabBar    = @"Home";
             logged_out = YES;
+            //Add Notification to go to the main app after login is confirmed.
+            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(goToMainApp) name:@"GoToMainApp" object:nil];
+            
+            got_facebook_info  = NO;
+            //setup the login and dashboard viewcontroller.
+            self.window.rootViewController = self.viewController;
+            [self.window makeKeyAndVisible];
         }
     }
-    @catch (NSException *exception) {
-        user_state_information = [[USERINFORMATIONANDAPPSTATE alloc] init];
-        user_state_information.currentTabBar = @"Home";
-        logged_out = YES;
-    }
-    //Add Notification to go to the main app after login is confirmed.
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(goToMainApp) name:@"GoToMainApp" object:nil];
-	got_facebook_info  = NO;
-    my_available_switch_array = [[NSMutableArray alloc] initWithCapacity:11];
-    //setup the login and dashboard viewcontroller.
-    self.window.rootViewController = self.viewController;
-    [self.window makeKeyAndVisible];
-    [UIApplication sharedApplication].statusBarHidden = YES;
+    @catch (NSException *e) {
+        printf("Exception occured: %s", [[e description] UTF8String]);
+        //setup the login and dashboard viewcontroller.
+        self.window.rootViewController = self.viewController;
+        [self.window makeKeyAndVisible];
+    }*/
     return YES;
 }
 -(void)updateAvailableSwitches
@@ -115,6 +150,7 @@ static NSString *staff_it_to_me_address = @"www.google.com";
      Save data if appropriate.
      See also applicationDidEnterBackground:.
      */
+    [[ApplicationDatabase sharedInstance] closeDatabase];
 }
 
 -(BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url 
@@ -200,6 +236,26 @@ static NSString *staff_it_to_me_address = @"www.google.com";
     NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"friends, first_name, last_name, id, locale, gender, birthday, email, link, name", @"fields", nil];
     [facebook requestWithGraphPath:@"me" andParams:parameters andDelegate:self];
 }
+-(FacebookBroadcast*)getFriendFacebookScreen
+{
+    return my_facebook_broadcaster;
+}
+/**
+	This method calls all of the viewDIdLoads for the different controllers so the information is ready and waiting for the user instead of the user waiting for the controllers.
+ */
+-(void)loadControllerViews
+{
+    [home               viewDidLoad];
+    [search             viewDidLoad];
+    [jobs               viewDidLoad];
+    [main_profile       viewDidLoad];
+    [broadcast          viewDidLoad];
+    [my_messages_inbox  viewDidLoad];
+}
+-(void)allocateNonNecessaryViewControllers
+{
+    my_facebook_broadcaster = [[FacebookBroadcast alloc] initWithNibName:@"FacebookBroadcast" bundle:nil];   
+}
 /**
  This method will cause the whole app to open. This is called after login.
  return void. 
@@ -217,6 +273,7 @@ static NSString *staff_it_to_me_address = @"www.google.com";
     main_profile.view.backgroundColor = [UIColor whiteColor];
     broadcast = [[StaffOutMain alloc] init];
     my_messages_inbox = [[MessageSystemMain alloc] init];
+    [self performSelectorInBackground:@selector(allocateNonNecessaryViewControllers) withObject:nil];
     
     [_window.rootViewController.view removeFromSuperview];
     _window.rootViewController = nil;
@@ -247,6 +304,7 @@ static NSString *staff_it_to_me_address = @"www.google.com";
     else if ([user_state_information.currentTabBar isEqualToString:@"Inbox"]) {
         tab_bar_controller.selectedViewController = main_profile;
     }
+    _window.rootViewController = tab_bar_controller;
     [_window addSubview:tab_bar_controller.view];
 }
 -(void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController
@@ -344,17 +402,22 @@ static NSString *staff_it_to_me_address = @"www.google.com";
     [request_ror setPostValue:[result objectForKey:@"birthday"] forKey:@"birthday"];
     [request_ror setPostValue:[result objectForKey:@"email"] forKey:@"email"];
     [request_ror setPostValue:[result objectForKey:@"name"] forKey:@"name"];
+    
+    
     //Get the facebook friends
+    [[ApplicationDatabase sharedInstance] dropfacebookFriendsTable];
+    [[ApplicationDatabase sharedInstance] createUsersFacebookFriendsTable];
+    
     StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate];
     NSMutableArray *dciont = [[result objectForKey:@"friends"] objectForKey:@"data"];
     for (int i = 0; i < dciont.count; i++)
     {
-        FacebookFriend *friend = [[FacebookFriend alloc] init];
-        friend.friend_id = [[dciont objectAtIndex:i] objectForKey:@"id"];
-        friend.name = [[dciont objectAtIndex:i] objectForKey:@"name"];
-        [app_delegate.user_state_information.my_facebook_friends addObject:friend];
-        [friend release];
+        NSMutableDictionary *friend_info = [[NSMutableDictionary alloc] initWithCapacity:2];
+        [friend_info setObject:[[dciont objectAtIndex:i] objectForKey:@"name"] forKey:@"friend_name"];
+        [friend_info setObject:[[dciont objectAtIndex:i] objectForKey:@"id"] forKey:@"friend_id"];
+        [[ApplicationDatabase sharedInstance] insertFacebookFriend:friend_info];
     }
+    [user_state_information loadUsersFacebookFriendsFromDatabase];
     
     [request_ror setTimeOutSeconds:30];
     [request_ror setDelegate:self];
@@ -449,6 +512,9 @@ static NSString *staff_it_to_me_address = @"www.google.com";
 }
 -(void)logoutFunction
 {
+    [[ApplicationDatabase sharedInstance] dropAllTables];
+    [[ApplicationDatabase sharedInstance] createUserInformationTable];
+    [[ApplicationDatabase sharedInstance] createUsersFacebookFriendsTable];
     logged_out = YES;
     //Kill facebook login credentials
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];

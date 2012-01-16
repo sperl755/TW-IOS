@@ -134,9 +134,6 @@ static NSString *job_apply_address = @"https://helium.staffittome.com/apis/submi
         my_connection_button.alpha = .2;
         my_connection_button.userInteractionEnabled = NO;
         
-        UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Congratulations!" message:@"Your application was succesfully submitted!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-        [message show];
-        [message release];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"ApplicationSent" object:nil];
     }
     else

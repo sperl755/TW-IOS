@@ -32,16 +32,16 @@
         [friend_one_picture setFrame:CGRectMake(module_row_one_background.frame.origin.x + 10, module_row_one_background.frame.origin.y + 8, 25, 25)];
         [self addSubview:friend_one_picture];
         
-        //add nice overlay to compliment photo
-        friend_one_overlay = [[UIImageView alloc] initWithFrame:friend_one_picture.frame];
-        friend_one_overlay.image = [UIImage imageNamed:@"50x50_overlay"];
-        [self addSubview:friend_one_overlay];
-        
         //module_row_one_background = [[aDecoder decodeObjectForKey:module_row_one_background_key] retain];
         //friend_one_picture = [[aDecoder decodeObjectForKey:friend_one_picture_key] retain];
         friend_one_name = [[aDecoder decodeObjectForKey:friend_one_label_key] retain];
         friend_one_name.backgroundColor = [UIColor clearColor];
         [self addSubview:friend_one_name];
+        
+        //add nice overlay to compliment photo
+        friend_one_overlay = [[UIImageView alloc] initWithFrame:friend_one_picture.frame];
+        friend_one_overlay.image = [UIImage imageNamed:@"50x50_overlay"];
+        [self addSubview:friend_one_overlay];
         
         friend_one_invite_btn = [[aDecoder decodeObjectForKey:friend_one_invite_key] retain];
         [self addSubview:friend_one_invite_btn.imageView];

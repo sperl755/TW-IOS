@@ -262,6 +262,8 @@
 		466FABF6146116350081FC86 /* CompanySummary.m in Sources */ = {isa = PBXBuildFile; fileRef = 466FABF5146116350081FC86 /* CompanySummary.m */; };
 		466FABFC1461165A0081FC86 /* BasicCompanyInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = 466FABFB1461165A0081FC86 /* BasicCompanyInformation.m */; };
 		466FABFF1461171A0081FC86 /* CompanyHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 466FABFE146117190081FC86 /* CompanyHeader.m */; };
+		46718D7414C2CBDD0053A1CA /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 46718D7314C2CBDD0053A1CA /* libsqlite3.0.dylib */; };
+		46718D7714C2CC140053A1CA /* ApplicationDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 46718D7614C2CC140053A1CA /* ApplicationDatabase.m */; };
 		4677D1B8141D44B30014F435 /* MessageSystemMain.m in Sources */ = {isa = PBXBuildFile; fileRef = 4677D1B6141D44B30014F435 /* MessageSystemMain.m */; };
 		4677D1B9141D44B30014F435 /* MessageSystemMain.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4677D1B7141D44B30014F435 /* MessageSystemMain.xib */; };
 		4677D1BD141D470C0014F435 /* InboxOrSentbox.m in Sources */ = {isa = PBXBuildFile; fileRef = 4677D1BB141D470B0014F435 /* InboxOrSentbox.m */; };
@@ -307,6 +309,7 @@
 		46AFD8B8141B3E4A0063140C /* send_proposal.png in Resources */ = {isa = PBXBuildFile; fileRef = 46AFD8B6141B3E4A0063140C /* send_proposal.png */; };
 		46B1510213AF0DFA008B6644 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46B1510113AF0DFA008B6644 /* SystemConfiguration.framework */; };
 		46BB09BD147CC2010077320E /* CodeableUIImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 46BB09BC147CC2010077320E /* CodeableUIImage.m */; };
+		46BCEFA114C2AD1F00920230 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 46BCEFA014C2AD1F00920230 /* Default@2x.png */; };
 		46BE4C9F141F194900898626 /* CustomGoogleMapBubble.m in Sources */ = {isa = PBXBuildFile; fileRef = 46BE4C9E141F194900898626 /* CustomGoogleMapBubble.m */; };
 		46D498831411F2EB00E28EDE /* JobSkillsModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 46D498821411F2EB00E28EDE /* JobSkillsModule.m */; };
 		46D4B52F147AD46300B70C2D /* PullRefreshHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 46D4B52E147AD46300B70C2D /* PullRefreshHeader.m */; };
@@ -724,6 +727,9 @@
 		466FABFB1461165A0081FC86 /* BasicCompanyInformation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BasicCompanyInformation.m; sourceTree = "<group>"; };
 		466FABFD146117190081FC86 /* CompanyHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompanyHeader.h; sourceTree = "<group>"; };
 		466FABFE146117190081FC86 /* CompanyHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CompanyHeader.m; sourceTree = "<group>"; };
+		46718D7314C2CBDD0053A1CA /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
+		46718D7514C2CC140053A1CA /* ApplicationDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplicationDatabase.h; sourceTree = "<group>"; };
+		46718D7614C2CC140053A1CA /* ApplicationDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplicationDatabase.m; sourceTree = "<group>"; };
 		4677D1B5141D44B30014F435 /* MessageSystemMain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageSystemMain.h; sourceTree = "<group>"; };
 		4677D1B6141D44B30014F435 /* MessageSystemMain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageSystemMain.m; sourceTree = "<group>"; };
 		4677D1B7141D44B30014F435 /* MessageSystemMain.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageSystemMain.xib; sourceTree = "<group>"; };
@@ -797,6 +803,7 @@
 		46B1510113AF0DFA008B6644 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		46BB09BB147CC2010077320E /* CodeableUIImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CodeableUIImage.h; path = CoderBreadAndButters/CodeableUIImage.h; sourceTree = "<group>"; };
 		46BB09BC147CC2010077320E /* CodeableUIImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CodeableUIImage.m; path = CoderBreadAndButters/CodeableUIImage.m; sourceTree = "<group>"; };
+		46BCEFA014C2AD1F00920230 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		46BE4C9D141F194900898626 /* CustomGoogleMapBubble.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomGoogleMapBubble.h; sourceTree = "<group>"; };
 		46BE4C9E141F194900898626 /* CustomGoogleMapBubble.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomGoogleMapBubble.m; sourceTree = "<group>"; };
 		46D498811411F2EB00E28EDE /* JobSkillsModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JobSkillsModule.h; sourceTree = "<group>"; };
@@ -859,6 +866,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				46718D7414C2CBDD0053A1CA /* libsqlite3.0.dylib in Frameworks */,
 				46D4B533147ADD2900B70C2D /* QuartzCore.framework in Frameworks */,
 				46481686146B9F6700CF5A52 /* libz.1.2.5.dylib in Frameworks */,
 				46FCF43D13EC912300D63579 /* AVFoundation.framework in Frameworks */,
@@ -1011,6 +1019,8 @@
 				46598A4313FC7F4700C3AF1E /* UserInfo.m */,
 				46F2631F1429930700348AF2 /* ASSLider.h */,
 				46F263201429930700348AF2 /* ASSLider.m */,
+				46718D7514C2CC140053A1CA /* ApplicationDatabase.h */,
+				46718D7614C2CC140053A1CA /* ApplicationDatabase.m */,
 			);
 			name = "Data Classes";
 			sourceTree = "<group>";
@@ -1439,6 +1449,8 @@
 		469BD66813AB188800EDFE3E = {
 			isa = PBXGroup;
 			children = (
+				46718D7314C2CBDD0053A1CA /* libsqlite3.0.dylib */,
+				46BCEFA014C2AD1F00920230 /* Default@2x.png */,
 				46D4B532147ADD2900B70C2D /* QuartzCore.framework */,
 				46481685146B9F6700CF5A52 /* libz.1.2.5.dylib */,
 				46FCF43C13EC912300D63579 /* AVFoundation.framework */,
@@ -1964,6 +1976,7 @@
 				46534545147579D60008288B /* search_x.png in Resources */,
 				46D4B531147AD69300B70C2D /* LoadingArrow.png in Resources */,
 				4613B57D147C6F2500BD1D4A /* search_box_remove.png in Resources */,
+				46BCEFA114C2AD1F00920230 /* Default@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2123,6 +2136,7 @@
 				46688E3F147CC405004D44E0 /* UIImage-Extended.m in Sources */,
 				463DB83E148D8830004B924C /* ISO8601DateFormatter.m in Sources */,
 				46AF2C761499A8AC0076DDE3 /* StaffOutHeader.m in Sources */,
+				46718D7714C2CC140053A1CA /* ApplicationDatabase.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

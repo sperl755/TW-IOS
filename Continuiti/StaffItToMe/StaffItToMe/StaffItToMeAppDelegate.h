@@ -35,6 +35,7 @@
     ProfileMain *main_profile;
     MessageSystemMain *my_messages_inbox;
     StaffOutMain *broadcast;
+    FacebookBroadcast *my_facebook_broadcaster;
 	BOOL got_facebook_info;
     //This is used to count when we can go to the main app
     //because we need to make multiple requests at the beginning of login.
@@ -60,6 +61,7 @@
 -(BOOL)wifiConnected;
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions;
 -(BOOL)networkConnected;
+-(FacebookBroadcast*)getFriendFacebookScreen;
 @property (nonatomic, retain) Facebook *facebook;
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 @property (nonatomic, retain) IBOutlet StaffItToMeViewController *viewController;

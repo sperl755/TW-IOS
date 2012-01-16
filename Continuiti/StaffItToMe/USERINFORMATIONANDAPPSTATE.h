@@ -25,6 +25,11 @@
     //BOOL im_available;
     
 }
+/**DATABASE LOADING*/
+-(void)loadUserInfoFromDatabase;
+-(void)loadUsersFacebookFriendsFromDatabase;
+
+
 -(id)initWithCoder:(NSCoder*)aDecoder;
 -(void)encodeWithCoder:(NSCoder*)aCoder;
 -(void)getUserInformation:(NSString*)user_information;

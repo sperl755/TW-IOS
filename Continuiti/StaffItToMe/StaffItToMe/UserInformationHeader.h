@@ -27,5 +27,6 @@
     UIImageView *my_available_switch_foreground;
     
 }
+-(void)updateProfilePicture;
 @property (nonatomic, retain) id <UserInfoHeaderProtocol> delegate;
 @end

@@ -14,6 +14,7 @@
 #define SESSION_KEY_KEY @"SessionKey"
 #define INDUSTRY_SEARCH_KEY @"IndustrySearchType"
 #define SALARY_SEARCH_KEY @"Salary_Search_type"
+#define FACEBOOK_ID_KEY @"FacebookKEY"
 #define DISTANCE_SEARCH_KEY @"Salary_Search_type"
 #define JOB_ARRAY_KEY @"jobArray"
 #define MY_JOB_ARRAY_KEY @"MYJOBARRAY"
@@ -60,6 +61,7 @@ static NSString *user_locale_address = @"https://hydrogen.xen.exoware.net:3000/a
     {
         currentTabBar = [[aDecoder decodeObjectForKey:CURRENT_TAB_BAR_KEY] retain];   
         userName = [[aDecoder decodeObjectForKey:USER_NAME_KEY] retain];
+        facebook_id = [[aDecoder decodeObjectForKey:FACEBOOK_ID_KEY] retain];
         sessionKey = [[aDecoder decodeObjectForKey:SESSION_KEY_KEY] retain];
         industry_search_type = [[aDecoder decodeObjectForKey:INDUSTRY_SEARCH_KEY] retain];
         salary_search_type = [[aDecoder decodeObjectForKey:SALARY_SEARCH_KEY] retain];
@@ -82,11 +84,14 @@ static NSString *user_locale_address = @"https://hydrogen.xen.exoware.net:3000/a
         }else{
             printf("NIL AS HECK");
         }
-        if ([aDecoder decodeObjectForKey:MY_FACEBOOK_FRIENDS_KEY] != nil){
+        
+        my_facebook_friends = [[NSMutableArray alloc] initWithCapacity:300];
+        
+        /*if ([aDecoder decodeObjectForKey:MY_FACEBOOK_FRIENDS_KEY] != nil){
             my_facebook_friends = [[aDecoder decodeObjectForKey:MY_FACEBOOK_FRIENDS_KEY] retain];
         }else{
             printf("NIL AS HECK");
-        }
+        }*/
         if ([aDecoder decodeObjectForKey:MY_INBOX_MESSAGES_KEY] != nil){
             my_inbox_messages = [[aDecoder decodeObjectForKey:MY_INBOX_MESSAGES_KEY] retain];
         }else{
@@ -117,6 +122,7 @@ static NSString *user_locale_address = @"https://hydrogen.xen.exoware.net:3000/a
     [aCoder encodeObject:currentTabBar forKey:CURRENT_TAB_BAR_KEY];
     [aCoder encodeObject:userName forKey:USER_NAME_KEY];
     [aCoder encodeObject:sessionKey forKey:SESSION_KEY_KEY];
+    [aCoder encodeObject:facebook_id forKey:FACEBOOK_ID_KEY];
     [aCoder encodeObject:industry_search_type forKey:INDUSTRY_SEARCH_KEY];
     [aCoder encodeObject:salary_search_type forKey:SALARY_SEARCH_KEY];
     [aCoder encodeObject:distance_search_type forKey:DISTANCE_SEARCH_KEY];
@@ -138,11 +144,11 @@ static NSString *user_locale_address = @"https://hydrogen.xen.exoware.net:3000/a
     }else{
         printf("Job array is nil");
     }
-    if (my_facebook_friends != nil){
+    /*if (my_facebook_friends != nil){
         [aCoder encodeObject:my_facebook_friends forKey:MY_FACEBOOK_FRIENDS_KEY];
     }else{
         printf("Job array is nil");
-    }
+    }*/
     if (my_inbox_messages != nil){
         [aCoder encodeObject:my_inbox_messages forKey:MY_INBOX_MESSAGES_KEY];
     }else{
@@ -509,14 +515,53 @@ static NSString *user_locale_address = @"https://hydrogen.xen.exoware.net:3000/a
 {
     printf("\n%s\n", [user_information UTF8String]);
     NSDictionary *user_date = [user_information JSONValue];
-    sessionKey = [[user_date objectForKey:@"session_key"] retain];
-    int user_id = [[user_date objectForKey:@"user_id"] intValue];
-    printf("%d", user_id);
-    my_user_info.user_id = user_id;
+    
+    NSMutableDictionary *user_information_dictionary = [[NSMutableDictionary alloc] initWithCapacity:14];
+    [user_information_dictionary setObject:[user_date objectForKey:@"name"] forKey:@"name"];
+    [user_information_dictionary setObject:[user_date objectForKey:@"facebook_friends_count"] forKey:@"facebook_friend_count"];
+    [user_information_dictionary setObject:[user_date objectForKey:@"session_key"] forKey:@"session_key"];
+    [user_information_dictionary setObject:[user_date objectForKey:@"facebook_uid"] forKey:@"facebook_uid"];
+    [user_information_dictionary setObject:[user_date objectForKey:@"avatar"] forKey:@"avatar"];
+    [user_information_dictionary setObject:[user_date objectForKey:@"gender"] forKey:@"gender"];
+    [user_information_dictionary setObject:[user_date objectForKey:@"user_id"] forKey:@"user_id"];
+    [user_information_dictionary setObject:[user_date objectForKey:@"avatar_thumb"] forKey:@"avatar_thumb"];
+    [user_information_dictionary setObject:[user_date objectForKey:@"facebook_session_key"] forKey:@"facebook_session_key"];
+    [user_information_dictionary setObject:[user_date objectForKey:@"birthday"] forKey:@"birthday"];
+    [user_information_dictionary setObject:[user_date objectForKey:@"last_name"] forKey:@"last_name"];
+    [user_information_dictionary setObject:[user_date objectForKey:@"locale"] forKey:@"locale"];
+    [user_information_dictionary setObject:[user_date objectForKey:@"first_name"] forKey:@"first_name"];
+    [user_information_dictionary setObject:[user_date objectForKey:@"email"] forKey:@"email"];
+    
+    [[ApplicationDatabase sharedInstance] insertOrUpdateUserInformationWithDictionary:user_information_dictionary];
+    [self loadUserInfoFromDatabase];
+    
     DataMaker *message_Creation = [[DataMaker alloc] initWithNibName:@"DataMaker" bundle:nil];
+}
+-(void)loadUserInfoFromDatabase
+{
+    NSDictionary *get_user_information_dictionary = [[ApplicationDatabase sharedInstance] getUserInformationFromDatabase];
+    sessionKey              = [[get_user_information_dictionary objectForKey:@"session_key"] retain];
+    my_user_info.full_name  = [[get_user_information_dictionary objectForKey:@"name"] retain];
+    facebook_id             = [[get_user_information_dictionary objectForKey:@"facebook_uid"] retain];
+    my_user_info.user_id    = (int)[get_user_information_dictionary objectForKey:@"user_id"];
+    picture_url             = [[get_user_information_dictionary objectForKey:@"avatar"] retain];
+    
     printf("\n%s", [my_user_info.full_name UTF8String]);
     printf("\nSession Key: %s\n", [sessionKey UTF8String]);
-    picture_url = [[user_date objectForKey:@"avatar"] retain];
+}
+-(void)loadUsersFacebookFriendsFromDatabase
+{
+    NSMutableArray *get_facebook_friends = [[ApplicationDatabase sharedInstance] getFacebookFriendFromDatabase];
+    for (int i = 0; i < get_facebook_friends.count; i++)
+    {
+        NSDictionary *friend = [get_facebook_friends objectAtIndex:i];
+        
+        FacebookFriend *friend_class    = [[FacebookFriend alloc] init];
+        friend_class.friend_id          = [friend objectForKey:@"friend_id"];
+        friend_class.name               = [friend objectForKey:@"friend_name"];
+        
+        [my_facebook_friends addObject:friend_class];
+    }
 }
 -(void)setUserLocation:(CLLocation*)the_location
 {
@@ -595,7 +640,8 @@ static NSString *user_locale_address = @"https://hydrogen.xen.exoware.net:3000/a
     }
     
     for (int i = 0; i < array_thing.count; i++)
-    {SmallJobs *temp_small_job = [[SmallJobs alloc] init];
+    {
+        SmallJobs *temp_small_job = [[SmallJobs alloc] init];
         if ([[array_thing objectAtIndex:i] objectForKey:@"title"] == [NSNull null] || [[array_thing objectAtIndex:i] objectForKey:@"title"] == nil)
         {
             temp_small_job.title = @"";

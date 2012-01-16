@@ -25,7 +25,7 @@
 -(id)init
 {
     if ((self = [super init])) {
-        StaffItToMeAppDelegate *app_delegate = [[UIApplication sharedApplication] delegate];
+        StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*) [[UIApplication sharedApplication] delegate];
         // Initialization code
         //Okay so the beginning is where the array is starting and then the end is
         //the row stopping point in the array. End will be behind beginning sometimes
@@ -71,17 +71,22 @@
         int height = module_header_background.frame.size.height;
         for (int i = beginning; i <= end; i++)
         {
+            StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*) [[UIApplication sharedApplication] delegate];  
             FacebookFriendEICell *cell = [[FacebookFriendEICell alloc] initWithFriendName:[[app_delegate.user_state_information.my_facebook_friends objectAtIndex:i] name] friend_id:[[app_delegate.user_state_information.my_facebook_friends objectAtIndex:i] friend_id]];
             cell.frame = CGRectMake(0, height, 310, 42);
             [self addSubview:cell];
-            height+=43;
             [friend_cells addObject:cell];
             [cell release];
+            [self performSelectorInBackground:@selector(friendCellInitialize) withObject:nil];
+            height+=43;
         }
         [self setFrame:CGRectMake(5, 0, 310, height)];
         
     }
     return self;
+}
+-(void)friendCellInitialize
+{
 }
 -(void)changeIndexes
 {

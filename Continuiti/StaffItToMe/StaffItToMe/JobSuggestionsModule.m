@@ -78,6 +78,7 @@ static NSString *job_suggestion_rl = @"https://helium.staffittome.com/apis/job_s
         {
             if ([job_one_name.text isEqualToString:[[app_delegate.user_state_information.my_suggested_jobs objectAtIndex:i] title]]) {
                 app_delegate.user_state_information.current_suggested_job_in_array = i;
+                break;
             }
         }
     }
@@ -87,6 +88,7 @@ static NSString *job_suggestion_rl = @"https://helium.staffittome.com/apis/job_s
         {
             if ([job_two_name.text isEqualToString:[[app_delegate.user_state_information.my_suggested_jobs objectAtIndex:i] title]]) {
                 app_delegate.user_state_information.current_suggested_job_in_array = i;
+                break;
             }
         }
     }

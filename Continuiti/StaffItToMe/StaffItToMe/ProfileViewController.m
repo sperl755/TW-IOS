@@ -46,38 +46,16 @@
     background = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Background.png"]];
     background.frame = CGRectMake(0, 0, 320, 480);
     [self.view insertSubview:background atIndex:0];
-    // Do any additional setup after loading the view from its nib.
-    my_header = [[UserInformationHeader alloc] init];
-    my_header.delegate = self;
+   
+
     
-    
-    
-    
-    my_table_view.allowsSelection = NO;
-    my_table_view.backgroundColor = [UIColor clearColor];
-    
-    my_table_view = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 370)];
-    my_table_view.delegate = self;
-    my_table_view.dataSource = self;
-    my_table_view.backgroundColor = [UIColor clearColor];
-    my_table_view.separatorColor = [UIColor clearColor];
-    my_table_view.hidden = YES;
-    [self.view addSubview:my_table_view];
-    
-    refresh_header = [[PullRefreshHeader alloc] initWithFrame:CGRectMake(0, -70, 320, 70)];
-    [my_table_view addSubview:refresh_header];
-    
-    //Data handling.
-    
+    //Perform the accessing of fthe server.
     NSMutableString *user_information = [[NSMutableString alloc] initWithString:@"https://helium.staffittome.com/apis/"];
     [user_information appendString:[NSString stringWithFormat:@"%d", app_delegate.user_state_information.my_user_info.user_id]];
     [user_information appendString:@"/profile_details"];
-    //Perform the accessing of fthe server.
     NSURL *url = [NSURL URLWithString:user_information];
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
     [request setRequestMethod:@"GET"];
-    
-    ///Finish request
     [request setValidatesSecureCertificate:NO];
     [request setTimeOutSeconds:30];
     [request setDelegate:self];
@@ -171,6 +149,24 @@
 }
 -(void)requestFinished:(ASIHTTPRequest *)request
 {
+    // Do any additional setup after loading the view from its nib.
+    my_header = [[UserInformationHeader alloc] init];
+    my_header.delegate = self;
+    
+    my_table_view.allowsSelection = NO;
+    my_table_view.backgroundColor = [UIColor clearColor];
+    
+    my_table_view = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 370)];
+    my_table_view.delegate = self;
+    my_table_view.dataSource = self;
+    my_table_view.backgroundColor = [UIColor clearColor];
+    my_table_view.separatorColor = [UIColor clearColor];
+    my_table_view.hidden = YES;
+    [self.view addSubview:my_table_view];
+    
+    refresh_header = [[PullRefreshHeader alloc] initWithFrame:CGRectMake(0, -70, 320, 70)];
+    [my_table_view addSubview:refresh_header];
+    
     StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate];
     [app_delegate removeLoadingViewFromWindow];
     printf("\nThis is theuser info: %s", [[request responseString] UTF8String]);

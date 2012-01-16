@@ -99,12 +99,6 @@
     
     friend_facebook_broadcast = [[FriendFacebookBroadcast alloc] initWithNibName:@"FriendFacebookBroadcast" bundle:nil];
     friend_facebook_broadcast.delegate = self;
-    [self performSelectorInBackground:@selector(loadFriendContent) withObject:nil];
-}
--(void)loadFriendContent
-{
-    broadcast_facebook = [[FacebookBroadcast alloc] initWithNibName:@"FacebookBroadcast" bundle:nil];
-    broadcast_facebook.delegate = self;   
 }
 - (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated
 {
@@ -125,8 +119,8 @@
 }
 -(void)goToFacebookBroadcast
 {
-    
-    [nav_control pushViewController:broadcast_facebook animated:YES];
+    StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate];
+    [nav_control pushViewController:[app_delegate getFriendFacebookScreen] animated:YES];
 }
 -(void)goToFriendFacebookBroadcast:(int)array_position
 {

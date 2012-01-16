@@ -119,11 +119,11 @@
     {
         my_table_view.contentOffset = CGPointMake(0, -refresh_header.frame.size.height);
         my_table_view.userInteractionEnabled = NO;
-        facebook = [[Facebook alloc] initWithAppId:@"187212574660004"];
-        facebook.accessToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"FBAccessTokenKey"];
-        facebook.expirationDate = [[NSUserDefaults standardUserDefaults] objectForKey:@"FBExpirationDateKey"];
-        NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"friends, first_name, last_name, id, locale, gender, birthday, email, link, name", @"fields", nil];
-        [facebook requestWithGraphPath:@"me" andParams:parameters andDelegate:self];
+        //facebook = [[Facebook alloc] initWithAppId:@"187212574660004"];
+        //facebook.accessToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"FBAccessTokenKey"];
+        //facebook.expirationDate = [[NSUserDefaults standardUserDefaults] objectForKey:@"FBExpirationDateKey"];
+        //NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"friends, first_name, last_name, id, locale, gender, birthday, email, link, name", @"fields", nil];
+        //[facebook requestWithGraphPath:@"me" andParams:parameters andDelegate:self];
         [self performSelector:@selector(finishedLoadingSuggestedJob) withObject:nil afterDelay:30];
     }
 }

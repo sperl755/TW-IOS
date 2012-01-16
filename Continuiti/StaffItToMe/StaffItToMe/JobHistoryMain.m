@@ -70,8 +70,8 @@
 }
 -(void)loadFriendContent
 {
-    broadcast_facebook = [[FacebookBroadcast alloc] initWithNibName:@"FacebookBroadcast" bundle:nil];
-    broadcast_facebook.delegate = self;   
+    //broadcast_facebook = [[FacebookBroadcast alloc] initWithNibName:@"FacebookBroadcast" bundle:nil];
+    //broadcast_facebook.delegate = self;   
 }
 - (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated
 {
@@ -92,7 +92,8 @@
 }
 -(void)goToFacebookBroadcast
 {
-    [nav_controller pushViewController:broadcast_facebook animated:YES];
+    StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate];
+    [nav_controller pushViewController:[app_delegate getFriendFacebookScreen] animated:YES];
 }
 -(void)goToFriendFacebookBroadcast:(int)array_position
 {

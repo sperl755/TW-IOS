@@ -122,10 +122,18 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    
     background = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Background"]];
     background.frame = CGRectMake(0, 0, 320, 480);
     [self.view insertSubview:background atIndex:0];
+    
+    [self performSelectorInBackground:@selector(finishViewDidLoad) withObject:nil];
+    
+    StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate];
+    [app_delegate displayLoadingView];
+    
+}
+-(void)finishViewDidLoad
+{
     my_header = [[UserInformationHeader alloc] init];
     my_header.delegate = self;
     my_jobs_module = [[MyJobsModule alloc] initWithFrame:CGRectMake(0, 0, 320, 60)];
@@ -144,6 +152,10 @@
     //Create header
     refresh_header = [[PullRefreshHeader alloc] initWithFrame:CGRectMake(0, -70, 320, 70)];
     [my_table_view addSubview:refresh_header];
+    
+    
+    StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate];
+    [app_delegate removeLoadingViewFromWindow];
 }
 -(void)goToInbox
 {

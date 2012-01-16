@@ -25,13 +25,15 @@
     if ((self = [super init]))
     {
         StaffItToMeAppDelegate *app_delegate    = (StaffItToMeAppDelegate*) [[UIApplication sharedApplication] delegate];
-        header_shadow = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 10)];
-        header_shadow.image = [UIImage imageNamed:@"header_shadow"];
+        header_shadow           = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 10)];
+        header_shadow.image     = [UIImage imageNamed:@"header_shadow"];
         [self addSubview:header_shadow];
+        
         //Setup the available switch background.
         my_available_switch_background = [[UIImageView alloc] initWithFrame:CGRectMake(230, 10, 89, 58)];
         [my_available_switch_background setImage:[UIImage imageNamed:@"available_widget"]];
         [self addSubview:my_available_switch_background];
+        
         //Create custom switch
         my_available_switch = [[ASSwitch alloc] initWithFrame:CGRectMake(242, 36, 65, 22) andOnImage:[UIImage imageNamed:@"available_no"] offImage:[UIImage imageNamed:@"available_yes"] sliderImage:[UIImage imageNamed:@"available_slider"]];
         my_available_switch.delegate = self;
@@ -58,11 +60,12 @@
         [self addSubview:my_profile_name];
         
         //SetupButton
-        my_connection_button = [UIButton buttonWithType:UIButtonTypeCustom];
-        my_connection_button.frame = CGRectMake(73, 36, 93, 24.5);
+        my_connection_button        = [UIButton buttonWithType:UIButtonTypeCustom];
+        my_connection_button.frame  = CGRectMake(73, 36, 93, 24.5);
         [my_connection_button setBackgroundImage:[UIImage imageNamed:@"connections_box"] forState:UIControlStateNormal];
         [my_connection_button addTarget:delegate action:@selector(respondToConnectionsButton) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:my_connection_button];
+        
         //setupButtonLabel
         connections_label = [[UILabel alloc] initWithFrame:CGRectMake(89, 40, 73, 22)];
         [self addSubview:connections_label];
@@ -119,10 +122,11 @@
         app_delegate.user_state_information.picture_url == [NSNull null])
     {
         NSMutableString *user_picture_string    = [NSMutableString stringWithString:@"http://graph.facebook.com/"];
+        printf("ID: %s", [app_delegate.user_state_information.facebook_id UTF8String]);
         [user_picture_string appendString:app_delegate.user_state_information.facebook_id];
         [user_picture_string appendString:@"/picture?type=large"];
         
-        NSURL *user_image_location              = [[NSURL alloc] initWithString:user_picture_string];
+        NSURL *user_image_location   = [[NSURL alloc] initWithString:user_picture_string];
         if (user_image_location != nil)
         {
             [my_profile_picture setImage:[UIImage imageWithData:[NSData dataWithContentsOfURL:user_image_location]]];   
@@ -156,7 +160,7 @@
 }
 -(void)viewDidAppear:(BOOL)animated
 {
-    [super viewDidAppear];
+    [super viewDidAppear:animated];
     StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate];
     [my_available_switch setOn:app_delegate.user_state_information.im_available];
 }
