@@ -66,6 +66,8 @@
 -(void)reloadTableData
 {
     [my_table_view reloadData];
+    StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate];
+    [app_delegate removeLoadingViewFromWindow];
 }
 -(void)manualButtonPressedOnJobInArrayPosition:(int)the_array_position
 {
@@ -154,8 +156,6 @@
     [my_table_view addSubview:refresh_header];
     
     
-    StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate];
-    [app_delegate removeLoadingViewFromWindow];
 }
 -(void)goToInbox
 {

@@ -636,7 +636,7 @@ static NSString *user_locale_address = @"https://hydrogen.xen.exoware.net:3000/a
     }
     @catch (NSException *exception) 
     {
-        array_thing = [fileContent JSONValue];
+        return;
     }
     
     for (int i = 0; i < array_thing.count; i++)

@@ -433,24 +433,33 @@ static NSString *staff_it_to_me_address = @"www.google.com";
 }
 -(void)requestFinished:(ASIHTTPRequest *)request
 {
-    if (loadDoneYet == 1) {
-        if ([[request responseString] length] >= 40) {
-            StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate];
-            //Populate Data before entering app.
-            [app_delegate.user_state_information getUserInformation:[request responseString]];
-            got_facebook_info = YES;
-            logged_out = NO;
-            [_viewController tearLoginScreen];
+    @try {
+        if (loadDoneYet == 1) {
+            if ([[request responseString] length] >= 40) {
+                StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate];
+                //Populate Data before entering app.
+                [app_delegate.user_state_information getUserInformation:[request responseString]];
+                got_facebook_info = YES;
+                logged_out = NO;
+                [_viewController tearLoginScreen];
+            }
+            else
+            {
+                UIAlertView *unable_to_login = [[UIAlertView alloc] initWithTitle:@"Unable_to_login" message:nil delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+                [unable_to_login show];
+                [unable_to_login release];
+            }
+            
         }
-        else
-        {
-            UIAlertView *unable_to_login = [[UIAlertView alloc] initWithTitle:@"Unable_to_login" message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:nil];
-            [unable_to_login show];
-            [unable_to_login release];
-        }
-     
     }
-    [load_view removeFromSuperview];
+    @catch (NSException *exception) {
+        UIAlertView *unable_to_login = [[UIAlertView alloc] initWithTitle:@"Talentwire is down for maintenance and will be back up shortly.  Thank you for being part of our beta!" message:nil delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+        [unable_to_login show];
+        [unable_to_login release];
+    }
+    @finally {
+        [load_view removeFromSuperview];
+    }
 }
 -(void)request:(FBRequest *)request didFailWithError:(NSError *)error
 {
