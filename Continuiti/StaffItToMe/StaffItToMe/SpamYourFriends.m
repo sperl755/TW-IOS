@@ -91,8 +91,26 @@
 -(void)changeIndexes
 {
     StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate];
+    int id_array_indeices[end+1];
+    for (int i = 0; i <= end; i++)
+    {
+        id_array_indeices[i] = rand()%app_delegate.user_state_information.my_facebook_friends.count-1;
+    }
+    //Empty the array
+    [friend_cells removeAllObjects];
+    //recreate the arrays
+    int height = module_header_background.frame.size.height;
+    for (int i = 0; i <= end; i++)
+    {
+        FacebookFriendEICell *cell = [[FacebookFriendEICell alloc] initWithFriendName:[[app_delegate.user_state_information.my_facebook_friends objectAtIndex:id_array_indeices[i]] name] friend_id:[[app_delegate.user_state_information.my_facebook_friends objectAtIndex:id_array_indeices[i]] friend_id]];
+        cell.frame = CGRectMake(0, height, 310, 42);
+        [self addSubview:cell];
+        height+=43;
+        [friend_cells addObject:cell];
+        [cell release];
+    }
     //increase the variables and if they are above the count then rap them around.
-    beginning++;
+    /*beginning++;
     if (beginning >= app_delegate.user_state_information.my_facebook_friends.count)
     {
         beginning = 0;
@@ -124,7 +142,7 @@
         height+=43;
         [friend_cells addObject:cell];
         [cell release];
-    }
+    }*/
 }
 /*
 // Only override drawRect: if you perform custom drawing.

@@ -515,6 +515,8 @@ static NSString *user_locale_address = @"https://hydrogen.xen.exoware.net:3000/a
 {
     printf("\n%s\n", [user_information UTF8String]);
     NSDictionary *user_date = [user_information JSONValue];
+    int user_id = [[user_date objectForKey:@"user_id"] intValue];
+    NSString *user_id_string = [NSString stringWithFormat:@"%d", user_id];
     
     NSMutableDictionary *user_information_dictionary = [[NSMutableDictionary alloc] initWithCapacity:14];
     [user_information_dictionary setObject:[user_date objectForKey:@"name"] forKey:@"name"];
@@ -523,7 +525,7 @@ static NSString *user_locale_address = @"https://hydrogen.xen.exoware.net:3000/a
     [user_information_dictionary setObject:[user_date objectForKey:@"facebook_uid"] forKey:@"facebook_uid"];
     [user_information_dictionary setObject:[user_date objectForKey:@"avatar"] forKey:@"avatar"];
     [user_information_dictionary setObject:[user_date objectForKey:@"gender"] forKey:@"gender"];
-    [user_information_dictionary setObject:[user_date objectForKey:@"user_id"] forKey:@"user_id"];
+    [user_information_dictionary setObject:user_id_string forKey:@"user_id"];
     [user_information_dictionary setObject:[user_date objectForKey:@"avatar_thumb"] forKey:@"avatar_thumb"];
     [user_information_dictionary setObject:[user_date objectForKey:@"facebook_session_key"] forKey:@"facebook_session_key"];
     [user_information_dictionary setObject:[user_date objectForKey:@"birthday"] forKey:@"birthday"];
@@ -533,6 +535,7 @@ static NSString *user_locale_address = @"https://hydrogen.xen.exoware.net:3000/a
     [user_information_dictionary setObject:[user_date objectForKey:@"email"] forKey:@"email"];
     
     [[ApplicationDatabase sharedInstance] insertOrUpdateUserInformationWithDictionary:user_information_dictionary];
+    
     [self loadUserInfoFromDatabase];
     
     DataMaker *message_Creation = [[DataMaker alloc] initWithNibName:@"DataMaker" bundle:nil];
@@ -543,11 +546,14 @@ static NSString *user_locale_address = @"https://hydrogen.xen.exoware.net:3000/a
     sessionKey              = [[get_user_information_dictionary objectForKey:@"session_key"] retain];
     my_user_info.full_name  = [[get_user_information_dictionary objectForKey:@"name"] retain];
     facebook_id             = [[get_user_information_dictionary objectForKey:@"facebook_uid"] retain];
-    my_user_info.user_id    = (int)[get_user_information_dictionary objectForKey:@"user_id"];
+    int user_id = [[get_user_information_dictionary objectForKey:@"user_id"] intValue];
+    my_user_info.user_id    = user_id;
+    printf("User ID: %d", my_user_info.user_id);
     picture_url             = [[get_user_information_dictionary objectForKey:@"avatar"] retain];
     
     printf("\n%s", [my_user_info.full_name UTF8String]);
     printf("\nSession Key: %s\n", [sessionKey UTF8String]);
+    
 }
 -(void)loadUsersFacebookFriendsFromDatabase
 {
@@ -579,20 +585,24 @@ static NSString *user_locale_address = @"https://hydrogen.xen.exoware.net:3000/a
     [request_ror setTimeOutSeconds:30];
     [request_ror setDelegate:self];
     [request_ror startAsynchronous];
-    if (im_available)
-    {
+   // if (im_available)
+   // {
         [local_manager.manager performSelector:@selector(startUpdatingLocation) withObject:nil afterDelay:100];
-    }
+   // }
 }
--(void)stopUpdatingUserLocation
-{
+-(void)stopUpdatingUserLocation {
+    
     [local_manager.manager stopUpdatingLocation];
+    
     NSURL *url = [NSURL URLWithString:user_locale_address];
+    
     //tell the servers i am here and not avaialable
     ASIFormDataRequest *request_ror = [ASIFormDataRequest requestWithURL:url];
+    
     [request_ror setRequestMethod:@"POST"];
     [request_ror setValidatesSecureCertificate:NO];
     [request_ror setPostValue:sessionKey forKey:@"session_key"];
+    
     [request_ror setPostValue:[NSString stringWithFormat:@"%d", my_user_location.coordinate.latitude] forKey:@"lat"];
     [request_ror setPostValue:[NSString stringWithFormat:@"%d", my_user_location.coordinate.longitude] forKey:@"long"];
     [request_ror setPostValue:@"0" forKey:@"is_available"];
@@ -600,16 +610,23 @@ static NSString *user_locale_address = @"https://hydrogen.xen.exoware.net:3000/a
     [request_ror setDelegate:self];
     [request_ror startAsynchronous];
     im_available = NO;
+    
+    StaffItToMeAppDelegate *app_delegate    = (StaffItToMeAppDelegate*) [[UIApplication sharedApplication] delegate];
+    [app_delegate                           updateAvailableSwitches];
 }
--(void)startUpdatingUserLocation
-{
+-(void)startUpdatingUserLocation {
+    
     [local_manager.manager startUpdatingLocation];
+    
     NSURL *url = [NSURL URLWithString:user_locale_address];
+    
     //tell the servers i am here and not avaialable
-    ASIFormDataRequest *request_ror = [ASIFormDataRequest requestWithURL:url];
+    ASIFormDataRequest *request_ror     = [ASIFormDataRequest requestWithURL:url];
     [request_ror setRequestMethod:@"POST"];
+    
     [request_ror setValidatesSecureCertificate:NO];
     [request_ror setPostValue:sessionKey forKey:@"session_key"];
+    
     [request_ror setPostValue:[NSString stringWithFormat:@"%d", my_user_location.coordinate.latitude] forKey:@"lat"];
     [request_ror setPostValue:[NSString stringWithFormat:@"%d", my_user_location.coordinate.longitude] forKey:@"long"];
     [request_ror setPostValue:@"1" forKey:@"is_available"];
@@ -617,6 +634,10 @@ static NSString *user_locale_address = @"https://hydrogen.xen.exoware.net:3000/a
     [request_ror setDelegate:self];
     [request_ror startAsynchronous];
     im_available = YES;
+    
+    StaffItToMeAppDelegate *app_delegate    = (StaffItToMeAppDelegate*) [[UIApplication sharedApplication] delegate];
+    [app_delegate                           updateAvailableSwitches];
+    
 }
 -(void)populateSuggestedJobsArrayWithString:(NSString*)the_string
 {

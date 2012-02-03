@@ -38,6 +38,7 @@
         my_available_switch = [[ASSwitch alloc] initWithFrame:CGRectMake(242, 36, 65, 22) andOnImage:[UIImage imageNamed:@"available_no"] offImage:[UIImage imageNamed:@"available_yes"] sliderImage:[UIImage imageNamed:@"available_slider"]];
         my_available_switch.delegate = self;
         [my_available_switch setOn:app_delegate.user_state_information.im_available];
+        [app_delegate.my_available_switch_array addObject:my_available_switch];
         [self addSubview:my_available_switch];
         
         //Setup Containers.
@@ -93,7 +94,6 @@
         [connections_text appendString:@"Connections"];
         [connections_label setText:connections_text];
         [self setFrame:CGRectMake(0, 0, 320, 80)];
-        [app_delegate.my_available_switch_array addObject:my_available_switch];
         
         
         //Setup the available switch background.
@@ -101,6 +101,9 @@
         [my_available_switch_foreground setImage:[UIImage imageNamed:@"available_overlay"]];
         [self addSubview:my_available_switch_foreground];
         
+        
+        //Set this one up to display the same information as the others
+        [app_delegate updateAvailableSwitches];
         
     }
     return self;

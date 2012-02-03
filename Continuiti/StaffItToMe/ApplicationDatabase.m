@@ -105,7 +105,7 @@ static ApplicationDatabase *shared = NULL;
     }
     else
     {
-        char *create_user_information_table = "CREATE TABLE user_information (name VARCHAR, facebook_friend_count VARCHAR, session_key VARCHAR, facebook_uid VARCHAR, avatar VARCHAR, gender VARCHAR, user_id INTEGER, avatar_thumb VARCHAR, facebook_session_key VARCHAR, birthday VARCHAR, last_name VARCHAR, locale VARCHAR, first_name VARCHAR, email VARCHAR)";
+        char *create_user_information_table = "CREATE TABLE user_information (name VARCHAR, facebook_friend_count VARCHAR, session_key VARCHAR, facebook_uid VARCHAR, avatar VARCHAR, gender VARCHAR, user_id VARCHAR, avatar_thumb VARCHAR, facebook_session_key VARCHAR, birthday VARCHAR, last_name VARCHAR, locale VARCHAR, first_name VARCHAR, email VARCHAR)";
         if (sqlite3_exec(database_pointer, create_user_information_table, NULL, NULL, &error_message) != SQLITE_OK)
         {
             fprintf(stderr, "Error in creating user information table. Error: %s", sqlite3_errmsg(database_pointer));
@@ -160,7 +160,7 @@ static ApplicationDatabase *shared = NULL;
 }
 -(void)insertUserInformationIntoUserInformationTableWithDictionary:(NSDictionary*)the_values
 {
-    NSString *inser_user_into_nsstring = [NSString stringWithFormat:@"INSERT INTO user_information VALUES ('%@', '%@', '%@', '%@', '%@', '%@', %d, '%@', '%@', '%@', '%@', '%@', '%@', '%@')", 
+    NSString *inser_user_into_nsstring = [NSString stringWithFormat:@"INSERT INTO user_information VALUES ('%@', '%@', '%@', '%@', '%@', '%@', '%@', '%@', '%@', '%@', '%@', '%@', '%@', '%@')", 
                                           [the_values objectForKey:@"name"],
                                           [the_values objectForKey:@"facebook_friend_count"],
                                           [the_values objectForKey:@"session_key"],
@@ -184,7 +184,7 @@ static ApplicationDatabase *shared = NULL;
 }
 -(void)updateUserInformationIntoUserInformationTableWithDictionary:(NSDictionary*)the_values
 {
-    NSString *inser_user_into_nsstring = [NSString stringWithFormat:@"UPDATE user_information SET name = '%@', facebook_friend_count = '%@', session_key = '%@', facebook_uid = '%@', avatar = '%@', gender = '%@', user_id = %d, avatar_thumb = '%@', facebook_session_key = '%@', birthday = '%@', last_name = '%@', locale = '%@', first_name = '%@', email = '%@'", 
+    NSString *inser_user_into_nsstring = [NSString stringWithFormat:@"UPDATE user_information SET name = '%@', facebook_friend_count = '%@', session_key = '%@', facebook_uid = '%@', avatar = '%@', gender = '%@', user_id = '%@', avatar_thumb = '%@', facebook_session_key = '%@', birthday = '%@', last_name = '%@', locale = '%@', first_name = '%@', email = '%@'", 
                                           [the_values objectForKey:@"name"],
                                           [the_values objectForKey:@"facebook_friend_count"],
                                           [the_values objectForKey:@"session_key"],
@@ -274,7 +274,7 @@ static ApplicationDatabase *shared = NULL;
     const char *facebook_uid            = (const char*)sqlite3_column_text(get_user_information, 3);
     const char *avatar                  = (const char*)sqlite3_column_text(get_user_information, 4);
     const char *gender                  = (const char*)sqlite3_column_text(get_user_information, 5);
-    int user_id                         = sqlite3_column_int(get_user_information, 6);
+    const char *user_id                 = (const char*)sqlite3_column_text(get_user_information, 6);
     const char *avatar_thumb            = (const char*)sqlite3_column_text(get_user_information, 7);
     const char *facebook_session_key    = (const char*)sqlite3_column_text(get_user_information, 8);
     const char *birthday                = (const char*)sqlite3_column_text(get_user_information, 9);
@@ -290,7 +290,7 @@ static ApplicationDatabase *shared = NULL;
     [user_information_dictionary setObject:[NSString stringWithFormat:@"%s", facebook_uid] forKey:@"facebook_uid"];
     [user_information_dictionary setObject:[NSString stringWithFormat:@"%s", avatar] forKey:@"avatar"];
     [user_information_dictionary setObject:[NSString stringWithFormat:@"%s", gender]forKey:@"gender"];
-    [user_information_dictionary setObject:[NSString stringWithFormat:@"%d", user_id] forKey:@"user_id"];
+    [user_information_dictionary setObject:[NSString stringWithFormat:@"%s", user_id] forKey:@"user_id"];
     [user_information_dictionary setObject:[NSString stringWithFormat:@"%s", avatar_thumb] forKey:@"avatar_thumb"];
     [user_information_dictionary setObject:[NSString stringWithFormat:@"%s", facebook_session_key] forKey:@"facebook_session_key"];
     [user_information_dictionary setObject:[NSString stringWithFormat:@"%s", birthday] forKey:@"birthday"];

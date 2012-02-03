@@ -26,12 +26,16 @@
     {
         StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*) [[UIApplication sharedApplication] delegate];
         NSMutableString *the_string = [[NSMutableString alloc] initWithString:@"https://helium.staffittome.com/apis/"];
-        [the_string appendFormat:@"%d", app_delegate.user_state_information.my_user_info.user_id];
+        
+        int user_id = app_delegate.user_state_information.my_user_info.user_id;
+        [the_string appendString:[NSString stringWithFormat:@"%d", user_id]];
         [the_string appendString:@"/list_proposal"];
+        
         NSURL *url = [NSURL URLWithString:the_string];
         ASIFormDataRequest *request_ror = [ASIFormDataRequest requestWithURL:url];
         [request_ror setRequestMethod:@"GET"];
         [request_ror setTimeOutSeconds:30];
+        
         [request_ror setValidatesSecureCertificate:NO];
         [request_ror setDelegate:self];
         //[request_ror setPostValue:app_delegate.user_state_information.sessionKey forKey:@"session_key"];
@@ -42,25 +46,29 @@
 -(void)requestFinished:(ASIHTTPRequest *)request
 {
     NSArray *first_level = [[request responseString] JSONValue];
-    
+    printf("\n\nProposals: %s\n\n", [[request responseString] UTF8String]);
     //Check to make sure there are proposals
     if (first_level.count < 1 )
     {
         return;
     }
     //Create Header First
-    UIImage *header_image = [UIImage imageNamed:@"module_header.png"];
-    module_header_background = [[UIImageView alloc] initWithImage:header_image];
-    module_header_background.frame = CGRectMake(5, 0, 310, 33);
+    UIImage *header_image           = [UIImage imageNamed:@"module_header.png"];
+    module_header_background        = [[UIImageView alloc] initWithImage:header_image];
+    module_header_background.frame  = CGRectMake(5, 0, 310, 33);
     [self addSubview:module_header_background];
-    spam_your_friends_label = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, 200, 22)];
-    spam_your_friends_label.textColor = [UIColor colorWithRed:49.0/255 green:72.0/255 blue:106.0/255 alpha:1];
+    
+    spam_your_friends_label                 = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, 200, 22)];
+    spam_your_friends_label.textColor       = [UIColor colorWithRed:49.0/255 green:72.0/255 blue:106.0/255 alpha:1];
     spam_your_friends_label.backgroundColor = [UIColor clearColor];
     [spam_your_friends_label setFont:[UIFont fontWithName:@"HelveticaNeue-Bold" size:12]];
-    StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*) [[UIApplication sharedApplication] delegate];
-    NSMutableString *header_label = [[NSMutableString alloc] initWithString:app_delegate.user_state_information.my_user_info.full_name];
+    
+    StaffItToMeAppDelegate *app_delegate    = (StaffItToMeAppDelegate*) [[UIApplication sharedApplication] delegate];
+    NSMutableString *header_label           = [[NSMutableString alloc] initWithString:app_delegate.user_state_information.my_user_info.full_name];
+    
     [header_label appendString:@"'s Proposals"];
     spam_your_friends_label.text = header_label;
+    
     [self addSubview:spam_your_friends_label];
     
     

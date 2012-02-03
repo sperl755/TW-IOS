@@ -526,7 +526,7 @@
     StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*) [[UIApplication sharedApplication] delegate];
     [((StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate]) displayLoadingView];
     // Custom initialization
-    NSURL *url = [NSURL URLWithString:@"https://helium.staffittome.com/apis/create_proposal "];
+    NSURL *url = [NSURL URLWithString:@"https://helium.staffittome.com/apis/create_proposal"];
     ASIFormDataRequest *request_ror = [ASIFormDataRequest requestWithURL:url];
     [request_ror setRequestMethod:@"POST"];
     [request_ror setTimeOutSeconds:30];
@@ -560,6 +560,7 @@
         getting_information = NO;
         return;
     }
+    printf("ProposalSendResponse:%s\n", [[request responseString] UTF8String]);
     [((StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate]) removeLoadingViewFromWindow];
     UIAlertView *aler = [[UIAlertView alloc] initWithTitle:@"" message:@"Your proposal was submitted!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
     [aler show];

@@ -150,12 +150,23 @@
 -(void)requestFinished:(ASIHTTPRequest *)request
 {
     // Do any additional setup after loading the view from its nib.
+    if (my_header != nil)
+    {
+        [my_header removeFromSuperview];
+        my_header.delegate = nil;
+        my_header = nil;
+    }
     my_header = [[UserInformationHeader alloc] init];
     my_header.delegate = self;
     
     my_table_view.allowsSelection = NO;
     my_table_view.backgroundColor = [UIColor clearColor];
     
+    if (my_table_view != nil)
+    {
+        [my_table_view removeFromSuperview];
+        my_table_view = nil;
+    }
     my_table_view = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 370)];
     my_table_view.delegate = self;
     my_table_view.dataSource = self;
@@ -164,6 +175,11 @@
     my_table_view.hidden = YES;
     [self.view addSubview:my_table_view];
     
+    if (refresh_header != nil)
+    {
+        [refresh_header removeFromSuperview];
+        refresh_header = nil;
+    }
     refresh_header = [[PullRefreshHeader alloc] initWithFrame:CGRectMake(0, -70, 320, 70)];
     [my_table_view addSubview:refresh_header];
     
