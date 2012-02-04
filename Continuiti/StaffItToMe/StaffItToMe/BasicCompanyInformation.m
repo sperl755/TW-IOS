@@ -58,54 +58,54 @@
 -(void)setupGUI
 {
     // Initialization code //Create Header
-    UIImage *header_image = [UIImage imageNamed:@"module_header.png"];
-    module_header_background = [[UIImageView alloc] initWithImage:header_image];
-    module_header_background.frame = CGRectMake(0, 0, 310, 33);
+    UIImage *header_image               = [UIImage imageNamed:@"module_header.png"];
+    module_header_background            = [[UIImageView alloc] initWithImage:header_image];
+    module_header_background.frame      = CGRectMake(0, 0, 310, 33);
     [self addSubview:module_header_background];
+    
     //[header_image release];
-    spam_your_friends_label = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, 200, 22)];
-    spam_your_friends_label.textColor = [UIColor colorWithRed:49.0/255 green:72.0/255 blue:106.0/255 alpha:1];
+    spam_your_friends_label                 = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, 200, 22)];
+    spam_your_friends_label.textColor       = [UIColor colorWithRed:49.0/255 green:72.0/255 blue:106.0/255 alpha:1];
     spam_your_friends_label.backgroundColor = [UIColor clearColor];
+    spam_your_friends_label.text            = @"Basic Info";
     [spam_your_friends_label setFont:[UIFont fontWithName:@"HelveticaNeue-Bold" size:12]];
-    spam_your_friends_label.text = @"Basic Info";
     [self addSubview:spam_your_friends_label];
     
     //Create Row 1
-    UIImage *row_background = [UIImage imageNamed:@"module_split_last"];
-    module_row_one_background = [[UIImageView alloc] initWithImage:row_background];
+    UIImage *row_background         = [UIImage imageNamed:@"module_split_last"];
+    module_row_one_background       = [[UIImageView alloc] initWithImage:row_background];
     module_row_one_background.frame = CGRectMake(0, module_header_background.frame.origin.y + module_header_background.frame.size.height, 310, 42);
     [self addSubview:module_row_one_background];
     
-    basic_info_icons = [[UIImageView alloc] initWithFrame:CGRectMake(module_row_one_background.frame.origin.x + 10, module_row_one_background.frame.origin.y + 9,178.5, 65.5)];
-    basic_info_icons.image = [UIImage imageNamed:@"BasicInfoIcons"];
+    basic_info_icons        = [[UIImageView alloc] initWithFrame:CGRectMake(module_row_one_background.frame.origin.x + 10, module_row_one_background.frame.origin.y + 9,178.5, 65.5)];
+    basic_info_icons.image  = [UIImage imageNamed:@"BasicInfoIcons"];
     [self addSubview:basic_info_icons];
     
     //Location Information
-    location_label = [[UILabel alloc] initWithFrame:CGRectMake(basic_info_icons.frame.origin.x + 30, basic_info_icons.frame.origin.y - 4, 100, 20)];
-    location_label.text = @"Size";
-    location_label.backgroundColor = [UIColor clearColor];
+    location_label                  = [[UILabel alloc] initWithFrame:CGRectMake(basic_info_icons.frame.origin.x + 30, basic_info_icons.frame.origin.y - 4, 100, 20)];
+    location_label.text             = @"Size";
+    location_label.backgroundColor  = [UIColor clearColor];
     [location_label setFont:[UIFont fontWithName:@"HelveticaNeueLTCom-Md" size:11]];
     [self addSubview:location_label];
-    location_details = [[UILabel alloc] initWithFrame:CGRectMake(location_label.frame.origin.x, location_label.frame.origin.y + 10, 100, 30)];
     
-    
-    location_details.backgroundColor = [UIColor clearColor];
+    location_details                    = [[UILabel alloc] initWithFrame:CGRectMake(location_label.frame.origin.x, location_label.frame.origin.y + 10, 100, 30)];
+    location_details.backgroundColor    = [UIColor clearColor];
     [location_details setFont:[UIFont fontWithName:@"HelveticaNeueLTCom-Md" size:9]];
     [self addSubview:location_details];
     
     //Job Type Information
-    job_type = [[UILabel alloc] initWithFrame:CGRectMake(basic_info_icons.frame.origin.x + basic_info_icons.frame.size.width + 5, location_label.frame.origin.y, 100, 20)];
+    job_type                        = [[UILabel alloc] initWithFrame:CGRectMake(basic_info_icons.frame.origin.x + basic_info_icons.frame.size.width + 5, location_label.frame.origin.y, 100, 20)];
     [job_type setFont:[UIFont fontWithName:@"HelveticaNeueLTCom-Md" size:11]];
-    job_type.text = @"Job Type";
-    job_type.backgroundColor = [UIColor clearColor];
+    job_type.text                   = @"Job Type";
+    job_type.backgroundColor        = [UIColor clearColor];
     [self addSubview:job_type];
-    job_type_detail = [[UILabel alloc] initWithFrame:CGRectMake(job_type.frame.origin.x, job_type.frame.origin.y + 10, 100, 30)];
+    
+    job_type_detail                 = [[UILabel alloc] initWithFrame:CGRectMake(job_type.frame.origin.x, job_type.frame.origin.y + 10, 100, 30)];
     job_type_detail.backgroundColor = [UIColor clearColor];
     [job_type_detail setFont:[UIFont fontWithName:@"HelveticaNeueLTCom-Md" size:9]];
     [self addSubview:job_type_detail];
     [self setFrame:CGRectMake(5, 0, 310, 84)];
     [self setClipsToBounds:YES];
-    
    
 }
 - (void)dealloc

@@ -19,7 +19,7 @@
     }
     return self;
 }
--(id)initWithSummary:(NSString*)the_summary
+-(id)initWithSummary:(NSString*)the_summary andDescription:(NSString*)the_description
 {
     self = [super init];
     if (self) {
@@ -33,7 +33,11 @@
             else
             {
                 [self setupGUI:the_summary];
-                my_summary_text.text = the_summary;   
+                NSMutableString *the_summary_and_desc = [[NSMutableString alloc] initWithCapacity:11];
+                [the_summary_and_desc appendString:the_summary];
+                [the_summary_and_desc appendString:@"\nDescription: "];
+                [the_summary_and_desc appendString:the_description];
+                my_summary_text.text = the_summary_and_desc;   
             }
             printf("\n\n\n\n%s", [the_summary UTF8String]);
         }
@@ -50,16 +54,17 @@
 {
     
     // Initialization code //Create Header
-    UIImage *header_image = [UIImage imageNamed:@"module_header.png"];
-    module_header_background = [[UIImageView alloc] initWithImage:header_image];
-    module_header_background.frame = CGRectMake(0, 0, 310, 33);
+    UIImage *header_image           = [UIImage imageNamed:@"module_header.png"];
+    module_header_background        = [[UIImageView alloc] initWithImage:header_image];
+    module_header_background.frame  = CGRectMake(0, 0, 310, 33);
     [self addSubview:module_header_background];
     //[header_image release];
-    spam_your_friends_label = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, 200, 22)];
-    spam_your_friends_label.textColor = [UIColor colorWithRed:49.0/255 green:72.0/255 blue:106.0/255 alpha:1];
+    
+    spam_your_friends_label                 = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, 200, 22)];
+    spam_your_friends_label.textColor       = [UIColor colorWithRed:49.0/255 green:72.0/255 blue:106.0/255 alpha:1];
     spam_your_friends_label.backgroundColor = [UIColor clearColor];
+    spam_your_friends_label.text            = @"Company Summary and Description";
     [spam_your_friends_label setFont:[UIFont fontWithName:@"HelveticaNeue-Bold" size:12]];
-    spam_your_friends_label.text = @"Company Summary";
     [self addSubview:spam_your_friends_label];
     
     //Create Row 1

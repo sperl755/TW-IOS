@@ -26,16 +26,18 @@
         header_shadow = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 10)];
         header_shadow.image = [UIImage imageNamed:@"header_shadow"];
         [self addSubview:header_shadow];
+        
         //Setup the available switch background.
         my_available_switch_background = [[UIImageView alloc] initWithFrame:CGRectMake(250, 10, 70, 60)];
         [my_available_switch_background setImage:[UIImage imageNamed:@"distance_box"]];
         [self addSubview:my_available_switch_background];
+        
         //setup company name
-        distance_from_user = [[UILabel alloc] initWithFrame:CGRectMake(my_available_switch_background.frame.origin.x, my_available_switch_background.frame.origin.y + 20, 70, 40)];
-        distance_from_user.textAlignment = UITextAlignmentCenter;
-        distance_from_user.backgroundColor = [UIColor clearColor];
-        distance_from_user.font = [UIFont fontWithName:@"HelveticaNeueLTCom-Md" size:12];
-        distance_from_user.textColor = [UIColor colorWithRed:49.0/255 green:72.0/255 blue:106.0/255 alpha:1];
+        distance_from_user                  = [[UILabel alloc] initWithFrame:CGRectMake(my_available_switch_background.frame.origin.x, my_available_switch_background.frame.origin.y + 20, 70, 40)];
+        distance_from_user.textAlignment    = UITextAlignmentCenter;
+        distance_from_user.backgroundColor  = [UIColor clearColor];
+        distance_from_user.font             = [UIFont fontWithName:@"HelveticaNeueLTCom-Md" size:12];
+        distance_from_user.textColor        = [UIColor colorWithRed:49.0/255 green:72.0/255 blue:106.0/255 alpha:1];
         
         NSMutableString *distance_text = [[NSMutableString alloc] initWithString:@"0"];
         [distance_text appendString:@" mi"];
@@ -47,24 +49,23 @@
         //setup prof pic
         my_profile_picture = [[UIImageView alloc] initWithFrame:CGRectMake(5, 14, 48, 50)];
         [self addSubview:my_profile_picture];
+        
         //Set User Profile Picture
         [my_profile_picture setImage:[UIImage imageNamed:@"default_company"]];
         
         //setup cover that makes thing nicer
-        my_profile_shiner = [UIButton buttonWithType:UIButtonTypeCustom];
+        my_profile_shiner       = [UIButton buttonWithType:UIButtonTypeCustom];
         my_profile_shiner.frame = CGRectMake(0, 9, 58, 60);
+        
         [my_profile_shiner setBackgroundImage:[UIImage imageNamed:@"profile_pic_overlay"] forState:UIControlStateNormal];
         [my_profile_shiner addTarget:self action:@selector(goToCompanyPage) forControlEvents:UIControlEventTouchUpInside];
+        
         [self addSubview:my_profile_shiner];
-        
-        
         
         //setup user name
         my_profile_name = [[UILabel alloc] initWithFrame:CGRectMake(63, 15, 100, 22)];
         my_profile_name.font = [UIFont fontWithName:@"HelveticaNeueLTCom-Md" size:12];
         [self addSubview:my_profile_name];
-        
-        
         
         //Display users display name
         my_profile_name.text = the_name;

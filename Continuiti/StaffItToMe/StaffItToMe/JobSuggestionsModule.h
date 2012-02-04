@@ -8,12 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "ASIFormDataRequest.h"
+#import "SuggestionModuleCell.h"
 @protocol JobSuggestionProtocol <NSObject>
 -(void)respondToSuggestionSelection;
 -(void)finishedLoadingSuggestedJob;
 @end
 
-@interface JobSuggestionsModule : UIView 
+@interface JobSuggestionsModule : UIView <SuggestionModuleCellProtocol>
 {
     UIImageView *module_header_background;
     UIButton *shuffle_button;
@@ -25,15 +26,11 @@
     
     //Rows Items
     int current_suggested_job_position;
-    UIImageView *job_one_picture;
-    UIImageView *job_one_overlay;
-    UILabel *job_one_name;
-    UILabel *job_one_description;
+    int index_beginning;
+    int index_end;
+    int array_size;
     
-    UIImageView *job_two_picture;
-    UIImageView *job_two_overlay;
-    UILabel *job_two_name;
-    UILabel *job_two_description;
+    NSMutableArray *cell_array;
     
     BOOL information_loaded;
 }

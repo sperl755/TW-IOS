@@ -64,35 +64,10 @@ static NSString *job_suggestion_rl = @"https://helium.staffittome.com/apis/job_s
          */
         [self setFrame:CGRectMake(5, 0, 310, 160)];
         current_suggested_job_position = 0;
+        index_beginning = 0;
+        
     }
     return self;
-}
--(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
-{
-    StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate];
-    UITouch *touch = [touches anyObject];
-    CGPoint touch_locale = [touch locationInView:self];
-    if (touch_locale.y > module_row_one_background.frame.origin.y && touch_locale.y < module_row_two_background.frame.origin.y)
-    {
-        for (int i = 0; i < app_delegate.user_state_information.my_suggested_jobs.count; i++)
-        {
-            if ([job_one_name.text isEqualToString:[[app_delegate.user_state_information.my_suggested_jobs objectAtIndex:i] title]]) {
-                app_delegate.user_state_information.current_suggested_job_in_array = i;
-                break;
-            }
-        }
-    }
-    else if (touch_locale.y > module_row_two_background.frame.origin.y)
-    {
-        for (int i = 0; i < app_delegate.user_state_information.my_suggested_jobs.count; i++)
-        {
-            if ([job_two_name.text isEqualToString:[[app_delegate.user_state_information.my_suggested_jobs objectAtIndex:i] title]]) {
-                app_delegate.user_state_information.current_suggested_job_in_array = i;
-                break;
-            }
-        }
-    }
-    [delegate respondToSuggestionSelection];
 }
 -(void)oneSelected
 {
@@ -106,139 +81,82 @@ static NSString *job_suggestion_rl = @"https://helium.staffittome.com/apis/job_s
 {
     StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate];
     [app_delegate.user_state_information populateSuggestedJobsArrayWithString:[request responseString]];
+    
     if (app_delegate.user_state_information.my_suggested_jobs.count < 3)
     {
         [self removeFromSuperview];
         return;
     }
-    //Create Row 1
-    //module_row_one_background = [UIButton buttonWithType:UIButtonTypeCustom];
-    //[module_row_one_background setImage:[UIImage imageNamed:@"module_row"] forState:UIControlStateNormal];
-    //[module_row_one_background addTarget:self action:@selector(oneSelected) forControlEvents:UIControlEventTouchUpInside];
-    module_row_one_background = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"module_row"]];
-    module_row_one_background.frame = CGRectMake(0, module_header_background.frame.origin.y + module_header_background.frame.size.height, 310, 42);
-    [self addSubview:module_row_one_background];
     
-    //Setup the first job suggestions information.
-    job_one_picture = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"default_company"]];
-    [job_one_picture setFrame:CGRectMake(module_row_one_background.frame.origin.x + 10, module_row_one_background.frame.origin.y + 8, 25, 25)];
-    [self addSubview:job_one_picture];
+    cell_array = [[NSMutableArray alloc] initWithCapacity:app_delegate.user_state_information.my_suggested_jobs.count];
     
-    job_one_overlay         = [[UIImageView alloc] initWithFrame:job_one_picture.frame];
-    job_one_overlay.image   = [UIImage imageNamed:@"50x50_overlay"];
-    [self addSubview:job_one_overlay];
-    
-    job_one_name                    = [[UILabel alloc] initWithFrame:CGRectMake(job_one_picture.frame.origin.x + job_one_picture.frame.size.width + 10, job_one_picture.frame.origin.y-2, 200, 20)];
-    job_one_name.backgroundColor    = [UIColor clearColor];
-    job_one_name.font               = [UIFont fontWithName:@"HelveticaNeueLTCom-Md" size:10];
-    [self addSubview:job_one_name];
-    
-    job_one_description                 = [[UILabel alloc] initWithFrame:CGRectMake(job_one_name.frame.origin.x, job_one_name.frame.origin.y + job_one_name.frame.size.height - 10, 200, 30)];
-    job_one_description.textColor       = [UIColor colorWithRed:153.0/255 green:153.0/255 blue:153.0/255 alpha:1];
-    job_one_description.backgroundColor = [UIColor clearColor];
-    job_one_description.font            = [UIFont fontWithName:@"HelveticaNeueLTCom-Md" size:9];
-    [self addSubview:job_one_description];
-    
-    
-    arrow_one       = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_following"]];
-    arrow_one.frame = CGRectMake(module_row_one_background.frame.origin.x + module_row_one_background.frame.size.width - 23.5, module_row_one_background.frame.origin.y + 15, 12,12);
-    [self addSubview:arrow_one];
-    
-    if (app_delegate.user_state_information.my_suggested_jobs.count >= 1)
-    {
-        job_one_name.text           = [[app_delegate.user_state_information.my_suggested_jobs objectAtIndex:current_suggested_job_position] title];
-        job_one_description.text    = [[app_delegate.user_state_information.my_suggested_jobs objectAtIndex:current_suggested_job_position] company];
+    if (app_delegate.user_state_information.my_suggested_jobs.count >= 4) {
+        index_end = 4;
+        array_size = 4;
     }
-    else
-    {
-        job_one_name.text           = @"";
-        job_one_description.text    = @"";
+    else {
+        index_end = app_delegate.user_state_information.my_suggested_jobs.count;
+        array_size = index_end;
     }
     
-    //Create Row 2
-    module_row_two_background       = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"module_row_last"]];
-    module_row_two_background.frame = CGRectMake(0, module_row_one_background.frame.origin.y + module_row_one_background.frame.size.height,  310, 42);
-    [self addSubview:module_row_two_background];
+    int height = module_header_background.frame.size.height + module_header_background.frame.origin.y;
     
-    [self setFrame:CGRectMake(5, 0, 310, (module_row_two_background.frame.size.height + module_row_two_background.frame.origin.y) - module_header_background.frame.origin.y)]; 
-    
-    arrow_two       = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_following"]];
-    arrow_two.frame = CGRectMake(module_row_one_background.frame.origin.x + module_row_one_background.frame.size.width - 23.5, module_row_one_background.frame.origin.y + 15 + module_row_one_background.frame.size.height,12, 12);
-    [self addSubview:arrow_two];
-    
-    //Setup the second job suggestions information.
-    job_two_picture = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"default_company"]];
-    [job_two_picture setFrame:CGRectMake(module_row_two_background.frame.origin.x + 10, module_row_two_background.frame.origin.y + 8, 25, 25)];
-    [self addSubview:job_two_picture];
-    
-    job_two_overlay         = [[UIImageView alloc] initWithFrame:job_two_picture.frame];
-    job_two_overlay.image   = [UIImage imageNamed:@"50x50_overlay"];
-    [self addSubview:job_two_overlay];
-    
-    job_two_name                    = [[UILabel alloc] initWithFrame:CGRectMake(job_two_picture.frame.origin.x + job_two_picture.frame.size.width + 10, job_two_picture.frame.origin.y-2, 200, 20)];
-    job_two_name.backgroundColor    = [UIColor clearColor];
-    job_two_name.font               = [UIFont fontWithName:@"HelveticaNeueLTCom-Md" size:10];
-    [self addSubview:job_two_name];
-    
-    job_two_description                 = [[UILabel alloc] initWithFrame:CGRectMake(job_two_name.frame.origin.x, job_two_name.frame.origin.y + job_two_name.frame.size.height - 10, 200, 30)];
-    job_two_description.backgroundColor = [UIColor clearColor];
-    job_two_description.font            = [UIFont fontWithName:@"HelveticaNeueLTCom-Md" size:9];
-    job_two_description.textColor       = [UIColor colorWithRed:153.0/255 green:153.0/255 blue:153.0/255 alpha:1];
-    [self addSubview:job_two_description];
-    
-    if (app_delegate.user_state_information.my_suggested_jobs.count >= 2)
+    for (int i = index_beginning; i < index_end; i++)
     {
-        job_two_name.text           = [[app_delegate.user_state_information.my_suggested_jobs objectAtIndex:current_suggested_job_position + 1] title];
-        job_two_description.text    = [[app_delegate.user_state_information.my_suggested_jobs objectAtIndex:current_suggested_job_position + 1] company];   
+        SuggestionModuleCell *cell  = [[SuggestionModuleCell alloc] initWithFrame:CGRectZero andJobSuggestionIndex:index_beginning + i];
+        cell.frame                  = CGRectMake(0,height, 310, 42);
+        cell.delegate = self;
+        [cell_array addObject:cell];
+        [self addSubview:cell];
+        
+        height += 42;
     }
-    else
-    {
-        job_two_name.text           = @"";
-        job_two_description.text    = @"";
-    }
+    
+    [self setFrame:CGRectMake(5, 0, 310, height)];
     information_loaded = YES;
     [delegate finishedLoadingSuggestedJob];
-    [self setFrame:CGRectMake(5, 0, 310, 160)];
+}
+-(void)respondToTouchWithIndex:(int)the_index andJobTitle:(NSString *)the_title
+{
+    StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate];
+    for (int i = 0; i < app_delegate.user_state_information.my_suggested_jobs.count; i++)
+    {
+        if ([the_title isEqualToString:[[app_delegate.user_state_information.my_suggested_jobs objectAtIndex:i] title]]) {
+            app_delegate.user_state_information.current_suggested_job_in_array = i;
+            break;
+        }
+    }
+    [delegate respondToSuggestionSelection];
 }
 -(void)scrollThroughJobs
 {
-    if (!information_loaded)
-    {
-        return;
-    }
     StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate];
-    if (app_delegate.user_state_information.my_suggested_jobs.count < 2)
+    
+    if (index_beginning + 1 >= app_delegate.user_state_information.my_suggested_jobs.count) {
+        
+        index_beginning = 0;
+        if (app_delegate.user_state_information.my_suggested_jobs.count >= 4) {
+            index_end = 4;
+        }
+        else {
+            index_end = app_delegate.user_state_information.my_suggested_jobs.count;
+        }
+    }
+    index_beginning += 1;
+    index_end += 1;
+    
+    for (int i = 0; i < array_size; i++)
     {
-        return;
-    }
-    //If there is more in the array display it.
-    if (current_suggested_job_position + 1 < app_delegate.user_state_information.my_suggested_jobs.count)
-    { 
-        current_suggested_job_position++; 
-        @try {
-            job_one_name.text = [[app_delegate.user_state_information.my_suggested_jobs objectAtIndex:current_suggested_job_position] title];
-            job_one_description.text = [[app_delegate.user_state_information.my_suggested_jobs objectAtIndex:current_suggested_job_position] company];  
-            job_two_name.text = [[app_delegate.user_state_information.my_suggested_jobs objectAtIndex:current_suggested_job_position + 1] title];
-            job_two_description.text = [[app_delegate.user_state_information.my_suggested_jobs objectAtIndex:current_suggested_job_position + 1] company]; 
-        }
-        @catch (NSException *the_e)
+        if (index_beginning + i >= app_delegate.user_state_information.my_suggested_jobs.count)
         {
-            
+            [[cell_array objectAtIndex:i] changeIndex:(index_beginning + i) - app_delegate.user_state_information.my_suggested_jobs.count];   
+        }
+        else
+        {
+            [[cell_array objectAtIndex:i] changeIndex:index_beginning + i];   
         }
     }
-    else
-    {//Else just bring it back to the beginning of the array.
-        current_suggested_job_position = 0;
-        @try {
-            job_one_name.text = [[app_delegate.user_state_information.my_suggested_jobs objectAtIndex:current_suggested_job_position] title];
-            job_one_description.text = [[app_delegate.user_state_information.my_suggested_jobs objectAtIndex:current_suggested_job_position] company];  
-            job_two_name.text = [[app_delegate.user_state_information.my_suggested_jobs objectAtIndex:current_suggested_job_position + 1] title];
-            job_two_description.text = [[app_delegate.user_state_information.my_suggested_jobs objectAtIndex:current_suggested_job_position + 1] company]; 
-        }
-        @catch (NSException *the_e) {
-            
-        } 
-    }
+    
 }
 - (void)dealloc
 {

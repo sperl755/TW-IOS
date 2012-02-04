@@ -342,6 +342,7 @@
 		46FEE55713B29F4900753CBC /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46FEE55613B29F4900753CBC /* MapKit.framework */; };
 		46FEE56313B2A10100753CBC /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46FEE56213B2A10100753CBC /* CoreLocation.framework */; };
 		46FEE56713B2A1A000753CBC /* LocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 46FEE56613B2A1A000753CBC /* LocationManager.m */; };
+		6AB3FE3D14DCFDC300EBE9CC /* SuggestionModuleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AB3FE3C14DCFDC200EBE9CC /* SuggestionModuleCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -859,6 +860,8 @@
 		46FEE56213B2A10100753CBC /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		46FEE56513B2A1A000753CBC /* LocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationManager.h; sourceTree = "<group>"; };
 		46FEE56613B2A1A000753CBC /* LocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationManager.m; sourceTree = "<group>"; };
+		6AB3FE3B14DCFDC200EBE9CC /* SuggestionModuleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SuggestionModuleCell.h; sourceTree = "<group>"; };
+		6AB3FE3C14DCFDC200EBE9CC /* SuggestionModuleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SuggestionModuleCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1091,6 +1094,8 @@
 				46598A1413FC467600C3AF1E /* SpamYourFriends.m */,
 				46598A1813FC4D2F00C3AF1E /* JobSuggestionsModule.h */,
 				46598A1913FC4D2F00C3AF1E /* JobSuggestionsModule.m */,
+				6AB3FE3B14DCFDC200EBE9CC /* SuggestionModuleCell.h */,
+				6AB3FE3C14DCFDC200EBE9CC /* SuggestionModuleCell.m */,
 			);
 			name = Modules;
 			sourceTree = "<group>";
@@ -2137,6 +2142,7 @@
 				463DB83E148D8830004B924C /* ISO8601DateFormatter.m in Sources */,
 				46AF2C761499A8AC0076DDE3 /* StaffOutHeader.m in Sources */,
 				46718D7714C2CC140053A1CA /* ApplicationDatabase.m in Sources */,
+				6AB3FE3D14DCFDC300EBE9CC /* SuggestionModuleCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

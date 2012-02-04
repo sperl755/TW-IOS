@@ -26,8 +26,9 @@
     if ((self = [super init]))
     {
         StaffItToMeAppDelegate *delegate = (StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate];
-        background = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Background.png"]];
-        background.frame = CGRectMake(0, 0, 320, 480);
+        
+        background          = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Background.png"]];
+        background.frame    = CGRectMake(0, 0, 320, 480);
         [self.view insertSubview:background atIndex:0];
         
         NSDictionary *json_job_info = [json_information JSONValue];
@@ -46,18 +47,11 @@
             }
             else
             {
-                summary = [[CompanySummary alloc] initWithSummary:@"This is an amazing and rewarding company dedicated to their customers"];     
+                summary = [[CompanySummary alloc] initWithSummary:@""];     
             }
-            if([[json_job_info_mutable objectForKey:@"company"] objectForKey:@"company_type"] == [NSNull null] || [[json_job_info_mutable objectForKey:@"company"] objectForKey:@"company_type"] == nil)
+            if ([json_job_info_mutable objectForKey:@"size"] != nil || [json_job_info_mutable objectForKey:@"company_type"] != nil)
             {
-                NSString *stringness = @"{\"company\":{\"what_we_look_for\":null,\"name\":\"PetRays\",\"size\":\"101-500\",\"created_at\":\"2011-09-12T07:35:46Z\",\"core_values\":null,\"company_url\":null,\"updated_at\":\"2011-09-12T07:35:46Z\",\"jobs_count\":1,\"id\":65,\"company_page_name\":\"PetRays\",\"user_id\":2,\"mission_philosophy\":\"No Philo\",\"company_type\":\"Technical\",\"description\":null,\"industry_id\":12}}";
-                NSDictionary *temp_dict = [stringness JSONValue];
-                NSMutableDictionary *temp_mutable = [NSMutableDictionary dictionaryWithDictionary:temp_dict];
-                basic_info = [[BasicCompanyInformation alloc] initWithMutableDictionary:temp_mutable];
-            }
-            else
-            {
-                basic_info = [[BasicCompanyInformation alloc] initWithMutableDictionary:json_job_info_mutable];
+                basic_info = [[BasicCompanyInformation alloc] initWithMutableDictionary:json_job_info_mutable];   
             }
             
         }
