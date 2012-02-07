@@ -18,20 +18,23 @@ static NSString *job_apply_address = @"https://helium.staffittome.com/apis/submi
 {
     if ((self = [super init]))
     {
-        header_shadow = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 10)];
+        header_shadow       = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 10)];
         header_shadow.image = [UIImage imageNamed:@"header_shadow"];
         [self addSubview:header_shadow];
+        
         StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*) [[UIApplication sharedApplication] delegate];
         //Setup the available switch background.
         my_available_switch_background = [[UIImageView alloc] initWithFrame:CGRectMake(250, 10, 70, 60)];
         [my_available_switch_background setImage:[UIImage imageNamed:@"distance_box"]];
         [self addSubview:my_available_switch_background];
+        
         //setup company name
-        distance_from_user = [[UILabel alloc] initWithFrame:CGRectMake(my_available_switch_background.frame.origin.x, my_available_switch_background.frame.origin.y + 20, 70, 40)];
-        distance_from_user.textAlignment = UITextAlignmentCenter;
-        distance_from_user.backgroundColor = [UIColor clearColor];
-        distance_from_user.font = [UIFont fontWithName:@"HelveticaNeueLTCom-Md" size:12];
-        distance_from_user.textColor = [UIColor colorWithRed:49.0/255 green:72.0/255 blue:106.0/255 alpha:1];
+        distance_from_user                  = [[UILabel alloc] initWithFrame:CGRectMake(my_available_switch_background.frame.origin.x, my_available_switch_background.frame.origin.y + 20, 70, 40)];
+        distance_from_user.textAlignment    = UITextAlignmentCenter;
+        distance_from_user.backgroundColor  = [UIColor clearColor];
+        distance_from_user.font             = [UIFont fontWithName:@"HelveticaNeueLTCom-Md" size:12];
+        distance_from_user.textColor        = [UIColor colorWithRed:49.0/255 green:72.0/255 blue:106.0/255 alpha:1];
+        
         int distance_text_user = (int)[[app_delegate.user_state_information.my_suggested_jobs objectAtIndex:app_delegate.user_state_information.current_suggested_job_in_array] job_distance];
         NSMutableString *distance_text = [[NSMutableString alloc] initWithString:[NSString stringWithFormat:@"%d", distance_text_user]];
         [distance_text appendString:@" mi"];

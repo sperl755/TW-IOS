@@ -24,10 +24,6 @@
     if ((self = [super init]))
     {
         //Create Header
-        if (the_experiences.count < 1)
-        {
-            return self;
-        }
         UIImage *header_image = [UIImage imageNamed:@"module_header.png"];
         module_header_background = [[UIImageView alloc] initWithImage:header_image];
         module_header_background.frame = CGRectMake(5, 0, 310, 33);
@@ -45,10 +41,10 @@
         
         if (the_experiences.count < 1)
         {
-            /*JobDisplayCell *no_info = [[JobDisplayCell alloc] initWithFrame:CGRectMake(0, 0, 0, 0) pictureURL:@"" name:@"" description:@"Part-Time / Tech" detail:@"9 years"];
+            JobDisplayCell *no_info = [[JobDisplayCell alloc] initWithFrame:CGRectMake(0, 0, 0, 0) pictureURL:@"" name:@"Not Available" description:@"" detail:@""];
             [no_info removeArrow];
             [self addSubview:no_info];
-            no_info.frame = CGRectMake(5, module_header_background.frame.origin.y + module_header_background.frame.size.height, 310, 33);*/
+            no_info.frame = CGRectMake(5, module_header_background.frame.origin.y + module_header_background.frame.size.height, 310, 33);
             [self setFrame:CGRectMake(0, 0, 310, 77)];
         }
         else

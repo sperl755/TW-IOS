@@ -40,40 +40,46 @@
         
         //Create user Summary
         user_summary_text = [[UITextView alloc] init];
-        if (the_string == nil || the_string == [NSNull null] || the_string.length < 15)
+        if (the_string == nil || the_string == [NSNull null])
         {
-            user_summary_text.text = @"";
-            [module_header_background removeFromSuperview];
-            [spam_your_friends_label removeFromSuperview];
-            return self;
+            user_summary_text.text = @"Not Available\n";
+            //adjust the label the the new height.
+            //CGRect newFrame = user_summary_text.frame;
+            //newFrame.size.height = expectedLabelSize.height;
+            //user_summary_text.frame = newFrame;
+            module_row_one_background.frame = CGRectMake(0, module_header_background.frame.origin.y + module_header_background.frame.size.height, 310, 42);
+            [self addSubview:module_row_one_background];
+            
+            user_summary_text.frame = CGRectMake(0, module_header_background.frame.origin.y + module_header_background.frame.size.height, 310, 42);
+            [self addSubview:user_summary_text];
         }
         else
         {
             user_summary_text.text              = the_string;
-            user_summary_text.textColor         = [UIColor colorWithRed:153.0/255 green:153.0/255 blue:153.0/255 alpha:1];
-            user_summary_text.backgroundColor   = [UIColor clearColor];
-            [user_summary_text setFont:[UIFont fontWithName:@"HelveticaNeueLTCom-Md" size:9]];
-            user_summary_text.editable          = NO;
-        
             //Figure out height of summary txt
             CGSize maximumLabelSize     = CGSizeMake(300,9999);
-            CGSize expectedLabelSize    = [the_string sizeWithFont:[UIFont fontWithName:@"HelveticaNeueLTCom-Md" size:9] 
-                                          constrainedToSize:maximumLabelSize 
-                                              lineBreakMode:UILineBreakModeWordWrap]; 
-        
+            CGSize expectedLabelSize    = [user_summary_text.text sizeWithFont:[UIFont fontWithName:@"HelveticaNeueLTCom-Md" size:9] 
+                                                             constrainedToSize:maximumLabelSize 
+                                                                 lineBreakMode:UILineBreakModeWordWrap]; 
+            
             //adjust the label the the new height.
             //CGRect newFrame = user_summary_text.frame;
             //newFrame.size.height = expectedLabelSize.height;
             //user_summary_text.frame = newFrame;
             module_row_one_background.frame = CGRectMake(0, module_header_background.frame.origin.y + module_header_background.frame.size.height, 310, expectedLabelSize.height);
             [self addSubview:module_row_one_background];
-        
+            
             user_summary_text.frame = CGRectMake(0, module_header_background.frame.origin.y + module_header_background.frame.size.height, 310, expectedLabelSize.height);
             [self addSubview:user_summary_text];
-        
-            //set The frame of this module.
-            [self setFrame:CGRectMake(5, 0, 310, (module_row_one_background.frame.origin.y + module_row_one_background.frame.size.height) - module_header_background.frame.origin.y)];
         }
+        user_summary_text.textColor         = [UIColor colorWithRed:153.0/255 green:153.0/255 blue:153.0/255 alpha:1];
+        user_summary_text.backgroundColor   = [UIColor clearColor];
+        [user_summary_text setFont:[UIFont fontWithName:@"HelveticaNeueLTCom-Md" size:9]];
+        user_summary_text.editable          = NO;
+        
+        
+        //set The frame of this module.
+        [self setFrame:CGRectMake(5, 0, 310, (module_row_one_background.frame.origin.y + module_row_one_background.frame.size.height) - module_header_background.frame.origin.y)];
     }
     return self;
 }

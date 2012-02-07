@@ -41,10 +41,6 @@ static NSString *capabilities = @"http://helium.staffittome.com/apis/capability_
     if ((self = [super init]))
     {
         //Create Header
-        if (the_capabilities.count < 1)
-        {
-            return self;
-        }
         UIImage *header_image = [UIImage imageNamed:@"module_header.png"];
         module_header_background = [[UIImageView alloc] initWithImage:header_image];
         module_header_background.frame = CGRectMake(5, 0, 310, 33);
@@ -62,7 +58,7 @@ static NSString *capabilities = @"http://helium.staffittome.com/apis/capability_
         
         if (the_capabilities.count < 1)
         {
-            JobDisplayCell *no_info = [[JobDisplayCell alloc] initWithFrame:CGRectMake(0, 0, 0, 0) pictureURL:@"" name:@"Add a Capability" description:@"" detail:@""];
+            JobDisplayCell *no_info = [[JobDisplayCell alloc] initWithFrame:CGRectMake(0, 0, 0, 0) pictureURL:@"" name:@"Not Available" description:@"" detail:@""];
             [no_info removeArrow];
             [self addSubview:no_info];
     

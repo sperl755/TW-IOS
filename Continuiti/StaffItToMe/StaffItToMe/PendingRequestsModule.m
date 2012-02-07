@@ -47,11 +47,6 @@
 {
     NSArray *first_level = [[request responseString] JSONValue];
     printf("\n\nProposals: %s\n\n", [[request responseString] UTF8String]);
-    //Check to make sure there are proposals
-    if (first_level.count < 1 )
-    {
-        return;
-    }
     //Create Header First
     UIImage *header_image           = [UIImage imageNamed:@"module_header.png"];
     module_header_background        = [[UIImageView alloc] initWithImage:header_image];
@@ -73,6 +68,20 @@
     
     
     int height = 0;
+    //Check to make sure there are proposals
+    if (first_level.count < 1 )
+    {
+        JobDisplayCell *no_info = [[JobDisplayCell alloc] initWithFrame:CGRectMake(0, 0, 0, 0) pictureURL:@"" name:@"Not Available" description:@"" detail:@""];
+        //Detail = [[the_capabilities objectAtIndex:i] objectForKey:@"inclusive"]
+        [no_info removeArrow];
+        
+        [no_info setBackgroundImageToModuleRowLast];
+        
+        [self addSubview:no_info];
+        no_info.frame = CGRectMake(5, (module_header_background.frame.origin.y + module_header_background.frame.size.height), 310, 33);
+        height+= 42;
+    }
+    
     for (int i = 0; i < first_level.count; i++)
     {
         JobDisplayCell *no_info = [[JobDisplayCell alloc] initWithFrame:CGRectMake(0, 0, 0, 0) pictureURL:@"" name:[[[first_level objectAtIndex:i] objectForKey:@"proposal"] objectForKey:@"title"] description:[[[first_level objectAtIndex:i] objectForKey:@"proposal"] objectForKey:@"description_of_service"] detail:@""];

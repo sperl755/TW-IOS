@@ -18,8 +18,8 @@
 {
     if ((self = [super init]))
     {
-        StaffItToMeAppDelegate *delegate = (StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate];
-        array_position = delegate.user_state_information.current_job_in_array;
+        StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate];
+        array_position = app_delegate.user_state_information.current_job_in_array;
         background = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Background.png"]];
         background.frame = CGRectMake(0, 0, 320, 480);
         [self.view insertSubview:background atIndex:0];
@@ -36,9 +36,9 @@
         search_table.backgroundColor = [UIColor clearColor];
         [self.view addSubview:search_table];
         
-        job_summary = [[JobSummaryModule alloc] initWithSummary:[[delegate.user_state_information.job_array objectAtIndex:delegate.user_state_information.current_job_in_array] job_description]];
-        basic_info = [[BasicInfoModule alloc] initWithPos:delegate.user_state_information.current_job_in_array];
-        job_skills_module = [[JobSkillsModule alloc] initWithPos:delegate.user_state_information.current_job_in_array];
+        job_summary         = [[JobSummaryModule alloc] initWithSummary:[[app_delegate.user_state_information.job_array objectAtIndex:app_delegate.user_state_information.current_job_in_array] job_description]];
+        basic_info          = [[BasicInfoModule alloc] initWithPos:app_delegate.user_state_information.current_job_in_array];
+        job_skills_module   = [[JobSkillsModule alloc] initWithPos:app_delegate.user_state_information.current_job_in_array];
         
         module_array = [[NSArray alloc] initWithArray:[NSArray arrayWithObjects:job_summary, basic_info, job_skills_module, nil]];
         
@@ -49,8 +49,8 @@
 {
     if ((self = [super init]))
     {
-        StaffItToMeAppDelegate *delegate = (StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate];
-        array_position = delegate.user_state_information.current_job_in_array;
+        StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate];
+        array_position = app_delegate.user_state_information.current_job_in_array;
         background = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Background.png"]];
         background.frame = CGRectMake(0, 0, 320, 480);
         [self.view insertSubview:background atIndex:0];
@@ -63,19 +63,11 @@
         
         NSDictionary *json_job_info = [json_info JSONValue];
         NSMutableDictionary *json_job_info_mutable = [NSMutableDictionary dictionaryWithDictionary:json_job_info];
-        @try 
-        {
-            job_summary = [[JobSummaryModule alloc] initWithSummary:[json_job_info_mutable objectForKey:@"description"]];
-            basic_info = [[BasicInfoModule alloc] initWithMutableDictionary:json_job_info_mutable];
-            job_skills_module = [[JobSkillsModule alloc] initWithArray:[json_job_info objectForKey:@"skills"]];
-        }
-        @catch (NSException *exception) 
-        {
-            printf("ISSUE");
-            /*job_summary = [[JobSummaryModule alloc] init];
-            basic_info = [[BasicInfoModule alloc] init];
-            job_skills_module = [[JobSkillsModule alloc] init];*/
-        }
+        
+        job_summary         = [[JobSummaryModule alloc] initWithSummary:[json_job_info_mutable objectForKey:@"description"]];
+        basic_info          = [[BasicInfoModule alloc] initWithMutableDictionary:json_job_info_mutable];
+        job_skills_module   = [[JobSkillsModule alloc] initWithArray:[json_job_info objectForKey:@"skills"]];
+        
         module_array = [[NSArray alloc] initWithArray:[NSArray arrayWithObjects:job_info_header, job_summary, basic_info, job_skills_module, nil]];
         search_table = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 370)];
         search_table.delegate = self;
@@ -95,39 +87,32 @@
 {
     if ((self = [super init]))
     {
+        printf("%s", [json_info UTF8String]);
         NSDictionary *json_job_info = [json_info JSONValue];
         NSMutableDictionary *json_job_info_mutable = [NSMutableDictionary dictionaryWithDictionary:json_job_info];
-        StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate];
-        array_position = app_delegate.user_state_information.current_suggested_job_in_array;
-        background = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Background.png"]];
-        background.frame = CGRectMake(0, 0, 320, 480);
+        
+        StaffItToMeAppDelegate *app_delegate    = (StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate];
+        array_position                          = app_delegate.user_state_information.current_suggested_job_in_array;
+        background                              = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Background.png"]];
+        background.frame                        = CGRectMake(0, 0, 320, 480);
         [self.view insertSubview:background atIndex:0];
         
         suggested_job_info_header = [[SuggestedJobsInformationHeader alloc] initWithPos:array_position];
         [self.view addSubview:suggested_job_info_header];
         
         
+        job_summary         = [[JobSummaryModule alloc] initWithSummary:[json_job_info objectForKey:@"description"]];
+        basic_info          = [[BasicInfoModule alloc] initWithMutableDictionary:json_job_info_mutable];
+        job_skills_module   = [[JobSkillsModule alloc] initWithArray:[json_job_info objectForKey:@"skills"]];
         
-        @try 
-        {
-            job_summary = [[JobSummaryModule alloc] initWithSummary:[json_job_info objectForKey:@"description"]];
-            basic_info = [[BasicInfoModule alloc] initWithMutableDictionary:json_job_info_mutable];
-            job_skills_module = [[JobSkillsModule alloc] initWithArray:[json_job_info objectForKey:@"skills"]];
-        }
-        @catch (NSException *exception) 
-        {
-            /*job_summary = [[JobSummaryModule alloc] init];
-            basic_info = [[BasicInfoModule alloc] init];
-            job_skills_module = [[JobSkillsModule alloc] init];*/
-        }
         module_array = [[NSArray alloc] initWithArray:[NSArray arrayWithObjects:suggested_job_info_header, job_summary, basic_info, job_skills_module, nil]];
         
-        search_table = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 370)];
-        search_table.delegate = self;
-        search_table.dataSource = self;
-        search_table.allowsSelection = NO;
-        search_table.separatorColor = [UIColor clearColor];
-        search_table.backgroundColor = [UIColor clearColor];
+        search_table                    = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 370)];
+        search_table.delegate           = self;
+        search_table.dataSource         = self;
+        search_table.allowsSelection    = NO;
+        search_table.separatorColor     = [UIColor clearColor];
+        search_table.backgroundColor    = [UIColor clearColor];
         [self.view addSubview:search_table];
     }
     return self;

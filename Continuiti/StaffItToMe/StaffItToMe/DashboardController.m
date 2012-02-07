@@ -28,16 +28,19 @@ static NSString *staff_out_address = @"http://hydrogen.xen.exoware.net:3000/apis
 {
     if ((self = [super init]))
     {
-        UIImageView *nav_back = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"TopBar"]];
-        nav_back.frame = CGRectMake(0, 0, 320, 43);
-        nav_back.tag = 132;
-        UIImageView *logo = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo"]];
-        logo.frame = CGRectMake(50, 0, 200, 40);
-        logo.center = CGPointMake(320/2, logo.center.y);
-        home_screen = [[HomeScreen alloc] initWithNibName:@"HomeScreen" bundle:nil];
-        home_screen.home_screen_delegate = self;
-        nav_control = [[UINavigationController alloc] initWithRootViewController:home_screen];
-        nav_control.delegate = self;
+        UIImageView *nav_back       = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"TopBar"]];
+        nav_back.frame              = CGRectMake(0, 0, 320, 43);
+        nav_back.tag                = 132;
+        
+        UIImageView *logo           = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo"]];
+        logo.frame                  = CGRectMake(50, 0, 200, 40);
+        logo.center                 = CGPointMake(320/2, logo.center.y);
+        home_screen                         = [[HomeScreen alloc] initWithNibName:@"HomeScreen" bundle:nil];
+        home_screen.home_screen_delegate    = self;
+        
+        nav_control             = [[UINavigationController alloc] initWithRootViewController:home_screen];
+        nav_control.delegate    = self;
+        
         //This is extremely important. DO NOT CHANGE THESE LINES these are for
         //IOS 5 COMPATIBILITY ISSUES
         [nav_control.navigationBar insertSubview:nav_back atIndex:1];
@@ -49,6 +52,7 @@ static NSString *staff_out_address = @"http://hydrogen.xen.exoware.net:3000/apis
         //Create Back Button
         UIView *backButtonView = [[UIView alloc] initWithFrame:CGRectMake(5,5,50,31)];
         UIButton *myBackButton = [[UIButton buttonWithType:UIButtonTypeCustom] retain];
+        
         [myBackButton setFrame:CGRectMake(0,0,50,31)];
         [myBackButton setImage:[UIImage imageNamed:@"back_button"] forState:UIControlStateNormal];
         [myBackButton setEnabled:YES];
@@ -136,8 +140,9 @@ static NSString *staff_out_address = @"http://hydrogen.xen.exoware.net:3000/apis
     [((StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate]) displayLoadingView];
     
     NSMutableString *job_info_url = [[NSMutableString alloc] initWithString:@"https://helium.staffittome.com/apis/"];
-    int suggested_position = delegate.user_state_information.current_suggested_job_in_array;
-    int job_id = [[delegate.user_state_information.my_suggested_jobs objectAtIndex:suggested_position] job_id];
+    int suggested_position  = delegate.user_state_information.current_suggested_job_in_array;
+    int job_id              = [[delegate.user_state_information.my_suggested_jobs objectAtIndex:suggested_position] job_id];
+    
     [job_info_url appendString:[NSString stringWithFormat:@"%d", job_id]];
     [job_info_url appendString:@"/job"];
     

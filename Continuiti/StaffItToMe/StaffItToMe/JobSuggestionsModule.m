@@ -25,28 +25,6 @@ static NSString *job_suggestion_rl = @"https://helium.staffittome.com/apis/job_s
     if ((self = [super init])) {
         // Initialization code
         
-        //Create Header
-        UIImage *header_image           = [UIImage imageNamed:@"module_header.png"];
-        module_header_background        = [[UIImageView alloc] initWithImage:header_image];
-        module_header_background.frame  = CGRectMake(0, 0, 310, 32);
-        [self addSubview:module_header_background];
-        
-        //create label for this module
-        job_suggestion_label                    = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, 200, 22)];
-        job_suggestion_label.textColor          = [UIColor colorWithRed:49.0/255 green:72.0/255 blue:106.0/255 alpha:1];
-        job_suggestion_label.backgroundColor    = [UIColor clearColor];
-        job_suggestion_label.text               = @"Job Discovery";
-        job_suggestion_label.font               = [UIFont fontWithName:@"HelveticaNeue-Bold" size:12];
-        [self addSubview:job_suggestion_label];
-        
-        //Create button on far right for shuffling.
-        shuffle_button = [UIButton buttonWithType:UIButtonTypeCustom];
-        UIImage *shuffle_image = [UIImage imageNamed:@"arrows.png"];
-        [shuffle_button setImage:shuffle_image forState:UIControlStateNormal];
-        shuffle_button.frame = CGRectMake(250, 5, 50, 22);
-        [shuffle_button addTarget:self action:@selector(scrollThroughJobs) forControlEvents:UIControlEventTouchUpInside];
-        [self addSubview:shuffle_button];
-        //[shuffle_image release];
         
         StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate];
         //Perform the accessing of the server.
@@ -79,6 +57,30 @@ static NSString *job_suggestion_rl = @"https://helium.staffittome.com/apis/job_s
 }
 -(void)requestFinished:(ASIHTTPRequest *)request
 {
+    //Create Header
+    UIImage *header_image           = [UIImage imageNamed:@"module_header.png"];
+    module_header_background        = [[UIImageView alloc] initWithImage:header_image];
+    module_header_background.frame  = CGRectMake(0, 0, 310, 32);
+    [self addSubview:module_header_background];
+    
+    //create label for this module
+    job_suggestion_label                    = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, 200, 22)];
+    job_suggestion_label.textColor          = [UIColor colorWithRed:49.0/255 green:72.0/255 blue:106.0/255 alpha:1];
+    job_suggestion_label.backgroundColor    = [UIColor clearColor];
+    job_suggestion_label.text               = @"Job Discovery";
+    job_suggestion_label.font               = [UIFont fontWithName:@"HelveticaNeue-Bold" size:12];
+    [self addSubview:job_suggestion_label];
+    
+    //Create button on far right for shuffling.
+    shuffle_button = [UIButton buttonWithType:UIButtonTypeCustom];
+    UIImage *shuffle_image = [UIImage imageNamed:@"arrows.png"];
+    [shuffle_button setImage:shuffle_image forState:UIControlStateNormal];
+    shuffle_button.frame = CGRectMake(250, 5, 50, 22);
+    [shuffle_button addTarget:self action:@selector(scrollThroughJobs) forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:shuffle_button];
+    //[shuffle_image release];
+    
+    
     StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate];
     [app_delegate.user_state_information populateSuggestedJobsArrayWithString:[request responseString]];
     

@@ -41,10 +41,6 @@
     if ((self = [super init]))
     {
         //Create Header
-        if (the_experiences.count < 1)
-        {
-            return self;
-        }
         UIImage *header_image = [UIImage imageNamed:@"module_header.png"];
         module_header_background = [[UIImageView alloc] initWithImage:header_image];
         module_header_background.frame = CGRectMake(5, 0, 310, 33);
@@ -62,8 +58,19 @@
         
         if (the_experiences.count < 1)
         {
-            [self removeFromSuperview];
-            return self;
+            int height = 0;
+            NSMutableString *detail_text = [[NSMutableString alloc] initWithString:@"From Year: NA"];
+            
+            JobDisplayCell *no_info = [[JobDisplayCell alloc] initWithFrame:CGRectMake(0, 0, 0, 0) pictureURL:@"" name:@"Not Available" description:@"" detail:detail_text];
+            [no_info removeArrow];
+            
+            [no_info setBackgroundImageToModuleRowLast];
+            
+            [self addSubview:no_info];
+            no_info.frame = CGRectMake(5, (module_header_background.frame.origin.y + module_header_background.frame.size.height), 310, 33);
+            height+= 42;
+            //set The frame of this module.
+            [self setFrame:CGRectMake(0, 0, 310, module_header_background.frame.size.height + height)]; 
         }
         else
         {

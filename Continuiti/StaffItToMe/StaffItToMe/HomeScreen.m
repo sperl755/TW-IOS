@@ -95,21 +95,22 @@
     NSMutableArray *dciont = [[result objectForKey:@"friends"] objectForKey:@"data"];
     for (int i = 0; i < dciont.count; i++)
     {
-        FacebookFriend *friend = [[FacebookFriend alloc] init];
-        friend.friend_id = [[dciont objectAtIndex:i] objectForKey:@"id"];
-        friend.name = [[dciont objectAtIndex:i] objectForKey:@"name"];
+        FacebookFriend *friend  = [[FacebookFriend alloc] init];
+        friend.friend_id        = [[dciont objectAtIndex:i] objectForKey:@"id"];
+        friend.name             = [[dciont objectAtIndex:i] objectForKey:@"name"];
         [app_delegate.user_state_information.my_facebook_friends addObject:friend];
         [friend release];
     }
     
     //Reset the screen
-    im_available = YES;
-    SpamYourFriends *spam_friends = [[SpamYourFriends alloc] init];
-    JobSuggestionsModule *job_suggests = [[JobSuggestionsModule alloc] init];
-    job_suggests.delegate = self;
-    my_header = [[UserInformationHeader alloc] init];
-    my_header.delegate = self;
-    module_array = [[NSArray alloc] initWithArray:[NSArray arrayWithObjects:my_header, spam_friends, job_suggests, nil]];
+    im_available                        = YES;
+    SpamYourFriends *spam_friends       = [[SpamYourFriends alloc] init];
+    JobSuggestionsModule *job_suggests  = [[JobSuggestionsModule alloc] init];
+    job_suggests.delegate               = self;
+    my_header                           = [[UserInformationHeader alloc] init];
+    my_header.delegate                  = self;
+    module_array                        = [[NSArray alloc] initWithArray:[NSArray arrayWithObjects:my_header, spam_friends, job_suggests, nil]];
+    
     [spam_friends release];
     [job_suggests release];
 }

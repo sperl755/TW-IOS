@@ -96,15 +96,12 @@
     
     if (applied_to_job_array.count < 1)
     {
-        /*JobDisplayCell *no_info = [[JobDisplayCell alloc] initWithFrame:CGRectMake(0, 0, 0, 0) pictureURL:@"" name:@"Creative Group" description:@"Marketing Position" detail:@"1 mi"];
+        JobDisplayCell *no_info = [[JobDisplayCell alloc] initWithFrame:CGRectMake(0, 0, 0, 0) pictureURL:@"" name:@"Not available" description:@"" detail:@""];
         [no_info removeArrow];
         [self addSubview:no_info];
         no_info.frame = CGRectMake(0, header_background.frame.origin.y + header_background.frame.size.height, 310, 33);
-        [self setFrame:CGRectMake(5, 0, 310, (no_info.frame.origin.y + no_info.frame.size.height) - header_background.frame.origin.y)];*/
+        [self setFrame:CGRectMake(5, 0, 310, (no_info.frame.origin.y + no_info.frame.size.height) - header_background.frame.origin.y)];
         [header_background removeFromSuperview];
-        [my_applications_label removeFromSuperview];
-        [my_application_count_label removeFromSuperview];
-        [self removeFromSuperview];
     }
     else
     {
