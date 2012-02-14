@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "/usr/include/sqlite3.h"
 
+
 /**
 	This class is for accessing the SQL Lite database and storing information into and retrieving information from the database.
 
@@ -36,6 +37,11 @@
 -(void)insertFacebookFriend:(NSDictionary*)the_values;
 -(NSMutableArray*)getFacebookFriendFromDatabase;
 -(void)dropfacebookFriendsTable;
+
+//User Location methods
+-(void)createUserLocationInformationTable;
+-(NSMutableDictionary*)getUserLocationInformationFromDatabase;
+-(void)insertOrUpdateUserLocationInformationWithDictionary:(NSDictionary*)the_values;
 
 
 //Table Deletes

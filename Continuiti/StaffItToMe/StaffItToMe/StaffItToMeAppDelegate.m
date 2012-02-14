@@ -29,6 +29,7 @@ static NSString *staff_it_to_me_address = @"www.google.com";
 { 
     [[ApplicationDatabase sharedInstance] createUserInformationTable];
     [[ApplicationDatabase sharedInstance] createUsersFacebookFriendsTable];
+    [[ApplicationDatabase sharedInstance] createUserLocationInformationTable];
     
     //test to see whether this IOS device is even connected.
     [self connectionFunction];
@@ -38,12 +39,14 @@ static NSString *staff_it_to_me_address = @"www.google.com";
     //Checks to see if user is currently there.
     if ([[ApplicationDatabase sharedInstance] hasUserInformationTableBeenPopulated])
     {
-        user_state_information = [[USERINFORMATIONANDAPPSTATE alloc] init];
+        user_state_information  = [[USERINFORMATIONANDAPPSTATE alloc] init];
+        logged_out              = NO;
+        got_facebook_info       = YES;
         
         [user_state_information loadUserInfoFromDatabase];
         [user_state_information loadUsersFacebookFriendsFromDatabase];
-        logged_out = NO;
-        got_facebook_info = YES;
+        [user_state_information loadUserLocationFromDatabase];
+        
         //setup the login and dashboard viewcontroller.
         self.window.rootViewController = self.viewController;
         [self.window makeKeyAndVisible];

@@ -36,6 +36,9 @@
     my_table.backgroundColor = [UIColor clearColor];
     my_table.separatorColor = [UIColor clearColor];
     [self.view addSubview:my_table];
+    
+    [load_view removeFromSuperview];
+    load_view = nil;
 }
 - (void)dealloc
 {
@@ -138,6 +141,9 @@
     [request_ror setDelegate:self];
     [request_ror setPostValue:app_delegate.user_state_information.sessionKey forKey:@"session_key"];
     [request_ror startAsynchronous];
+    
+    load_view = [[LoadingView alloc] initWithFrame:CGRectMake(0, -44, 320, 480)];
+    [self.view addSubview:load_view];
 }
 -(void)refreshInbox
 {
@@ -166,6 +172,8 @@
     [request_ror setDelegate:self];
     [request_ror setPostValue:app_delegate.user_state_information.sessionKey forKey:@"session_key"];
     [request_ror startAsynchronous];
+    load_view = [[LoadingView alloc] initWithFrame:CGRectMake(0, -44, 320, 480)];
+    [self.view addSubview:load_view];
 }
 
 - (void)viewDidUnload

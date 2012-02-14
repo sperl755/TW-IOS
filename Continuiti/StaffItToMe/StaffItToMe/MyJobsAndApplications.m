@@ -26,10 +26,6 @@
     module_array = [[NSArray alloc] initWithArray:[NSArray arrayWithObjects:my_header, my_jobs_module, job_application_module, nil]];
     my_table_view.hidden = NO;
     [my_table_view reloadData];
-    refresh_header.hidden = NO;
-    [refresh_header reset];
-    my_table_view.contentOffset = CGPointMake(0, 0);
-    my_table_view.userInteractionEnabled = YES; 
     
 }
 -(void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
@@ -66,8 +62,12 @@
 -(void)reloadTableData
 {
     [my_table_view reloadData];
-    StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate];
-    [app_delegate removeLoadingViewFromWindow];
+    refresh_header.hidden = NO;
+    [refresh_header reset];
+    my_table_view.contentOffset = CGPointMake(0, 0);
+    my_table_view.userInteractionEnabled = YES; 
+    [load_view removeFromSuperview];
+    load_view = nil;
 }
 -(void)manualButtonPressedOnJobInArrayPosition:(int)the_array_position
 {
@@ -130,8 +130,8 @@
     
     [self performSelectorInBackground:@selector(finishViewDidLoad) withObject:nil];
     
-    StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate];
-    [app_delegate displayLoadingView];
+    load_view = [[LoadingView alloc] initWithFrame:CGRectMake(0, -44, 320, 480)];
+    [self.view addSubview:load_view];
     
 }
 -(void)finishViewDidLoad

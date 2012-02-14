@@ -28,6 +28,7 @@
     NSArray *module_array;
     MyJobsModule *my_jobs_module;
     PullRefreshHeader *refresh_header;
+    LoadingView *load_view;
 }
 @property (nonatomic, retain) id <JobAndApplicationProtocol> delegate;
 @end

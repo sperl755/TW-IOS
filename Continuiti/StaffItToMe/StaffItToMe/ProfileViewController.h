@@ -25,6 +25,8 @@
     UITableView *my_table_view;
     NSArray *module_array;
     PullRefreshHeader *refresh_header;
+    
+    LoadingView *load_view;
 }
 @property (nonatomic, retain) id <ProfileViewProtocol> delegate;
 

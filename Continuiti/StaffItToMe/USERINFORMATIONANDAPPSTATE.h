@@ -28,6 +28,7 @@
 /**DATABASE LOADING*/
 -(void)loadUserInfoFromDatabase;
 -(void)loadUsersFacebookFriendsFromDatabase;
+-(void)loadUserLocationFromDatabase;
 
 
 -(id)initWithCoder:(NSCoder*)aDecoder;

@@ -22,6 +22,7 @@ static NSString *GMAP_ANNOTATION_SELECTED = @"GMAP";
     is_loading = YES;
     NSMutableString *job_list_address = [NSMutableString stringWithString:@"https://helium.staffittome.com/apis/search/"];
     StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*) [[UIApplication sharedApplication] delegate];
+    
     //Acesss the server with solr parameters
     //Perform the accessing of the server.
     NSURL *url = [NSURL URLWithString:job_list_address];
@@ -40,13 +41,8 @@ static NSString *GMAP_ANNOTATION_SELECTED = @"GMAP";
     [request setTimeOutSeconds:30];
     [request setDelegate:self];
     [request startAsynchronous];
-    //show a alertview that we are accessing the credentials and talking to the server.
-    /*load_message = [[UIAlertView alloc] initWithTitle:@"Loading..." message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:nil];
-    UIActivityIndicatorView *active = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-    active.center = CGPointMake(load_message.bounds.size.width / 2, load_message.bounds.size.height - 40);
-    [active startAnimating];
-    [load_message addSubview:active];
-    [self addSubview:load_message];*/
+    
+    
     load_view = [[LoadingView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
     [load_view setMiniatureMapLoading];
     [self addSubview:load_view];
@@ -55,29 +51,32 @@ static NSString *GMAP_ANNOTATION_SELECTED = @"GMAP";
 -(void)updateCriteriaWithMapPosition
 {
     updatingWithTimer = 20;
+    
     /*
      Use the haversine formula to calculate the distance bewteen the previous center position of the map and this current one.
      */
     double earth_radius = 6371;
-    double deltaLat = (main_map_view.centerCoordinate.latitude - previous_latitude);
-    deltaLat = (deltaLat * 3.14) / 180;//Convert DeltaLat Into Radians
-    double deltaLong = (main_map_view.centerCoordinate.longitude - previous_longitude);
-    deltaLong = (deltaLong *3.14) / 180;//Convert DeltaLong Into Radians
-    double latOne = (previous_latitude * 3.14) /180;//get previous lat in radians
-    double latTwo = (main_map_view.centerCoordinate.latitude * 3.14) / 180;//Get current lat in radians
-    double a = (sin(deltaLat/2) * sin(deltaLat/2)) + (sin(deltaLong/2) * sin(deltaLong/2) * cos(latOne) * cos(latTwo));
-    double c = 2 * atan2(sqrt(a), sqrt(1-a));
+    double deltaLat     = (main_map_view.centerCoordinate.latitude - previous_latitude);
+    deltaLat            = (deltaLat * 3.14) / 180;//Convert DeltaLat Into Radians
+    double deltaLong    = (main_map_view.centerCoordinate.longitude - previous_longitude);
+    deltaLong           = (deltaLong *3.14) / 180;//Convert DeltaLong Into Radians
+    double latOne       = (previous_latitude * 3.14) /180;//get previous lat in radians
+    double latTwo       = (main_map_view.centerCoordinate.latitude * 3.14) / 180;
+    
+    //Get current lat in radians
+    double a        = (sin(deltaLat/2) * sin(deltaLat/2)) + (sin(deltaLong/2) * sin(deltaLong/2) * cos(latOne) * cos(latTwo));
+    double c        = 2 * atan2(sqrt(a), sqrt(1-a));
     double distance = earth_radius * c;
     /*
      Condition Checks to make sure we arent redundently accessing the server
      */
-    double current_delta = main_map_view.region.span.latitudeDelta;
+    double current_delta    = main_map_view.region.span.latitudeDelta;
     double delta_difference = current_delta - previous_delta;
     
     if (distance > DISTANCE_BEFORE_RELOAD)
     {
-        previous_latitude = main_map_view.centerCoordinate.latitude;
-        previous_longitude = main_map_view.centerCoordinate.longitude;
+        previous_latitude   = main_map_view.centerCoordinate.latitude;
+        previous_longitude  = main_map_view.centerCoordinate.longitude;
         [self renewMapsData];
         
     }
@@ -109,7 +108,9 @@ static NSString *GMAP_ANNOTATION_SELECTED = @"GMAP";
         CLLocationCoordinate2D coordinate = {[[table_data objectAtIndex:i] latitude], [[table_data objectAtIndex:i] longitude]};
         //Create an annotation for it with an id of the current position in the array that the job is in.
         AvailableJobsAnnotation *a_job = [[[AvailableJobsAnnotation alloc] initWithTitle:[[table_data objectAtIndex:i] title] subTitle:@"" andCoordinate:coordinate andID:[[table_data objectAtIndex:i] job_id]] retain];
+        
         printf("\n%d", a_job.pin_id);
+        
         if (coordinate.latitude == 0) {
             [a_job release];
         }
@@ -131,32 +132,35 @@ static NSString *GMAP_ANNOTATION_SELECTED = @"GMAP";
     //REallocate Map View
     main_map_view = [[MKMapView alloc] initWithFrame:CGRectMake(0, 0, 320, 380)];
     main_map_view.delegate = self;
+    
     [main_map_view addAnnotations:annotations];
     [main_map_view setRegion:beginning_region animated:NO];
     [main_map_view regionThatFits:beginning_region];
     [main_map_view setCenterCoordinate:beginning_region.center animated:NO];
+    
     WildcardGestureRecognizer *my_touches_ended_recognizer = [[WildcardGestureRecognizer alloc] init];
     my_touches_ended_recognizer.touchesEndedCallback = ^(NSSet *touches, UIEvent *event)
     {
         [main_map_view touchesEnded:touches withEvent:event];
-        UITouch *touch = (UITouch*) [touches anyObject];
-        CGPoint touch_location = [touch locationInView:main_map_view];
-        touch_pos = touch_location;
+        UITouch *touch          = (UITouch*) [touches anyObject];
+        CGPoint touch_location  = [touch locationInView:main_map_view];
+        touch_pos               = touch_location;
         [self updateCriteriaWithMapPosition];
     };
     my_touches_ended_recognizer.touchesMovedCallback = ^(NSSet *touches, UIEvent *event)
     {
         [main_map_view touchesMoved:touches withEvent:event];
         
-        CGPoint center_of_popover = [main_map_view convertCoordinate:current_selected_annotation_coordinate toPointToView:self];
-        popover.center = CGPointMake(center_of_popover.x, center_of_popover.y - 65);
+        CGPoint center_of_popover   = [main_map_view convertCoordinate:current_selected_annotation_coordinate toPointToView:self];
+        popover.center              = CGPointMake(center_of_popover.x, center_of_popover.y - 65);
     };
     [main_map_view addGestureRecognizer:my_touches_ended_recognizer];
     
-    previous_delta = main_map_view.region.span.latitudeDelta;
-    previous_latitude = main_map_view.centerCoordinate.latitude;
-    previous_longitude = main_map_view.centerCoordinate.longitude;
+    previous_delta      = main_map_view.region.span.latitudeDelta;
+    previous_latitude   = main_map_view.centerCoordinate.latitude;
+    previous_longitude  = main_map_view.centerCoordinate.longitude;
     [self insertSubview:main_map_view atIndex:0];
+    
    // [main_map_view addAnnotations:annotations];
     /*[main_map_view setNeedsLayout];
     [main_map_view setNeedsDisplay];
@@ -183,25 +187,32 @@ static NSString *GMAP_ANNOTATION_SELECTED = @"GMAP";
 {
     self = [super initWithFrame:frame];
     if (self) {
+        if (the_location == nil)
+        {
+            printf("Issue");
+        }
         //This variable will be set to die when the map needs to be
         //deallocated and they are changing the screen.
         need_to_die = NO;
         
-        header_shadow = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 10)];
+        header_shadow       = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 10)];
         header_shadow.image = [UIImage imageNamed:@"header_shadow"];
         [self addSubview:header_shadow];
+        
         annotations = [[NSMutableArray alloc] initWithCapacity:25];
-        is_loading = NO;
+        is_loading  = NO;
+        
         //Create Table Data
-        table_data = [[NSMutableArray alloc] initWithCapacity:11]; 
-        StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*) [[UIApplication sharedApplication] delegate];
+        table_data                              = [[NSMutableArray alloc] initWithCapacity:11]; 
+        StaffItToMeAppDelegate *app_delegate    = (StaffItToMeAppDelegate*) [[UIApplication sharedApplication] delegate];
+        
         for (int i = 0; i < app_delegate.user_state_information.job_array.count; i++)
         {
             
             SmallJobs *small_jobs = [[SmallJobs alloc] init];
             
-            small_jobs.title = [[app_delegate.user_state_information.job_array objectAtIndex:i] title];
-            small_jobs.skills = [[app_delegate.user_state_information.job_array objectAtIndex:i] skills];
+            small_jobs.title    = [[app_delegate.user_state_information.job_array objectAtIndex:i] title];
+            small_jobs.skills   = [[app_delegate.user_state_information.job_array objectAtIndex:i] skills];
             small_jobs.job_id = [[app_delegate.user_state_information.job_array objectAtIndex:i] job_id];
             small_jobs.job_description = [[app_delegate.user_state_information.job_array objectAtIndex:i] job_description];
             small_jobs.user_id = [[app_delegate.user_state_information.job_array objectAtIndex:i] user_id];
@@ -224,6 +235,7 @@ static NSString *GMAP_ANNOTATION_SELECTED = @"GMAP";
         
         main_map_view = [[MKMapView alloc] initWithFrame:CGRectMake(0, 0, 320, 380)];
         main_map_view.delegate = self;
+        
         /*for (int i = 0; i < 100; i++)
         {
             CLLocationCoordinate2D coordinate = {47.3225,-122.3113889};
@@ -231,12 +243,14 @@ static NSString *GMAP_ANNOTATION_SELECTED = @"GMAP";
             AvailableJobsAnnotation *a_job = [[AvailableJobsAnnotation alloc] initWithTitle:@"" subTitle:@"" andCoordinate:coordinate andID:0];
             [main_map_view addAnnotation:a_job];
         }*/
+        
         [self addSubview:main_map_view];
         MKCoordinateRegion beginning_region;
-        beginning_region.center.latitude = the_location.coordinate.latitude;
-        beginning_region.center.longitude = the_location.coordinate.longitude;
-        beginning_region.span.latitudeDelta = 11;
-        beginning_region.span.longitudeDelta = 11;
+        beginning_region.center.latitude        = the_location.coordinate.latitude;
+        beginning_region.center.longitude       = the_location.coordinate.longitude;
+        beginning_region.span.latitudeDelta     = 11;
+        beginning_region.span.longitudeDelta    = 11;
+        
         [main_map_view setRegion:beginning_region animated:NO];
         [main_map_view regionThatFits:beginning_region];
         [main_map_view setCenterCoordinate:beginning_region.center animated:NO];
@@ -271,9 +285,9 @@ static NSString *GMAP_ANNOTATION_SELECTED = @"GMAP";
         };
         [main_map_view addGestureRecognizer:my_touches_ended_recognizer];
         
-        previous_delta = main_map_view.region.span.latitudeDelta;
-        previous_latitude = main_map_view.centerCoordinate.latitude;
-        previous_longitude = main_map_view.centerCoordinate.longitude;
+        previous_delta      = main_map_view.region.span.latitudeDelta;
+        previous_latitude   = main_map_view.centerCoordinate.latitude;
+        previous_longitude  = main_map_view.centerCoordinate.longitude;
         //renew map data
         updatingWithTimer = 20;
         [self renewMapsData];
@@ -569,15 +583,16 @@ static NSString *GMAP_ANNOTATION_SELECTED = @"GMAP";
             delegate.user_state_information.current_job_in_array = job_array_position;
         }
     }
-    current_selected_annotation_coordinate = annot_view.coordinate;
-    main_map_view.centerCoordinate = annot_view.coordinate;
-    previous_latitude = main_map_view.centerCoordinate.latitude;
-    previous_longitude = main_map_view.centerCoordinate.longitude;
-    CGPoint center_of_popover = [main_map_view convertCoordinate:annot_view.coordinate toPointToView:self];
-    popover = [[CustomGoogleMapBubble alloc] initWithFrame:CGRectMake(0, 0, 200, 70) andPos:job_array_position];
-    popover.delegate = self;
-    popover.react_to_tap = @selector(viewJob);
-    popover.center = CGPointMake(center_of_popover.x, center_of_popover.y - 65);
+    current_selected_annotation_coordinate  = annot_view.coordinate;
+    main_map_view.centerCoordinate          = annot_view.coordinate;
+    previous_latitude                       = main_map_view.centerCoordinate.latitude;
+    previous_longitude                      = main_map_view.centerCoordinate.longitude;
+    
+    CGPoint center_of_popover   = [main_map_view convertCoordinate:annot_view.coordinate toPointToView:self];
+    popover                     = [[CustomGoogleMapBubble alloc] initWithFrame:CGRectMake(0, 0, 200, 70) andPos:job_array_position];
+    popover.delegate            = self;
+    popover.react_to_tap        = @selector(viewJob);
+    popover.center              = CGPointMake(center_of_popover.x, center_of_popover.y - 65);
     [self insertSubview:popover atIndex:1];
 }
 -(void)hideAnnotation
@@ -635,13 +650,14 @@ static NSString *GMAP_ANNOTATION_SELECTED = @"GMAP";
 }
 - (void)dealloc
 {
-    [main_map_view release];
-    [load_view release];
-    [search_bar_text release];
-    [search_bar_background release];
-    [table_data removeAllObjects];
-    [table_data release];
-    [job_search_update invalidate];
+    [main_map_view          release];
+    [load_view              release];
+    [search_bar_text        release];
+    [search_bar_background  release];
+    [table_data             removeAllObjects];
+    [table_data             release];
+    [job_search_update      invalidate];
+    
     job_search_update = nil;
     [super dealloc];
 }

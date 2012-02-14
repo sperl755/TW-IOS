@@ -68,6 +68,9 @@
     refresh_header = [[PullRefreshHeader alloc] initWithFrame:CGRectMake(0, -70, 320, 70)];
     [my_table_view addSubview:refresh_header];
     
+    load_view = [[LoadingView alloc] initWithFrame:CGRectMake(0, -44, 320, 480)];
+    [self.view addSubview:load_view];
+    
 }
 -(void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
@@ -91,7 +94,9 @@
 {
     //Get the facebook friends
     StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate];
+    
     [app_delegate.user_state_information.my_facebook_friends removeAllObjects];
+    
     NSMutableArray *dciont = [[result objectForKey:@"friends"] objectForKey:@"data"];
     for (int i = 0; i < dciont.count; i++)
     {
@@ -131,10 +136,14 @@
 -(void)finishedLoadingSuggestedJob
 {
     [refresh_header reset];
+    
+    [load_view removeFromSuperview];
+    load_view = nil;
+    
     [my_table_view reloadData];
-    my_table_view.contentOffset = CGPointMake(0, 0);
-    my_table_view.userInteractionEnabled = YES; 
-    requesting = NO;
+    my_table_view.contentOffset             = CGPointMake(0, 0);
+    my_table_view.userInteractionEnabled    = YES; 
+    requesting                              = NO;
 }
 -(void)reloadTableData
 {

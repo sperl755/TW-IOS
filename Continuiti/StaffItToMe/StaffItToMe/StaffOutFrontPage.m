@@ -34,6 +34,9 @@
         [request setDelegate:self];
         [request startAsynchronous];
         reloading = NO;
+        
+        load_view = [[LoadingView alloc] initWithFrame:CGRectMake(0, -44, 320, 480)];
+        [self.view addSubview:load_view];
     }
     return self;
 }
@@ -42,10 +45,6 @@
     printf("\nThis is theuser info: %s", [[request responseString] UTF8String]);
     if (reloading)
     {
-        [refresh_header reset];
-        [table_view reloadData];
-        table_view.contentOffset = CGPointMake(0, 0);
-        table_view.userInteractionEnabled = YES; 
         reloading = NO;   
     }
     NSDictionary *response_data = [[request responseString] JSONValue];
@@ -69,7 +68,12 @@
 }
 -(void)reloadMyTableView
 {
+    [load_view removeFromSuperview];
+    load_view = nil;
+    [refresh_header reset];
     [table_view reloadData];
+    table_view.contentOffset = CGPointMake(0, 0);
+    table_view.userInteractionEnabled = YES;
 }
 //--------------TABLE VIEW METHOD TABLE VIEW METHODS TABLE VIEW METHODS-----------
 -(NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath

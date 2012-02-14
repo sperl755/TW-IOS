@@ -12,6 +12,7 @@
 #import "StaffOutHeader.h"
 #import "PullRefreshHeader.h"
 #import "ASIFormDataRequest.h"
+
 @protocol StaffOutFrontPageProtocol <NSObject>
 -(void)goToProposal;
 @end
@@ -23,6 +24,9 @@
     NSArray *module_array;
     PullRefreshHeader *refresh_header;
     BOOL reloading;
+    
+    LoadingView *load_view;
+    
 }
 -(IBAction)goToProposalPage;
 @property (nonatomic, retain) id <StaffOutFrontPageProtocol> delegate;

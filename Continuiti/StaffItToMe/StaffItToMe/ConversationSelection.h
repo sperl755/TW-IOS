@@ -19,6 +19,8 @@
     UILabel *load_message;
     UIImageView *wait_header;
     UILabel *wait_label;
+    
+    LoadingView *load_view;
 }
 -(void)refreshInbox;
 @property (nonatomic, retain) IBOutlet UITableView *my_table;

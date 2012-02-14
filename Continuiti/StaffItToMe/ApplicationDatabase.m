@@ -114,6 +114,39 @@ static ApplicationDatabase *shared = NULL;
     }
     sqlite3_finalize(table_check_statement);
 }
+
+/**
+	Sets up the users location table in the database.
+ */
+-(void)createUserLocationInformationTable
+{
+    sqlite3_stmt *table_check_statement;
+    char *user_table_check = "SELECT name FROM sqlite_master WHERE type='table' AND name='user_location';";
+    if (sqlite3_prepare_v2(database_pointer, user_table_check, strlen(user_table_check), &table_check_statement, NULL) != SQLITE_OK)
+    {
+        fprintf(stderr, "Error in retrieving users location information. Error :%s", sqlite3_errmsg(database_pointer));
+        sqlite3_free(error_message);
+        return;
+    }
+    sqlite3_step(table_check_statement);
+    
+    const char *user_location_table_name;
+    user_location_table_name = (const char*)sqlite3_column_text(table_check_statement, 0);
+    if (user_location_table_name != nil)
+    {
+        printf("%s", user_location_table_name);
+    }
+    else
+    {
+        char *create_user_location_table = "CREATE TABLE user_location (latitude VARCHAR, longitude VARCHAR)";
+        if (sqlite3_exec(database_pointer, create_user_location_table, NULL, NULL, &error_message) != SQLITE_OK)
+        {
+            fprintf(stderr, "Error in creating user location table. Error: %s", sqlite3_errmsg(database_pointer));
+            sqlite3_free(error_message);
+        }
+    }
+    sqlite3_finalize(table_check_statement);
+}
 /**
     Sets up the users_facebook_friends table for insertions later.
  */
@@ -206,6 +239,28 @@ static ApplicationDatabase *shared = NULL;
         sqlite3_free(error_message);
     }
 }
+-(void)insertIntoLocationTableUserLocationWithDictionary:(NSDictionary*)the_values
+{
+    NSString *insert_user_location_string = [NSString stringWithFormat:@"INSERT INTO user_location VALUES ('%@', '%@')", [the_values objectForKey:@"latitude"], [the_values objectForKey:@"longitude"]];
+    
+    const char *insert_location = [insert_user_location_string UTF8String];
+    if (sqlite3_exec(database_pointer, insert_location, NULL, NULL, &error_message) != SQLITE_OK) {
+        
+        fprintf(stderr, "Error in inserting user information into user_location table. Error: %s", sqlite3_errmsg(database_pointer));
+        sqlite3_free(error_message);
+    }
+}
+-(void)updateUserLocationIntoLocationTableWithDictionary:(NSDictionary*)the_values {
+     
+    NSString *update_user_location_string = [NSString stringWithFormat:@"UPDATE user_location SET latitude = '%@', longitude = '%@'", [the_values objectForKey:@"latitude"], [the_values objectForKey:@"longitude"]]; 
+    
+    const char *update_location = [update_user_location_string UTF8String];
+    if (sqlite3_exec(database_pointer, update_location, NULL, NULL, &error_message) != SQLITE_OK) {
+        
+        fprintf(stderr, "Error in inserting user information into user_location table. Error: %s", sqlite3_errmsg(database_pointer));
+        sqlite3_free(error_message);
+    }
+}
 -(void)insertOrUpdateUserInformationWithDictionary:(NSDictionary*)the_values
 {
     sqlite3_stmt *check_user_exists;
@@ -228,6 +283,31 @@ static ApplicationDatabase *shared = NULL;
         printf("%s", user_information_username);
         sqlite3_finalize(check_user_exists);
         [self insertUserInformationIntoUserInformationTableWithDictionary:the_values];
+    }
+}
+-(void)insertOrUpdateUserLocationInformationWithDictionary:(NSDictionary*)the_values
+{
+    sqlite3_stmt *check_location_exists;
+    char *location_exists_string = "SELECT * FROM user_location;";
+    if (sqlite3_prepare(database_pointer, location_exists_string, strlen(location_exists_string), &check_location_exists, NULL) != SQLITE_OK)
+    {
+        fprintf(stderr, "Error while checking if location was set. Error: %s", sqlite3_errmsg(database_pointer));
+        sqlite3_free(error_message);
+        return;
+    }
+    sqlite3_step(check_location_exists);
+    
+    const char *location_information = (const char*)sqlite3_column_text(check_location_exists, 0);
+    if (location_information != nil)
+    {
+        sqlite3_finalize(check_location_exists);
+        [self updateUserLocationIntoLocationTableWithDictionary:the_values];
+    }
+    else
+    {
+        printf("%s", location_information);
+        sqlite3_finalize(check_location_exists);
+        [self insertIntoLocationTableUserLocationWithDictionary:the_values];
     }
 }
 -(NSMutableArray*)getFacebookFriendFromDatabase
@@ -301,6 +381,27 @@ static ApplicationDatabase *shared = NULL;
     
     sqlite3_finalize(get_user_information);
     return user_information_dictionary;
+}
+-(NSMutableDictionary*)getUserLocationInformationFromDatabase
+{
+    sqlite3_stmt *get_user_location;
+    char *user_location_request = "SELECT * FROM user_location;";
+    if (sqlite3_prepare(database_pointer, user_location_request, strlen(user_location_request), &get_user_location, NULL) != SQLITE_OK)
+    {
+        fprintf(stderr, "Error while retrieving user location information: Error: %s", sqlite3_errmsg(database_pointer));
+        sqlite3_free(error_message);
+    }
+    sqlite3_step(get_user_location);
+    
+    const char *latitude    = (const char*)sqlite3_column_text(get_user_location, 0);
+    const char *longitude   = (const char*)sqlite3_column_text(get_user_location, 1);
+    
+    NSMutableDictionary *user_location_dictionary = [[NSMutableDictionary alloc] initWithCapacity:2];
+    [user_location_dictionary setObject:[NSString stringWithFormat:@"%s", latitude] forKey:@"latitude"];
+    [user_location_dictionary setObject:[NSString stringWithFormat:@"%s", longitude] forKey:@"longitude"];
+     
+     sqlite3_finalize(get_user_location);
+     return user_location_dictionary;
 }
 #pragma mark singleton_items
 /**

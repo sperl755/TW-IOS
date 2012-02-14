@@ -37,6 +37,8 @@
     PullRefreshHeader *refresh_header;
     Facebook *facebook;
     BOOL requesting;
+    
+    LoadingView *load_view;
 }
 -(IBAction)goToFriendBroadcast;
 -(IBAction)changeFacebookPeeps;

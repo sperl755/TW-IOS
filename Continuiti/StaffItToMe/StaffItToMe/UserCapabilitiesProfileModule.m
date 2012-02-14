@@ -89,22 +89,7 @@ static NSString *capabilities = @"http://helium.staffittome.com/apis/capability_
             //set The frame of this module.
             [self setFrame:CGRectMake(0, 0, 310, module_header_background.frame.size.height + height)]; 
         }
-        int user_id = app_delegate.user_state_information.my_user_info.user_id;
-        NSMutableString *url_string = [[NSMutableString alloc] initWithString:@"http://helium.staffittome.com/apis/"];
-        [url_string appendString:[NSString stringWithFormat:@"%d", user_id]];
-        [url_string appendString:@"/capability_list"];
-        //Perform the accessing of fthe server. for the user capabilities
-        NSURL *url = [NSURL URLWithString:url_string];
-        ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
-        [request setRequestMethod:@"POST"];
-        [request setPostValue:app_delegate.user_state_information.sessionKey forKey:@"session_key"];
-        printf("%s", [[NSString stringWithFormat:@"%d", user_id] UTF8String]);
-        [request setPostValue:[NSString stringWithFormat:@"%d", user_id]forKey:@"user_id"];
-        ///Finish request
-        [request setValidatesSecureCertificate:NO];
-        [request setTimeOutSeconds:30];
-        [request setDelegate:self];
-        [request startAsynchronous];
+        
         
     }
     return self;

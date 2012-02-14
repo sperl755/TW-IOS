@@ -169,24 +169,25 @@ static NSString *user_locale_address = @"https://hydrogen.xen.exoware.net:3000/a
 {
     if ((self = [super init]))
     {
-        on_my_job = NO;
-        currentTabBar = [[NSString alloc] init];
-        userName = [[NSString alloc] init];
-        sessionKey = [[NSString alloc] init];
-        industry_search_type = [[NSString alloc] initWithString:@""];
-        salary_search_type = [[NSString alloc] initWithString:@""];
-        distance_search_type = [[NSString alloc] initWithString:@""];
-        job_array = [[NSMutableArray alloc] initWithCapacity:20];
-        my_jobs = [[NSMutableArray alloc] initWithCapacity:20];
-        my_facebook_friends = [[NSMutableArray alloc] initWithCapacity:100];
-        my_inbox_messages = [[NSMutableArray alloc] initWithCapacity:100];
-        my_suggested_jobs = [[NSMutableArray alloc] initWithCapacity:100];
-        my_sent_messages = [[NSMutableArray alloc] initWithCapacity:100];
-        my_applied_to_jobs = [[NSMutableArray alloc] initWithCapacity:100];
-        my_user_info = [[UserInfo alloc] init];
-        local_manager = [[LocationManager alloc] init];
-        local_manager.delegate = self;
-        im_available = YES;
+        on_my_job               = NO;
+        currentTabBar           = [[NSString alloc] init];
+        userName                = [[NSString alloc] init];
+        sessionKey              = [[NSString alloc] init];
+        industry_search_type    = [[NSString alloc] initWithString:@""];
+        salary_search_type      = [[NSString alloc] initWithString:@""];
+        distance_search_type    = [[NSString alloc] initWithString:@""];
+        job_array               = [[NSMutableArray alloc] initWithCapacity:20];
+        my_jobs                 = [[NSMutableArray alloc] initWithCapacity:20];
+        my_facebook_friends     = [[NSMutableArray alloc] initWithCapacity:100];
+        my_inbox_messages       = [[NSMutableArray alloc] initWithCapacity:100];
+        my_suggested_jobs       = [[NSMutableArray alloc] initWithCapacity:100];
+        my_sent_messages        = [[NSMutableArray alloc] initWithCapacity:100];
+        my_applied_to_jobs      = [[NSMutableArray alloc] initWithCapacity:100];
+        my_user_info            = [[UserInfo alloc] init];
+        local_manager           = [[LocationManager alloc] init];
+        [self startUpdatingUserLocation];
+        local_manager.delegate  = self;
+        im_available            = YES;
     }
     return self;
 }
@@ -555,6 +556,12 @@ static NSString *user_locale_address = @"https://hydrogen.xen.exoware.net:3000/a
     printf("\nSession Key: %s\n", [sessionKey UTF8String]);
     
 }
+-(void)loadUserLocationFromDatabase
+{
+    NSDictionary *get_user_location_dictionary = [[ApplicationDatabase sharedInstance] getUserLocationInformationFromDatabase];
+    CLLocation *location = [[CLLocation alloc] initWithLatitude:[[get_user_location_dictionary objectForKey:@"latitude"] floatValue] longitude:[[get_user_location_dictionary objectForKey:@"longitude"] floatValue]];
+    my_user_location = [location copy];
+}
 -(void)loadUsersFacebookFriendsFromDatabase
 {
     NSMutableArray *get_facebook_friends = [[ApplicationDatabase sharedInstance] getFacebookFriendFromDatabase];
@@ -573,6 +580,15 @@ static NSString *user_locale_address = @"https://hydrogen.xen.exoware.net:3000/a
 {
     [local_manager.manager stopUpdatingLocation];
     my_user_location = [the_location copy];
+    
+    NSMutableDictionary *coordinate_dict = [[NSMutableDictionary alloc] initWithCapacity:2];
+    [coordinate_dict setObject:[NSString stringWithFormat:@"%f", the_location.coordinate.latitude] forKey:@"latitude"];
+    [coordinate_dict setObject:[NSString stringWithFormat:@"%f", the_location.coordinate.longitude] forKey:@"longitude"];
+    
+    [[ApplicationDatabase sharedInstance] insertOrUpdateUserLocationInformationWithDictionary:coordinate_dict];
+    
+    
+    
     NSURL *url = [NSURL URLWithString:user_locale_address];
     //tell the servers i am here and avialable
     ASIFormDataRequest *request_ror = [ASIFormDataRequest requestWithURL:url];
