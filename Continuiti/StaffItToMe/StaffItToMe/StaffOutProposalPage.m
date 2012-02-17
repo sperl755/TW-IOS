@@ -43,6 +43,8 @@
         hide_slider = NO;
         hide_rate_text = YES;
         
+        my_capabilities_array = [[NSMutableArray alloc] initWithArray:app_delegate.user_state_information.my_capabilities_array];
+        
         // Custom initialization
         capability = @"Choose a capability";
         module_array = [[NSArray alloc] initWithArray:[NSArray arrayWithObjects:[self getHeader],[self getCapabilityDropDown],[self getRateCell], [self getEmailCell], [self getSubjectCell], [self getMessageCell], [self getStaffOutButtonCell], nil]];
@@ -533,8 +535,30 @@
     [request_ror setValidatesSecureCertificate:NO];
     [request_ror setDelegate:self];
     [request_ror setPostValue:app_delegate.user_state_information.sessionKey forKey:@"session_key"];
-    [request_ror setPostValue:@"1" forKey:@"payment_method"];
-    [request_ror setPostValue:@"1" forKey:@"capability_id"];
+    
+    
+    NSString *int_pay_type;
+    if ([pay_type isEqualToString:@"Hourly"])
+    {
+        int_pay_type = @"1";
+    }
+    else if ([pay_type isEqualToString:@"Fixed"])
+    {
+        int_pay_type = @"2";
+    }
+    
+    [request_ror setPostValue:int_pay_type forKey:@"payment_method"];
+    
+    NSString *capability_id;
+    for (int i = 0; i < app_delegate.user_state_information.my_capabilities_array.count; i++)
+    {
+        if ([capability_txt.text isEqualToString:[[app_delegate.user_state_information.my_capabilities_array objectAtIndex:i] title]])
+        {
+            capability_id = [(Capability*)[app_delegate.user_state_information.my_capabilities_array objectAtIndex:i] capability_id];
+        }
+    }
+    
+    [request_ror setPostValue:capability_id forKey:@"capability_id"];
     [request_ror setPostValue:[NSString stringWithFormat:@"%d", per_hr] forKey:@"rate"];
     [request_ror setPostValue:email_text.text forKey:@"email"];
     [request_ror setPostValue:message_txt.text forKey:@"message"];

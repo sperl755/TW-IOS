@@ -343,6 +343,8 @@
 		46FEE56313B2A10100753CBC /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46FEE56213B2A10100753CBC /* CoreLocation.framework */; };
 		46FEE56713B2A1A000753CBC /* LocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 46FEE56613B2A1A000753CBC /* LocationManager.m */; };
 		6AB3FE3D14DCFDC300EBE9CC /* SuggestionModuleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AB3FE3C14DCFDC200EBE9CC /* SuggestionModuleCell.m */; };
+		6ADE2B1514EE044A00A85CCA /* Capability.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ADE2B1414EE044A00A85CCA /* Capability.m */; };
+		6AF62C9F14ECB53F00BF584E /* FeedService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AF62C9E14ECB53F00BF584E /* FeedService.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -862,6 +864,10 @@
 		46FEE56613B2A1A000753CBC /* LocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationManager.m; sourceTree = "<group>"; };
 		6AB3FE3B14DCFDC200EBE9CC /* SuggestionModuleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SuggestionModuleCell.h; sourceTree = "<group>"; };
 		6AB3FE3C14DCFDC200EBE9CC /* SuggestionModuleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SuggestionModuleCell.m; sourceTree = "<group>"; };
+		6ADE2B1314EE044A00A85CCA /* Capability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Capability.h; path = src/Capability.h; sourceTree = "<group>"; };
+		6ADE2B1414EE044A00A85CCA /* Capability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Capability.m; path = src/Capability.m; sourceTree = "<group>"; };
+		6AF62C9D14ECB53F00BF584E /* FeedService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FeedService.h; path = InternetServices/FeedService.h; sourceTree = "<group>"; };
+		6AF62C9E14ECB53F00BF584E /* FeedService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FeedService.m; path = InternetServices/FeedService.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -995,6 +1001,7 @@
 		464F35A513B8F0C0003E9323 /* Data Classes */ = {
 			isa = PBXGroup;
 			children = (
+				6AF62C9B14ECB50900BF584E /* InternetServices */,
 				463DB83C148D8830004B924C /* ISO8601DateFormatter.h */,
 				463DB83D148D8830004B924C /* ISO8601DateFormatter.m */,
 				46BB09B7147CC1100077320E /* CoderBreadAndButters */,
@@ -1024,6 +1031,8 @@
 				46F263201429930700348AF2 /* ASSLider.m */,
 				46718D7514C2CC140053A1CA /* ApplicationDatabase.h */,
 				46718D7614C2CC140053A1CA /* ApplicationDatabase.m */,
+				6ADE2B1314EE044A00A85CCA /* Capability.h */,
+				6ADE2B1414EE044A00A85CCA /* Capability.m */,
 			);
 			name = "Data Classes";
 			sourceTree = "<group>";
@@ -1765,6 +1774,15 @@
 			path = AnthonySierraClasses;
 			sourceTree = SOURCE_ROOT;
 		};
+		6AF62C9B14ECB50900BF584E /* InternetServices */ = {
+			isa = PBXGroup;
+			children = (
+				6AF62C9D14ECB53F00BF584E /* FeedService.h */,
+				6AF62C9E14ECB53F00BF584E /* FeedService.m */,
+			);
+			name = InternetServices;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -2143,6 +2161,8 @@
 				46AF2C761499A8AC0076DDE3 /* StaffOutHeader.m in Sources */,
 				46718D7714C2CC140053A1CA /* ApplicationDatabase.m in Sources */,
 				6AB3FE3D14DCFDC300EBE9CC /* SuggestionModuleCell.m in Sources */,
+				6AF62C9F14ECB53F00BF584E /* FeedService.m in Sources */,
+				6ADE2B1514EE044A00A85CCA /* Capability.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

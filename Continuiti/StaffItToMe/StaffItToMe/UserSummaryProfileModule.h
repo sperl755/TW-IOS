@@ -14,7 +14,7 @@
     UIImageView *module_header_background;
     UILabel *spam_your_friends_label;
     UIImageView *module_row_one_background;
-    UITextView *user_summary_text;
+    UILabel *user_summary_text;
 }
 -(id)initWithString:(NSString*)the_string;
 

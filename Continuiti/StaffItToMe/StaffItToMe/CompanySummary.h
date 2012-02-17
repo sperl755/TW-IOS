@@ -16,6 +16,7 @@
     UIImageView *module_row_one_background;
     UITextView *my_summary_text;
 }
--(id)initWithSummary:(NSString*)the_summary;
+-(id)initWithJSONDictionary:(NSDictionary*)the_json_info;
 
+-(void)setupGUI:(NSString*)the_summary;
 @end

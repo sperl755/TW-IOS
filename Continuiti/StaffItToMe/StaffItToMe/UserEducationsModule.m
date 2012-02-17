@@ -55,7 +55,7 @@
                 int from_year = [[[the_experiences objectAtIndex:i] objectForKey:@"end_year"] intValue];
                 NSMutableString *detail_text = [[NSMutableString alloc] initWithString:@"End Year: "];
                 [detail_text appendString:[NSString stringWithFormat:@"%d", from_year]];
-                JobDisplayCell *no_info = [[JobDisplayCell alloc] initWithFrame:CGRectMake(0, 0, 0, 0) pictureURL:@"" name:[[the_experiences objectAtIndex:i] objectForKey:@"major"] description:[[the_experiences objectAtIndex:i] objectForKey:@"degree"] detail:detail_text];
+                JobDisplayCell *no_info = [[JobDisplayCell alloc] initWithFrame:CGRectMake(0, 0, 0, 0) pictureURL:@"" name:[[the_experiences objectAtIndex:i] objectForKey:@"organization"] description:[[the_experiences objectAtIndex:i] objectForKey:@"degree"] detail:detail_text];
                 [no_info removeArrow];
                 
                 if (i == the_experiences.count-1)

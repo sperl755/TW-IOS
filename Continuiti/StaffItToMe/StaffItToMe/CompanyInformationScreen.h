@@ -16,6 +16,8 @@
 {
     UIImageView *background;
     CompanyHeader *company_header;
+    CompanySummary *summary;
+    BasicCompanyInformation *basic_info;
     UITableView *search_table;
     NSArray *module_array;
 }

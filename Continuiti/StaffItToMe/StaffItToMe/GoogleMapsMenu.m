@@ -15,13 +15,13 @@
 static NSString *GMAP_ANNOTATION_SELECTED = @"GMAP";
 -(void)renewMapsData
 {
+    StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*) [[UIApplication sharedApplication] delegate];
     if (is_loading)
     {
         return;
     }
     is_loading = YES;
     NSMutableString *job_list_address = [NSMutableString stringWithString:@"https://helium.staffittome.com/apis/search/"];
-    StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*) [[UIApplication sharedApplication] delegate];
     
     //Acesss the server with solr parameters
     //Perform the accessing of the server.
@@ -211,23 +211,23 @@ static NSString *GMAP_ANNOTATION_SELECTED = @"GMAP";
             
             SmallJobs *small_jobs = [[SmallJobs alloc] init];
             
-            small_jobs.title    = [[app_delegate.user_state_information.job_array objectAtIndex:i] title];
-            small_jobs.skills   = [[app_delegate.user_state_information.job_array objectAtIndex:i] skills];
-            small_jobs.job_id = [[app_delegate.user_state_information.job_array objectAtIndex:i] job_id];
-            small_jobs.job_description = [[app_delegate.user_state_information.job_array objectAtIndex:i] job_description];
-            small_jobs.user_id = [[app_delegate.user_state_information.job_array objectAtIndex:i] user_id];
-            small_jobs.created_at = [[app_delegate.user_state_information.job_array objectAtIndex:i] created_at];
-            small_jobs.job_city = [[app_delegate.user_state_information.job_array objectAtIndex:i] job_city];
-            small_jobs.job_state = [[app_delegate.user_state_information.job_array objectAtIndex:i] job_state];
-            small_jobs.job_duration = [[app_delegate.user_state_information.job_array objectAtIndex:i] job_duration];
-            small_jobs.hours_per_week = [[app_delegate.user_state_information.job_array objectAtIndex:i] hours_per_week];
-            small_jobs.task_start_date = [[app_delegate.user_state_information.job_array objectAtIndex:i] task_start_date];
-            small_jobs.task_start_time = [[app_delegate.user_state_information.job_array objectAtIndex:i] task_start_time];
-            small_jobs.company = [[app_delegate.user_state_information.job_array objectAtIndex:i] company];
-            small_jobs.company_description = [[app_delegate.user_state_information.job_array objectAtIndex:i] company_description];
-            small_jobs.compensation = [[app_delegate.user_state_information.job_array objectAtIndex:i] compensation];
-            small_jobs.latitude = [[app_delegate.user_state_information.job_array objectAtIndex:i] latitude];
-            small_jobs.longitude = [[app_delegate.user_state_information.job_array objectAtIndex:i] longitude];
+            small_jobs.title                = [[app_delegate.user_state_information.job_array objectAtIndex:i] title];
+            small_jobs.skills               = [[app_delegate.user_state_information.job_array objectAtIndex:i] skills];
+            small_jobs.job_id               = [[app_delegate.user_state_information.job_array objectAtIndex:i] job_id];
+            small_jobs.job_description      = [[app_delegate.user_state_information.job_array objectAtIndex:i] job_description];
+            small_jobs.user_id              = [[app_delegate.user_state_information.job_array objectAtIndex:i] user_id];
+            small_jobs.created_at           = [[app_delegate.user_state_information.job_array objectAtIndex:i] created_at];
+            small_jobs.job_city             = [[app_delegate.user_state_information.job_array objectAtIndex:i] job_city];
+            small_jobs.job_state            = [[app_delegate.user_state_information.job_array objectAtIndex:i] job_state];
+            small_jobs.job_duration         = [[app_delegate.user_state_information.job_array objectAtIndex:i] job_duration];
+            small_jobs.hours_per_week       = [[app_delegate.user_state_information.job_array objectAtIndex:i] hours_per_week];
+            small_jobs.task_start_date      = [[app_delegate.user_state_information.job_array objectAtIndex:i] task_start_date];
+            small_jobs.task_start_time      = [[app_delegate.user_state_information.job_array objectAtIndex:i] task_start_time];
+            small_jobs.company              = [[app_delegate.user_state_information.job_array objectAtIndex:i] company];
+            small_jobs.company_description  = [[app_delegate.user_state_information.job_array objectAtIndex:i] company_description];
+            small_jobs.compensation         = [[app_delegate.user_state_information.job_array objectAtIndex:i] compensation];
+            small_jobs.latitude             = [[app_delegate.user_state_information.job_array objectAtIndex:i] latitude];
+            small_jobs.longitude            = [[app_delegate.user_state_information.job_array objectAtIndex:i] longitude];
             
             [table_data addObject:small_jobs];
             [small_jobs release];
@@ -293,6 +293,11 @@ static NSString *GMAP_ANNOTATION_SELECTED = @"GMAP";
         [self renewMapsData];
     }
     return self;
+}
+-(void)mapView:(MKMapView *)mapView regionWillChangeAnimated:(BOOL)animated
+{
+    CGPoint center_of_popover = [main_map_view convertCoordinate:current_selected_annotation_coordinate toPointToView:self];
+    popover.center = CGPointMake(center_of_popover.x, center_of_popover.y - 65);   
 }
 -(void)clearSearchBarText
 {
@@ -433,6 +438,7 @@ static NSString *GMAP_ANNOTATION_SELECTED = @"GMAP";
 }
 -(void)mapView:(MKMapView *)mapView didDeselectAnnotationView:(MKAnnotationView *)view
 {
+    [self hideAnnotation];
     [job_description_image removeFromSuperview];
 }
 -(void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control
@@ -453,12 +459,6 @@ static NSString *GMAP_ANNOTATION_SELECTED = @"GMAP";
     load_view = [[LoadingView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
     [load_view setMiniatureMapLoading];
     [self addSubview:load_view];
-    /*load_message = [[UIAlertView alloc] initWithTitle:@"Loading..." message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:nil];
-    [load_message show];
-    UIActivityIndicatorView *active = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-    active.center = CGPointMake(load_message.bounds.size.width / 2, load_message.bounds.size.height - 40);
-    [active startAnimating];
-    [load_message addSubview:active];*/
     
     NSMutableString *job_info_url = [[NSMutableString alloc] initWithString:@"http://helium.staffittome.com/apis/"];
     [job_info_url appendString:[NSString stringWithFormat:@"%d", [[delegate.user_state_information.job_array objectAtIndex:delegate.user_state_information.current_job_in_array] job_id]]];
@@ -514,13 +514,15 @@ static NSString *GMAP_ANNOTATION_SELECTED = @"GMAP";
         printf("%s", [[request responseString] UTF8String]);
         StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*) [[UIApplication sharedApplication] delegate];
         [app_delegate.user_state_information populateJobArrayWithJSONString:[request responseString]];
+        
         if (app_delegate.user_state_information.job_array.count <= 1)
         {
             MKCoordinateRegion beginning_region;
-            beginning_region.center.latitude = main_map_view.region.center.latitude;
-            beginning_region.center.longitude = main_map_view.region.center.longitude;
-            beginning_region.span.latitudeDelta = main_map_view.region.span.latitudeDelta+.5;
-            beginning_region.span.longitudeDelta = main_map_view.region.span.longitudeDelta+.5;
+            beginning_region.center.latitude        = main_map_view.region.center.latitude;
+            beginning_region.center.longitude       = main_map_view.region.center.longitude;
+            beginning_region.span.latitudeDelta     = main_map_view.region.span.latitudeDelta+.5;
+            beginning_region.span.longitudeDelta    = main_map_view.region.span.longitudeDelta+.5;
+            
             [main_map_view setRegion:beginning_region animated:NO];
             [main_map_view regionThatFits:beginning_region];
             [main_map_view setCenterCoordinate:beginning_region.center animated:YES];
@@ -532,41 +534,27 @@ static NSString *GMAP_ANNOTATION_SELECTED = @"GMAP";
         return;
     }
 }
-/*
--(MKAnnotationView*)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation
-{
-    MKPinAnnotationView *pin = (MKPinAnnotationView*)[mapView dequeueReusableAnnotationViewWithIdentifier:@"Job"];
-    if (!pin) {
-        pin = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"Job"];
-    }
-    pin.pinColor = MKPinAnnotationColorRed;
-    pin.animatesDrop = YES;
-    pin.canShowCallout = YES;
-    pin.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
-    return pin;
-}*/
+
 -(MKAnnotationView*)mapView:(MKMapView*)mapView viewForAnnotation:(id<MKAnnotation>)annotation
 {
     MKAnnotationView *annotation_view = nil;
+    
     AvailableJobsAnnotation *annot = (AvailableJobsAnnotation*)annotation;
     printf("%s", [annot.name UTF8String]);
+    
     CustomAnnotationView *view;
             view = [[[CustomAnnotationView alloc] initWithAnnotation:annot reuseIdentifier:annot.name] autorelease];
     [view addObserver:self forKeyPath:@"selected"options:NSKeyValueObservingOptionNew context:GMAP_ANNOTATION_SELECTED];
     
-    view.image = [UIImage imageNamed:@"map_marker"];
+    view.image          = [UIImage imageNamed:@"map_marker"];
     view.canShowCallout = YES;
-    annotation_view = view;
+    annotation_view     = view;
+    
     [annotation_view setEnabled:YES];
     [annotation_view setCanShowCallout:YES];
-        //view.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
-        //UIView *aView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 30, 40)];
-       // aView.backgroundColor = [UIColor yellowColor];
     
-    //UIImageView *image = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
-    //image.image = [UIImage imageNamed:@"icon57"];
-       // view.leftCalloutAccessoryView = image;
     printf("ADDED AN ANNOTATION\n");
+    annotation_view.calloutOffset = CGPointMake(-10000, -100000);
     
     return annotation_view;
 }
@@ -601,20 +589,17 @@ static NSString *GMAP_ANNOTATION_SELECTED = @"GMAP";
 }
 -(void)viewJob
 {
-    StaffItToMeAppDelegate *delegate = (StaffItToMeAppDelegate*) [[UIApplication sharedApplication] delegate];
-    updatingWithTimer = 0;
-    //show a alertview that we are accessing the credentials and talking to the server.
-    /*load_message = [[UIAlertView alloc] initWithTitle:@"Loading..." message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:nil];
-    [load_message show];*/
+    StaffItToMeAppDelegate *delegate    = (StaffItToMeAppDelegate*) [[UIApplication sharedApplication] delegate];
+    updatingWithTimer                   = 0;
+    
     big_load_view = [[LoadingView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
     [big_load_view setMiniatureMapLoading];
+    
     big_load_view.frame = CGRectMake(popover.frame.origin.x + popover.frame.size.width - 43, popover.frame.origin.y + popover.frame.size.height - 53, 20, 20);
     [self addSubview:big_load_view];
+    
     loading_job = YES;
-    /*UIActivityIndicatorView *active = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-    active.center = CGPointMake(load_message.bounds.size.width / 2, load_message.bounds.size.height - 40);
-    [active startAnimating];
-    [load_message addSubview:active];*/
+    
     
     NSMutableString *job_info_url = [[NSMutableString alloc] initWithString:@"http://helium.staffittome.com/apis/"];
     [job_info_url appendString:[NSString stringWithFormat:@"%d", [[delegate.user_state_information.job_array objectAtIndex:delegate.user_state_information.current_job_in_array] job_id]]];

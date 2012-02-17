@@ -178,7 +178,7 @@ static NSString *login_check_address = @"http://hydrogen.xen.exoware.net:3000/ap
     CGPoint touch_locale = [touch locationInView:self];
     if (touch_locale.x > 188 && touch_locale.y > 308 && touch_locale.x < 250 && touch_locale.y < 330)
     {
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"http://helium.staffittome.com/about/termsofservice"]];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"https://helium.staffittome.com/about/termsofservice"]];
     }
 }
 

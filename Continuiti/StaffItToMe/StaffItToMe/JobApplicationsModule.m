@@ -72,16 +72,17 @@
     StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate];
     // Initialization code
     //Create Header
-    UIImage *header_image = [UIImage imageNamed:@"module_header.png"];
-    header_background = [[UIImageView alloc] initWithImage:header_image];
+    UIImage *header_image   = [UIImage imageNamed:@"module_header"];
+    header_background       = [[UIImageView alloc] initWithImage:header_image];
     header_background.frame = CGRectMake(0, 0, 310, 33);
     [self addSubview:header_background];
+    
     //Create Header Label
-    my_applications_label = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, 200, 22)];
-    my_applications_label.textColor = [UIColor colorWithRed:49.0/255 green:72.0/255 blue:106.0/255 alpha:1];
-    my_applications_label.backgroundColor = [UIColor clearColor];
+    my_applications_label                   = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, 200, 22)];
+    my_applications_label.textColor         = [UIColor colorWithRed:49.0/255 green:72.0/255 blue:106.0/255 alpha:1];
+    my_applications_label.backgroundColor   = [UIColor clearColor];
+    my_applications_label.text              = @"Job Applications";
     [my_applications_label setFont:[UIFont fontWithName:@"HelveticaNeue-Bold" size:12]];
-    my_applications_label.text = @"Job Applications";
     [self addSubview:my_applications_label];
     
     //Create Job Count Label

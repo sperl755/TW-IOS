@@ -43,6 +43,8 @@
 -(void)stopUpdatingUserLocation;
 -(void)populateMyAppliedToJobsWithString:(NSString*)the_information;
 -(void)populateMySentMessagesWithString:(NSString *)the_string;
+-(void)populateMyCapabilities:(NSArray *)the_values;
+
 @property (nonatomic, assign) NSString *currentTabBar;
 @property (nonatomic, assign) NSString *userName;
 @property (nonatomic, assign) NSString *sessionKey;
@@ -56,6 +58,7 @@
 //jobs that are currently available to them.
 //This is used on the job search tab.
 @property (nonatomic, assign) NSMutableArray *job_array;
+@property (nonatomic, assign) NSMutableArray *my_capabilities_array;
 @property (nonatomic, assign) NSUInteger current_job_in_array;
 @property (nonatomic, assign) NSUInteger current_suggested_job_in_array;
 //Array of MyJob objects which are the jobs that the user

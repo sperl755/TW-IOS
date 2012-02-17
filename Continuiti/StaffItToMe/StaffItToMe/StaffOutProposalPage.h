@@ -11,6 +11,7 @@
 #import "ASIFormDataRequest.h"
 #import "ASSLider.h"
 #import "FindRightSpotArrows.h"
+#import "Capability.h"
 
 @interface StaffOutProposalPage : UIViewController <UITextViewDelegate, UITextFieldDelegate, ASSliderProtocol, FindRightSpotArrowProtocol, UIPickerViewDelegate, UIPickerViewDataSource, UIActionSheetDelegate>
 {

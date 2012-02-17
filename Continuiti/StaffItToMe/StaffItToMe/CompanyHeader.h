@@ -15,10 +15,10 @@
     UIImageView *my_available_switch_background;
     UILabel *distance_from_user;
     UIImageView *my_profile_picture;
-    UIImageView *my_profile_shiner;
+    UIButton *my_profile_shiner;
     UILabel *my_profile_name;
     
 }
--(id)initWithName:(NSString*)the_name;
+-(id)initWithName:(NSString*)the_name andHeaderPicture:(NSString*)the_header_url;
 
 @end

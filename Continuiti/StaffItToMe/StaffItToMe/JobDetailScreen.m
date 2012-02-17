@@ -10,7 +10,6 @@
 #import "StaffItToMeAppDelegate.h"
 #import "JSON.h"
 
-
 @implementation JobDetailScreen
 @synthesize delegate;
 @synthesize array_position;
@@ -18,22 +17,22 @@
 {
     if ((self = [super init]))
     {
-        StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate];
-        array_position = app_delegate.user_state_information.current_job_in_array;
-        background = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Background.png"]];
-        background.frame = CGRectMake(0, 0, 320, 480);
+        StaffItToMeAppDelegate *app_delegate    = (StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate];
+        array_position                          = app_delegate.user_state_information.current_job_in_array;
+        background                              = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Background.png"]];
+        background.frame                        = CGRectMake(0, 0, 320, 480);
         [self.view insertSubview:background atIndex:0];
         
         job_info_header = [[JobInformationHeader alloc] initWithPos:array_position];
         [self.view addSubview:job_info_header];
         
         
-        search_table = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 290)];
-        search_table.delegate = self;
-        search_table.dataSource = self;
-        search_table.allowsSelection = NO;
-        search_table.separatorColor = [UIColor clearColor];
-        search_table.backgroundColor = [UIColor clearColor];
+        search_table                    = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 290)];
+        search_table.delegate           = self;
+        search_table.dataSource         = self;
+        search_table.allowsSelection    = NO;
+        search_table.separatorColor     = [UIColor clearColor];
+        search_table.backgroundColor    = [UIColor clearColor];
         [self.view addSubview:search_table];
         
         job_summary         = [[JobSummaryModule alloc] initWithSummary:[[app_delegate.user_state_information.job_array objectAtIndex:app_delegate.user_state_information.current_job_in_array] job_description]];
@@ -45,6 +44,7 @@
     }
     return self;
 }
+
 -(id)initWithJSONString:(NSString*)json_info
 {
     if ((self = [super init]))
@@ -55,8 +55,8 @@
         background.frame = CGRectMake(0, 0, 320, 480);
         [self.view insertSubview:background atIndex:0];
         
-        job_info_header = [[JobInformationHeader alloc] initWithPos:array_position];
-        job_info_header.delegate = self;
+        job_info_header             = [[JobInformationHeader alloc] initWithPos:array_position];
+        job_info_header.delegate    = self;
         //[self.view addSubview:job_info_header];
         
         
@@ -68,13 +68,13 @@
         basic_info          = [[BasicInfoModule alloc] initWithMutableDictionary:json_job_info_mutable];
         job_skills_module   = [[JobSkillsModule alloc] initWithArray:[json_job_info objectForKey:@"skills"]];
         
-        module_array = [[NSArray alloc] initWithArray:[NSArray arrayWithObjects:job_info_header, job_summary, basic_info, job_skills_module, nil]];
-        search_table = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 370)];
-        search_table.delegate = self;
-        search_table.dataSource = self;
-        search_table.allowsSelection = NO;
-        search_table.separatorColor = [UIColor clearColor];
-        search_table.backgroundColor = [UIColor clearColor];
+        module_array                    = [[NSArray alloc] initWithArray:[NSArray arrayWithObjects:job_info_header, job_summary, basic_info, job_skills_module, nil]];
+        search_table                    = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 370)];
+        search_table.delegate           = self;
+        search_table.dataSource         = self;
+        search_table.allowsSelection    = NO;
+        search_table.separatorColor     = [UIColor clearColor];
+        search_table.backgroundColor    = [UIColor clearColor];
         [self.view addSubview:search_table];
     }
     return self;

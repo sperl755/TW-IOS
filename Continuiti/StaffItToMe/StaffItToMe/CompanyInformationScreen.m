@@ -30,45 +30,28 @@
         background          = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Background.png"]];
         background.frame    = CGRectMake(0, 0, 320, 480);
         [self.view insertSubview:background atIndex:0];
+        printf("Company info: %s", [json_information UTF8String]);
         
         NSDictionary *json_job_info = [json_information JSONValue];
         NSMutableDictionary *json_job_info_mutable = [NSMutableDictionary dictionaryWithDictionary:json_job_info];
         
         
-        CompanySummary *summary;
-        BasicCompanyInformation *basic_info;
-        @try 
-        {
-            company_header = [[CompanyHeader alloc] initWithName:[[json_job_info_mutable objectForKey:@"company"] objectForKey:@"name"]];
-            if ([[json_job_info_mutable objectForKey:@"company"] objectForKey:@"mission_philosophy"] != nil && [[json_job_info_mutable objectForKey:@"company"] objectForKey:@"mission_philosophy"] != [NSNull null])
-            {
-                NSString *string = [[json_job_info_mutable objectForKey:@"company"] objectForKey:@"mission_philosophy"];
-                summary = [[CompanySummary alloc] initWithSummary:string];   
-            }
-            else
-            {
-                summary = [[CompanySummary alloc] initWithSummary:@""];     
-            }
-            if ([json_job_info_mutable objectForKey:@"size"] != nil || [json_job_info_mutable objectForKey:@"company_type"] != nil)
-            {
-                basic_info = [[BasicCompanyInformation alloc] initWithMutableDictionary:json_job_info_mutable];   
-            }
-            
-        }
-        @catch (NSException *exception) 
-        {
-            /*job_summary = [[JobSummaryModule alloc] init];
-             basic_info = [[BasicInfoModule alloc] init];
-             job_skills_module = [[JobSkillsModule alloc] init];*/
-        }
-        module_array = [[NSArray alloc] initWithArray:[NSArray arrayWithObjects:company_header, summary, basic_info, nil]];
+        company_header = [[CompanyHeader alloc] initWithName:[[json_job_info_mutable objectForKey:@"company"] objectForKey:@"name"] andHeaderPicture:[[json_job_info_mutable objectForKey:@"company"] objectForKey:@"company_url"]];
         
-        search_table = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 370)];
-        search_table.delegate = self;
-        search_table.dataSource = self;
-        search_table.allowsSelection = NO;
-        search_table.separatorColor = [UIColor clearColor];
-        search_table.backgroundColor = [UIColor clearColor];
+        
+        summary = [[CompanySummary alloc] initWithJSONDictionary:json_job_info_mutable];
+        
+       // summary = [[CompanySummary alloc] initWithSummary:string andDescription:[[json_job_info_mutable objectForKey:@"company"] objectForKey:@"description"]];   
+        
+        basic_info      = [[BasicCompanyInformation alloc] initWithMutableDictionary:json_job_info_mutable]; 
+        module_array    = [[NSArray alloc] initWithArray:[NSArray arrayWithObjects:company_header, summary, basic_info, nil]];
+        
+        search_table                    = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 370)];
+        search_table.delegate           = self;
+        search_table.dataSource         = self;
+        search_table.allowsSelection    = NO;
+        search_table.separatorColor     = [UIColor clearColor];
+        search_table.backgroundColor    = [UIColor clearColor];
         [self.view addSubview:search_table];
     }
     return self;

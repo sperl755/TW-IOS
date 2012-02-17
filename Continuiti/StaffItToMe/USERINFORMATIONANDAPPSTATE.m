@@ -9,6 +9,7 @@
 #import "USERINFORMATIONANDAPPSTATE.h"
 #import "ASIFormDataRequest.h"
 #import "StaffItToMeAppDelegate.h"
+#import "Capability.h"
 #define CURRENT_TAB_BAR_KEY @"current_tab_bar"
 #define USER_NAME_KEY @"User_Name"
 #define SESSION_KEY_KEY @"SessionKey"
@@ -49,6 +50,7 @@
 @synthesize picture_url;
 @synthesize my_applied_to_jobs;
 @synthesize current_suggested_job_in_array;
+@synthesize my_capabilities_array;
 static NSString *user_locale_address = @"https://hydrogen.xen.exoware.net:3000/apis/available";
 
 /**
@@ -183,6 +185,7 @@ static NSString *user_locale_address = @"https://hydrogen.xen.exoware.net:3000/a
         my_suggested_jobs       = [[NSMutableArray alloc] initWithCapacity:100];
         my_sent_messages        = [[NSMutableArray alloc] initWithCapacity:100];
         my_applied_to_jobs      = [[NSMutableArray alloc] initWithCapacity:100];
+        my_capabilities_array      = [[NSMutableArray alloc] initWithCapacity:100];
         my_user_info            = [[UserInfo alloc] init];
         local_manager           = [[LocationManager alloc] init];
         [self startUpdatingUserLocation];
@@ -508,9 +511,29 @@ static NSString *user_locale_address = @"https://hydrogen.xen.exoware.net:3000/a
         [message_header release];
     }
 }
--(void)populateUserCapabilities:(NSString*)json_information
+/**
+	Takes in an NSArray of NSDictionary holding values and populates the my_capabilities_array with Capability objects.
+ NSDIctionaryValues:
+ description
+ title
+ capability_id
+ 
+	@param the_values NSArray the array of NSDictionaries.
+ */
+-(void)populateMyCapabilities:(NSArray *)the_values
 {
-    printf("\nJSON INFORMATION ON USER CAPABILITIES STUFF: %s\n", [json_information UTF8String]);
+    [my_capabilities_array removeAllObjects];
+    for (int i = 0; i  < the_values.count; i++)
+    {
+        Capability *temp    = [[Capability alloc] init];
+        temp.title          = [[the_values objectAtIndex:i] objectForKey:@"title"];
+        temp.description    = [[the_values objectAtIndex:i] objectForKey:@"description"];
+        int temp_id         = [[[the_values objectAtIndex:i] objectForKey:@"capability_id"] intValue];
+        temp.title          = [NSString stringWithFormat:@"%d", temp_id];
+        
+        [my_capabilities_array addObject:temp];
+        [temp release];
+    }
 }
 -(void)getUserInformation:(NSString *)user_information
 {

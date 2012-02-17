@@ -36,7 +36,7 @@
         }
         if ([[the_json_info objectForKey:@"company"] objectForKey:@"company_type"] == [NSNull null] || [[the_json_info objectForKey:@"company"] objectForKey:@"company_type"] == nil)
         {
-            job_type_detail.text = @"Company_type";
+            job_type_detail.text = @"No company type";
         }
         else
         {

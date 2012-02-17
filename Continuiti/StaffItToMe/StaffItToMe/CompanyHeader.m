@@ -18,12 +18,11 @@
     }
     return self;
 }
--(id)initWithName:(NSString*)the_name
-{
+-(id)initWithName:(NSString*)the_name andHeaderPicture:(NSString*)the_header_url {
     
     if ((self = [super init]))
     {
-        header_shadow = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 10)];
+        header_shadow       = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 10)];
         header_shadow.image = [UIImage imageNamed:@"header_shadow"];
         [self addSubview:header_shadow];
         
@@ -51,24 +50,32 @@
         [self addSubview:my_profile_picture];
         
         //Set User Profile Picture
-        [my_profile_picture setImage:[UIImage imageNamed:@"default_company"]];
+        if (the_header_url.length < 10)
+        {
+            [my_profile_picture setImage:[UIImage imageNamed:@"default_company"]];   
+        }
+        else
+        {
+            NSURL* aURL                 = [NSURL URLWithString:the_header_url];
+            NSData* data                = [[NSData alloc] initWithContentsOfURL:aURL];
+            my_profile_picture.image    = [UIImage imageWithData:data];
+        }
         
         //setup cover that makes thing nicer
         my_profile_shiner       = [UIButton buttonWithType:UIButtonTypeCustom];
         my_profile_shiner.frame = CGRectMake(0, 9, 58, 60);
         
         [my_profile_shiner setBackgroundImage:[UIImage imageNamed:@"profile_pic_overlay"] forState:UIControlStateNormal];
-        [my_profile_shiner addTarget:self action:@selector(goToCompanyPage) forControlEvents:UIControlEventTouchUpInside];
         
         [self addSubview:my_profile_shiner];
         
         //setup user name
-        my_profile_name = [[UILabel alloc] initWithFrame:CGRectMake(63, 15, 100, 22)];
-        my_profile_name.font = [UIFont fontWithName:@"HelveticaNeueLTCom-Md" size:12];
+        my_profile_name         = [[UILabel alloc] initWithFrame:CGRectMake(63, 15, 100, 22)];
+        my_profile_name.font    = [UIFont fontWithName:@"HelveticaNeueLTCom-Md" size:12];
         [self addSubview:my_profile_name];
         
         //Display users display name
-        my_profile_name.text = the_name;
+        my_profile_name.text            = the_name;
         my_profile_name.backgroundColor = [UIColor clearColor];
         [self setFrame:CGRectMake(0, 0, 320, 80)];
     }
