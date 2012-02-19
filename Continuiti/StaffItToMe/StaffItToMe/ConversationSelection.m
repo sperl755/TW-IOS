@@ -29,12 +29,13 @@
     StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate];
     [load_message removeFromSuperview];
     printf("\n\n\nTHe Messages that have been sent to you : %s\n\n\n", [[request responseString] UTF8String]);
+    
     [app_delegate.user_state_information populateMyInboxWithString:[request responseString]];
-    my_table = [[UITableView alloc] initWithFrame:CGRectMake(0, 5, 320, 367)];
-    my_table.delegate = self;
-    my_table.dataSource = self;
-    my_table.backgroundColor = [UIColor clearColor];
-    my_table.separatorColor = [UIColor clearColor];
+    my_table                    = [[UITableView alloc] initWithFrame:CGRectMake(0, 5, 320, 367)];
+    my_table.delegate           = self;
+    my_table.dataSource         = self;
+    my_table.backgroundColor    = [UIColor clearColor];
+    my_table.separatorColor     = [UIColor clearColor];
     [self.view addSubview:my_table];
     
     [load_view removeFromSuperview];
@@ -82,14 +83,16 @@
     }
     if (indexPath.row == 0)
     {
-        UIView *cell_view = [[UIView alloc] initWithFrame:CGRectMake(5, 0, 310, 33)];
-        UIImage *header_image = [UIImage imageNamed:@"module_header.png"];
-        UIImageView *module_header_background = [[UIImageView alloc] initWithImage:header_image];
-        module_header_background.frame = CGRectMake(0, 0, 310, 33);
+        UIView *cell_view                       = [[UIView alloc] initWithFrame:CGRectMake(5, 0, 310, 33)];
+        UIImage *header_image                   = [UIImage imageNamed:@"module_header"];
+        UIImageView *module_header_background   = [[UIImageView alloc] initWithImage:header_image];
+        module_header_background.frame          = CGRectMake(0, 0, 310, 33);
         [cell_view addSubview:module_header_background];
+        
         //[header_image release];
-        UILabel *spam_your_friends_label = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, 200, 22)];
-        spam_your_friends_label.textColor = [UIColor colorWithRed:49.0/255 green:72.0/255 blue:106.0/255 alpha:1];
+        
+        UILabel *spam_your_friends_label        = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, 200, 22)];
+        spam_your_friends_label.textColor       = [UIColor colorWithRed:49.0/255 green:72.0/255 blue:106.0/255 alpha:1];
         spam_your_friends_label.backgroundColor = [UIColor clearColor];
         [spam_your_friends_label setFont:[UIFont fontWithName:@"HelveticaNeue-Bold" size:12]];
         spam_your_friends_label.text = @"Notifications and Inbox";
@@ -117,17 +120,18 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    UIView *cell_view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 310, 33)];
-    UIImage *header_image = [UIImage imageNamed:@"module_header.png"];
-    wait_header = [[UIImageView alloc] initWithImage:header_image];
-    wait_header.frame = CGRectMake(5, 5, 310, 33);
+    UIView *cell_view       = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 310, 33)];
+    UIImage *header_image   = [UIImage imageNamed:@"module_header.png"];
+    wait_header             = [[UIImageView alloc] initWithImage:header_image];
+    wait_header.frame       = CGRectMake(5, 5, 310, 33);
     [cell_view addSubview:wait_header];
+    
     //[header_image release];
-    wait_label = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, 200, 22)];
-    wait_label.textColor = [UIColor colorWithRed:49.0/255 green:72.0/255 blue:106.0/255 alpha:1];
-    wait_label.backgroundColor = [UIColor clearColor];
+    wait_label                  = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, 200, 22)];
+    wait_label.textColor        = [UIColor colorWithRed:49.0/255 green:72.0/255 blue:106.0/255 alpha:1];
+    wait_label.backgroundColor  = [UIColor clearColor];
+    wait_label.text             = @"Loading Your Messages";
     [wait_label setFont:[UIFont fontWithName:@"HelveticaNeue-Bold" size:12]];
-    wait_label.text = @"Loading Your Messages";
     [cell_view addSubview:wait_label];
     [self.view addSubview:cell_view];
     
@@ -148,17 +152,18 @@
 -(void)refreshInbox
 {
     [my_table removeFromSuperview];
-    UIView *cell_view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 310, 33)];
-    UIImage *header_image = [UIImage imageNamed:@"module_header.png"];
-    wait_header = [[UIImageView alloc] initWithImage:header_image];
-    wait_header.frame = CGRectMake(5, 5, 310, 33);
+    UIView *cell_view       = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 310, 33)];
+    UIImage *header_image   = [UIImage imageNamed:@"module_header.png"];
+    wait_header             = [[UIImageView alloc] initWithImage:header_image];
+    wait_header.frame       = CGRectMake(5, 5, 310, 33);
     [cell_view addSubview:wait_header];
     //[header_image release];
-    wait_label = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, 200, 22)];
-    wait_label.textColor = [UIColor colorWithRed:49.0/255 green:72.0/255 blue:106.0/255 alpha:1];
-    wait_label.backgroundColor = [UIColor clearColor];
+    
+    wait_label                  = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, 200, 22)];
+    wait_label.textColor        = [UIColor colorWithRed:49.0/255 green:72.0/255 blue:106.0/255 alpha:1];
+    wait_label.backgroundColor  = [UIColor clearColor];
+    wait_label.text             = @"Loading Your Messages";
     [wait_label setFont:[UIFont fontWithName:@"HelveticaNeue-Bold" size:12]];
-    wait_label.text = @"Loading Your Messages";
     [cell_view addSubview:wait_label];
     [self.view addSubview:cell_view];
     

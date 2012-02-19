@@ -85,6 +85,11 @@
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    //Offset the logout button more
+    if (indexPath.row == 4)
+    {
+        return [[module_array objectAtIndex:indexPath.row] frame].size.height + 15;
+    }
     return  [[module_array objectAtIndex:indexPath.row] frame].size.height + 5;
 }
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -206,13 +211,25 @@
     UserExperienceProfileModule *user_experience        = [[UserExperienceProfileModule alloc] initWithArray:experiences_array];
     UserEducationsModule *user_education                = [[UserEducationsModule alloc] initWithArray:education_array];
     
+    UIView *logout_button_view  = [[UIView alloc] initWithFrame:CGRectMake(73, 0, 93, 25.5)];
+    logout_button_view.center   = CGPointMake(320/2, logout_button_view.center.y);
     
-    logout_button                   = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    logout_button.titleLabel.text   = @"Logout";
-    logout_button.frame             = CGRectMake(5, 0, 300, 55);
-    [logout_button addTarget:self action:@selector(logUserOut) forControlEvents:UIControlEventTouchUpInside];
+    logout_button                   = [UIButton buttonWithType:UIButtonTypeCustom];
+    logout_button.frame             = CGRectMake(0, 0, 93, 25.5);
+    [logout_button addTarget:self action:@selector(logUserOut)                  forControlEvents:UIControlEventTouchUpInside];
+    [logout_button setBackgroundImage:[UIImage imageNamed:@"connections_box"]   forState:UIControlStateNormal];
+    [logout_button_view addSubview:logout_button]; 
     
-    module_array = [[NSArray alloc] initWithArray:[NSArray arrayWithObjects:my_header, user_summary, user_capabilities, user_experience, user_education, logout_button, nil]];
+    //setupButtonLabel
+    UILabel *connections_label          = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 30, 22)];
+    connections_label.text              = @"Logout";
+    connections_label.center            = CGPointMake(97/2, connections_label.center.y + 4);
+    connections_label.backgroundColor   = [UIColor clearColor];
+    connections_label.font              = [UIFont fontWithName:@"HelveticaNeueLTCom-Md" size:9];
+    connections_label.textColor         = [UIColor colorWithRed:153.0/255 green:153.0/255 blue:153.0/255 alpha:1];
+    [logout_button_view addSubview:connections_label];
+    
+    module_array = [[NSArray alloc] initWithArray:[NSArray arrayWithObjects:my_header, user_summary, user_capabilities, user_experience, user_education, logout_button_view, nil]];
     
     my_table_view.hidden = NO;
     [refresh_header reset];

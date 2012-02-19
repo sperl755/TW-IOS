@@ -38,26 +38,29 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    nav_control = [[UINavigationController alloc] initWithRootViewController:conversations];
-    UIImageView *nav_back = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"TopBar"]];
-    nav_back.frame = CGRectMake(0, 0, 320, 43);
-    nav_back.tag = 132;
-    UIImageView *logo = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo"]];
-    logo.frame = CGRectMake(50, 0, 200, 40);
-    logo.center = CGPointMake(320/2, logo.center.y);
+    nav_control                 = [[UINavigationController alloc] initWithRootViewController:conversations];
+    UIImageView *nav_back       = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"TopBar"]];
+    nav_back.frame              = CGRectMake(0, 0, 320, 43);
+    nav_back.tag                = 132;
+    UIImageView *logo           = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo"]];
+    logo.frame                  = CGRectMake(50, 0, 200, 40);
+    logo.center                 = CGPointMake(320/2, logo.center.y);
+    
     //This is extremely important. DO NOT CHANGE THESE LINES these are for
     //IOS 5 COMPATIBILITY ISSUES
     [nav_control.navigationBar insertSubview:nav_back atIndex:1];
     [nav_control.navigationBar insertSubview:logo atIndex:2];
     [self.view addSubview:nav_control.view];
+    
     // Do any additional setup after loading the view from its nib.
-    UIColor *background = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"TopBar.png"]];
-    nav_control.navigationBar.tintColor  = background;
+    UIColor *background                     = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"TopBar.png"]];
+    nav_control.navigationBar.tintColor     = background;
     [background release];
 }
 -(void)goToConversation:(int)convo_position
 { 
     StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*) [[UIApplication sharedApplication] delegate];
+    
     //show a alertview that we are accessing the credentials and talking to the server.
     load_message = [[UIAlertView alloc] initWithTitle:@"Loading..." message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:nil];
     [load_message show];
