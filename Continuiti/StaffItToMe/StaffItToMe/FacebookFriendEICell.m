@@ -86,13 +86,13 @@
 {
     if ((self = [super init]))
     {
-        facebook = [[Facebook alloc] initWithAppId:@"187212574660004"];
-        facebook.accessToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"FBAccessTokenKey"];
+        facebook                = [[Facebook alloc] initWithAppId:@"187212574660004"];
+        facebook.accessToken    = [[NSUserDefaults standardUserDefaults] objectForKey:@"FBAccessTokenKey"];
         facebook.expirationDate = [[NSUserDefaults standardUserDefaults] objectForKey:@"FBExpirationDateKey"];
         //Create back
-        UIImage *row_background = [UIImage imageNamed:@"module_row_single"];
-        UIImage *stretch_back = [row_background stretchableImageWithLeftCapWidth:(row_background.size.width/2)-1 topCapHeight:(row_background.size.height/2)-1];
-        module_row_one_background = [[UIImageView alloc] initWithImage:stretch_back];
+        UIImage *row_background         = [UIImage imageNamed:@"module_row_single"];
+        UIImage *stretch_back           = [row_background stretchableImageWithLeftCapWidth:(row_background.size.width/2)-1 topCapHeight:(row_background.size.height/2)-1];
+        module_row_one_background       = [[UIImageView alloc] initWithImage:stretch_back];
         module_row_one_background.frame = CGRectMake(0, 0, 310, 42);
         [self addSubview:module_row_one_background];
         //creat invite
@@ -116,10 +116,10 @@
         [self performSelectorInBackground:@selector(getImageForFriend) withObject:nil];
         
         //set the friend name
-        friend_one_name = [[UILabel alloc] initWithFrame:CGRectMake(module_row_one_background.frame.origin.x + 45, module_row_one_background.frame.origin.y + 8, 200, 30)];
+        friend_one_name                 = [[UILabel alloc] initWithFrame:CGRectMake(module_row_one_background.frame.origin.x + 45, module_row_one_background.frame.origin.y + 8, 140, 30)];
         friend_one_name.backgroundColor = [UIColor clearColor];
-        friend_one_name.font = [UIFont fontWithName:@"HelveticaNeueLTCom-Md" size:10];
-        friend_one_name.text = friend_name;
+        friend_one_name.font            = [UIFont fontWithName:@"HelveticaNeueLTCom-Md" size:10];
+        friend_one_name.text            = friend_name;
         [self addSubview:friend_one_name];
         //set my frame
         [self setFrame:CGRectMake(5, 5, 310, 42)];
