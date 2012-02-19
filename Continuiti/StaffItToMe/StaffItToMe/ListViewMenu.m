@@ -30,37 +30,38 @@
         
             SmallJobs *small_jobs = [[SmallJobs alloc] init];
             
-            small_jobs.title = [[app_delegate.user_state_information.job_array objectAtIndex:i] title];
-            small_jobs.skills = [[app_delegate.user_state_information.job_array objectAtIndex:i] skills];
-            small_jobs.job_id = [[app_delegate.user_state_information.job_array objectAtIndex:i] job_id];
-            small_jobs.job_description = [[app_delegate.user_state_information.job_array objectAtIndex:i] job_description];
-            small_jobs.user_id = [[app_delegate.user_state_information.job_array objectAtIndex:i] user_id];
-            small_jobs.created_at = [[app_delegate.user_state_information.job_array objectAtIndex:i] created_at];
-            small_jobs.job_city = [[app_delegate.user_state_information.job_array objectAtIndex:i] job_city];
-            small_jobs.job_state = [[app_delegate.user_state_information.job_array objectAtIndex:i] job_state];
-            small_jobs.job_duration = [[app_delegate.user_state_information.job_array objectAtIndex:i] job_duration];
-            small_jobs.hours_per_week = [[app_delegate.user_state_information.job_array objectAtIndex:i] hours_per_week];
-            small_jobs.task_start_date = [[app_delegate.user_state_information.job_array objectAtIndex:i] task_start_date];
-            small_jobs.task_start_time = [[app_delegate.user_state_information.job_array objectAtIndex:i] task_start_time];
-            small_jobs.company = [[app_delegate.user_state_information.job_array objectAtIndex:i] company];
-            small_jobs.company_description = [[app_delegate.user_state_information.job_array objectAtIndex:i] company_description];
-            small_jobs.compensation = [[app_delegate.user_state_information.job_array objectAtIndex:i] compensation];
-            small_jobs.latitude = [[app_delegate.user_state_information.job_array objectAtIndex:i] latitude];
-            small_jobs.longitude = [[app_delegate.user_state_information.job_array objectAtIndex:i] longitude];
+            small_jobs.title                = [[app_delegate.user_state_information.job_array objectAtIndex:i] title];
+            small_jobs.skills               = [[app_delegate.user_state_information.job_array objectAtIndex:i] skills];
+            small_jobs.job_id               = [[app_delegate.user_state_information.job_array objectAtIndex:i] job_id];
+            small_jobs.job_description      = [[app_delegate.user_state_information.job_array objectAtIndex:i] job_description];
+            small_jobs.user_id              = [[app_delegate.user_state_information.job_array objectAtIndex:i] user_id];
+            small_jobs.created_at           = [[app_delegate.user_state_information.job_array objectAtIndex:i] created_at];
+            small_jobs.job_city             = [[app_delegate.user_state_information.job_array objectAtIndex:i] job_city];
+            small_jobs.job_state            = [[app_delegate.user_state_information.job_array objectAtIndex:i] job_state];
+            small_jobs.job_duration         = [[app_delegate.user_state_information.job_array objectAtIndex:i] job_duration];
+            small_jobs.hours_per_week       = [[app_delegate.user_state_information.job_array objectAtIndex:i] hours_per_week];
+            small_jobs.task_start_date      = [[app_delegate.user_state_information.job_array objectAtIndex:i] task_start_date];
+            small_jobs.task_start_time      = [[app_delegate.user_state_information.job_array objectAtIndex:i] task_start_time];
+            small_jobs.company              = [[app_delegate.user_state_information.job_array objectAtIndex:i] company];
+            small_jobs.company_description  = [[app_delegate.user_state_information.job_array objectAtIndex:i] company_description];
+            small_jobs.compensation         = [[app_delegate.user_state_information.job_array objectAtIndex:i] compensation];
+            small_jobs.latitude             = [[app_delegate.user_state_information.job_array objectAtIndex:i] latitude];
+            small_jobs.longitude            = [[app_delegate.user_state_information.job_array objectAtIndex:i] longitude];
                 
             [table_data addObject:small_jobs];
             [small_jobs release];
         }
         
-        table_view = [[UITableView alloc] initWithFrame:CGRectMake(0, 5, frame.size.width, 290) style:UITableViewStylePlain];
-        table_view.dataSource = self;
+        table_view                  = [[UITableView alloc] initWithFrame:CGRectMake(0, 5, frame.size.width, 290) style:UITableViewStylePlain];
+        table_view.dataSource       = self;
+        table_view.separatorColor   = [UIColor clearColor];
+        table_view.backgroundColor  = [UIColor clearColor];
+        
         [table_view setDelegate:self];
-        table_view.separatorColor = [UIColor clearColor];
-        table_view.backgroundColor = [UIColor clearColor];
         [self addSubview:table_background];
         [self addSubview:table_view];
         
-        search_bar_background = [[UIImageView alloc] initWithFrame:CGRectMake(1, 292, 318, 43)];
+        search_bar_background       = [[UIImageView alloc] initWithFrame:CGRectMake(1, 292, 318, 43)];
         search_bar_background.image = [UIImage imageNamed:@"search_box"];
         [self addSubview:search_bar_background];
         
@@ -69,7 +70,7 @@
         search_bar_text.backgroundColor = [UIColor clearColor];
         [self addSubview:search_bar_text];
         
-        header_shadow = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 10)];
+        header_shadow       = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 10)];
         header_shadow.image = [UIImage imageNamed:@"header_shadow"];
         [self addSubview:header_shadow];
     }
@@ -128,26 +129,27 @@
     [table_data removeAllObjects];
     StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*) [[UIApplication sharedApplication] delegate];
     if (search_bar_text.text.length < 1) {
+        
         for (int i = 0; i < app_delegate.user_state_information.job_array.count; i++)
         {
                 SmallJobs *small_jobs = [[SmallJobs alloc] init];
-                small_jobs.title = [[app_delegate.user_state_information.job_array objectAtIndex:i] title];
-                small_jobs.skills = [[app_delegate.user_state_information.job_array objectAtIndex:i] skills];
-                small_jobs.job_id = [[app_delegate.user_state_information.job_array objectAtIndex:i] job_id];
-                small_jobs.job_description = [[app_delegate.user_state_information.job_array objectAtIndex:i] job_description];
-                small_jobs.user_id = [[app_delegate.user_state_information.job_array objectAtIndex:i] user_id];
-                small_jobs.created_at = [[app_delegate.user_state_information.job_array objectAtIndex:i] created_at];
-                small_jobs.job_city = [[app_delegate.user_state_information.job_array objectAtIndex:i] job_city];
-                small_jobs.job_state = [[app_delegate.user_state_information.job_array objectAtIndex:i] job_state];
-                small_jobs.job_duration = [[app_delegate.user_state_information.job_array objectAtIndex:i] job_duration];
-                small_jobs.hours_per_week = [[app_delegate.user_state_information.job_array objectAtIndex:i] hours_per_week];
-                small_jobs.task_start_date = [[app_delegate.user_state_information.job_array objectAtIndex:i] task_start_date];
-                small_jobs.task_start_time = [[app_delegate.user_state_information.job_array objectAtIndex:i] task_start_time];
-                small_jobs.company = [[app_delegate.user_state_information.job_array objectAtIndex:i] company];
-                small_jobs.company_description = [[app_delegate.user_state_information.job_array objectAtIndex:i] company_description];
-                small_jobs.compensation = [[app_delegate.user_state_information.job_array objectAtIndex:i] compensation];
-                small_jobs.latitude = [[app_delegate.user_state_information.job_array objectAtIndex:i] latitude];
-                small_jobs.longitude = [[app_delegate.user_state_information.job_array objectAtIndex:i] longitude];
+                small_jobs.title                = [[app_delegate.user_state_information.job_array objectAtIndex:i] title];
+                small_jobs.skills               = [[app_delegate.user_state_information.job_array objectAtIndex:i] skills];
+                small_jobs.job_id               = [[app_delegate.user_state_information.job_array objectAtIndex:i] job_id];
+                small_jobs.job_description      = [[app_delegate.user_state_information.job_array objectAtIndex:i] job_description];
+                small_jobs.user_id              = [[app_delegate.user_state_information.job_array objectAtIndex:i] user_id];
+                small_jobs.created_at           = [[app_delegate.user_state_information.job_array objectAtIndex:i] created_at];
+                small_jobs.job_city             = [[app_delegate.user_state_information.job_array objectAtIndex:i] job_city];
+                small_jobs.job_state            = [[app_delegate.user_state_information.job_array objectAtIndex:i] job_state];
+                small_jobs.job_duration         = [[app_delegate.user_state_information.job_array objectAtIndex:i] job_duration];
+                small_jobs.hours_per_week       = [[app_delegate.user_state_information.job_array objectAtIndex:i] hours_per_week];
+                small_jobs.task_start_date      = [[app_delegate.user_state_information.job_array objectAtIndex:i] task_start_date];
+                small_jobs.task_start_time      = [[app_delegate.user_state_information.job_array objectAtIndex:i] task_start_time];
+                small_jobs.company              = [[app_delegate.user_state_information.job_array objectAtIndex:i] company];
+                small_jobs.company_description  = [[app_delegate.user_state_information.job_array objectAtIndex:i] company_description];
+                small_jobs.compensation         = [[app_delegate.user_state_information.job_array objectAtIndex:i] compensation];
+                small_jobs.latitude             = [[app_delegate.user_state_information.job_array objectAtIndex:i] latitude];
+                small_jobs.longitude            = [[app_delegate.user_state_information.job_array objectAtIndex:i] longitude];
                 
                 [table_data addObject:small_jobs];
                 [small_jobs release];
@@ -160,23 +162,23 @@
         if ([self checkMatchItem:[[app_delegate.user_state_information.job_array objectAtIndex:i] title] withPhrase:search_bar_text.text])
         {
             SmallJobs *small_jobs = [[SmallJobs alloc] init];
-            small_jobs.title = [[app_delegate.user_state_information.job_array objectAtIndex:i] title];
-            small_jobs.skills = [[app_delegate.user_state_information.job_array objectAtIndex:i] skills];
-            small_jobs.job_id = [[app_delegate.user_state_information.job_array objectAtIndex:i] job_id];
-            small_jobs.job_description = [[app_delegate.user_state_information.job_array objectAtIndex:i] job_description];
-            small_jobs.user_id = [[app_delegate.user_state_information.job_array objectAtIndex:i] user_id];
-            small_jobs.created_at = [[app_delegate.user_state_information.job_array objectAtIndex:i] created_at];
-            small_jobs.job_city = [[app_delegate.user_state_information.job_array objectAtIndex:i] job_city];
-            small_jobs.job_state = [[app_delegate.user_state_information.job_array objectAtIndex:i] job_state];
-            small_jobs.job_duration = [[app_delegate.user_state_information.job_array objectAtIndex:i] job_duration];
-            small_jobs.hours_per_week = [[app_delegate.user_state_information.job_array objectAtIndex:i] hours_per_week];
-            small_jobs.task_start_date = [[app_delegate.user_state_information.job_array objectAtIndex:i] task_start_date];
-            small_jobs.task_start_time = [[app_delegate.user_state_information.job_array objectAtIndex:i] task_start_time];
-            small_jobs.company = [[app_delegate.user_state_information.job_array objectAtIndex:i] company];
-            small_jobs.company_description = [[app_delegate.user_state_information.job_array objectAtIndex:i] company_description];
-            small_jobs.compensation = [[app_delegate.user_state_information.job_array objectAtIndex:i] compensation];
-            small_jobs.latitude = [[app_delegate.user_state_information.job_array objectAtIndex:i] latitude];
-            small_jobs.longitude = [[app_delegate.user_state_information.job_array objectAtIndex:i] longitude];
+            small_jobs.title                    = [[app_delegate.user_state_information.job_array objectAtIndex:i] title];
+            small_jobs.skills                   = [[app_delegate.user_state_information.job_array objectAtIndex:i] skills];
+            small_jobs.job_id                   = [[app_delegate.user_state_information.job_array objectAtIndex:i] job_id];
+            small_jobs.job_description          = [[app_delegate.user_state_information.job_array objectAtIndex:i] job_description];
+            small_jobs.user_id                  = [[app_delegate.user_state_information.job_array objectAtIndex:i] user_id];
+            small_jobs.created_at               = [[app_delegate.user_state_information.job_array objectAtIndex:i] created_at];
+            small_jobs.job_city                 = [[app_delegate.user_state_information.job_array objectAtIndex:i] job_city];
+            small_jobs.job_state                = [[app_delegate.user_state_information.job_array objectAtIndex:i] job_state];
+            small_jobs.job_duration             = [[app_delegate.user_state_information.job_array objectAtIndex:i] job_duration];
+            small_jobs.hours_per_week           = [[app_delegate.user_state_information.job_array objectAtIndex:i] hours_per_week];
+            small_jobs.task_start_date          = [[app_delegate.user_state_information.job_array objectAtIndex:i] task_start_date];
+            small_jobs.task_start_time          = [[app_delegate.user_state_information.job_array objectAtIndex:i] task_start_time];
+            small_jobs.company                  = [[app_delegate.user_state_information.job_array objectAtIndex:i] company];
+            small_jobs.company_description      = [[app_delegate.user_state_information.job_array objectAtIndex:i] company_description];
+            small_jobs.compensation             = [[app_delegate.user_state_information.job_array objectAtIndex:i] compensation];
+            small_jobs.latitude                 = [[app_delegate.user_state_information.job_array objectAtIndex:i] latitude];
+            small_jobs.longitude                = [[app_delegate.user_state_information.job_array objectAtIndex:i] longitude];
             
             [table_data addObject:small_jobs];
             [small_jobs release];
@@ -188,11 +190,11 @@
 {
     if ([text isEqualToString:@"\n"])
     {
-        search_bar_text.center = CGPointMake(search_bar_text.center.x, search_bar_text.center.y + 150);
-        search_bar_background.image = [UIImage imageNamed:@"search_box"];
-        search_bar_background.center = CGPointMake(search_bar_background.center.x, search_bar_background.center.y + 150);
-        clear_text_x.center = CGPointMake(clear_text_x.center.x, clear_text_x.center.y + 150);
-        clear_text_x.hidden = YES;
+        search_bar_text.center          = CGPointMake(search_bar_text.center.x, search_bar_text.center.y + 150);
+        search_bar_background.image     = [UIImage imageNamed:@"search_box"];
+        search_bar_background.center    = CGPointMake(search_bar_background.center.x, search_bar_background.center.y + 150);
+        clear_text_x.center             = CGPointMake(clear_text_x.center.x, clear_text_x.center.y + 150);
+        clear_text_x.hidden             = YES;
         [search_bar_text resignFirstResponder];
         [self filterTable];
     }
@@ -227,9 +229,12 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     StaffItToMeAppDelegate *delegate = (StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate];
+    printf("Row: %d", indexPath.row);
+    printf("TableDataSize: %d", table_data.count);
+    printf("job array size: %d", delegate.user_state_information.job_array.count);
     for (int i = 0; i < delegate.user_state_information.job_array.count; i++)
     {
-        if ([[table_data objectAtIndex:indexPath.row] job_id] == [[delegate.user_state_information.job_array objectAtIndex:i] job_id])
+        if ([[table_data objectAtIndex:indexPath.row - 1] job_id] == [[delegate.user_state_information.job_array objectAtIndex:i] job_id])
         {
             delegate.user_state_information.current_job_in_array = i;
             break;
@@ -241,7 +246,7 @@
     [self addSubview:load_view];
     
     
-    NSMutableString *job_info_url = [[[NSMutableString alloc] initWithString:@"http://helium.staffittome.com/apis/"] autorelease];
+    NSMutableString *job_info_url = [[[NSMutableString alloc] initWithString:@"https://helium.staffittome.com/apis/"] autorelease];
     [job_info_url appendString:[NSString stringWithFormat:@"%d", [[delegate.user_state_information.job_array objectAtIndex:delegate.user_state_information.current_job_in_array] job_id]]];
     [job_info_url appendString:@"/job"];
     //Perform the accessing of the server.

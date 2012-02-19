@@ -53,7 +53,8 @@
     //Perform the accessing of fthe server.
     NSMutableString *user_information = [[NSMutableString alloc] initWithString:@"https://helium.staffittome.com/apis/"];
     
-    [user_information appendString:[NSString stringWithFormat:@"%d", app_delegate.user_state_information.my_user_info.user_id]];
+    int my_user_id = app_delegate.user_state_information.my_user_info.user_id;
+    [user_information appendString:[NSString stringWithFormat:@"%d", my_user_id]];
     [user_information appendString:@"/profile_details"];
     
     NSURL *url = [NSURL URLWithString:user_information];

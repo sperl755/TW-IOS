@@ -111,34 +111,36 @@
 -(void)updateProfilePicture
 {
     StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*) [[UIApplication sharedApplication] delegate];
-    printf("%s", [app_delegate.user_state_information.picture_url UTF8String]);
+    printf("\nUrl: %s\n", [app_delegate.user_state_information.picture_url UTF8String]);
     
     //check to make sure that the picture that we grabbed is not set to the missing_icon.gif;.
     NSArray *picture_web_components = [app_delegate.user_state_information.picture_url componentsSeparatedByString:@"/"];
+    
     if ([[picture_web_components objectAtIndex:picture_web_components.count-1] isEqualToString:@"icon_missing_medium.gif"])
     {
         app_delegate.user_state_information.picture_url = nil;
     }
     
-    if (app_delegate.user_state_information.picture_url.length <=15 ||
-        app_delegate.user_state_information.picture_url == nil ||
-        app_delegate.user_state_information.picture_url == [NSNull null])
+    NSData *url_data = [NSData dataWithContentsOfURL:[NSURL URLWithString:app_delegate.user_state_information.picture_url]];
+    if (url_data != nil)
+    {
+        [my_profile_picture setImage:[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:app_delegate.user_state_information.picture_url]]]]; 
+    }
+    else
     {
         NSMutableString *user_picture_string    = [NSMutableString stringWithString:@"http://graph.facebook.com/"];
+        
         printf("ID: %s", [app_delegate.user_state_information.facebook_id UTF8String]);
         [user_picture_string appendString:app_delegate.user_state_information.facebook_id];
         [user_picture_string appendString:@"/picture?type=large"];
         
         NSURL *user_image_location   = [[NSURL alloc] initWithString:user_picture_string];
-        if (user_image_location != nil)
-        {
+        
+        if (user_image_location != nil) {
+            
             [my_profile_picture setImage:[UIImage imageWithData:[NSData dataWithContentsOfURL:user_image_location]]];   
         }
-    }
-    else
-    {
-        [my_profile_picture setImage:[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:app_delegate.user_state_information.picture_url]]]];   
-    }   
+    }  
 }
 -(void)goToProfilePage
 {
