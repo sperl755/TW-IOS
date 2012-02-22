@@ -14,6 +14,7 @@
 {
     UILabel *what_waiting;
     UIButton *staff_out_button;
+    UIImageView *header_shadow;
 }
 @property (nonatomic, retain) id <StaffOutHeaderProtocol> delegate;
 @end

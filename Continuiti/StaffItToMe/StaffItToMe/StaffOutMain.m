@@ -63,6 +63,7 @@
         [nav_control.navigationBar insertSubview:inboxButtonView atIndex:4];
         [self.view addSubview:nav_control.view];
         proposal_page = [[StaffOutProposalPage alloc] init];
+        
     }
     return self;
 }

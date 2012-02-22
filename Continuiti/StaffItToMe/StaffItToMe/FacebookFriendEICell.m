@@ -140,13 +140,15 @@
     [self addSubview:friend_one_picture];
     
     //add nice overlay to compliment photo
-    friend_one_overlay = [[UIImageView alloc] initWithFrame:friend_one_picture.frame];
-    friend_one_overlay.image = [UIImage imageNamed:@"50x50_overlay"];
+    friend_one_overlay          = [[UIImageView alloc] initWithFrame:friend_one_picture.frame];
+    friend_one_overlay.image    = [UIImage imageNamed:@"50x50_overlay"];
     [self addSubview:friend_one_overlay];
     [temp_pool drain];
 }
 -(void)sendWallPost:(id)sender
 {
+    StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate];
+    [app_delegate displayLoadingView];
     NSString *graphPath;
     graphPath = [NSString stringWithFormat:@"%@/feed",friend_facebook_id];
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"187212574660004",@"api_key",@"You should come to staff with me!",@"message", @"join me",@"caption", @"Some Random Message",@"description", nil];
@@ -155,11 +157,8 @@
 }
 -(void)sendEndorsement
 {
-    //Show that they are loading the endorsement
-    [((StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate]) displayLoadingView];
-    
-    
     StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate];
+    [app_delegate displayLoadingView];
     //Perform the accessing of the server.
     NSURL *url = [NSURL URLWithString:[[URLLibrary sharedInstance] getEndorseLinkURL]];
     ASIFormDataRequest *request_ror = [ASIFormDataRequest requestWithURL:url];
@@ -167,48 +166,43 @@
     [request_ror setValidatesSecureCertificate:NO];
     [request_ror setPostValue:app_delegate.user_state_information.sessionKey forKey:@"session_key"];
     [request_ror setPostValue:friend_facebook_id forKey:@"facebook_uid"];
-    
+    [request_ror setDidFailSelector:@selector(requestFailedSoRemove:)];
     [request_ror setTimeOutSeconds:30];
     [request_ror setDelegate:self];
     [request_ror startAsynchronous];
 }
 -(void)request:(FBRequest *)request didLoad:(id)result
 {
-    AlertLoadView *alert = [[AlertLoadView alloc] initWithFrame:CGRectMake(0, -150, 320, 480) andText:@"You have succesfully invited your friend!"];
-    [self.superview addSubview:alert];
-    [alert release];
+    StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate];
+    [app_delegate removeLoadingViewFromWindow];
 }
 -(void)request:(FBRequest *)request didFailWithError:(NSError *)error
 {
-    UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Unable to post" message:@"Unable to send request, user could have posting turned off!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    [message show];
-    [message release];
+    StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate];
+    [app_delegate removeLoadingViewFromWindow];
 }
 -(void)requestFinished:(ASIHTTPRequest *)request
 {
-    [((StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate]) removeLoadingViewFromWindow];
+    StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate];
+    [app_delegate removeLoadingViewFromWindow];
 }
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
+-(void)requestFailedSoRemove:(ASIHTTPRequest *)request
 {
-    // Drawing code
+    StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate];
+    [app_delegate removeLoadingViewFromWindow];
 }
-*/
-
 - (void)dealloc
 {
-    [module_row_one_background release];
-    [friend_one_name release];
-    [friend_one_picture release];
-    [friend_one_overlay release];
-    [friend_one_invite_btn release];
-    [friend_one_endorse_btn release];
-    [friend_facebook_id release];
-    [load_view release];
-    [facebook release];
+    [module_row_one_background  release];
+    [friend_one_name            release];
+    [friend_one_picture         release];
+    [friend_one_overlay         release];
+    [friend_one_invite_btn      release];
+    [friend_one_endorse_btn     release];
+    [friend_facebook_id         release];
+    [load_view                  release];
+    [facebook                   release];
     [super dealloc];
 }
 

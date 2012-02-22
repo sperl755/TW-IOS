@@ -92,26 +92,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          isPathRelative = "1"
-         filePath = "StaffItToMe/ConversationSelection.m"
-         timestampString = "351405604.235123"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "123"
-         endingLineNumber = "123"
-         landmarkName = "-viewDidLoad"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         isPathRelative = "1"
          filePath = "StaffItToMe/MyJobDisplayCell.m"
-         timestampString = "351588996.103777"
+         timestampString = "351589308.144985"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "236"
-         endingLineNumber = "236"
+         startingLineNumber = "235"
+         endingLineNumber = "235"
          landmarkName = "-checkinButtonAction"
          landmarkType = "5">
       </FileBreakpoint>
@@ -135,11 +121,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "StaffItToMe/MyJobDisplayCell.m"
-         timestampString = "351588996.103777"
+         timestampString = "351589308.144985"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "231"
-         endingLineNumber = "231"
+         startingLineNumber = "230"
+         endingLineNumber = "230"
          landmarkName = "-checkinButtonAction"
          landmarkType = "5">
       </FileBreakpoint>
@@ -149,11 +135,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "StaffItToMe/MyJobDisplayCell.m"
-         timestampString = "351588996.103777"
+         timestampString = "351589308.144985"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "387"
-         endingLineNumber = "387"
+         startingLineNumber = "385"
+         endingLineNumber = "385"
          landmarkName = "-stopTimer"
          landmarkType = "5">
       </FileBreakpoint>
@@ -163,11 +149,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "StaffItToMe/MyJobDisplayCell.m"
-         timestampString = "351588996.103777"
+         timestampString = "351589308.144985"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "249"
-         endingLineNumber = "249"
+         startingLineNumber = "248"
+         endingLineNumber = "248"
          landmarkName = "-setCheckedInWithTime:manual:"
          landmarkType = "5">
       </FileBreakpoint>

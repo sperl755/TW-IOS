@@ -23,9 +23,10 @@
 {
     JobApplicationsModule *job_application_module = [[JobApplicationsModule alloc] init];
     job_application_module.delegate = self;
-    module_array = [[NSArray alloc] initWithArray:[NSArray arrayWithObjects:my_header, my_jobs_module, job_application_module, nil]];
-    my_table_view.hidden = NO;
+    module_array                    = [[NSArray alloc] initWithArray:[NSArray arrayWithObjects:my_header, my_jobs_module, job_application_module, nil]];
+    my_table_view.hidden            = NO;
     [my_table_view reloadData];
+    [self.view insertSubview:load_view atIndex:22];
     
 }
 -(void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
@@ -52,10 +53,10 @@
     {
         my_table_view.contentOffset = CGPointMake(0, -refresh_header.frame.size.height);
         my_table_view.userInteractionEnabled = NO;
-        my_header = [[UserInformationHeader alloc] init];
-        my_header.delegate = self;
-        my_jobs_module = [[MyJobsModule alloc] initWithFrame:CGRectMake(0, 0, 320, 60)];
-        my_jobs_module.delegate = self;
+        my_header                   = [[UserInformationHeader alloc] init];
+        my_header.delegate          = self;
+        my_jobs_module              = [[MyJobsModule alloc] initWithFrame:CGRectMake(0, 0, 320, 60)];
+        my_jobs_module.delegate     = self;
         [self performSelector:@selector(getApplications) withObject:nil afterDelay:30];
     }
 }
@@ -131,31 +132,29 @@
     [self performSelectorInBackground:@selector(finishViewDidLoad) withObject:nil];
     
     load_view = [[LoadingView alloc] initWithFrame:CGRectMake(0, -44, 320, 480)];
-    [self.view addSubview:load_view];
+    [self.view insertSubview:load_view atIndex:22];
     
 }
 -(void)finishViewDidLoad
 {
-    my_header = [[UserInformationHeader alloc] init];
-    my_header.delegate = self;
-    my_jobs_module = [[MyJobsModule alloc] initWithFrame:CGRectMake(0, 0, 320, 60)];
+    my_header               = [[UserInformationHeader alloc] init];
+    my_header.delegate      = self;
+    my_jobs_module          = [[MyJobsModule alloc] initWithFrame:CGRectMake(0, 0, 320, 60)];
     my_jobs_module.delegate = self;
     
     
     //Create tableview
-    my_table_view = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 369)];
-    my_table_view.allowsSelection = NO;
-    my_table_view.delegate = self;
-    my_table_view.dataSource = self;
-    my_table_view.separatorColor = [UIColor clearColor];
-    my_table_view.backgroundColor = [UIColor clearColor];
-    my_table_view.hidden = YES;
+    my_table_view                   = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 369)];
+    my_table_view.allowsSelection   = NO;
+    my_table_view.delegate          = self;
+    my_table_view.dataSource        = self;
+    my_table_view.separatorColor    = [UIColor clearColor];
+    my_table_view.backgroundColor   = [UIColor clearColor];
+    my_table_view.hidden            = YES;
     [self.view addSubview:my_table_view];
     //Create header
     refresh_header = [[PullRefreshHeader alloc] initWithFrame:CGRectMake(0, -70, 320, 70)];
     [my_table_view addSubview:refresh_header];
-    
-    
 }
 -(void)goToInbox
 {

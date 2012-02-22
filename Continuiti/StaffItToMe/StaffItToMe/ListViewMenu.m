@@ -228,6 +228,10 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (indexPath.row == 0)//if user clicked the table header.
+    {
+        return;
+    }
     StaffItToMeAppDelegate *delegate = (StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate];
     for (int i = 0; i < delegate.user_state_information.job_array.count; i++)
     {
