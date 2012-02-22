@@ -23,11 +23,8 @@
     if (self) {
         StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate];
         
-        NSMutableString *user_information = [[NSMutableString alloc] initWithString:@"https://helium.staffittome.com/apis/"];
-        [user_information appendString:[NSString stringWithFormat:@"%d", app_delegate.user_state_information.my_user_info.user_id]];
-        [user_information appendString:@"/profile_details"];
         //Perform the accessing of fthe server.
-        NSURL *url = [NSURL URLWithString:user_information];
+        NSURL *url = [NSURL URLWithString:[[URLLibrary sharedInstance] getProfileInfoLinkWithId:app_delegate.user_state_information.my_user_info.user_id]];
         ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
         [request setRequestMethod:@"GET"];
         
@@ -73,7 +70,6 @@
         x_offset = movement_amount;
     }
     rate_slider.center = CGPointMake(rate_slider.center.x + x_offset, rate_slider.center.y + y_offset);
-    printf("\nCenter X: %f, Center Y: %f", rate_slider.center.x, rate_slider.center.y);
 }
 
 - (void)dealloc
@@ -461,51 +457,52 @@
     cell_background.frame = CGRectMake(5, 0, 310, 42);
     [email_view addSubview:cell_background];
     
-    email_lbl = [[UILabel alloc] initWithFrame:CGRectMake(cell_background.frame.origin.x + 10, cell_background.frame.origin.y, 75, 45)];
-    email_lbl.text = @"Subject ";
+    email_lbl                   = [[UILabel alloc] initWithFrame:CGRectMake(cell_background.frame.origin.x + 10, cell_background.frame.origin.y, 75, 45)];
+    email_lbl.text              = @"Subject ";
     [email_lbl setFont:[UIFont fontWithName:@"HelveticaNeueLTCom-Md" size:12]];
-    email_lbl.backgroundColor = [UIColor clearColor];
-    email_lbl.center = CGPointMake(email_lbl.center.x,22);
+    email_lbl.backgroundColor   = [UIColor clearColor];
+    email_lbl.center            = CGPointMake(email_lbl.center.x,22);
     [email_view addSubview:email_lbl];
     
-    subject_txt = [[UITextField alloc] initWithFrame:CGRectMake(email_lbl.frame.origin.x + email_lbl.frame.size.width + 7, email_lbl.frame.origin.y + 16, 200, 50)];
+    subject_txt                 = [[UITextField alloc] initWithFrame:CGRectMake(email_lbl.frame.origin.x + email_lbl.frame.size.width + 7, email_lbl.frame.origin.y + 16, 200, 50)];
     [subject_txt setFont:[UIFont fontWithName:@"HelveticaNeueLTCom-Md" size:11]];
     subject_txt.backgroundColor = [UIColor clearColor];
-    subject_txt.textColor = [UIColor colorWithRed:153.0/255 green:153.0/255 blue:153.0/255 alpha:1];
+    subject_txt.textColor       = [UIColor colorWithRed:153.0/255 green:153.0/255 blue:153.0/255 alpha:1];
     StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate];
+    
     NSMutableString *subject_txt_string = [[NSMutableString alloc] initWithString:@"A proposal from "];
     [subject_txt_string appendString:app_delegate.user_state_information.my_user_info.full_name];
     [subject_txt_string appendString:@"."];
-    subject_txt.text = subject_txt_string;
-    subject_txt.tag = SUBJECT_TAG;
-    subject_txt.delegate = self;
-    subject_txt.userInteractionEnabled = YES;
-    subject_txt.center = CGPointMake(197, 40);
+    subject_txt.text                    = subject_txt_string;
+    subject_txt.tag                     = SUBJECT_TAG;
+    subject_txt.delegate                = self;
+    subject_txt.userInteractionEnabled  = YES;
+    subject_txt.center                  = CGPointMake(197, 40);
     [email_view addSubview:subject_txt];
     
     return email_view;
 }
 -(id)getMessageCell
 {
-    UIView *email_view = [[UIView alloc] init];
-    UIImage *cell_image2 = [UIImage imageNamed:@"module_row_last"];
-    UIImage *cell_stretchable2 = [cell_image2 stretchableImageWithLeftCapWidth:(cell_image2.size.width/2)-1 topCapHeight:(cell_image2.size.height/2)-1];
-    UIImageView *cell_background = [[UIImageView alloc] initWithImage:cell_stretchable2];
-    cell_background.frame = CGRectMake(5, 0, 310, 90);
+    UIView *email_view              = [[UIView alloc] init];
+    UIImage *cell_image2            = [UIImage imageNamed:@"module_row_last"];
+    UIImage *cell_stretchable2      = [cell_image2 stretchableImageWithLeftCapWidth:(cell_image2.size.width/2)-1 topCapHeight:(cell_image2.size.height/2)-1];
+    UIImageView *cell_background    = [[UIImageView alloc] initWithImage:cell_stretchable2];
+    cell_background.frame           = CGRectMake(5, 0, 310, 90);
     [email_view addSubview:cell_background];
     
     UIImageView *message_backing = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"StaffOutMEssageBacking"]];
     message_backing.frame = CGRectMake(10, 5, 300, 80);
     [email_view addSubview:message_backing];
     
-    message_txt = [[UITextView alloc] initWithFrame:CGRectMake(message_backing.frame.origin.x + 5, message_backing.frame.origin.y, message_backing.frame.size.width - 10, message_backing.frame.size.height - 5)];
+    message_txt                         = [[UITextView alloc] initWithFrame:CGRectMake(message_backing.frame.origin.x + 5, message_backing.frame.origin.y, message_backing.frame.size.width - 10, message_backing.frame.size.height - 5)];
+    message_txt.backgroundColor         = [UIColor clearColor];
+    message_txt.text                    = @"Enter a description.";
+    message_txt.tag                     = MESSAGE_TAG;
+    message_txt.delegate                = self;
+    message_txt.center                  = CGPointMake(152, 42.5);
+    message_txt.userInteractionEnabled  = YES;
     [message_txt setFont:[UIFont fontWithName:@"HelveticaNeueLTCom-Md" size:11]];
-    message_txt.backgroundColor = [UIColor clearColor];
-    message_txt.text = @"Enter a description.";
-    message_txt.tag = MESSAGE_TAG;
-    message_txt.delegate = self;
-    message_txt.center = CGPointMake(152, 42.5);
-    message_txt.userInteractionEnabled = YES;
     [email_view addSubview:message_txt];
     
     return email_view;
@@ -528,7 +525,7 @@
     StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*) [[UIApplication sharedApplication] delegate];
     [((StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate]) displayLoadingView];
     // Custom initialization
-    NSURL *url = [NSURL URLWithString:@"https://helium.staffittome.com/apis/create_proposal"];
+    NSURL *url = [NSURL URLWithString:[[URLLibrary sharedInstance] getCreateProposalUrl]];
     ASIFormDataRequest *request_ror = [ASIFormDataRequest requestWithURL:url];
     [request_ror setRequestMethod:@"POST"];
     [request_ror setTimeOutSeconds:30];
@@ -549,7 +546,7 @@
     
     [request_ror setPostValue:int_pay_type forKey:@"payment_method"];
     
-    NSString *capability_id;
+    NSString *capability_id = [NSString stringWithString:@""];
     for (int i = 0; i < app_delegate.user_state_information.my_capabilities_array.count; i++)
     {
         if ([capability_txt.text isEqualToString:[[app_delegate.user_state_information.my_capabilities_array objectAtIndex:i] title]])
@@ -580,11 +577,9 @@
     if (getting_information)
     {
         [self fillCapabilities:[request responseString]];
-        printf("\n\n\nThis is theuser capabilities: %s\n\n", [[request responseString] UTF8String]);
         getting_information = NO;
         return;
     }
-    printf("ProposalSendResponse:%s\n", [[request responseString] UTF8String]);
     [((StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate]) removeLoadingViewFromWindow];
     UIAlertView *aler = [[UIAlertView alloc] initWithTitle:@"" message:@"Your proposal was submitted!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
     [aler show];

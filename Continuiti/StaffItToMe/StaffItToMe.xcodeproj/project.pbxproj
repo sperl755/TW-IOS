@@ -342,7 +342,11 @@
 		46FEE55713B29F4900753CBC /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46FEE55613B29F4900753CBC /* MapKit.framework */; };
 		46FEE56313B2A10100753CBC /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46FEE56213B2A10100753CBC /* CoreLocation.framework */; };
 		46FEE56713B2A1A000753CBC /* LocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 46FEE56613B2A1A000753CBC /* LocationManager.m */; };
+		6A4438AB14F1E3BE00068167 /* tw_mark_rev_114.png in Resources */ = {isa = PBXBuildFile; fileRef = 6A4438AA14F1E3BE00068167 /* tw_mark_rev_114.png */; };
+		6A4438AD14F1E3CF00068167 /* tw_mark_rev_57.png in Resources */ = {isa = PBXBuildFile; fileRef = 6A4438AC14F1E3CF00068167 /* tw_mark_rev_57.png */; };
+		6A4438AF14F1E78900068167 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 6A4438AE14F1E78900068167 /* Default.png */; };
 		6AB3FE3D14DCFDC300EBE9CC /* SuggestionModuleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AB3FE3C14DCFDC200EBE9CC /* SuggestionModuleCell.m */; };
+		6AB544E114F4C1C10098183E /* URLLibrary.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AB544E014F4C1C10098183E /* URLLibrary.m */; };
 		6ADE2B1514EE044A00A85CCA /* Capability.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ADE2B1414EE044A00A85CCA /* Capability.m */; };
 		6AF62C9F14ECB53F00BF584E /* FeedService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AF62C9E14ECB53F00BF584E /* FeedService.m */; };
 /* End PBXBuildFile section */
@@ -862,8 +866,13 @@
 		46FEE56213B2A10100753CBC /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		46FEE56513B2A1A000753CBC /* LocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationManager.h; sourceTree = "<group>"; };
 		46FEE56613B2A1A000753CBC /* LocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationManager.m; sourceTree = "<group>"; };
+		6A4438AA14F1E3BE00068167 /* tw_mark_rev_114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tw_mark_rev_114.png; sourceTree = "<group>"; };
+		6A4438AC14F1E3CF00068167 /* tw_mark_rev_57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tw_mark_rev_57.png; sourceTree = "<group>"; };
+		6A4438AE14F1E78900068167 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		6AB3FE3B14DCFDC200EBE9CC /* SuggestionModuleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SuggestionModuleCell.h; sourceTree = "<group>"; };
 		6AB3FE3C14DCFDC200EBE9CC /* SuggestionModuleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SuggestionModuleCell.m; sourceTree = "<group>"; };
+		6AB544DF14F4C1C10098183E /* URLLibrary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = URLLibrary.h; path = InternetServices/URLLibrary.h; sourceTree = "<group>"; };
+		6AB544E014F4C1C10098183E /* URLLibrary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = URLLibrary.m; path = InternetServices/URLLibrary.m; sourceTree = "<group>"; };
 		6ADE2B1314EE044A00A85CCA /* Capability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Capability.h; path = src/Capability.h; sourceTree = "<group>"; };
 		6ADE2B1414EE044A00A85CCA /* Capability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Capability.m; path = src/Capability.m; sourceTree = "<group>"; };
 		6AF62C9D14ECB53F00BF584E /* FeedService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FeedService.h; path = InternetServices/FeedService.h; sourceTree = "<group>"; };
@@ -1016,6 +1025,7 @@
 				466BF5D313CE1D5D00DF28C1 /* MyJob.h */,
 				466BF5D413CE1D5D00DF28C1 /* MyJob.m */,
 				466BF5D613CE971500DF28C1 /* JobBillingHistoryObject.h */,
+				6ADE2B1314EE044A00A85CCA /* Capability.h */,
 				466BF5D713CE971500DF28C1 /* JobBillingHistoryObject.m */,
 				46868A3E13CF7EC300D751E6 /* AvailableJobsAnnotation.h */,
 				46868A3F13CF7EC300D751E6 /* AvailableJobsAnnotation.m */,
@@ -1031,7 +1041,6 @@
 				46F263201429930700348AF2 /* ASSLider.m */,
 				46718D7514C2CC140053A1CA /* ApplicationDatabase.h */,
 				46718D7614C2CC140053A1CA /* ApplicationDatabase.m */,
-				6ADE2B1314EE044A00A85CCA /* Capability.h */,
 				6ADE2B1414EE044A00A85CCA /* Capability.m */,
 			);
 			name = "Data Classes";
@@ -1463,6 +1472,9 @@
 		469BD66813AB188800EDFE3E = {
 			isa = PBXGroup;
 			children = (
+				6A4438AE14F1E78900068167 /* Default.png */,
+				6A4438AC14F1E3CF00068167 /* tw_mark_rev_57.png */,
+				6A4438AA14F1E3BE00068167 /* tw_mark_rev_114.png */,
 				46718D7314C2CBDD0053A1CA /* libsqlite3.0.dylib */,
 				46BCEFA014C2AD1F00920230 /* Default@2x.png */,
 				46D4B532147ADD2900B70C2D /* QuartzCore.framework */,
@@ -1779,6 +1791,8 @@
 			children = (
 				6AF62C9D14ECB53F00BF584E /* FeedService.h */,
 				6AF62C9E14ECB53F00BF584E /* FeedService.m */,
+				6AB544DF14F4C1C10098183E /* URLLibrary.h */,
+				6AB544E014F4C1C10098183E /* URLLibrary.m */,
 			);
 			name = InternetServices;
 			sourceTree = "<group>";
@@ -2000,6 +2014,9 @@
 				46D4B531147AD69300B70C2D /* LoadingArrow.png in Resources */,
 				4613B57D147C6F2500BD1D4A /* search_box_remove.png in Resources */,
 				46BCEFA114C2AD1F00920230 /* Default@2x.png in Resources */,
+				6A4438AB14F1E3BE00068167 /* tw_mark_rev_114.png in Resources */,
+				6A4438AD14F1E3CF00068167 /* tw_mark_rev_57.png in Resources */,
+				6A4438AF14F1E78900068167 /* Default.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2163,6 +2180,7 @@
 				6AB3FE3D14DCFDC300EBE9CC /* SuggestionModuleCell.m in Sources */,
 				6AF62C9F14ECB53F00BF584E /* FeedService.m in Sources */,
 				6ADE2B1514EE044A00A85CCA /* Capability.m in Sources */,
+				6AB544E114F4C1C10098183E /* URLLibrary.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -208,7 +208,6 @@ static NSString *job_apply_address = @"http://hydrogen.xen.exoware.net:3000/apis
     }
 	else*/ if (textView == start_at_txt)
 	{
-		printf("SFDJlkajsdlkfjalksdf");
 		[start_at_txt resignFirstResponder];
 	}
     [delegate displayApplyKeyboardDoneButton];

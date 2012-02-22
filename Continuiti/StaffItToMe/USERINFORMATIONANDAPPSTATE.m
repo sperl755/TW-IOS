@@ -74,17 +74,14 @@ static NSString *user_locale_address = @"https://hydrogen.xen.exoware.net:3000/a
         if ([aDecoder decodeObjectForKey:JOB_ARRAY_KEY] != nil){
             job_array = [[aDecoder decodeObjectForKey:JOB_ARRAY_KEY] retain];
         }else{
-            printf("NIL AS HECK");
         }
         if ([aDecoder decodeObjectForKey:MY_JOB_SUGGESTED_ARRAY_KEY] != nil){
             my_suggested_jobs = [[aDecoder decodeObjectForKey:MY_JOB_SUGGESTED_ARRAY_KEY] retain];
         }else{
-            printf("NIL AS HECK");
         }
         if ([aDecoder decodeObjectForKey:MY_JOB_ARRAY_KEY] != nil){
             my_jobs = [[aDecoder decodeObjectForKey:MY_JOB_ARRAY_KEY] retain];
         }else{
-            printf("NIL AS HECK");
         }
         
         my_facebook_friends = [[NSMutableArray alloc] initWithCapacity:300];
@@ -92,26 +89,22 @@ static NSString *user_locale_address = @"https://hydrogen.xen.exoware.net:3000/a
         /*if ([aDecoder decodeObjectForKey:MY_FACEBOOK_FRIENDS_KEY] != nil){
             my_facebook_friends = [[aDecoder decodeObjectForKey:MY_FACEBOOK_FRIENDS_KEY] retain];
         }else{
-            printf("NIL AS HECK");
         }*/
         if ([aDecoder decodeObjectForKey:MY_INBOX_MESSAGES_KEY] != nil){
             my_inbox_messages = [[aDecoder decodeObjectForKey:MY_INBOX_MESSAGES_KEY] retain];
         }else{
-            printf("NIL AS HECK");
         }
         if ([aDecoder decodeObjectForKey:MY_SENT_MESSAGES_KEY] != nil){
             my_sent_messages = [[aDecoder decodeObjectForKey:MY_SENT_MESSAGES_KEY] retain];
         }else{
-            printf("NIL AS HECK");
         }
         if ([aDecoder decodeObjectForKey:MY_APPLIED_TO_JOBS_KEY] != nil){
             my_applied_to_jobs = [[aDecoder decodeObjectForKey:MY_APPLIED_TO_JOBS_KEY] retain];
         }else{
-            printf("NIL AS HECK");
         }
-        local_manager = [[LocationManager alloc] init];
-        local_manager.delegate = self;
-        im_available = YES;
+        local_manager           = [[LocationManager alloc] init];
+        local_manager.delegate  = self;
+        im_available            = YES;
     }
     return self;
 }
@@ -134,37 +127,30 @@ static NSString *user_locale_address = @"https://hydrogen.xen.exoware.net:3000/a
     if (job_array != nil){
         [aCoder encodeObject:job_array forKey:JOB_ARRAY_KEY];
     }else{
-        printf("Job array is nil");
     }
     if (my_suggested_jobs != nil){
         [aCoder encodeObject:my_suggested_jobs forKey:MY_JOB_SUGGESTED_ARRAY_KEY];
     }else{
-        printf("Job array is nil");
     }
     if (my_jobs != nil){
         [aCoder encodeObject:my_jobs forKey:MY_JOB_ARRAY_KEY];
     }else{
-        printf("Job array is nil");
     }
     /*if (my_facebook_friends != nil){
         [aCoder encodeObject:my_facebook_friends forKey:MY_FACEBOOK_FRIENDS_KEY];
     }else{
-        printf("Job array is nil");
     }*/
     if (my_inbox_messages != nil){
         [aCoder encodeObject:my_inbox_messages forKey:MY_INBOX_MESSAGES_KEY];
     }else{
-        printf("Job array is nil");
     }
     if (my_sent_messages != nil){
         [aCoder encodeObject:my_sent_messages forKey:MY_SENT_MESSAGES_KEY];
     }else{
-        printf("Job array is nil");
     }
     if (my_applied_to_jobs != nil){
         [aCoder encodeObject:my_sent_messages forKey:MY_APPLIED_TO_JOBS_KEY];
     }else{
-        printf("Job array is nil");
     }
 }
 -(id)init
@@ -247,8 +233,6 @@ static NSString *user_locale_address = @"https://hydrogen.xen.exoware.net:3000/a
             temp_small_job.job_id = -99;
         } else {
             temp_small_job.job_id = [[[array_thing objectAtIndex:i] objectForKey:@"id"] intValue];
-            printf("%d",[ [[array_thing objectAtIndex:i] objectForKey:@"id"] intValue]);
-            printf("%d",temp_small_job.job_id);
         }
         if ([[array_thing objectAtIndex:i] objectForKey:@"description"] == [NSNull null] || [[array_thing objectAtIndex:i] objectForKey:@"description"] == nil) {
             temp_small_job.job_description = @"";
@@ -316,7 +300,6 @@ static NSString *user_locale_address = @"https://hydrogen.xen.exoware.net:3000/a
         } else {
             temp_small_job.company_description = [[[array_thing objectAtIndex:i] objectForKey:@"company_description"] retain];
         }
-        NSLog(@"\nThis is the company)descriontpiong: %@\n", [[[array_thing objectAtIndex:i] objectForKey:@"company_description"]class]);
         if ([[array_thing objectAtIndex:i] objectForKey:@"compensation"]  == [NSNull null] || [[array_thing objectAtIndex:i] objectForKey:@"compensation"] == nil) {
             temp_small_job.compensation = @"";
         } else {
@@ -336,24 +319,7 @@ static NSString *user_locale_address = @"https://hydrogen.xen.exoware.net:3000/a
             temp_small_job.job_distance = 0;
         } else {
             temp_small_job.job_distance = [[[array_thing objectAtIndex:i] objectForKey:@"distance"] doubleValue];
-            printf("%f", temp_small_job.job_distance);
         }
-        NSLog(@"%@", [[array_thing objectAtIndex:i] objectForKey:@"title"]);
-        NSLog(@"%@", [[array_thing objectAtIndex:i] objectForKey:@"skills"]);
-        NSLog(@"%@", [[array_thing objectAtIndex:i] objectForKey:@"id"]);
-        NSLog(@"%@", [[array_thing objectAtIndex:i] objectForKey:@"description"]);
-        NSLog(@"%@", [[array_thing objectAtIndex:i] objectForKey:@"user_id"]);
-        NSLog(@"%@", [[array_thing objectAtIndex:i] objectForKey:@"created_at"]);
-        NSLog(@"%@", [[array_thing objectAtIndex:i] objectForKey:@"duration"]);
-        NSLog(@"%@", [[array_thing objectAtIndex:i] objectForKey:@"hours_per_week"]);
-        NSLog(@"%@", [[array_thing objectAtIndex:i] objectForKey:@"task_start_date"]);
-        NSLog(@"%@", [[array_thing objectAtIndex:i] objectForKey:@"task_start_time"]);
-        NSLog(@"%@", [[array_thing objectAtIndex:i] objectForKey:@"company"]);
-        NSLog(@"%@", [[array_thing objectAtIndex:i] objectForKey:@"company_description"]);
-        NSLog(@"%@", [[array_thing objectAtIndex:i] objectForKey:@"compensation"]);
-        NSLog(@"%@", [[array_thing objectAtIndex:i] objectForKey:@"latitude"]);
-        NSLog(@"%@", [[array_thing objectAtIndex:i]  objectForKey:@"longitude"]);
-        NSLog(@"%@", [[array_thing objectAtIndex:i]  objectForKey:@"distance"]);
         [job_array addObject:temp_small_job];
         [temp_small_job release];
     }
@@ -363,13 +329,6 @@ static NSString *user_locale_address = @"https://hydrogen.xen.exoware.net:3000/a
 -(void)populateMyJobArrayWithJSONString:(NSString *)the_string
 {
 	[my_jobs removeAllObjects];
-    printf("\n%s\n", [the_string UTF8String]);
-    /* if (the_string.length < 5) {
-     UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Maybe Search Again?" message:@"Unfortunately we could not find any jobs for you. Go ahead and change your keywords and try again!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-     [message show];
-     [message release];
-     return;
-     }*/
 	NSString *filePath = [[NSBundle mainBundle] pathForResource:@"JSONFILEMYJOBS" ofType:@"json"];
 	NSString *fileContent = [[NSString alloc] initWithContentsOfFile:filePath]; 
 	
@@ -413,13 +372,11 @@ static NSString *user_locale_address = @"https://hydrogen.xen.exoware.net:3000/a
         } else {
             temp_small_job.start_date_time = [[[data_array objectAtIndex:i] objectForKey:@"start_datetime"] retain];
         }
-        if ([[data_array objectAtIndex:i] objectForKey:@"job_id"] == [NSNull null]) {
+        if ([[data_array objectAtIndex:i] objectForKey:@"contract_id"] == [NSNull null]) {
             temp_small_job.my_job_id = @"";
         } else {
-            int job_id = [[[data_array objectAtIndex:i] objectForKey:@"job_id"] intValue];
-            printf("%d", job_id);
+            int job_id = [[[data_array objectAtIndex:i] objectForKey:@"contract_id"] intValue];
             temp_small_job.my_job_id = [[NSString stringWithFormat:@"%d", job_id] retain];
-            printf("%s", [temp_small_job.my_job_id UTF8String]);
         }
         if ([[data_array objectAtIndex:i] objectForKey:@"checkin_checkout_status"] == [NSNull null]) {
             temp_small_job.my_checkin_chekcout_status = @"null";
@@ -428,11 +385,9 @@ static NSString *user_locale_address = @"https://hydrogen.xen.exoware.net:3000/a
         }
         
         NSDictionary *billing_history = [[data_array objectAtIndex:i] objectForKey:@"job_billing_history"];
-        NSLog(@"%@", [billing_history description]);
         NSString *currentPosition;
         NSEnumerator *history_enum = [[[data_array objectAtIndex:i] objectForKey:@"job_billing_history"] keyEnumerator];
         currentPosition = [history_enum nextObject];
-        NSLog(@"%@", [history_enum description]);
         do {
             
             JobBillingHistoryObject *history_object = [[JobBillingHistoryObject alloc] init];
@@ -472,7 +427,6 @@ static NSString *user_locale_address = @"https://hydrogen.xen.exoware.net:3000/a
  */
 -(void)populateMyInboxWithString:(NSString *)the_string
 {
-    printf("This is the inbox information %s", [the_string UTF8String]);
     [my_inbox_messages removeAllObjects];
     NSArray *data = [the_string JSONValue];
     for (int i = 0; i < data.count; i++)
@@ -480,7 +434,6 @@ static NSString *user_locale_address = @"https://hydrogen.xen.exoware.net:3000/a
         @try {
             int message_id = [[[data objectAtIndex:i] objectForKey:@"messageable_id"] intValue];
             int sender_id = [[[data objectAtIndex:i] objectForKey:@"id"] intValue];
-            printf("%d", message_id);
             //allocate an MessageHeaderObject
             MessageHeaderObject *message_header = [[MessageHeaderObject alloc] initWithDate:[[data objectAtIndex:i] objectForKey:@"created_at"] body:[[data objectAtIndex:i] objectForKey:@"body"] subject:
                                                    [[data objectAtIndex:i] objectForKey:@"subject"] recipient_id:@"" sender_id:[NSString stringWithFormat:@"%d", sender_id] sender_name:
@@ -490,7 +443,6 @@ static NSString *user_locale_address = @"https://hydrogen.xen.exoware.net:3000/a
             [message_header release];
         }
         @catch (NSException *exception) {
-            printf("Encountered exception when reading inbox JSON information");
         }
     }
 }
@@ -501,7 +453,6 @@ static NSString *user_locale_address = @"https://hydrogen.xen.exoware.net:3000/a
     for (int i = 0; i < data.count; i++)
     {
         int message_id = [[[data objectAtIndex:i] objectForKey:@"id"] intValue];
-        printf("%d", message_id);
         //allocate an MessageHeaderObject
         MessageHeaderObject *message_header = [[MessageHeaderObject alloc] initWithDate:[[data objectAtIndex:i] objectForKey:@"created_at"] body:[[data objectAtIndex:i] objectForKey:@"body"] subject:
                                                [[data objectAtIndex:i] objectForKey:@"subject"] recipient_id:@"" sender_id:[[NSString stringWithFormat:@"%d", message_id] retain] sender_name:
@@ -537,7 +488,6 @@ static NSString *user_locale_address = @"https://hydrogen.xen.exoware.net:3000/a
 }
 -(void)getUserInformation:(NSString *)user_information
 {
-    printf("\n%s\n", [user_information UTF8String]);
     NSDictionary *user_date = [user_information JSONValue];
     int user_id = [[user_date objectForKey:@"user_id"] intValue];
     NSString *user_id_string = [NSString stringWithFormat:@"%d", user_id];
@@ -572,11 +522,8 @@ static NSString *user_locale_address = @"https://hydrogen.xen.exoware.net:3000/a
     facebook_id             = [[get_user_information_dictionary objectForKey:@"facebook_uid"] retain];
     int user_id = [[get_user_information_dictionary objectForKey:@"user_id"] intValue];
     my_user_info.user_id    = user_id;
-    printf("User ID: %d", my_user_info.user_id);
     picture_url             = [[get_user_information_dictionary objectForKey:@"avatar"] retain];
     
-    printf("\n%s", [my_user_info.full_name UTF8String]);
-    printf("\nSession Key: %s\n", [sessionKey UTF8String]);
     
 }
 -(void)loadUserLocationFromDatabase
@@ -680,7 +627,6 @@ static NSString *user_locale_address = @"https://hydrogen.xen.exoware.net:3000/a
 }
 -(void)populateSuggestedJobsArrayWithString:(NSString*)the_string
 {
-    printf("\n\n\nSuggested Jobs Array: %s\n\n", [the_string UTF8String]);
     if (the_string.length < 20)
     {
         return;
@@ -717,8 +663,6 @@ static NSString *user_locale_address = @"https://hydrogen.xen.exoware.net:3000/a
             temp_small_job.job_id = -99;
         } else {
             temp_small_job.job_id = [[[array_thing objectAtIndex:i] objectForKey:@"id"] intValue];
-            printf("%d",[ [[array_thing objectAtIndex:i] objectForKey:@"id"] intValue]);
-            printf("%d",temp_small_job.job_id);
         }
         if ([[array_thing objectAtIndex:i] objectForKey:@"description"] == [NSNull null] || [[array_thing objectAtIndex:i] objectForKey:@"description"] == nil) {
             temp_small_job.job_description = @"";
@@ -805,7 +749,6 @@ static NSString *user_locale_address = @"https://hydrogen.xen.exoware.net:3000/a
             temp_small_job.job_distance = 0;
         } else {
             temp_small_job.job_distance = [[[array_thing objectAtIndex:i] objectForKey:@"distance"] doubleValue];
-            printf("%f", temp_small_job.job_distance);
         }
         [my_suggested_jobs addObject:temp_small_job];
         [temp_small_job release];

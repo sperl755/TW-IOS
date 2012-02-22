@@ -229,9 +229,6 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     StaffItToMeAppDelegate *delegate = (StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate];
-    printf("Row: %d", indexPath.row);
-    printf("TableDataSize: %d", table_data.count);
-    printf("job array size: %d", delegate.user_state_information.job_array.count);
     for (int i = 0; i < delegate.user_state_information.job_array.count; i++)
     {
         if ([[table_data objectAtIndex:indexPath.row - 1] job_id] == [[delegate.user_state_information.job_array objectAtIndex:i] job_id])
@@ -245,10 +242,8 @@
     load_view = [[LoadingView alloc] initWithFrame:CGRectMake(0, -100, 320, 480)];
     [self addSubview:load_view];
     
+    NSString *job_info_url = [[URLLibrary sharedInstance] getJobInfoWithId:[[delegate.user_state_information.job_array objectAtIndex:delegate.user_state_information.current_job_in_array] job_id]];
     
-    NSMutableString *job_info_url = [[[NSMutableString alloc] initWithString:@"https://helium.staffittome.com/apis/"] autorelease];
-    [job_info_url appendString:[NSString stringWithFormat:@"%d", [[delegate.user_state_information.job_array objectAtIndex:delegate.user_state_information.current_job_in_array] job_id]]];
-    [job_info_url appendString:@"/job"];
     //Perform the accessing of the server.
     NSURL *url = [NSURL URLWithString:job_info_url];
     ASIFormDataRequest *request_ror = [ASIFormDataRequest requestWithURL:url];
@@ -266,7 +261,6 @@
 {
     [load_view removeFromSuperview];
     NSDictionary *request_info = [NSDictionary dictionaryWithObject:[request responseString] forKey:@"responseString"];
-    printf("\n\n\nThis is stuff: %s", [[request responseString] UTF8String]);
     [[NSNotificationCenter defaultCenter] postNotificationName:@"jumpToJobDetail" object:self userInfo:request_info];
 }
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath

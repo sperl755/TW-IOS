@@ -25,13 +25,10 @@
     if ((self = [super init]))
     {
         StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*) [[UIApplication sharedApplication] delegate];
-        NSMutableString *the_string = [[NSMutableString alloc] initWithString:@"https://helium.staffittome.com/apis/"];
-        
+       
         int user_id = app_delegate.user_state_information.my_user_info.user_id;
-        [the_string appendString:[NSString stringWithFormat:@"%d", user_id]];
-        [the_string appendString:@"/list_proposal"];
         
-        NSURL *url = [NSURL URLWithString:the_string];
+        NSURL *url = [NSURL URLWithString:[[URLLibrary sharedInstance] getPendingRequestsLinkWithUserId:user_id]];
         ASIFormDataRequest *request_ror = [ASIFormDataRequest requestWithURL:url];
         [request_ror setRequestMethod:@"GET"];
         [request_ror setTimeOutSeconds:30];
@@ -46,7 +43,6 @@
 -(void)requestFinished:(ASIHTTPRequest *)request
 {
     NSArray *first_level = [[request responseString] JSONValue];
-    printf("\n\nProposals: %s\n\n", [[request responseString] UTF8String]);
     //Create Header First
     UIImage *header_image           = [UIImage imageNamed:@"module_header.png"];
     module_header_background        = [[UIImageView alloc] initWithImage:header_image];
@@ -101,13 +97,7 @@
     [self setFrame:CGRectMake(0, 0, 310, module_header_background.frame.size.height + height)]; 
     
     
-    /*
-    for (int i = 0; i < first_level.count; i++)
-    {
-        printf("%s", [[[[first_level objectAtIndex:i] objectForKey:@"proposal"] objectForKey:@"description_of_service"] UTF8String]);
-    }*/
     [delegate reloadMyTableView];
-    printf("\nThis is the contracts I have: %s\n", [[request responseString] UTF8String]);
 }
 
 -(id)initWithArray:(NSArray*)the_requests

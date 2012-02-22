@@ -12,8 +12,6 @@
 
 @implementation JobInformationHeader
 @synthesize delegate;
-static NSString *job_apply_address = @"https://helium.staffittome.com/apis/submit_application";
-static NSString *job_company_info_address = @"https://helium.staffittome.com/apis/view_company";
 
 -(id)initWithPos:(int)the_position
 {
@@ -114,7 +112,6 @@ static NSString *job_company_info_address = @"https://helium.staffittome.com/api
     return self;
 }
 -(void)tapped:(id)sender {
-	NSLog(@"See a tap gesture");
 }
 -(void)requestFinished:(ASIHTTPRequest *)request
 {
@@ -125,7 +122,6 @@ static NSString *job_company_info_address = @"https://helium.staffittome.com/api
         adding_myself_to_applied_list = NO;
         return;
     }
-    printf("\n\n\n\n\n\nThis is the application response: %s\n\n", [[request responseString] UTF8String]);
     [load_view removeFromSuperview];
     if (company_information)
     {
@@ -138,7 +134,7 @@ static NSString *job_company_info_address = @"https://helium.staffittome.com/api
         StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate];
         
         //Request information about applications
-        NSURL *url = [NSURL URLWithString:applied_job_url];
+        NSURL *url = [NSURL URLWithString:[[URLLibrary sharedInstance] getAppliedJobsUrl]];
         ASIFormDataRequest *request_ror = [ASIFormDataRequest requestWithURL:url];
         [request_ror setRequestMethod:@"POST"];
         [request_ror setPostValue:app_delegate.user_state_information.sessionKey forKey:@"session_key"];
@@ -168,7 +164,7 @@ static NSString *job_company_info_address = @"https://helium.staffittome.com/api
     
 	//Acesss the server with application params
     //Perform the accessing of the server.
-    NSURL *url = [NSURL URLWithString:job_company_info_address];
+    NSURL *url = [NSURL URLWithString:[[URLLibrary sharedInstance] getViewCompanyLink]];
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
     
     [request setRequestMethod:@"POST"];
@@ -192,7 +188,7 @@ static NSString *job_company_info_address = @"https://helium.staffittome.com/api
 	StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate];
 	//Acesss the server with application params
     //Perform the accessing of the server.
-    NSURL *url = [NSURL URLWithString:job_apply_address];
+    NSURL *url = [NSURL URLWithString:[[URLLibrary sharedInstance] getSubmitApplicationLink]];
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
     [request setRequestMethod:@"POST"];
     [request setValidatesSecureCertificate:NO];

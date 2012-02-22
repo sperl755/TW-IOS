@@ -17,7 +17,6 @@
 - (id)initWithFrame:(CGRect)frame andOnImage:(UIImage*)the_on_image offImage:(UIImage*)the_off_image sliderImage:(UIImage*)the_slider_image
 {
     self = [super initWithFrame:frame];
-    printf("%f", frame.size.width/2);
     if (self) {        on = NO;
         // This switch starts as off
         //create on image 

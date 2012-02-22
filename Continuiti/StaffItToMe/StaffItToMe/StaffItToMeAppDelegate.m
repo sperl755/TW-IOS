@@ -21,7 +21,6 @@
 @synthesize tab_bar_controller;
 @synthesize my_available_switch_array;
 
-static NSString *facebook_address = @"https://helium.staffittome.com/apis/fb_login";
 static NSString *staff_it_to_me_address = @"www.google.com";
 #define CONSUMER_KEY @"g0LqV8EsFdhCPmFhdksh3A"
 #define SECRET_KEY @"cUKExTEAqwcqsjvmQi2078rwwUnmQknvCWzHCL8snO0"
@@ -96,7 +95,6 @@ static NSString *staff_it_to_me_address = @"www.google.com";
         }
     }
     @catch (NSException *e) {
-        printf("Exception occured: %s", [[e description] UTF8String]);
         //setup the login and dashboard viewcontroller.
         self.window.rootViewController = self.viewController;
         [self.window makeKeyAndVisible];
@@ -385,10 +383,8 @@ static NSString *staff_it_to_me_address = @"www.google.com";
 -(void)request:(FBRequest *)request didLoad:(id)result
 {
     NSString *text = [[NSString alloc] initWithData:[request responseText] encoding:NSUTF8StringEncoding];
-    printf("%s", [text UTF8String]);
     //Perform the accessing of the server.
-    printf("The User Facebook ID: %s", [[result objectForKey:@"id"] UTF8String]);
-    NSURL *url = [NSURL URLWithString:facebook_address];
+    NSURL *url = [NSURL URLWithString:[[URLLibrary sharedInstance] getFacebookLoginURL]];
     ASIFormDataRequest *request_ror = [ASIFormDataRequest requestWithURL:url];
     [request_ror setRequestMethod:@"POST"];
     [request_ror setValidatesSecureCertificate:NO];
@@ -411,7 +407,6 @@ static NSString *staff_it_to_me_address = @"www.google.com";
     [[ApplicationDatabase sharedInstance] dropfacebookFriendsTable];
     [[ApplicationDatabase sharedInstance] createUsersFacebookFriendsTable];
     
-    StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate];
     NSMutableArray *dciont = [[result objectForKey:@"friends"] objectForKey:@"data"];
     for (int i = 0; i < dciont.count; i++)
     {
@@ -466,8 +461,6 @@ static NSString *staff_it_to_me_address = @"www.google.com";
 }
 -(void)request:(FBRequest *)request didFailWithError:(NSError *)error
 {
-    printf("ERREOR");
-    printf("%s", [[error description] UTF8String]);
 }
 - (void) storeCachedTwitterOAuthData: (NSString *) data forUsername: (NSString *) username {  
      NSUserDefaults          *defaults = [NSUserDefaults standardUserDefaults];  
@@ -503,7 +496,6 @@ static NSString *staff_it_to_me_address = @"www.google.com";
     }
     NSString *cachedData=[[NSUserDefaults standardUserDefaults] objectForKey:@"authData"];
     NSString *username=[twitter_engine extractUsernameFromHTTPBody:cachedData];
-    printf("%s", [username UTF8String]);
 
 }
 
@@ -556,8 +548,7 @@ static NSString *staff_it_to_me_address = @"www.google.com";
 	got_facebook_info  = NO;
     my_available_switch_array = [[NSMutableArray alloc] initWithCapacity:11];
     [UIApplication sharedApplication].statusBarHidden = YES;
-    ///////////////////////////
-    printf("USER SHOULD BE LOGGED OUT BY THIS PRINTF STATEMENT");   
+    /////////////////////////// 
 }
 
 @end

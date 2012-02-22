@@ -17,7 +17,6 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        printf("The User JSON Info: %s", [json_string_info UTF8String]);
         NSDictionary *user_information = [json_string_info JSONValue];
         
         UIImageView *header_shadow = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 10)];

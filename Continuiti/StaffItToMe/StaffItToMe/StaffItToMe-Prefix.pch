@@ -13,8 +13,6 @@
     #import <Foundation/Foundation.h>
     #import "LoadingView.h"
     #import "AlertLoadView.h"
+    #import "URLLibrary.h"
     #import "ApplicationDatabase.h"
-static NSString *inbox_api_url = @"https://helium.staffittome.com/apis/inbox";
-static NSString *applied_job_url = @"https://helium.staffittome.com/apis/applied_jobs";
-static NSString *endorse_link = @"https://helium.staffittome.com/apis/endorse";
 #endif

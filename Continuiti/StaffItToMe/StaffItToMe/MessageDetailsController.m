@@ -134,10 +134,9 @@
     load_view = [[LoadingView alloc] initWithFrame:CGRectMake(0, -50, 320, 480)];
     [self.view addSubview:load_view];
     
-    StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*) [[UIApplication sharedApplication] delegate];
-    NSMutableString *user_information = [[NSMutableString alloc] initWithString:@"https://helium.staffittome.com/apis/"];
-    [user_information appendString:[[app_delegate.user_state_information.my_inbox_messages objectAtIndex:current_position] my_sender_id]];
-    [user_information appendString:@"/profile_details"];
+    StaffItToMeAppDelegate *app_delegate    = (StaffItToMeAppDelegate*) [[UIApplication sharedApplication] delegate];
+    int sender_id                           = [[[app_delegate.user_state_information.my_inbox_messages objectAtIndex:current_position] my_sender_id] intValue];
+    NSString *user_information              = [[URLLibrary sharedInstance] getProfileInfoLinkWithId:sender_id];
     //Perform the accessing of the server.
     NSURL *url = [NSURL URLWithString:user_information];
     ASIFormDataRequest *request_ror = [ASIFormDataRequest requestWithURL:url];
@@ -156,7 +155,7 @@
     {
         StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*) [[UIApplication sharedApplication] delegate];
         // Custom initialization
-        NSURL *url = [NSURL URLWithString:@"https://helium.staffittome.com/apis/create_message"];
+        NSURL *url = [NSURL URLWithString:[[URLLibrary sharedInstance] getCreateMessageLink]];
         ASIFormDataRequest *request_ror = [ASIFormDataRequest requestWithURL:url];
         [request_ror setRequestMethod:@"POST"];
         [request_ror setTimeOutSeconds:30];
@@ -164,7 +163,6 @@
         [request_ror setDelegate:self];
         [request_ror setPostValue:app_delegate.user_state_information.sessionKey forKey:@"session_key"];
         int user_id = app_delegate.user_state_information.my_user_info.user_id;
-        printf("%s", [[NSString stringWithFormat:@"%d", user_id] UTF8String]);
         [request_ror setPostValue:[NSString stringWithFormat:@"%d", app_delegate.user_state_information.my_user_info.user_id] forKey:@"sender_id"];
         //[request_ror setPostValue:[[app_delegate.user_state_information.my_inbox_messages objectAtIndex:current_position] my_sender_name] forKey:@"recipient_id"];
         [request_ror setPostValue:[[app_delegate.user_state_information.my_inbox_messages objectAtIndex:current_position] my_sender_id] forKey:@"recipient_id"];
@@ -175,7 +173,6 @@
         [request_ror startAsynchronous];
         load_view = [[LoadingView alloc] initWithFrame:CGRectMake(0, -50, 320, 480)];
         [self.view addSubview:load_view];
-        printf(" The ID OF THE PERSON WHO SEN ME THE MESSAGR: %s", [[[app_delegate.user_state_information.my_inbox_messages objectAtIndex:current_position] my_sender_id] UTF8String]);
     }
     @catch (NSException *exception)
     {
@@ -187,7 +184,6 @@
 -(void)requestFinished:(ASIHTTPRequest *)request
 {
     [load_view removeFromSuperview];
-    printf("RESPONSEING: %s", [[request responseString] UTF8String]);
     if (looking_at_profile == 22)
     {
         @try {

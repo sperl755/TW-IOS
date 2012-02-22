@@ -111,7 +111,6 @@
 -(void)updateProfilePicture
 {
     StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*) [[UIApplication sharedApplication] delegate];
-    printf("\nUrl: %s\n", [app_delegate.user_state_information.picture_url UTF8String]);
     
     //check to make sure that the picture that we grabbed is not set to the missing_icon.gif;.
     NSArray *picture_web_components = [app_delegate.user_state_information.picture_url componentsSeparatedByString:@"/"];
@@ -130,7 +129,6 @@
     {
         NSMutableString *user_picture_string    = [NSMutableString stringWithString:@"http://graph.facebook.com/"];
         
-        printf("ID: %s", [app_delegate.user_state_information.facebook_id UTF8String]);
         [user_picture_string appendString:app_delegate.user_state_information.facebook_id];
         [user_picture_string appendString:@"/picture?type=large"];
         

@@ -30,7 +30,6 @@
         background          = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Background.png"]];
         background.frame    = CGRectMake(0, 0, 320, 480);
         [self.view insertSubview:background atIndex:0];
-        printf("Company info: %s", [json_information UTF8String]);
         
         NSDictionary *json_job_info = [json_information JSONValue];
         NSMutableDictionary *json_job_info_mutable = [NSMutableDictionary dictionaryWithDictionary:json_job_info];

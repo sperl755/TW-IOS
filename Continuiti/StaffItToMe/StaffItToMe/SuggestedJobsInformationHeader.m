@@ -12,7 +12,6 @@
 
 @implementation SuggestedJobsInformationHeader
 @synthesize delegate;
-static NSString *job_apply_address = @"https://helium.staffittome.com/apis/submit_application";
 
 -(id)initWithPos:(int)the_position
 {
@@ -119,13 +118,12 @@ static NSString *job_apply_address = @"https://helium.staffittome.com/apis/submi
         adding_myself_to_applied_list = NO;
         return;
     }
-    printf("\n\n\n\n\n\nThis is the application response: %s\n\n", [[request responseString] UTF8String]);
     [((StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate]) removeLoadingViewFromWindow];
     if ([[request responseString] isEqualToString:@"Application has been successfully submitted."])
     {
         StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate];
         //Request information about applications
-        NSURL *url = [NSURL URLWithString:applied_job_url];
+        NSURL *url = [NSURL URLWithString:[[URLLibrary sharedInstance] getAppliedJobsUrl]];
         ASIFormDataRequest *request_ror = [ASIFormDataRequest requestWithURL:url];
         [request_ror setRequestMethod:@"POST"];
         [request_ror setPostValue:app_delegate.user_state_information.sessionKey forKey:@"session_key"];
@@ -151,7 +149,7 @@ static NSString *job_apply_address = @"https://helium.staffittome.com/apis/submi
 	StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate];
 	//Acesss the server with application params
     //Perform the accessing of the server.
-    NSURL *url = [NSURL URLWithString:job_apply_address];
+    NSURL *url = [NSURL URLWithString:[[URLLibrary sharedInstance] getSubmitApplicationLink]];
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
     [request setRequestMethod:@"POST"];
     [request setValidatesSecureCertificate:NO];

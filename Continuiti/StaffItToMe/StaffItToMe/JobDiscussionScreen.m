@@ -123,7 +123,6 @@ static NSString *create_message_address = @"http://hydrogen.xen.exoware.net:3000
 		[message release];
         
     }
-	printf("The Respondedededed: %s", [[request responseString] UTF8String]);
 }
 -(void)textViewDidBeginEditing:(UITextView *)textView
 {

@@ -21,7 +21,7 @@ static NSString *GMAP_ANNOTATION_SELECTED = @"GMAP";
         return;
     }
     is_loading = YES;
-    NSMutableString *job_list_address = [NSMutableString stringWithString:@"https://helium.staffittome.com/apis/search/"];
+    NSMutableString *job_list_address = [NSMutableString stringWithString:[[URLLibrary sharedInstance] getJobSearchLink]];
     
     //Acesss the server with solr parameters
     //Perform the accessing of the server.
@@ -36,7 +36,6 @@ static NSString *GMAP_ANNOTATION_SELECTED = @"GMAP";
     [request setPostValue:app_delegate.user_state_information.industry_search_type forKey:@"industry_name"];
     //set the currently selected job_type_name
     [request setPostValue:app_delegate.user_state_information.distance_search_type forKey:@"job_type_name"];
-    printf("%f", (main_map_view.region.span.latitudeDelta * 111));
     [request setPostValue:[NSString stringWithFormat:@"%f", (main_map_view.region.span.latitudeDelta * 111)] forKey:@"distance"];
     [request setTimeOutSeconds:30];
     [request setDelegate:self];
@@ -101,7 +100,6 @@ static NSString *GMAP_ANNOTATION_SELECTED = @"GMAP";
     }*/
     [annotations removeAllObjects];
     //Fill the map with jobs that are near user.
-    printf("Table Count: %d", [table_data count]);
     for (int i = 0; i < [table_data count]; i++)
     {
         //Get the location of the job
@@ -109,7 +107,6 @@ static NSString *GMAP_ANNOTATION_SELECTED = @"GMAP";
         //Create an annotation for it with an id of the current position in the array that the job is in.
         AvailableJobsAnnotation *a_job = [[[AvailableJobsAnnotation alloc] initWithTitle:[[table_data objectAtIndex:i] title] subTitle:@"" andCoordinate:coordinate andID:[[table_data objectAtIndex:i] job_id]] retain];
         
-        printf("\n%d", a_job.pin_id);
         
         if (coordinate.latitude == 0) {
             [a_job release];
@@ -176,7 +173,6 @@ static NSString *GMAP_ANNOTATION_SELECTED = @"GMAP";
 -(void)updateMapDisplay
 {
     sleep(5);
-    printf("%d", annotations.count);
      [main_map_view addAnnotations:annotations];
 }
 -(void)setDie
@@ -189,7 +185,6 @@ static NSString *GMAP_ANNOTATION_SELECTED = @"GMAP";
     if (self) {
         if (the_location == nil)
         {
-            printf("Issue");
         }
         //This variable will be set to die when the map needs to be
         //deallocated and they are changing the screen.
@@ -421,20 +416,6 @@ static NSString *GMAP_ANNOTATION_SELECTED = @"GMAP";
 }
 -(void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view
 {
-   /* [mapView deselectAnnotation:view.annotation animated:YES];
-    UIViewController *temp_controller = [[UIViewController alloc] init];
-    UIPopoverController *pop_over = [[UIPopoverController alloc] initWithContentViewController:temp_controller];
-    [temp_controller release];
-    my_popover_controller = pop_over;
-    pop_over.popoverContentSize = CGSizeMake(100, 100);
-    [pop_over presentPopoverFromRect:view.bounds inView:view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
-    [pop_over release];*/
-    
-    /*printf("%f", view.frame.origin.x);
-    job_description_image = [[UIImageView alloc] initWithFrame:CGRectMake(touch_pos.x, touch_pos.y - 20, 20, 20)];
-    job_description_image.image = [UIImage imageNamed:@"icon57"];
-    view.leftCalloutAccessoryView = job_description_image;
-    [main_map_view addSubview:job_description_image];*/
 }
 -(void)mapView:(MKMapView *)mapView didDeselectAnnotationView:(MKAnnotationView *)view
 {
@@ -459,11 +440,10 @@ static NSString *GMAP_ANNOTATION_SELECTED = @"GMAP";
     load_view = [[LoadingView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
     [load_view setMiniatureMapLoading];
     [self addSubview:load_view];
-    
-    NSMutableString *job_info_url = [[NSMutableString alloc] initWithString:@"http://helium.staffittome.com/apis/"];
-    [job_info_url appendString:[NSString stringWithFormat:@"%d", [[delegate.user_state_information.job_array objectAtIndex:delegate.user_state_information.current_job_in_array] job_id]]];
-    [job_info_url appendString:@"/job"];
     //Perform the accessing of the server.
+    
+    NSString *job_info_url = [[NSMutableString alloc] initWithString:[[URLLibrary sharedInstance] getJobInfoWithId:[[delegate.user_state_information.job_array objectAtIndex:delegate.user_state_information.current_job_in_array] job_id]]];
+    
     NSURL *url = [NSURL URLWithString:job_info_url];
     ASIFormDataRequest *request_ror = [ASIFormDataRequest requestWithURL:url];
     [request_ror setRequestMethod:@"GET"];
@@ -504,14 +484,13 @@ static NSString *GMAP_ANNOTATION_SELECTED = @"GMAP";
     {
         [big_load_view removeFromSuperview];
         NSDictionary *request_info = [NSDictionary dictionaryWithObject:[request responseString] forKey:@"responseString"];
-        printf("\n\n\nThis is stuff: %s", [[request responseString] UTF8String]);
+        
         [[NSNotificationCenter defaultCenter] postNotificationName:@"jumpToJobDetail" object:self userInfo:request_info];
         loading_job = NO;
     }
     is_loading = NO;
     if (updatingWithTimer == 20)
     {
-        printf("%s", [[request responseString] UTF8String]);
         StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*) [[UIApplication sharedApplication] delegate];
         [app_delegate.user_state_information populateJobArrayWithJSONString:[request responseString]];
         
@@ -540,7 +519,6 @@ static NSString *GMAP_ANNOTATION_SELECTED = @"GMAP";
     MKAnnotationView *annotation_view = nil;
     
     AvailableJobsAnnotation *annot = (AvailableJobsAnnotation*)annotation;
-    printf("%s", [annot.name UTF8String]);
     
     CustomAnnotationView *view;
             view = [[[CustomAnnotationView alloc] initWithAnnotation:annot reuseIdentifier:annot.name] autorelease];
@@ -553,7 +531,6 @@ static NSString *GMAP_ANNOTATION_SELECTED = @"GMAP";
     [annotation_view setEnabled:YES];
     [annotation_view setCanShowCallout:YES];
     
-    printf("ADDED AN ANNOTATION\n");
     annotation_view.calloutOffset = CGPointMake(-10000, -100000);
     
     return annotation_view;
@@ -600,10 +577,7 @@ static NSString *GMAP_ANNOTATION_SELECTED = @"GMAP";
     
     loading_job = YES;
     
-    
-    NSMutableString *job_info_url = [[NSMutableString alloc] initWithString:@"http://helium.staffittome.com/apis/"];
-    [job_info_url appendString:[NSString stringWithFormat:@"%d", [[delegate.user_state_information.job_array objectAtIndex:delegate.user_state_information.current_job_in_array] job_id]]];
-    [job_info_url appendString:@"/job"];
+    NSString *job_info_url = [[URLLibrary sharedInstance] getJobInfoWithId:[[delegate.user_state_information.job_array objectAtIndex:delegate.user_state_information.current_job_in_array] job_id]];
     //Perform the accessing of the server.
     NSURL *url = [NSURL URLWithString:job_info_url];
     ASIFormDataRequest *request_ror = [ASIFormDataRequest requestWithURL:url];

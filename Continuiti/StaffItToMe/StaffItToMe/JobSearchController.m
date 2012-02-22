@@ -63,7 +63,7 @@
         StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate];
         
         //Request information about applications
-        NSURL *url = [NSURL URLWithString:applied_job_url];
+        NSURL *url = [NSURL URLWithString:[[URLLibrary sharedInstance] getAppliedJobsUrl]];
         ASIFormDataRequest *request_ror = [ASIFormDataRequest requestWithURL:url];
         [request_ror setRequestMethod:@"POST"];
         [request_ror setPostValue:app_delegate.user_state_information.sessionKey forKey:@"session_key"];
@@ -97,7 +97,6 @@
 }
 -(void)detailSwipeLeft:(id)sender
 {
-    printf("Swiped left");
     if (!at_detail_screen) {return;}
     StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate];
     int next_array_spot = app_delegate.user_state_information.current_job_in_array + 1;
@@ -112,10 +111,9 @@
     [app_delegate displayLoadingView];
     
     //Perform the accessing of the server.
-    NSMutableString *job_info_url = [[NSMutableString alloc] initWithString:@"http://helium.staffittome.com/apis/"];
-    [job_info_url appendString:[NSString stringWithFormat:@"%d", [[app_delegate.user_state_information.job_array objectAtIndex:next_array_spot] job_id]]];
-    [job_info_url appendString:@"/job"];
-    NSURL *url = [NSURL URLWithString:job_info_url];
+    
+    NSString *job_info_url  = [[URLLibrary sharedInstance] getJobInfoWithId:[[app_delegate.user_state_information.job_array objectAtIndex:next_array_spot] job_id]];
+    NSURL *url              = [NSURL URLWithString:job_info_url];
     
     ASIFormDataRequest *request_ror = [ASIFormDataRequest requestWithURL:url];
     [request_ror setRequestMethod:@"GET"];
@@ -132,7 +130,6 @@
     if (!at_detail_screen)
     {
         [app_delegate.user_state_information populateMyAppliedToJobsWithString:[request responseString]];
-        printf("\nThe something:%s\n", [[request responseString] UTF8String]);
         return;
     }
     [app_delegate removeLoadingViewFromWindow];
@@ -156,7 +153,6 @@
 }
 -(void)detailSwipeRight:(id)sender
 {
-    printf("Swiped right");
     if (!at_detail_screen) {return;}
     StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate];
     int next_array_spot = app_delegate.user_state_information.current_job_in_array - 1;
@@ -171,9 +167,8 @@
     //show a alertview that we are accessing the credentials and talking to the server.
     [app_delegate displayLoadingView];
     
-    NSMutableString *job_info_url = [[NSMutableString alloc] initWithString:@"http://helium.staffittome.com/apis/"];
-    [job_info_url appendString:[NSString stringWithFormat:@"%d", [[app_delegate.user_state_information.job_array objectAtIndex:next_array_spot] job_id]]];
-    [job_info_url appendString:@"/job"];
+    NSString *job_info_url = [[URLLibrary sharedInstance] getJobInfoWithId:[[app_delegate.user_state_information.job_array objectAtIndex:next_array_spot] job_id]];
+    
     //Perform the accessing of the server.
     NSURL *url = [NSURL URLWithString:job_info_url];
     ASIFormDataRequest *request_ror = [ASIFormDataRequest requestWithURL:url];

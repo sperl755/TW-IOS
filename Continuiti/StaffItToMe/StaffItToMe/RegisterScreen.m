@@ -106,10 +106,8 @@ static NSString *login_check_address = @"http://hydrogen.xen.exoware.net:3000/ap
 {
     NSData *reData = [request responseData];
     if (reData) {
-        printf("There is Data");
     }
     NSString *response = [request responseString];
-    printf("\n\nResponse String : %s\n\n", [response UTF8String]);
     [load_message dismissWithClickedButtonIndex:0 animated:YES];
     
     if (response != nil && ![response isEqualToString:@"no"])
@@ -120,7 +118,6 @@ static NSString *login_check_address = @"http://hydrogen.xen.exoware.net:3000/ap
         StaffItToMeAppDelegate *delegate = (StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate];
         delegate.user_state_information.userName = [email_txt.text copy];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"removeLoginScreen" object:nil];
-        printf("Saved the user name");
     }
     else if ([response isEqualToString:@"no"])
     {

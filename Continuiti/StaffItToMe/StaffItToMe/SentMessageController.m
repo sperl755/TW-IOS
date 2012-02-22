@@ -13,7 +13,6 @@
 @implementation SentMessageController
 @synthesize my_table;
 @synthesize delegate;
-static NSString *outbox_api_url = @"https://helium.staffittome.com/apis/sentbox";
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -29,13 +28,12 @@ static NSString *outbox_api_url = @"https://helium.staffittome.com/apis/sentbox"
     [wait_label removeFromSuperview];
     StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate];
     [load_message removeFromSuperview];
-    printf("\n\n\nTHe Messages that have been sent to you : %s\n\n\n", [[request responseString] UTF8String]);
     [app_delegate.user_state_information populateMySentMessagesWithString:[request responseString]];
     my_table = [[UITableView alloc] initWithFrame:CGRectMake(0, 5, 320, 367)];
-    my_table.delegate = self;
-    my_table.dataSource = self;
-    my_table.backgroundColor = [UIColor clearColor];
-    my_table.separatorColor = [UIColor clearColor];
+    my_table.delegate           = self;
+    my_table.dataSource         = self;
+    my_table.backgroundColor    = [UIColor clearColor];
+    my_table.separatorColor     = [UIColor clearColor];
     [self.view addSubview:my_table];
 }
 - (void)dealloc
@@ -131,7 +129,7 @@ static NSString *outbox_api_url = @"https://helium.staffittome.com/apis/sentbox"
     
     StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate];
     //Start the second request for the inbox messages
-    NSURL *url = [NSURL URLWithString:outbox_api_url];
+    NSURL *url = [NSURL URLWithString:[[URLLibrary sharedInstance] getOutboxUrl]];
     ASIFormDataRequest *request_ror = [ASIFormDataRequest requestWithURL:url];
     [request_ror setRequestMethod:@"POST"];
     [request_ror setValidatesSecureCertificate:NO];

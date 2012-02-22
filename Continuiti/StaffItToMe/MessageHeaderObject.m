@@ -59,10 +59,7 @@
 }
 -(void)retrieveConversations
 {
-    NSMutableString *the_url_String = [NSMutableString stringWithString:@"https://helium.staffittome.com/apis/"];
-    [the_url_String appendString:my_message_id];
-    [the_url_String appendString:@"/view_message"];
-    NSURL *url = [NSURL URLWithString:the_url_String];
+    NSURL *url = [NSURL URLWithString:[[URLLibrary sharedInstance] getViewMessageLnkWithMessageId:[my_message_id intValue]]];
     ASIFormDataRequest *request_ror = [ASIFormDataRequest requestWithURL:url];
     [request_ror setRequestMethod:@"POST"];
     [request_ror setValidatesSecureCertificate:NO];
@@ -75,12 +72,10 @@
 }
 -(void)requestFinished:(ASIHTTPRequest *)request
 {
-    printf("\n\n\nTHe message details: %s\n\n\n", [[request responseString] UTF8String]);
     NSString *string = [request responseString];
     NSDictionary *array_of_conversations = [string JSONValue];
     int sender = [[[array_of_conversations objectForKey:@"message"] objectForKey:@"sender_id"] intValue];
     my_sender_id = [[NSString alloc] initWithFormat:@"%d", sender];
-    printf("%s", [my_sender_id UTF8String]);
     /*for (int i = 0; i < array_of_conversations.count; i++)
     {
         ConversationMessage *message = [[ConversationMessage alloc] init];

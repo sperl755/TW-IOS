@@ -161,12 +161,11 @@
     
     StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate];
     //Perform the accessing of the server.
-    NSURL *url = [NSURL URLWithString:endorse_link];
+    NSURL *url = [NSURL URLWithString:[[URLLibrary sharedInstance] getEndorseLinkURL]];
     ASIFormDataRequest *request_ror = [ASIFormDataRequest requestWithURL:url];
     [request_ror setRequestMethod:@"POST"];
     [request_ror setValidatesSecureCertificate:NO];
     [request_ror setPostValue:app_delegate.user_state_information.sessionKey forKey:@"session_key"];
-    printf("\nFacebook UID: %s\n", [friend_facebook_id UTF8String]);
     [request_ror setPostValue:friend_facebook_id forKey:@"facebook_uid"];
     
     [request_ror setTimeOutSeconds:30];

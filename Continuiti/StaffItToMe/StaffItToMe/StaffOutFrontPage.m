@@ -20,12 +20,8 @@
         //Data handling.
         StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate];
         
-        NSMutableString *user_information = [[NSMutableString alloc] initWithString:@"http://helium.staffittome.com/apis/"];
-        [user_information appendString:[NSString stringWithFormat:@"%d", app_delegate.user_state_information.my_user_info.user_id]];
-        printf("USERID: %d", app_delegate.user_state_information.my_user_info.user_id);
-        [user_information appendString:@"/profile_details"];
         //Perform the accessing of fthe server.
-        NSURL *url = [NSURL URLWithString:user_information];
+        NSURL *url = [NSURL URLWithString:[[URLLibrary sharedInstance] getProfileInfoLinkWithId:app_delegate.user_state_information.my_user_info.user_id]];
         ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
         [request setRequestMethod:@"GET"];
         
@@ -42,7 +38,6 @@
 }
 -(void)requestFinished:(ASIHTTPRequest *)request
 {
-    printf("\nThis is theuser info: %s", [[request responseString] UTF8String]);
     if (reloading)
     {
         reloading = NO;   
@@ -86,7 +81,6 @@
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    printf("Size of nexss : %d", module_array.count);
     return module_array.count;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -159,12 +153,8 @@
         table_view.userInteractionEnabled = NO;
         StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate];
         
-        NSMutableString *user_information = [[NSMutableString alloc] initWithString:@"http://helium.staffittome.com/apis/"];
-        [user_information appendString:[NSString stringWithFormat:@"%d", app_delegate.user_state_information.my_user_info.user_id]];
-        printf("USERID: %d", app_delegate.user_state_information.my_user_info.user_id);
-        [user_information appendString:@"/profile_details"];
         //Perform the accessing of fthe server.
-        NSURL *url = [NSURL URLWithString:user_information];
+        NSURL *url = [NSURL URLWithString:[[URLLibrary sharedInstance] getProfileInfoLinkWithId:app_delegate.user_state_information.my_user_info.user_id]];
         ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
         [request setRequestMethod:@"GET"];
         

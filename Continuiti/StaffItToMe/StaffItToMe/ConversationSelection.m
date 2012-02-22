@@ -28,7 +28,6 @@
     [wait_label removeFromSuperview];
     StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate];
     [load_message removeFromSuperview];
-    printf("\n\n\nTHe Messages that have been sent to you : %s\n\n\n", [[request responseString] UTF8String]);
     
     [app_delegate.user_state_information populateMyInboxWithString:[request responseString]];
     my_table                    = [[UITableView alloc] initWithFrame:CGRectMake(0, 5, 320, 367)];
@@ -137,7 +136,7 @@
     
     StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate];
     //Start the second request for the inbox messages
-    NSURL *url = [NSURL URLWithString:inbox_api_url];
+    NSURL *url = [NSURL URLWithString:[[URLLibrary sharedInstance] getInboxUrl]];
     ASIFormDataRequest *request_ror = [ASIFormDataRequest requestWithURL:url];
     [request_ror setRequestMethod:@"POST"];
     [request_ror setValidatesSecureCertificate:NO];
@@ -169,7 +168,7 @@
     
     StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate];
     //Start the second request for the inbox messages
-    NSURL *url = [NSURL URLWithString:inbox_api_url];
+    NSURL *url = [NSURL URLWithString:[[URLLibrary sharedInstance] getInboxUrl]];
     ASIFormDataRequest *request_ror = [ASIFormDataRequest requestWithURL:url];
     [request_ror setRequestMethod:@"POST"];
     [request_ror setValidatesSecureCertificate:NO];

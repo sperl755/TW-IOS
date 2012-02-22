@@ -27,7 +27,7 @@
 {
     StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*) [[UIApplication sharedApplication] delegate];
     // Custom initialization
-    NSURL *url = [NSURL URLWithString:@"https://helium.staffittome.com/apis/create_message"];
+    NSURL *url = [NSURL URLWithString:[[URLLibrary sharedInstance] getCreateMessageLink]];
     ASIFormDataRequest *request_ror = [ASIFormDataRequest requestWithURL:url];
     [request_ror setRequestMethod:@"POST"];
     [request_ror setTimeOutSeconds:30];
@@ -45,7 +45,6 @@
 
 -(void)requestFinished:(ASIHTTPRequest *)request
 {
-    printf("\nMessage Creation Response: %s\n", [[request responseString] UTF8String]);
 }
 - (void)dealloc
 {

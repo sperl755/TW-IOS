@@ -111,7 +111,7 @@
 }
 -(void)updateCriteriaWithoutLoad
 {
-    NSMutableString *job_list_address = [NSMutableString stringWithString:@"https://helium.staffittome.com/apis/search/"];
+    NSMutableString *job_list_address = [NSMutableString stringWithString:[[URLLibrary sharedInstance] getJobSearchLink]];
 	StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*) [[UIApplication sharedApplication] delegate];
 	//Acesss the server with solr parameters
     //Perform the accessing of the server.
@@ -194,7 +194,7 @@
 }
 -(void)updateCriteria
 {
-    NSMutableString *job_list_address = [NSMutableString stringWithString:@"https://helium.staffittome.com/apis/search/"];
+    NSMutableString *job_list_address = [NSMutableString stringWithString:[[URLLibrary sharedInstance] getJobSearchLink]];
 	StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*) [[UIApplication sharedApplication] delegate];
 	//Acesss the server with solr parameters
     //Perform the accessing of the server.
@@ -215,7 +215,6 @@
 -(void)requestFinished:(ASIHTTPRequest *)request
 {
     [load_view removeFromSuperview];
-    printf("This is the job json file: %s", [[request responseString] UTF8String]);
     StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate];
     [app_delegate.user_state_information populateJobArrayWithJSONString:[request responseString]];
     
@@ -281,13 +280,10 @@
 }
 -(void)viewAndApplyForJobs
 {
-    printf("I just got all the jobs in the world");
 }
 -(void)checkIntoMyJobs
 {
-    printf("I ran errands for ms potts!");
 }
-
 
 - (void)dealloc
 {

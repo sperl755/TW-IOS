@@ -27,7 +27,6 @@
                 [self setupGUI:the_summary];
                 my_summary_text.text = the_summary;   
             }
-            printf("\n\n\n\n%s", [the_summary UTF8String]);
         }
         @catch (NSException *e)
         {

@@ -97,7 +97,7 @@
 }
 -(void)updateCriteria
 {
-    NSMutableString *job_list_address = [NSMutableString stringWithString:@"http://helium.staffittome.com/apis/search/"];
+    NSMutableString *job_list_address = [NSMutableString stringWithString:[[URLLibrary sharedInstance] getJobSearchLink]];
     if (search_by_txt.text != nil)
     {
         [job_list_address appendString:search_by_txt.text];
@@ -122,7 +122,7 @@
 }
 -(void)listFunction
 {
-    NSMutableString *job_list_address = [NSMutableString stringWithString:@"http://helium.staffittome.com/apis/search/"];
+    NSMutableString *job_list_address = [NSMutableString stringWithString:[[URLLibrary sharedInstance] getJobSearchLink]];
     if (search_by_txt.text != nil)
     {
         [job_list_address appendString:search_by_txt.text];
@@ -150,7 +150,7 @@
 
 -(void)mapFunction
 {
-    NSMutableString *job_list_address = [NSMutableString stringWithString:@"http://helium.staffittome.com/apis/search/"];
+    NSMutableString *job_list_address = [NSMutableString stringWithString:[[URLLibrary sharedInstance] getJobSearchLink]];
     if (search_by_txt.text != nil)
     {
         [job_list_address appendString:search_by_txt.text];
@@ -238,8 +238,6 @@
     if (displayed == NO)
     {
         startPoint = [[touches anyObject] locationInView:self];
-        /*printf("%f\n%f", startPoint.y, self.frame.origin.y);
-        [self setFrame:CGRectMake(0, startPoint.y - ((self.frame.size.height*2) - 18), self.frame.size.width, self.frame.size.height)];*/
     }
 }
 -(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
@@ -250,9 +248,6 @@
         if (self.frame.origin.y < 0)
         {
             int DX = startPoint.y - cpoint.y;
-            printf("\n%f\n", self.frame.origin.y);
-            printf("%f\n", self.frame.size.height);
-            printf("%d\n", DX);
             if (self.frame.origin.y + self.frame.size.height - DX < 21)
             {
                 return;

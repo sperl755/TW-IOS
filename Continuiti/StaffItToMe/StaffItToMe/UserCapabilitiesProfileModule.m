@@ -10,7 +10,6 @@
 #import "StaffItToMeAppDelegate.h"
 
 @implementation UserCapabilitiesProfileModule
-static NSString *capabilities = @"http://helium.staffittome.com/apis/capability_list";
 -(id)init
 {
     if ((self = [super init]))
@@ -112,7 +111,6 @@ static NSString *capabilities = @"http://helium.staffittome.com/apis/capability_
 }
 -(void)requestFinished:(ASIHTTPRequest *)request
 {
-    printf("\n\n\nThis is theuser capabilities: %s\n\n", [[request responseString] UTF8String]);
 }
 
 /*

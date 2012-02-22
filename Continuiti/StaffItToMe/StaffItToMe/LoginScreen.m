@@ -25,11 +25,11 @@ static NSString *login_check_address = @"http://hydrogen.xen.exoware.net:3000/ap
         background = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"LoginBackground.png"]];
         [background setFrame:CGRectMake(0, 0, 320, 480)];
         [self addSubview:background];
+        
         //Create Facebook Button.
         facebook_register_btn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [facebook_register_btn setFrame:CGRectMake(47.5, 242, 225, 66)];
+        [facebook_register_btn setFrame:CGRectMake(110, 99.5, 101.5, 21)];
         [facebook_register_btn setBackgroundImage:[UIImage imageNamed:@"login_button"] forState:UIControlStateNormal];
-        [facebook_register_btn setBackgroundImage:[UIImage imageNamed:@"login_button_pressed"] forState:UIControlStateSelected];
         [facebook_register_btn addTarget:app_delegate action:@selector(facebookFunction) forControlEvents:UIControlEventTouchUpInside];
         [self insertSubview:facebook_register_btn atIndex:20];
         
@@ -44,7 +44,6 @@ static NSString *login_check_address = @"http://hydrogen.xen.exoware.net:3000/ap
 }
 -(void)reactToASSliderValueChange:(double)the_slider_value
 {
-    printf("\n%f", the_slider_value);
 }
 -(void)displayRegisterScreen
 {
@@ -89,15 +88,12 @@ static NSString *login_check_address = @"http://hydrogen.xen.exoware.net:3000/ap
     //Perform the accessing of the server.
     NSURL *url = [NSURL URLWithString:login_check_address];
     NSString *login_stream = [NSString stringWithFormat:@"%s-%s", [username_txt.text UTF8String],[password_txt.text UTF8String]];
-    printf("%s", [login_stream UTF8String]);
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
     [request setRequestMethod:@"POST"];
     [request setPostValue:username_txt.text forKey:@"login"];
     [request setPostValue:password_txt.text forKey:@"password"];
     [request setTimeOutSeconds:30];
     [request setDelegate:self];
-    //printf("%s", [[request valueForKey:@"email"]  UTF8String]);
-    //printf("\n%s\n", [[[request postBody] description] UTF8String]);
     [request startAsynchronous];
     
 }
@@ -108,11 +104,8 @@ static NSString *login_check_address = @"http://hydrogen.xen.exoware.net:3000/ap
 {
     NSData *reData = [request responseData];
     if (reData) {
-        printf("There is Data");
     }
     NSString *response = [request responseString];
-    printf("\n%s\n", [response UTF8String]);
-    printf("\n%d\n", [request responseStatusCode]);
 	
     //If username and password were correct
     if (response != nil && ![response isEqualToString:@"no"] && response.length == 40) {
@@ -122,7 +115,6 @@ static NSString *login_check_address = @"http://hydrogen.xen.exoware.net:3000/ap
         StaffItToMeAppDelegate *delegate = (StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate];
         delegate.user_state_information.userName = [username_txt.text copy];
 		delegate.user_state_information.sessionKey = [[request responseString] retain];
-		printf("\nThis is their sessionKey: %s\n", [delegate.user_state_information.sessionKey UTF8String]);
         
         NSError *error;
         NSString *path = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/AskedAboutSaving.txt"];
@@ -152,7 +144,6 @@ static NSString *login_check_address = @"http://hydrogen.xen.exoware.net:3000/ap
 -(void)alertView:(UIAlertView*)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if (buttonIndex == 1 && alertView.tag == 5) {
-        printf("User said sure");
         NSError *error;
         NSString *path = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/username.txt"];
         [username_txt.text writeToFile:path atomically:YES encoding:NSUTF8StringEncoding error:&error];
@@ -161,7 +152,6 @@ static NSString *login_check_address = @"http://hydrogen.xen.exoware.net:3000/ap
     }
     else if (buttonIndex == 0 && alertView.tag == 5)
     {
-        printf("user said heck no fool!");
     }
 }
 - (void)requestFailed:(ASIHTTPRequest *)request
@@ -178,7 +168,7 @@ static NSString *login_check_address = @"http://hydrogen.xen.exoware.net:3000/ap
     CGPoint touch_locale = [touch locationInView:self];
     if (touch_locale.x > 188 && touch_locale.y > 308 && touch_locale.x < 250 && touch_locale.y < 330)
     {
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"https://helium.staffittome.com/about/termsofservice"]];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[[URLLibrary sharedInstance] getTermsOfServiceLink]]];
     }
 }
 

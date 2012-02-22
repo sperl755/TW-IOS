@@ -18,7 +18,7 @@ static FeedService *shared = NULL;
 
 -(void)postNewFeedWithDictionary:(NSDictionary *)the_values {
     StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate];
-    NSURL *url = [[NSURL alloc] initWithString:@"https://helium.staffittome.com/apis/create_my_feed"];
+    NSURL *url = [[NSURL alloc] initWithString:[[URLLibrary sharedInstance] getCreateFeedURL]];
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
     [request setRequestMethod:@"POST"];
     [request setValidatesSecureCertificate:NO];

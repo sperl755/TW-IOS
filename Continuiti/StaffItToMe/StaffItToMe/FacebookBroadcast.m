@@ -152,7 +152,6 @@
         if ([[[app_delegate.user_state_information.my_facebook_friends objectAtIndex:i] name] isEqualToString:[[[tableView cellForRowAtIndexPath:indexPath] textLabel] text]])
         {
             index_in_real_array = i;
-            printf("%d", index_in_real_array);
             [delegate goToFriendFacebookBroadcast:index_in_real_array];
         }
     }

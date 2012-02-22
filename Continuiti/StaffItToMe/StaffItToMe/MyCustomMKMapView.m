@@ -12,7 +12,6 @@
 @implementation MyCustomMKMapView
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    printf("Hello");
 }
 
 @end

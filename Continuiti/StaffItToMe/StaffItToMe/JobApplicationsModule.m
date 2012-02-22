@@ -53,7 +53,7 @@
         StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate];
         
         //Request information about applications
-        NSURL *url = [NSURL URLWithString:applied_job_url];
+        NSURL *url = [NSURL URLWithString:[[URLLibrary sharedInstance] getAppliedJobsUrl]];
         ASIFormDataRequest *request_ror = [ASIFormDataRequest requestWithURL:url];
         [request_ror setRequestMethod:@"POST"];
         [request_ror setPostValue:app_delegate.user_state_information.sessionKey forKey:@"session_key"];
@@ -67,7 +67,6 @@
 
 -(void)requestFinished:(ASIHTTPRequest *)request
 {
-    printf("\n\n\nThis is  your applied to jobs: %s\n\n\n\n", [[request responseString] UTF8String]);
     
     StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate];
     // Initialization code

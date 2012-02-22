@@ -87,7 +87,6 @@
 {
     if ((self = [super init]))
     {
-        printf("%s", [json_info UTF8String]);
         NSDictionary *json_job_info = [json_info JSONValue];
         NSMutableDictionary *json_job_info_mutable = [NSMutableDictionary dictionaryWithDictionary:json_job_info];
         

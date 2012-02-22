@@ -101,7 +101,6 @@ static ApplicationDatabase *shared = NULL;
     
     if (user_information_table_name != nil)
     {
-        printf("%s", user_information_table_name);
     }
     else
     {
@@ -134,7 +133,6 @@ static ApplicationDatabase *shared = NULL;
     user_location_table_name = (const char*)sqlite3_column_text(table_check_statement, 0);
     if (user_location_table_name != nil)
     {
-        printf("%s", user_location_table_name);
     }
     else
     {
@@ -166,7 +164,6 @@ static ApplicationDatabase *shared = NULL;
     
     if (users_facebook_friends_table_name != nil)
     {
-        printf("%s", users_facebook_friends_table_name);
     }
     else
     {
@@ -280,7 +277,6 @@ static ApplicationDatabase *shared = NULL;
     }
     else
     {
-        printf("%s", user_information_username);
         sqlite3_finalize(check_user_exists);
         [self insertUserInformationIntoUserInformationTableWithDictionary:the_values];
     }
@@ -305,7 +301,6 @@ static ApplicationDatabase *shared = NULL;
     }
     else
     {
-        printf("%s", location_information);
         sqlite3_finalize(check_location_exists);
         [self insertIntoLocationTableUserLocationWithDictionary:the_values];
     }

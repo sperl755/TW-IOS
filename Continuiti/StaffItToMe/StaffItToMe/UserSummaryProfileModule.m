@@ -45,7 +45,7 @@
         {
             user_summary_text.text          = @"Not Available\n";
             module_row_one_background.frame = CGRectMake(0, module_header_background.frame.origin.y + module_header_background.frame.size.height, 310, 42);
-            user_summary_text.frame         = CGRectMake(0, module_header_background.frame.origin.y + module_header_background.frame.size.height, 310, 42);
+            user_summary_text.frame         = CGRectMake(5, module_header_background.frame.origin.y + module_header_background.frame.size.height, 300, 42);
             
             [self addSubview:module_row_one_background];
             [self addSubview:user_summary_text];

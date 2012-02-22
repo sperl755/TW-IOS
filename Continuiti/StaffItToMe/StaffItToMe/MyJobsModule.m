@@ -11,14 +11,13 @@
 
 @implementation MyJobsModule
 @synthesize delegate;
-static NSString *my_job_contracts_url = @"https://helium.staffittome.com/apis/my_job_contracts";
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
         StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate];
         //Perform the accessing of the server.
-        NSURL *url = [NSURL URLWithString:my_job_contracts_url];
+        NSURL *url = [NSURL URLWithString:[[URLLibrary sharedInstance] getMyJobContractsLink]];
         ASIFormDataRequest *request_ror = [ASIFormDataRequest requestWithURL:url];
         [request_ror setRequestMethod:@"POST"];
         [request_ror setValidatesSecureCertificate:NO];
@@ -34,14 +33,13 @@ static NSString *my_job_contracts_url = @"https://helium.staffittome.com/apis/my
 -(void)requestFinished:(ASIHTTPRequest *)request
 {
     height = 0;
-    printf("\n\n\n This is the job contracts: %s\n\n\n", [[request responseString] UTF8String]);
     StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate];
     [app_delegate.user_state_information populateMyJobArrayWithJSONString:[request responseString]];
     // Initialization code
     //Create Header
-    UIImage *header_image = [UIImage imageNamed:@"module_header.png"];
-    module_header_background = [[UIImageView alloc] initWithImage:header_image];
-    module_header_background.frame = CGRectMake(0, 0, 310, 33);
+    UIImage *header_image           = [UIImage imageNamed:@"module_header.png"];
+    module_header_background        = [[UIImageView alloc] initWithImage:header_image];
+    module_header_background.frame  = CGRectMake(0, 0, 310, 33);
     height += module_header_background.frame.size.height;
     [self addSubview:module_header_background];
     

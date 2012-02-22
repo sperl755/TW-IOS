@@ -139,12 +139,10 @@ static NSString *staff_out_address = @"http://hydrogen.xen.exoware.net:3000/apis
     //show a alertview that we are accessing the credentials and talking to the server.
     [((StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate]) displayLoadingView];
     
-    NSMutableString *job_info_url = [[NSMutableString alloc] initWithString:@"https://helium.staffittome.com/apis/"];
     int suggested_position  = delegate.user_state_information.current_suggested_job_in_array;
     int job_id              = [[delegate.user_state_information.my_suggested_jobs objectAtIndex:suggested_position] job_id];
     
-    [job_info_url appendString:[NSString stringWithFormat:@"%d", job_id]];
-    [job_info_url appendString:@"/job"];
+    NSString *job_info_url = [[URLLibrary sharedInstance] getJobInfoWithId:job_id];
     
     //Perform the accessing of the server.
     NSURL *url = [NSURL URLWithString:job_info_url];

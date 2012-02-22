@@ -17,8 +17,7 @@
     if (self) {
 
         // Custom initialization
-        
-        NSMutableString *industry_list_address = [NSMutableString stringWithString:@"https://helium.staffittome.com/moreapis/industries"];
+        NSString *industry_list_address = [NSMutableString stringWithString:[[URLLibrary sharedInstance] getIndustriesListLink]];
         StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*) [[UIApplication sharedApplication] delegate];
         //Acesss the server with solr parameters
         //Perform the accessing of the server.

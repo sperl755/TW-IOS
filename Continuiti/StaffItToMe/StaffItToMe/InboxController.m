@@ -69,9 +69,10 @@
     [active startAnimating];
     [load_message addSubview:active];
     
-    NSMutableString *message_info_url = [[NSMutableString alloc] initWithString:@"https://helium.staffittome.com/apis/"];
-    [message_info_url appendString:[[app_delegate.user_state_information.my_inbox_messages objectAtIndex:convo_position] my_message_id]];
-    [message_info_url appendString:@"/view_message"];
+    int message_id = [[[app_delegate.user_state_information.my_inbox_messages objectAtIndex:convo_position] my_message_id] intValue];
+    
+    NSString *message_info_url = [[URLLibrary sharedInstance] getViewMessageLnkWithMessageId:message_id];
+    
     //Perform the accessing of the server.
     NSURL *url = [NSURL URLWithString:message_info_url];
     ASIFormDataRequest *request_ror = [ASIFormDataRequest requestWithURL:url];
@@ -91,9 +92,7 @@
 
 -(void)requestFinished:(ASIHTTPRequest *)request
 {
-    printf("\nConversation Info: %s\n", [[request responseString] UTF8String]);
     [load_message dismissWithClickedButtonIndex:0 animated:YES];
-    printf("\n\n\nThis is message details: %s", [[request responseString] UTF8String]);
     if (convo_details == nil) {
         convo_details = [[ConversationViewController alloc] initWithNibName:@"ConversationViewController" bundle:nil andMessageArray:[NSArray arrayWithObjects:nil] andDateArray:[NSArray arrayWithObjects:nil]];
     }

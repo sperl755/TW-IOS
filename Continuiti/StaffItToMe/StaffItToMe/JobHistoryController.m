@@ -19,7 +19,6 @@
         // Custom initialization
         job_position = the_pos;
         StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*) [[UIApplication sharedApplication] delegate];
-        printf("\n%d\n", [[[app_delegate.user_state_information.my_jobs objectAtIndex:job_position] job_history] count]);
         UITextView *information = [[UITextView alloc] initWithFrame:CGRectMake(0, 0, 320, 300)];
         NSMutableString *description = [[NSMutableString alloc] init];
         for (int i = 0; i < [[[app_delegate.user_state_information.my_jobs objectAtIndex:job_position] job_history] count]; i++)

@@ -11,7 +11,6 @@
 
 @implementation JobSuggestionsModule
 @synthesize delegate;
-static NSString *job_suggestion_rl = @"https://helium.staffittome.com/apis/job_suggestion";
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -28,7 +27,7 @@ static NSString *job_suggestion_rl = @"https://helium.staffittome.com/apis/job_s
         
         StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate];
         //Perform the accessing of the server.
-        NSURL *url = [NSURL URLWithString:job_suggestion_rl];
+        NSURL *url = [NSURL URLWithString:[[URLLibrary sharedInstance] getJobSuggestionsLink]];
         ASIFormDataRequest *request_ror = [ASIFormDataRequest requestWithURL:url];
         [request_ror setRequestMethod:@"GET"];
         [request_ror setValidatesSecureCertificate:NO];
@@ -49,7 +48,6 @@ static NSString *job_suggestion_rl = @"https://helium.staffittome.com/apis/job_s
 }
 -(void)oneSelected
 {
-    printf("HELLO");
 }
 -(void)twoSelected
 {
