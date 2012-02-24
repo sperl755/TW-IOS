@@ -37,6 +37,7 @@
     StaffOutMain *broadcast;
     FacebookBroadcast *my_facebook_broadcaster;
 	BOOL got_facebook_info;
+    BOOL facebook_request_is_loading;
     //This is used to count when we can go to the main app
     //because we need to make multiple requests at the beginning of login.
     int loadDoneYet;

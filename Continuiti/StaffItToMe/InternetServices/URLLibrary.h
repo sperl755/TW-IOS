@@ -34,5 +34,6 @@
 -(NSString*)getFacebookLoginURL;
 -(NSString*)getCreateProposalUrl;
 -(NSString*)getCapabilityUrl;
+-(NSString*)getUsersFeedSubscriptionsUrlWithSessionKey:(NSString*)the_session_key;
 + (URLLibrary*) sharedInstance;
 @end

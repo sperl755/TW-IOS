@@ -84,7 +84,11 @@
     
     if (app_delegate.user_state_information.my_suggested_jobs.count < 3)
     {
+        [module_header_background removeFromSuperview];
+        [job_suggestion_label removeFromSuperview];
+        [shuffle_button removeFromSuperview];
         [self removeFromSuperview];
+        [delegate finishedLoadingSuggestedJob];
         return;
     }
     

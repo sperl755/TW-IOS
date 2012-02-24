@@ -82,12 +82,12 @@
 
 - (void)dealloc
 {
-    [logo_message release];
-    [find_work_btn release];
-    [my_jobs_btn release];
-    [im_available_btn release];
-    [home_btn release];
-    [inbox_btn release];
+    [logo_message       release];
+    [find_work_btn      release];
+    [my_jobs_btn        release];
+    [im_available_btn   release];
+    [home_btn           release];
+    [inbox_btn          release];
     [super dealloc];
 }
 

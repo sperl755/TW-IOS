@@ -12,11 +12,24 @@
 
 @implementation FeedService
 
-static FeedService *shared = NULL;
 @synthesize request_success_function;
 @synthesize request_failed_function;
 
+/**
+	Creates a new feed on the server. Dictionary values are 
+ session_key
+ feed
+ feed_filter
+ share_to_career_team
+ share_to_friend
+ url_title
+ url_address
+ url_description
+ 
+	@param the_values The dictioanry of values to post on the request.
+ */
 -(void)postNewFeedWithDictionary:(NSDictionary *)the_values {
+    
     StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate];
     NSURL *url = [[NSURL alloc] initWithString:[[URLLibrary sharedInstance] getCreateFeedURL]];
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
@@ -38,20 +51,23 @@ static FeedService *shared = NULL;
     
     [request startAsynchronous];
 }
-
 /**
-    Gets the global FeedService class.
- 
-    @returns ApplicationDatabase.
+	Gets the users feed subscriptions from the site.
  */
-+ (FeedService*) sharedInstance
-{	
-	// allocate the shared instance, because it hasn't been done yet
-	@synchronized( shared ) {
-		if ( !shared || shared == NULL ) {
-			shared = [[FeedService alloc] init];
-		}
-	}
-	return shared;
+-(void)getUsersFeedSubscriptions
+{
+    StaffItToMeAppDelegate *app_delegate    = (StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate];
+    NSURL *url                              = [[NSURL alloc] initWithString:[[URLLibrary sharedInstance] getUsersFeedSubscriptionsUrlWithSessionKey:app_delegate.user_state_information.sessionKey]];
+    ASIFormDataRequest *request             = [ASIFormDataRequest requestWithURL:url];
+    
+    [request setRequestMethod:@"GET"];
+    [request setValidatesSecureCertificate:NO];
+    [request setTimeOutSeconds:30];
+    [request setDelegate:self];
+    [request setDidFailSelector:request_failed_function];
+    [request setDidFinishSelector:request_success_function];
+    [request setPostValue:app_delegate.user_state_information.sessionKey    forKey:@"session_key"];
+    [request startAsynchronous];
+    
 }
 @end

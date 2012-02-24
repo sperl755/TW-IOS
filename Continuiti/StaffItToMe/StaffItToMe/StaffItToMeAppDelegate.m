@@ -114,6 +114,7 @@ static NSString *staff_it_to_me_address = @"www.google.com";
      Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
      Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
      */
+    [self removeLoadingViewFromWindow];
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
@@ -200,9 +201,8 @@ static NSString *staff_it_to_me_address = @"www.google.com";
 -(void)facebookFunction
 {
     //show a alertview that we are accessing the credentials and talking to the server.
-    load_view = [[LoadingView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
-    [_window addSubview:load_view];
-    load_view.backgroundColor = [UIColor clearColor];
+    [self displayLoadingView];
+    facebook_request_is_loading = YES;
     /*load_message = [[UIAlertView alloc] initWithTitle:@"Loading..." message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:nil];
     [load_message show];
     UIActivityIndicatorView *active = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
@@ -379,9 +379,12 @@ static NSString *staff_it_to_me_address = @"www.google.com";
 -(void)removeLoadingViewFromWindow
 {
     [load_view removeFromSuperview];
+    load_view = nil;
 }
 -(void)request:(FBRequest *)request didLoad:(id)result
 {
+    [self displayLoadingView];
+    
     NSString *text = [[NSString alloc] initWithData:[request responseText] encoding:NSUTF8StringEncoding];
     //Perform the accessing of the server.
     NSURL *url = [NSURL URLWithString:[[URLLibrary sharedInstance] getFacebookLoginURL]];
@@ -395,13 +398,12 @@ static NSString *staff_it_to_me_address = @"www.google.com";
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [request_ror setPostValue:[defaults objectForKey:@"FBAccessTokenKey"] forKey:@"facebook_session_key"];
-    [request_ror setPostValue:[result objectForKey:@"locale"] forKey:@"locale"];
-    [request_ror setPostValue:[result objectForKey:@"gender"] forKey:@"sex"];
-    [request_ror setPostValue:[result objectForKey:@"last_name"] forKey:@"last_name"];
-    [request_ror setPostValue:[result objectForKey:@"birthday"] forKey:@"birthday"];
-    [request_ror setPostValue:[result objectForKey:@"email"] forKey:@"email"];
-    [request_ror setPostValue:[result objectForKey:@"name"] forKey:@"name"];
-    
+    [request_ror setPostValue:[result objectForKey:@"locale"]       forKey:@"locale"];
+    [request_ror setPostValue:[result objectForKey:@"gender"]       forKey:@"sex"];
+    [request_ror setPostValue:[result objectForKey:@"last_name"]    forKey:@"last_name"];
+    [request_ror setPostValue:[result objectForKey:@"birthday"]     forKey:@"birthday"];
+    [request_ror setPostValue:[result objectForKey:@"email"]        forKey:@"email"];
+    [request_ror setPostValue:[result objectForKey:@"name"]         forKey:@"name"];
     
     //Get the facebook friends
     [[ApplicationDatabase sharedInstance] dropfacebookFriendsTable];
@@ -431,14 +433,15 @@ static NSString *staff_it_to_me_address = @"www.google.com";
 }
 -(void)requestFinished:(ASIHTTPRequest *)request
 {
+    facebook_request_is_loading = NO;
     @try {
         if (loadDoneYet == 1) {
             if ([[request responseString] length] >= 40) {
                 StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate];
                 //Populate Data before entering app.
                 [app_delegate.user_state_information getUserInformation:[request responseString]];
-                got_facebook_info = YES;
-                logged_out = NO;
+                got_facebook_info   = YES;
+                logged_out          = NO;
                 [_viewController tearLoginScreen];
             }
             else
@@ -461,6 +464,7 @@ static NSString *staff_it_to_me_address = @"www.google.com";
 }
 -(void)request:(FBRequest *)request didFailWithError:(NSError *)error
 {
+    [self removeLoadingViewFromWindow];
 }
 - (void) storeCachedTwitterOAuthData: (NSString *) data forUsername: (NSString *) username {  
      NSUserDefaults          *defaults = [NSUserDefaults standardUserDefaults];  

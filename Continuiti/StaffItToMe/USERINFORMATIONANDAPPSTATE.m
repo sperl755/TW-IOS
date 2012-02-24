@@ -635,6 +635,7 @@ static NSString *user_locale_address = @"https://hydrogen.xen.exoware.net:3000/a
 	NSString *fileContent = [[NSString alloc] initWithContentsOfFile:filePath]; 
 	    //Create a dicionary based off of the JSON String.
     NSDictionary *data = [the_string JSONValue];
+    
     NSArray *array_thing;
     @try
     {

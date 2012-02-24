@@ -12,7 +12,7 @@
 static URLLibrary *shared = NULL;
 
 -(NSString*)mainAddress {
-    return @"https://helium.staffittome.com/apis/";
+    return @"https://talentwire.me/apis/";
 }
 
 -(NSString*)getJobInfoWithId:(int)the_job_id
@@ -159,6 +159,14 @@ static URLLibrary *shared = NULL;
     NSMutableString *string = [[NSMutableString alloc] initWithString:[self mainAddress]];
     [string appendString:@"capability_list"];
     return string;    
+}
+-(NSString*)getUsersFeedSubscriptionsUrlWithSessionKey:(NSString*)the_session_key
+{
+    NSMutableString *string = [[NSMutableString alloc] initWithString:[self mainAddress]];
+    [string appendString:@"user/"];
+    [string appendString:the_session_key];
+    [string appendString:@"/get/subscriptions"];
+    return string;  
 }
 
 /**

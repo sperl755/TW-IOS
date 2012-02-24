@@ -12,7 +12,6 @@
 {
 }
 
-+(FeedService*)sharedInstance;
 @property (nonatomic) SEL request_success_function;
 @property (nonatomic) SEL request_failed_function;
 

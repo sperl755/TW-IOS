@@ -8,20 +8,6 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          isPathRelative = "1"
-         filePath = "StaffItToMe/StaffOutProposalPage.m"
-         timestampString = "351588521.372543"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "530"
-         endingLineNumber = "530"
-         landmarkName = "-sendProposal"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         isPathRelative = "1"
          filePath = "StaffItToMe/JobDetailScreen.m"
          timestampString = "351049705.8699"
          startingColumnNumber = "9223372036854775807"
@@ -169,6 +155,20 @@
          startingLineNumber = "64"
          endingLineNumber = "64"
          landmarkName = "-goToConversation:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "StaffItToMe/StaffItToMeAppDelegate.m"
+         timestampString = "351745365.410013"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "205"
+         endingLineNumber = "205"
+         landmarkName = "-facebookFunction"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>
