@@ -14,8 +14,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "469BD67213AB188800EDFE3E"
-               BuildableName = "StaffItToMe.app"
-               BlueprintName = "StaffItToMe"
+               BuildableName = "Talentwire.app"
+               BlueprintName = "Talentwire"
                ReferencedContainer = "container:StaffItToMe.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -32,8 +32,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "469BD67213AB188800EDFE3E"
-            BuildableName = "StaffItToMe.app"
-            BlueprintName = "StaffItToMe"
+            BuildableName = "Talentwire.app"
+            BlueprintName = "Talentwire"
             ReferencedContainer = "container:StaffItToMe.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -50,8 +50,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "469BD67213AB188800EDFE3E"
-            BuildableName = "StaffItToMe.app"
-            BlueprintName = "StaffItToMe"
+            BuildableName = "Talentwire.app"
+            BlueprintName = "Talentwire"
             ReferencedContainer = "container:StaffItToMe.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -68,8 +68,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "469BD67213AB188800EDFE3E"
-            BuildableName = "StaffItToMe.app"
-            BlueprintName = "StaffItToMe"
+            BuildableName = "Talentwire.app"
+            BlueprintName = "Talentwire"
             ReferencedContainer = "container:StaffItToMe.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

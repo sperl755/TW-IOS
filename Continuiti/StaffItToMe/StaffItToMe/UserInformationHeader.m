@@ -29,7 +29,7 @@
         header_shadow.image     = [UIImage imageNamed:@"header_shadow"];
         [self addSubview:header_shadow];
         
-        //Setup the available switch background.
+        /*//Setup the available switch background.
         my_available_switch_background = [[UIImageView alloc] initWithFrame:CGRectMake(230, 10, 89, 58)];
         [my_available_switch_background setImage:[UIImage imageNamed:@"available_widget"]];
         [self addSubview:my_available_switch_background];
@@ -39,7 +39,7 @@
         my_available_switch.delegate = self;
         [my_available_switch setOn:app_delegate.user_state_information.im_available];
         [app_delegate.my_available_switch_array addObject:my_available_switch];
-        [self addSubview:my_available_switch];
+        [self addSubview:my_available_switch];*/
         
         //Setup Containers.
         //setup prof pic

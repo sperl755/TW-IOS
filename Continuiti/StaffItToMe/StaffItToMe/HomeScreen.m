@@ -19,14 +19,31 @@
         // Custom initialization
         im_available = YES;
         SpamYourFriends *spam_friends = [[SpamYourFriends alloc] init];
-        JobSuggestionsModule *job_suggests = [[JobSuggestionsModule alloc] init];
-        job_suggests.delegate = self;
+        //JobSuggestionsModule *job_suggests = [[JobSuggestionsModule alloc] init];
+        //job_suggests.delegate = self;
         my_header = [[UserInformationHeader alloc] init];
         my_header.delegate = self;
         [self.view addSubview:my_header];
-        module_array = [[NSArray alloc] initWithArray:[NSArray arrayWithObjects:my_header, spam_friends, job_suggests, nil]];
+        
+        StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate];
+        UIView *logout_button_view  = [[UIView alloc] initWithFrame:CGRectMake(73, 0, 93, 25.5)];
+        logout_button_view.center   = CGPointMake(320/2, logout_button_view.center.y);
+        UIButton *logout_button                   = [UIButton buttonWithType:UIButtonTypeCustom];
+        logout_button.frame             = CGRectMake(0, 0, 93, 25.5);
+        [logout_button addTarget:app_delegate action:@selector(logoutFunction)      forControlEvents:UIControlEventTouchUpInside];
+        [logout_button setBackgroundImage:[UIImage imageNamed:@"connections_box"]   forState:UIControlStateNormal];
+        [logout_button_view addSubview:logout_button];
+        UILabel *aconnections_label          = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 30, 22)];
+        aconnections_label.text              = @"Logout";
+        aconnections_label.center            = CGPointMake(97/2, aconnections_label.center.y + 4);
+        aconnections_label.backgroundColor   = [UIColor clearColor];
+        aconnections_label.font              = [UIFont fontWithName:@"HelveticaNeueLTCom-Md" size:9];
+        aconnections_label.textColor         = [UIColor colorWithRed:153.0/255 green:153.0/255 blue:153.0/255 alpha:1];
+        [logout_button_view addSubview:aconnections_label];
+        
+        module_array = [[NSArray alloc] initWithArray:[NSArray arrayWithObjects:my_header, spam_friends, logout_button_view, nil]];
         [spam_friends release];
-        [job_suggests release];
+        //[job_suggests release];
         
     }
     return self;
@@ -68,8 +85,8 @@
     refresh_header = [[PullRefreshHeader alloc] initWithFrame:CGRectMake(0, -70, 320, 70)];
     [my_table_view addSubview:refresh_header];
     
-    load_view = [[LoadingView alloc] initWithFrame:CGRectMake(0, -44, 320, 480)];
-    [self.view addSubview:load_view];
+    //load_view = [[LoadingView alloc] initWithFrame:CGRectMake(0, -44, 320, 480)];
+    //[self.view addSubview:load_view];
     
 }
 -(void)scrollViewWillBeginDragging:(UIScrollView *)scrollView

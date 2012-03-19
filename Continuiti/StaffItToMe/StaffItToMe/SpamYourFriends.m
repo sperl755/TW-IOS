@@ -31,9 +31,9 @@
         //the row stopping point in the array. End will be behind beginning sometimes
         //as they are indexes that curl around the array
         beginning = 0;
-        if (app_delegate.user_state_information.my_facebook_friends.count > 4)
+        if (app_delegate.user_state_information.my_facebook_friends.count > 15)
         {
-            end = 3; //Creating 4 because 0, 1, 2, 3 = 4 items.
+            end = 14; //Creating 4 because 0, 1, 2, 3 = 4 items.
         }
         else
         {
@@ -44,6 +44,8 @@
             else
             {
                 end = 0;   
+                [self removeFromSuperview];
+                return [[SpamYourFriends alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
             }
         }
         
@@ -69,7 +71,7 @@
         [self addSubview:shuffle_button];
         //[shuffle_image release];
         int height = module_header_background.frame.size.height;
-        for (int i = beginning; i <= end; i++)
+        for (int i = beginning; i < end; i++)
         {
             StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*) [[UIApplication sharedApplication] delegate];  
             FacebookFriendEICell *cell = [[FacebookFriendEICell alloc] initWithFriendName:[[app_delegate.user_state_information.my_facebook_friends objectAtIndex:i] name] friend_id:[[app_delegate.user_state_information.my_facebook_friends objectAtIndex:i] friend_id]];
@@ -100,7 +102,7 @@
     [friend_cells removeAllObjects];
     //recreate the arrays
     int height = module_header_background.frame.size.height;
-    for (int i = 0; i <= end; i++)
+    for (int i = 0; i < end; i++)
     {
         FacebookFriendEICell *cell = [[FacebookFriendEICell alloc] initWithFriendName:[[app_delegate.user_state_information.my_facebook_friends objectAtIndex:id_array_indeices[i]] name] friend_id:[[app_delegate.user_state_information.my_facebook_friends objectAtIndex:id_array_indeices[i]] friend_id]];
         cell.frame = CGRectMake(0, height, 310, 42);

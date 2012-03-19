@@ -23,6 +23,9 @@
 #import "ProfileMain.h"
 #import "StaffOutMain.h"
 #import "FacebookFriendEICell.h"
+#import "FeedController.h"
+#import "ProfileServiceController.h"
+#import "MessagesWebController.h"
 @class StaffItToMeViewController;
 
 @interface StaffItToMeAppDelegate : NSObject <UIApplicationDelegate,FBRequestDelegate, FBSessionDelegate, SA_OAuthTwitterEngineDelegate, SA_OAuthTwitterControllerDelegate, UITabBarControllerDelegate> {
@@ -30,10 +33,10 @@
     SA_OAuthTwitterEngine    *twitter_engine; 
     UITabBarController *tab_bar_controller;
     DashboardController *home;
-    JobSearchController *search;
+    FeedController *search;
     JobHistoryMain *jobs;
-    ProfileMain *main_profile;
-    MessageSystemMain *my_messages_inbox;
+    ProfileServiceController *main_profile;
+    MessagesWebController *my_messages_inbox;
     StaffOutMain *broadcast;
     FacebookBroadcast *my_facebook_broadcaster;
 	BOOL got_facebook_info;

@@ -200,12 +200,13 @@
     UserExperienceProfileModule *user_experience        = [[UserExperienceProfileModule alloc] initWithArray:experiences_array];
     UserEducationsModule *user_education                = [[UserEducationsModule alloc] initWithArray:education_array];
     
+    
+    StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate];
     UIView *logout_button_view  = [[UIView alloc] initWithFrame:CGRectMake(73, 0, 93, 25.5)];
     logout_button_view.center   = CGPointMake(320/2, logout_button_view.center.y);
-    
     logout_button                   = [UIButton buttonWithType:UIButtonTypeCustom];
     logout_button.frame             = CGRectMake(0, 0, 93, 25.5);
-    [logout_button addTarget:self action:@selector(logUserOut)                  forControlEvents:UIControlEventTouchUpInside];
+    [logout_button addTarget:app_delegate action:@selector(logoutFunction)      forControlEvents:UIControlEventTouchUpInside];
     [logout_button setBackgroundImage:[UIImage imageNamed:@"connections_box"]   forState:UIControlStateNormal];
     [logout_button_view addSubview:logout_button]; 
     

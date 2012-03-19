@@ -12,7 +12,7 @@
 static URLLibrary *shared = NULL;
 
 -(NSString*)mainAddress {
-    return @"https://talentwire.me/apis/";
+    return @"https://www.talentwire.me/apis/";
 }
 
 -(NSString*)getJobInfoWithId:(int)the_job_id
@@ -54,7 +54,7 @@ static URLLibrary *shared = NULL;
 
 -(NSString*)getIndustriesListLink
 {
-    return @"https://helium.staffittome.com/moreapis/industries";
+    return @"https://www.talentwire.me/moreapis/industries";
 }
 
 -(NSString*)getSubmitApplicationLink
@@ -80,7 +80,7 @@ static URLLibrary *shared = NULL;
 
 -(NSString*)getTermsOfServiceLink
 {
-    return @"https://helium.staffittome.com/about/termsofservice";
+    return @"https://www.talentwire.me/about/termsofservice";
 }
 
 -(NSString*)getProfileInfoLinkWithId:(int)the_profile_id

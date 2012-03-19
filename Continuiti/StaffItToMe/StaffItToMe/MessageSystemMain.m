@@ -27,6 +27,8 @@
         logo.frame = CGRectMake(50, 0, 200, 40);
         logo.center = CGPointMake(320/2, logo.center.y);
         
+        self.tabBarItem.image = [UIImage imageNamed:@"Messages"];
+        
         
         navigation_controller = [[UINavigationController alloc] initWithRootViewController:inbox_controller];
         navigation_controller.delegate = self;

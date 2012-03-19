@@ -36,7 +36,7 @@ static NSString *staff_it_to_me_address = @"www.google.com";
     my_available_switch_array = [[NSMutableArray alloc] initWithCapacity:11];
     
     //Checks to see if user is currently there.
-    if ([[ApplicationDatabase sharedInstance] hasUserInformationTableBeenPopulated])
+   /* if ([[ApplicationDatabase sharedInstance] hasUserInformationTableBeenPopulated])
     {
         user_state_information  = [[USERINFORMATIONANDAPPSTATE alloc] init];
         logged_out              = NO;
@@ -53,16 +53,16 @@ static NSString *staff_it_to_me_address = @"www.google.com";
     }
     else
     {
-        user_state_information = [[USERINFORMATIONANDAPPSTATE alloc] init];
-        user_state_information.currentTabBar = @"Home";
-        logged_out = YES;
-        got_facebook_info = NO;
-        //Add Notification to go to the main app after login is confirmed.
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(goToMainApp) name:@"GoToMainApp" object:nil];
-        //setup the login and dashboard viewcontroller.
-        self.window.rootViewController = self.viewController;
-        [self.window makeKeyAndVisible];
-    }
+    }*/
+    user_state_information = [[USERINFORMATIONANDAPPSTATE alloc] init];
+    user_state_information.currentTabBar = @"Home";
+    logged_out = YES;
+    got_facebook_info = NO;
+    //Add Notification to go to the main app after login is confirmed.
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(goToMainApp) name:@"GoToMainApp" object:nil];
+    //setup the login and dashboard viewcontroller.
+    self.window.rootViewController = self.viewController;
+    [self.window makeKeyAndVisible];
     
     /*@try
     {
@@ -164,7 +164,7 @@ static NSString *staff_it_to_me_address = @"www.google.com";
 {
     if([self cellularConnected]) {
         
-		UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Warning" message:@"You are currently connected via cellular connection. For best results it is recommended to switch to a wifi connection." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+		UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Warning" message:@"You are currently connected via cellular connection. For best results it is recommended to switch to a Wi-Fi connection." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
 		[message show];
 		[message release];
     }
@@ -223,7 +223,7 @@ static NSString *staff_it_to_me_address = @"www.google.com";
         [facebook authorize:permission delegate:self];
     }
     if( [facebook isSessionValid]) {
-        NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"friends, first_name, last_name, id, locale, gender, birthday, email, link, name", @"fields", nil];
+        NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"friends, first_name, last_name, id, locale, gender, birthday, email, link, name, education, work, location, feed, notes, links, photos, videos", @"fields", nil];
                                            [facebook requestWithGraphPath:@"me" andParams:parameters andDelegate:self];
     }
     
@@ -234,7 +234,7 @@ static NSString *staff_it_to_me_address = @"www.google.com";
     [defaults setObject:[facebook accessToken] forKey:@"FBAccessTokenKey"];
     [defaults setObject:[facebook expirationDate] forKey:@"FBExpirationDateKey"];
     [defaults synchronize];
-    NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"friends, first_name, last_name, id, locale, gender, birthday, email, link, name", @"fields", nil];
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"friends, first_name, last_name, id, locale, gender, birthday, email, link, name, education, work, location, feed, notes, links, photos, videos", @"fields", nil];
     [facebook requestWithGraphPath:@"me" andParams:parameters andDelegate:self];
 }
 -(FacebookBroadcast*)getFriendFacebookScreen
@@ -266,14 +266,12 @@ static NSString *staff_it_to_me_address = @"www.google.com";
 {
     home = [[DashboardController alloc] init];
     home.view.backgroundColor = [UIColor whiteColor];
-    search = [[JobSearchController alloc] init];
-    search.view.backgroundColor = [UIColor whiteColor];
     jobs = [[JobHistoryMain alloc] init];
     jobs.view.backgroundColor = [UIColor whiteColor];
-    main_profile = [[ProfileMain alloc] init];
+    main_profile = [[ProfileServiceController alloc] initWithNibName:@"ProfileServiceController" bundle:nil andToken:@""];
     main_profile.view.backgroundColor = [UIColor whiteColor];
     broadcast = [[StaffOutMain alloc] init];
-    my_messages_inbox = [[MessageSystemMain alloc] init];
+    my_messages_inbox = [[MessagesWebController alloc] initWithNibName:NSStringFromClass([MessagesWebController class]) bundle:nil];
     [self performSelectorInBackground:@selector(allocateNonNecessaryViewControllers) withObject:nil];
     
     [_window.rootViewController.view removeFromSuperview];
@@ -282,13 +280,13 @@ static NSString *staff_it_to_me_address = @"www.google.com";
     tab_bar_controller = [[UITabBarController alloc] init];
     tab_bar_controller.tabBar.frame = CGRectMake(0, 420, 320, 60);
     tab_bar_controller.delegate = self;
-    UIImageView *tab_background = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"BottomBar2"]];
+    UIImageView *tab_background = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"TabBarBackground"]];
     tab_background.frame = CGRectMake(0, 0, 320, 60);
     
     //This is extrememly important keep atIndex:1 because IOS 5 compatibility.
     [tab_bar_controller.tabBar insertSubview:tab_background atIndex:1];
     
-    tab_bar_controller.viewControllers = [NSArray arrayWithObjects:home, search, jobs, main_profile, broadcast, nil];
+    tab_bar_controller.viewControllers = [NSArray arrayWithObjects:search, main_profile, my_messages_inbox, home, nil];
     
     if ([user_state_information.currentTabBar isEqualToString:@"FindWork"]) {
         tab_bar_controller.selectedViewController = search;
@@ -305,16 +303,17 @@ static NSString *staff_it_to_me_address = @"www.google.com";
     else if ([user_state_information.currentTabBar isEqualToString:@"Inbox"]) {
         tab_bar_controller.selectedViewController = main_profile;
     }
+    tab_bar_controller.selectedViewController = search;
     _window.rootViewController = tab_bar_controller;
     [_window addSubview:tab_bar_controller.view];
 }
 -(void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController
 {
-    tab_bar_controller.viewControllers = [NSArray arrayWithObjects:home, search, jobs, main_profile, broadcast, nil];
+    tab_bar_controller.viewControllers = [NSArray arrayWithObjects:search, main_profile, my_messages_inbox, home, nil];
     if (viewController == search)
     {
         user_state_information.currentTabBar = @"FindWork";
-        [search properlyToRootViewController];
+        //[search properlyToRootViewController];
     }
     else if (viewController == jobs)
     {
@@ -357,7 +356,7 @@ static NSString *staff_it_to_me_address = @"www.google.com";
     }
     else if ([user_state_information.currentTabBar isEqualToString:@"Messages"])
     {
-        tab_bar_controller.viewControllers = [NSArray arrayWithObjects:my_messages_inbox, search, jobs, main_profile, broadcast, nil];
+       // tab_bar_controller.viewControllers = [NSArray arrayWithObjects:my_messages_inbox, search, jobs, main_profile, broadcast, nil];
         [tab_bar_controller setSelectedViewController:my_messages_inbox];
     }
     [_window addSubview:tab_bar_controller.view];   
@@ -383,20 +382,37 @@ static NSString *staff_it_to_me_address = @"www.google.com";
 }
 -(void)request:(FBRequest *)request didLoad:(id)result
 {
+    
+    [self removeLoadingViewFromWindow];
     [self displayLoadingView];
     
     NSString *text = [[NSString alloc] initWithData:[request responseText] encoding:NSUTF8StringEncoding];
+    
+    
     //Perform the accessing of the server.
     NSURL *url = [NSURL URLWithString:[[URLLibrary sharedInstance] getFacebookLoginURL]];
     ASIFormDataRequest *request_ror = [ASIFormDataRequest requestWithURL:url];
     [request_ror setRequestMethod:@"POST"];
     [request_ror setValidatesSecureCertificate:NO];
     [request_ror setPostValue:[result objectForKey:@"first_name"] forKey:@"first_name"];
-    [request_ror setPostValue:[result objectForKey:@"id"] forKey:@"facebook_uid"];
-    user_state_information.facebook_id = [[result objectForKey:@"id"] retain];
+    
+    if ([result objectForKey:@"id"] == [NSNull null] || [result objectForKey:@"id"] == nil)
+    {
+        user_state_information.facebook_id = [[result objectForKey:@"facebook_uid"] retain];
+        [request_ror setPostValue:[result objectForKey:@"facebook_uid"] forKey:@"facebook_uid"];
+    }
+    else
+    {
+        user_state_information.facebook_id = [[result objectForKey:@"id"] retain];   
+        [request_ror setPostValue:[result objectForKey:@"id"] forKey:@"facebook_uid"];
+    }
     user_state_information.my_user_info.full_name = [[result objectForKey:@"name"] retain];
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    search = [[FeedController alloc] initWithNibName:@"FeedController" bundle:nil andToken:[defaults objectForKey:@"FBAccessTokenKey"]]; //= [[JobSearchController alloc] init];
+    search.view.backgroundColor = [UIColor whiteColor];
+    
     [request_ror setPostValue:[defaults objectForKey:@"FBAccessTokenKey"] forKey:@"facebook_session_key"];
     [request_ror setPostValue:[result objectForKey:@"locale"]       forKey:@"locale"];
     [request_ror setPostValue:[result objectForKey:@"gender"]       forKey:@"sex"];
@@ -404,6 +420,7 @@ static NSString *staff_it_to_me_address = @"www.google.com";
     [request_ror setPostValue:[result objectForKey:@"birthday"]     forKey:@"birthday"];
     [request_ror setPostValue:[result objectForKey:@"email"]        forKey:@"email"];
     [request_ror setPostValue:[result objectForKey:@"name"]         forKey:@"name"];
+    
     
     //Get the facebook friends
     [[ApplicationDatabase sharedInstance] dropfacebookFriendsTable];
@@ -454,12 +471,13 @@ static NSString *staff_it_to_me_address = @"www.google.com";
         }
     }
     @catch (NSException *exception) {
-        UIAlertView *unable_to_login = [[UIAlertView alloc] initWithTitle:@"Talentwire is down for maintenance and will be back up shortly.  Thank you for being part of our beta!" message:nil delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+        UIAlertView *unable_to_login = [[UIAlertView alloc] initWithTitle:@"Talentwire is down for maintenance and will be back up shortly.  Thank you for being part of Talentwire!" message:nil delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
         [unable_to_login show];
         [unable_to_login release];
+        [self removeLoadingViewFromWindow];
     }
     @finally {
-        [load_view removeFromSuperview];
+        [self removeLoadingViewFromWindow];
     }
 }
 -(void)request:(FBRequest *)request didFailWithError:(NSError *)error
@@ -523,11 +541,17 @@ static NSString *staff_it_to_me_address = @"www.google.com";
     [[ApplicationDatabase sharedInstance] dropAllTables];
     [[ApplicationDatabase sharedInstance] createUserInformationTable];
     [[ApplicationDatabase sharedInstance] createUsersFacebookFriendsTable];
+    
     logged_out = YES;
     //Kill facebook login credentials
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setObject:nil forKey:@"FBAccessTokenKey"];
     [defaults setObject:nil forKey:@"FBExpirationDateKey"];
+    NSHTTPCookie *cookie;
+    NSHTTPCookieStorage *storage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+    for (cookie in [storage cookies]) {
+        [storage deleteCookie:cookie];
+    }
     //Do some memory cleanup
     [twitter_engine release];
     [tab_bar_controller.view removeFromSuperview];

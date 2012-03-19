@@ -14,6 +14,7 @@
 
 @synthesize request_success_function;
 @synthesize request_failed_function;
+@synthesize delegate;
 
 /**
 	Creates a new feed on the server. Dictionary values are 
@@ -36,7 +37,7 @@
     [request setRequestMethod:@"POST"];
     [request setValidatesSecureCertificate:NO];
     [request setTimeOutSeconds:30];
-    [request setDelegate:self];
+    [request setDelegate:delegate];
     [request setDidFailSelector:request_failed_function];
     [request setDidFinishSelector:request_success_function];
     
@@ -57,17 +58,25 @@
 -(void)getUsersFeedSubscriptions
 {
     StaffItToMeAppDelegate *app_delegate    = (StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate];
-    NSURL *url                              = [[NSURL alloc] initWithString:[[URLLibrary sharedInstance] getUsersFeedSubscriptionsUrlWithSessionKey:app_delegate.user_state_information.sessionKey]];
+    NSString *url_string = [[URLLibrary sharedInstance] getUsersFeedSubscriptionsUrlWithSessionKey:app_delegate.user_state_information.sessionKey];
+    NSURL *url                              = [[NSURL alloc] initWithString:url_string];
     ASIFormDataRequest *request             = [ASIFormDataRequest requestWithURL:url];
     
     [request setRequestMethod:@"GET"];
+    [request setDidFailSelector:@selector(requestFail:)];
+    [request setDidFinishSelector:@selector(requestSucceed:)];
     [request setValidatesSecureCertificate:NO];
     [request setTimeOutSeconds:30];
     [request setDelegate:self];
-    [request setDidFailSelector:request_failed_function];
-    [request setDidFinishSelector:request_success_function];
-    [request setPostValue:app_delegate.user_state_information.sessionKey    forKey:@"session_key"];
     [request startAsynchronous];
     
+}
+-(void)requestFail:(ASIHTTPRequest*)the_request
+{
+    [delegate performSelector:request_failed_function withObject:[the_request retain]];
+}
+-(void)requestSucceed:(ASIHTTPRequest*)the_request
+{
+    [delegate performSelector:request_success_function withObject:[the_request retain]];
 }
 @end

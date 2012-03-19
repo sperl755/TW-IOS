@@ -40,6 +40,7 @@ static NSString *staff_out_address = @"http://hydrogen.xen.exoware.net:3000/apis
         
         nav_control             = [[UINavigationController alloc] initWithRootViewController:home_screen];
         nav_control.delegate    = self;
+        self.tabBarItem.image = [UIImage imageNamed:@"Dashboard"];
         
         //This is extremely important. DO NOT CHANGE THESE LINES these are for
         //IOS 5 COMPATIBILITY ISSUES

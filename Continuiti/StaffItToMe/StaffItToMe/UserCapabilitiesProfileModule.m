@@ -77,9 +77,30 @@
                 
                 [detail_text appendString:[NSString stringWithFormat:@"%d", from_year]];
                 
+                NSString *description_text;
+                if ([[the_capabilities objectAtIndex:i] objectForKey:@"description"] == [NSNull null] ||
+                    [[the_capabilities objectAtIndex:i] objectForKey:@"description"] == nil)
+                {
+                    description_text = @"NA";
+                }
+                else
+                {
+                    description_text = [[[the_capabilities objectAtIndex:i] objectForKey:@"description"] capitalizedString];
+                }
+                NSString *title_text;
+                if ([[the_capabilities objectAtIndex:i] objectForKey:@"title"] == [NSNull null] ||
+                    [[the_capabilities objectAtIndex:i] objectForKey:@"title"] == nil)
+                {
+                    title_text = @"NA";
+                }
+                else
+                {
+                    title_text = [[[the_capabilities objectAtIndex:i] objectForKey:@"title"] capitalizedString];
+                }
+                
                 JobDisplayCell *no_info = [[JobDisplayCell alloc] initWithFrame:CGRectMake(0, 0, 0, 0) pictureURL:@"" 
-                                                                           name:[[the_capabilities objectAtIndex:i] objectForKey:@"title"] 
-                                                                    description:[[[the_capabilities objectAtIndex:i] objectForKey:@"description"] capitalizedString]
+                                                                           name:title_text 
+                                                                    description:description_text
                                                                          detail:@""];
                 
                 [no_info removeArrow];

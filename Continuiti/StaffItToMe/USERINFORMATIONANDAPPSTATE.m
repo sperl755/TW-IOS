@@ -502,7 +502,6 @@ static NSString *user_locale_address = @"https://hydrogen.xen.exoware.net:3000/a
     [user_information_dictionary setObject:user_id_string forKey:@"user_id"];
     [user_information_dictionary setObject:[user_date objectForKey:@"avatar_thumb"] forKey:@"avatar_thumb"];
     [user_information_dictionary setObject:[user_date objectForKey:@"facebook_session_key"] forKey:@"facebook_session_key"];
-    [user_information_dictionary setObject:[user_date objectForKey:@"birthday"] forKey:@"birthday"];
     [user_information_dictionary setObject:[user_date objectForKey:@"last_name"] forKey:@"last_name"];
     [user_information_dictionary setObject:[user_date objectForKey:@"locale"] forKey:@"locale"];
     [user_information_dictionary setObject:[user_date objectForKey:@"first_name"] forKey:@"first_name"];
@@ -604,7 +603,7 @@ static NSString *user_locale_address = @"https://hydrogen.xen.exoware.net:3000/a
     
     [local_manager.manager startUpdatingLocation];
     
-    NSURL *url = [NSURL URLWithString:user_locale_address];
+    NSURL *url = [NSURL URLWithString:@"https://www.talentwire.me/apis/update_mob_location"];
     
     //tell the servers i am here and not avaialable
     ASIFormDataRequest *request_ror     = [ASIFormDataRequest requestWithURL:url];
@@ -613,8 +612,8 @@ static NSString *user_locale_address = @"https://hydrogen.xen.exoware.net:3000/a
     [request_ror setValidatesSecureCertificate:NO];
     [request_ror setPostValue:sessionKey forKey:@"session_key"];
     
-    [request_ror setPostValue:[NSString stringWithFormat:@"%d", my_user_location.coordinate.latitude] forKey:@"lat"];
-    [request_ror setPostValue:[NSString stringWithFormat:@"%d", my_user_location.coordinate.longitude] forKey:@"long"];
+    [request_ror setPostValue:[NSString stringWithFormat:@"%d", my_user_location.coordinate.latitude] forKey:@"mobile_latitude"];
+    [request_ror setPostValue:[NSString stringWithFormat:@"%d", my_user_location.coordinate.longitude] forKey:@"mobile_longitude"];
     [request_ror setPostValue:@"1" forKey:@"is_available"];
     [request_ror setTimeOutSeconds:30];
     [request_ror setDelegate:self];
@@ -623,6 +622,8 @@ static NSString *user_locale_address = @"https://hydrogen.xen.exoware.net:3000/a
     
     StaffItToMeAppDelegate *app_delegate    = (StaffItToMeAppDelegate*) [[UIApplication sharedApplication] delegate];
     [app_delegate                           updateAvailableSwitches];
+    
+    [self performSelector:@selector(startUpdatingUserLocation) withObject:nil afterDelay:1200];
     
 }
 -(void)populateSuggestedJobsArrayWithString:(NSString*)the_string

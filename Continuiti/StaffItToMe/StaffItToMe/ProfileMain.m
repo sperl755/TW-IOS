@@ -69,7 +69,7 @@
     [background release];
     nav_control.delegate = self;
     
-    
+    self.tabBarItem.image = [UIImage imageNamed:@"Profile"];
     
     
     

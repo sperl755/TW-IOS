@@ -151,7 +151,7 @@
     [app_delegate displayLoadingView];
     NSString *graphPath;
     graphPath = [NSString stringWithFormat:@"%@/feed",friend_facebook_id];
-    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"187212574660004",@"api_key",@"You should come to staff with me!",@"message", @"join me",@"caption", @"Some Random Message",@"description", nil];
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"187212574660004",@"api_key",@"Checkout my talent!",@"message", @"join me",@"caption", @"Some Random Message",@"description", nil];
     [facebook requestWithGraphPath:graphPath andParams:params andHttpMethod:@"POST" andDelegate:self];
     
 }
