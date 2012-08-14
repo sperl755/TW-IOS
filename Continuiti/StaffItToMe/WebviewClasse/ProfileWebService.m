@@ -140,6 +140,7 @@
 }
 -(BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
+    printf("%s", [[[request URL] description] UTF8String]);
     NSMutableString *request_url = [[NSMutableString alloc] initWithString:[request.URL description]];
     if ([request_url rangeOfString:@"/www.talentwire.me/"].location != NSNotFound &&  [request_url rangeOfString:@"header=no"].location == NSNotFound)
     {
@@ -165,7 +166,8 @@
         StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate];
         if (!did_pull_load)
         {
-            [app_delegate displayLoadingView];   
+            //[app_delegate displayLoadingView];   
+            [[URLLibrary sharedInstance] addLoadingView:self.view];
         }
         am_loading = YES;   
     }
@@ -178,7 +180,8 @@
         my_web_view.scrollView.contentOffset = CGPointMake(0, 0);
         my_web_view.scrollView.userInteractionEnabled = YES;
         StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate];
-        [app_delegate removeLoadingViewFromWindow];
+        
+        [[URLLibrary sharedInstance] removeLoadingView:self.view];
         am_loading = NO;
         did_pull_load = NO;
     }

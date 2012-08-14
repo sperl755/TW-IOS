@@ -36,4 +36,6 @@
 -(NSString*)getCapabilityUrl;
 -(NSString*)getUsersFeedSubscriptionsUrlWithSessionKey:(NSString*)the_session_key;
 + (URLLibrary*) sharedInstance;
+-(void)addLoadingView:(UIView*)the_view;
+-(void)removeLoadingView:(UIView*)the_view;
 @end

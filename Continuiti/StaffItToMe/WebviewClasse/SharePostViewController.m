@@ -350,7 +350,7 @@
                                my_message_text.text = @"";
                            }];
 
-    
+    [my_message_text resignFirstResponder];
    // NSData* result = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
     //NSLog(@"%@", [[[NSString alloc] initWithData:result encoding:NSASCIIStringEncoding] autorelease]);
 

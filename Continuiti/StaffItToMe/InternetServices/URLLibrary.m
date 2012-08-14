@@ -10,7 +10,7 @@
 
 @implementation URLLibrary
 static URLLibrary *shared = NULL;
-
+#define LOADINGVIEWTAG 5475638823476
 -(NSString*)mainAddress {
     return @"https://www.talentwire.me/apis/";
 }
@@ -167,6 +167,18 @@ static URLLibrary *shared = NULL;
     [string appendString:the_session_key];
     [string appendString:@"/get/subscriptions"];
     return string;  
+}
+
+-(void)addLoadingView:(UIView*)the_view
+{
+    LoadingView *load_view = [[LoadingView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
+    load_view.center = CGPointMake(the_view.frame.size.width/2, the_view.frame.size.height/2);
+    load_view.tag = LOADINGVIEWTAG;
+    [the_view addSubview:load_view];
+}
+-(void)removeLoadingView:(UIView*)the_view
+{
+    [[the_view viewWithTag:LOADINGVIEWTAG] removeFromSuperview];
 }
 
 /**

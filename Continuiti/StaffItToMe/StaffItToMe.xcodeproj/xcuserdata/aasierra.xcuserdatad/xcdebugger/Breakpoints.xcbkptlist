@@ -190,20 +190,6 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          isPathRelative = "1"
-         filePath = "MessagesWebService.m"
-         timestampString = "352663233.633943"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "54"
-         endingLineNumber = "54"
-         landmarkName = "-viewDidLoad"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         isPathRelative = "1"
          filePath = "WebviewClasse/SharePostViewController.m"
          timestampString = "352786953.248963"
          startingColumnNumber = "9223372036854775807"
@@ -211,20 +197,6 @@
          startingLineNumber = "235"
          endingLineNumber = "235"
          landmarkName = "-makePost:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         isPathRelative = "1"
-         filePath = "WebviewClasse/SharePostViewController.m"
-         timestampString = "352789902.496457"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "355"
-         endingLineNumber = "355"
-         landmarkName = "-ghettoURLConnect"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint

@@ -221,9 +221,24 @@
         StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate];
         if (!did_pull_load)
         {
-            [app_delegate displayLoadingView];   
+            [[URLLibrary sharedInstance] addLoadingView:self.view];
+            //[app_delegate displayLoadingView];   
         }
         am_loading = YES;   
+    }
+}
+-(void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
+{
+    if (am_loading)
+    {
+        [refresh_header reset];
+        my_web_view.scrollView.contentOffset = CGPointMake(0, 0);
+        my_web_view.scrollView.userInteractionEnabled = YES;
+        StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate];
+        
+        [[URLLibrary sharedInstance] removeLoadingView:self.view];
+        am_loading = NO;
+        did_pull_load = NO;
     }
 }
 -(void)webViewDidFinishLoad:(UIWebView *)webView
@@ -234,7 +249,7 @@
         my_web_view.scrollView.contentOffset = CGPointMake(0, 0);
         my_web_view.scrollView.userInteractionEnabled = YES;
         StaffItToMeAppDelegate *app_delegate = (StaffItToMeAppDelegate*)[[UIApplication sharedApplication] delegate];
-        [app_delegate removeLoadingViewFromWindow];
+        [[URLLibrary sharedInstance] removeLoadingView:self.view];
         am_loading = NO;
         did_pull_load = NO;
     }
